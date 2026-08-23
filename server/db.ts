@@ -19,9 +19,12 @@ export interface UserAccount {
   name: string;
   role: UserRole;
   avatar?: string;
+  googleId?: string;
+  authProvider?: 'local' | 'google';
   organization?: string;
   department?: string;
   college?: string;
+  lastLogin?: string;
   createdAt: string;
 }
 
@@ -32,6 +35,17 @@ export interface UserSession {
   role: UserRole;
   createdAt: string;
   expiresAt: string;
+}
+
+export interface SecurityAuditLog {
+  id: string;
+  userId?: string;
+  userEmail?: string;
+  action: 'LOGIN_SUCCESS' | 'LOGIN_FAILED' | 'REGISTER' | 'GOOGLE_AUTH' | 'LOGOUT' | 'UNAUTHORIZED_ACCESS' | 'SKILL_VERIFIED' | 'ESCROW_RELEASE';
+  ip: string;
+  status: 'SUCCESS' | 'BLOCKED' | 'WARNING';
+  details?: string;
+  timestamp: string;
 }
 
 export interface WalletTransaction {
@@ -49,6 +63,7 @@ export interface WalletTransaction {
 interface DatabaseSchema {
   users: UserAccount[];
   sessions: UserSession[];
+  securityLogs: SecurityAuditLog[];
   pods: PodData[];
   marketplaceProjects: MarketplaceProject[];
   skillPassports: VerifiedSkillPassport[];
@@ -144,6 +159,26 @@ function getSeedData(): DatabaseSchema {
       }
     ],
     sessions: [],
+    securityLogs: [
+      {
+        id: 'sec-01',
+        userEmail: 'dev.patel@skillpods.io',
+        action: 'LOGIN_SUCCESS',
+        ip: '127.0.0.1',
+        status: 'SUCCESS',
+        details: 'Local password authenticated via SHA-512 PBKDF2',
+        timestamp: new Date(Date.now() - 3600000).toISOString()
+      },
+      {
+        id: 'sec-02',
+        userEmail: 'sarah.chen@cloudflare.com',
+        action: 'SKILL_VERIFIED',
+        ip: '127.0.0.1',
+        status: 'SUCCESS',
+        details: 'Cryptographic skill verification stamp issued to Dev Patel',
+        timestamp: new Date(Date.now() - 1800000).toISOString()
+      }
+    ],
     metrics: {
       uptimeSla: 99.94,
       avgLatencyMs: 48,
@@ -560,6 +595,70 @@ class DatabaseManager {
   public deleteSession(token: string): void {
     this.data.sessions = this.data.sessions.filter(s => s.token !== token);
     this.save();
+  }
+
+  public findOrCreateGoogleUser(params: {
+    googleId: string;
+    email: string;
+    name: string;
+    avatar?: string;
+    role?: UserRole;
+    department?: string;
+    college?: string;
+    organization?: string;
+  }): UserAccount {
+    let user = this.data.users.find(
+      u => (u.googleId && u.googleId === params.googleId) || u.email.toLowerCase() === params.email.toLowerCase()
+    );
+
+    if (user) {
+      if (!user.googleId) user.googleId = params.googleId;
+      if (!user.avatar && params.avatar) user.avatar = params.avatar;
+      user.lastLogin = new Date().toISOString();
+      this.save();
+      return user;
+    }
+
+    const { hash, salt } = hashPassword(crypto.randomBytes(24).toString('hex'));
+    const newUser: UserAccount = {
+      id: `usr-g-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+      email: params.email.toLowerCase(),
+      name: params.name,
+      avatar: params.avatar,
+      googleId: params.googleId,
+      authProvider: 'google',
+      passwordHash: hash,
+      salt,
+      role: params.role || 'student',
+      department: params.department || (params.role === 'student' ? 'Computer Science & Engineering' : undefined),
+      college: params.college || (params.role === 'student' || params.role === 'college' ? 'National Institute of Technology' : undefined),
+      organization: params.organization,
+      lastLogin: new Date().toISOString(),
+      createdAt: new Date().toISOString()
+    };
+
+    this.data.users.push(newUser);
+    this.save();
+    return newUser;
+  }
+
+  public recordSecurityLog(log: Omit<SecurityAuditLog, 'id' | 'timestamp'>): SecurityAuditLog {
+    if (!this.data.securityLogs) this.data.securityLogs = [];
+    const newLog: SecurityAuditLog = {
+      ...log,
+      id: `sec-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      timestamp: new Date().toISOString()
+    };
+    this.data.securityLogs.unshift(newLog);
+    if (this.data.securityLogs.length > 200) {
+      this.data.securityLogs = this.data.securityLogs.slice(0, 200);
+    }
+    this.save();
+    return newLog;
+  }
+
+  public getSecurityLogs(): SecurityAuditLog[] {
+    return this.data.securityLogs || [];
   }
 
   // --- PODS ---

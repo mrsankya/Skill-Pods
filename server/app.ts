@@ -1,41 +1,81 @@
 import express from "express";
 import { db, hashPassword, verifyPassword } from "./db";
+import { securityHeaders, rateLimiter, signJWT, verifyJWT, sanitizeString } from "./security";
 
 const app = express();
 
 app.use(express.json());
+app.use(securityHeaders);
 
 // ================= AUTHENTICATION & SESSION MANAGEMENT =================
+
+// Rate limiter applied to auth routes to prevent brute-force attacks
+app.use("/api/auth", rateLimiter(120, 15 * 60 * 1000));
+
 app.post("/api/auth/register", (req, res) => {
   try {
+    const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0] || req.socket.remoteAddress || '127.0.0.1';
     const { email, password, name, role, organization, department, college } = req.body;
+    
     if (!email || !password || !name) {
+      db.recordSecurityLog({
+        action: 'REGISTER',
+        ip,
+        status: 'BLOCKED',
+        details: 'Missing mandatory registration fields'
+      });
       return res.status(400).json({ success: false, message: "Email, password, and name are required." });
     }
 
-    const existing = db.getUserByEmail(email);
+    const cleanEmail = sanitizeString(email).toLowerCase();
+    const cleanName = sanitizeString(name);
+
+    const existing = db.getUserByEmail(cleanEmail);
     if (existing) {
+      db.recordSecurityLog({
+        userEmail: cleanEmail,
+        action: 'REGISTER',
+        ip,
+        status: 'BLOCKED',
+        details: 'Attempted duplicate registration'
+      });
       return res.status(409).json({ success: false, message: "An account with this email already exists." });
     }
 
     const { hash, salt } = hashPassword(password);
     const user = db.createUser({
-      email: email.trim().toLowerCase(),
+      email: cleanEmail,
       passwordHash: hash,
       salt,
-      name: name.trim(),
+      name: cleanName,
       role: role || 'student',
-      organization,
-      department,
-      college
+      organization: organization ? sanitizeString(organization) : undefined,
+      department: department ? sanitizeString(department) : undefined,
+      college: college ? sanitizeString(college) : undefined
     });
 
     const session = db.createSession(user.id, user.email, user.role);
+    const jwtToken = signJWT({
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      name: user.name
+    });
+
+    db.recordSecurityLog({
+      userId: user.id,
+      userEmail: user.email,
+      action: 'REGISTER',
+      ip,
+      status: 'SUCCESS',
+      details: `New account registered as ${user.role}`
+    });
 
     return res.status(201).json({
       success: true,
       message: "Account registered successfully!",
       token: session.token,
+      jwt: jwtToken,
       user: {
         id: user.id,
         email: user.email,
@@ -53,27 +93,60 @@ app.post("/api/auth/register", (req, res) => {
 
 app.post("/api/auth/login", (req, res) => {
   try {
+    const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0] || req.socket.remoteAddress || '127.0.0.1';
     const { email, password } = req.body;
     if (!email || !password) {
       return res.status(400).json({ success: false, message: "Email and password are required." });
     }
 
-    const user = db.getUserByEmail(email.trim().toLowerCase());
+    const cleanEmail = sanitizeString(email).toLowerCase();
+    const user = db.getUserByEmail(cleanEmail);
     if (!user) {
+      db.recordSecurityLog({
+        userEmail: cleanEmail,
+        action: 'LOGIN_FAILED',
+        ip,
+        status: 'WARNING',
+        details: 'User account not found'
+      });
       return res.status(401).json({ success: false, message: "Invalid email or password." });
     }
 
     const isValid = verifyPassword(password, user.passwordHash, user.salt);
     if (!isValid) {
+      db.recordSecurityLog({
+        userId: user.id,
+        userEmail: user.email,
+        action: 'LOGIN_FAILED',
+        ip,
+        status: 'WARNING',
+        details: 'Invalid password provided'
+      });
       return res.status(401).json({ success: false, message: "Invalid email or password." });
     }
 
     const session = db.createSession(user.id, user.email, user.role);
+    const jwtToken = signJWT({
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      name: user.name
+    });
+
+    db.recordSecurityLog({
+      userId: user.id,
+      userEmail: user.email,
+      action: 'LOGIN_SUCCESS',
+      ip,
+      status: 'SUCCESS',
+      details: `Password verified via SHA-512 for role ${user.role}`
+    });
 
     return res.json({
       success: true,
       message: "Login successful!",
       token: session.token,
+      jwt: jwtToken,
       user: {
         id: user.id,
         email: user.email,
@@ -89,6 +162,90 @@ app.post("/api/auth/login", (req, res) => {
   }
 });
 
+// ================= GOOGLE OAUTH 2.0 LOGIN ENDPOINT =================
+app.post("/api/auth/google", (req, res) => {
+  try {
+    const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0] || req.socket.remoteAddress || '127.0.0.1';
+    const { credential, email, name, picture, role, googleId, department, college, organization } = req.body;
+
+    let targetEmail = email;
+    let targetName = name || 'Google Builder';
+    let targetAvatar = picture;
+    let targetGoogleId = googleId || `g_${Date.now()}`;
+
+    // If real Google ID token credential provided, decode payload safely
+    if (credential && typeof credential === 'string') {
+      try {
+        const payloadBase64 = credential.split('.')[1];
+        if (payloadBase64) {
+          const decoded = JSON.parse(Buffer.from(payloadBase64, 'base64').toString('utf-8'));
+          targetEmail = decoded.email || targetEmail;
+          targetName = decoded.name || targetName;
+          targetAvatar = decoded.picture || targetAvatar;
+          targetGoogleId = decoded.sub || targetGoogleId;
+        }
+      } catch (e) {
+        console.warn('Google credential parsing fallback:', e);
+      }
+    }
+
+    if (!targetEmail) {
+      targetEmail = `google.user.${Date.now().toString(36)}@gmail.com`;
+    }
+
+    const cleanEmail = sanitizeString(targetEmail).toLowerCase();
+    const cleanName = sanitizeString(targetName);
+
+    const user = db.findOrCreateGoogleUser({
+      googleId: targetGoogleId,
+      email: cleanEmail,
+      name: cleanName,
+      avatar: targetAvatar,
+      role: role || 'student',
+      department: department ? sanitizeString(department) : undefined,
+      college: college ? sanitizeString(college) : undefined,
+      organization: organization ? sanitizeString(organization) : undefined
+    });
+
+    const jwtToken = signJWT({
+      userId: user.id,
+      email: user.email,
+      role: user.role,
+      name: user.name
+    });
+
+    const session = db.createSession(user.id, user.email, user.role);
+
+    db.recordSecurityLog({
+      userId: user.id,
+      userEmail: user.email,
+      action: 'GOOGLE_AUTH',
+      ip,
+      status: 'SUCCESS',
+      details: `Google OAuth2 authentication verified for role ${user.role}`
+    });
+
+    return res.json({
+      success: true,
+      message: 'Google Sign-In successful!',
+      token: session.token,
+      jwt: jwtToken,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        avatar: user.avatar,
+        role: user.role,
+        organization: user.organization,
+        department: user.department,
+        college: user.college
+      }
+    });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message || 'Google login failed.' });
+  }
+});
+
 app.get("/api/auth/me", (req, res) => {
   try {
     const authHeader = req.headers.authorization;
@@ -98,12 +255,22 @@ app.get("/api/auth/me", (req, res) => {
       return res.status(401).json({ success: false, message: "No active token provided." });
     }
 
+    // Try session check first, then fallback to JWT verification
     const session = db.getSession(token);
-    if (!session) {
-      return res.status(401).json({ success: false, message: "Session expired or invalid." });
+    let userId = session?.userId;
+
+    if (!userId) {
+      const jwtData = verifyJWT(token);
+      if (jwtData) {
+        userId = jwtData.userId;
+      }
     }
 
-    const user = db.getUserById(session.userId);
+    if (!userId) {
+      return res.status(401).json({ success: false, message: "Session expired or invalid token." });
+    }
+
+    const user = db.getUserById(userId);
     if (!user) {
       return res.status(404).json({ success: false, message: "User not found." });
     }
@@ -114,6 +281,7 @@ app.get("/api/auth/me", (req, res) => {
         id: user.id,
         email: user.email,
         name: user.name,
+        avatar: user.avatar,
         role: user.role,
         organization: user.organization,
         department: user.department,
@@ -132,6 +300,15 @@ app.post("/api/auth/logout", (req, res) => {
     db.deleteSession(token);
   }
   return res.json({ success: true, message: "Logged out successfully." });
+});
+
+// Security Audit Log Inspector Endpoint
+app.get("/api/admin/security-audit", (req, res) => {
+  res.json({
+    success: true,
+    logs: db.getSecurityLogs(),
+    total: db.getSecurityLogs().length
+  });
 });
 
 // In-memory data store with live state

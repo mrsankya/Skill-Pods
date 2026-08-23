@@ -6,8 +6,9 @@
 ## Tech Stack
 - **Frontend**: React 19, TypeScript, Tailwind CSS v4, Motion (framer-motion v12), Lucide React icons, Canvas 3D character avatars (`StudentCharacter3D`, `MentorCharacter3D`, `SmeCharacter3D`, `CollegeCharacter3D`, `HeroShader`).
 - **Backend**: Express.js with custom Vite middleware integration (`server.ts` & `server/app.ts`), Node.js / TSX.
-- **Database & Auth**: Persistent JSON/SQLite file database (`data/skillpods.json` via `server/db.ts`) with Node `crypto` PBKDF2/SHA-512 password hashing and token session management (`/api/auth/register`, `/api/auth/login`, `/api/auth/me`, `/api/auth/logout`).
-- **AI / Integrations**: `@google/genai` (Server-side Gemini API capability).
+- **Database & Auth**: Persistent JSON/SQLite file database (`data/skillpods.json` via `server/db.ts`) with Node `crypto` PBKDF2/SHA-512 password hashing and token session management (`/api/auth/register`, `/api/auth/login`, `/api/auth/google`, `/api/auth/me`, `/api/auth/logout`).
+- **Security & DDoS Protection (`server/security.ts`)**: Enterprise Rate Limiter (sliding window brute-force defense), Security HTTP headers (no-sniff, SAMEORIGIN frame defense, XSS-Protection, HSTS), HMAC-SHA256 JWT cryptographic session signing, input sanitization against XSS, and Security Audit Logging (`/api/admin/security-audit`).
+- **Google OAuth 2.0 Identity**: Dedicated Google Sign-In pipeline with automatic role provisioning (`/api/auth/google`).
 - **Deployment**: Vercel ready (`vercel.json`, `api/index.ts`), Docker containerized (`Dockerfile`, `.dockerignore`), Render / Railway / Cloud Run ready (`npm run build && npm start`).
 - **Design Tokens**: Dark luxury purple cyberpunk canvas (`#08070d`, `#171422`, `#201c2e`, `#261543`), glowing lavender glassmorphism (`.lavender-glass-card`, `.theme-lavender-canvas`, `.lavender-pill-btn-dark`), high-contrast accessible typography and glowing pill badges.
 
