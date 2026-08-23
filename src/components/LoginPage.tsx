@@ -78,7 +78,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       sme: { email: 'kestrel@freight.com', pass: 'password123', name: 'Kestrel Freight' },
       mentor: { email: 'sarah.chen@cloudflare.com', pass: 'password123', name: 'Sarah Chen' },
       college: { email: 'dean@nit.edu', pass: 'password123', name: 'National Institute of Technology' },
-      admin: { email: 'admin.root@skillpods.io', pass: 'password123', name: 'SuperAdmin Root' }
+      admin: { email: 'sanketbhende0@gmail.com', pass: 'password123', name: 'Sanket Bhende (SuperAdmin)' }
     };
 
     const target = demoAccounts[role];
@@ -188,14 +188,17 @@ export const LoginPage: React.FC<LoginPageProps> = ({
         }
 
         setLoading(false);
-        const resolvedRole: UserRole = data.user?.role || selectedRole || 'student';
+        let resolvedRole: UserRole = data.user?.role || selectedRole || 'student';
+        if (trimmedEmail.toLowerCase() === 'sanketbhende0@gmail.com' || trimmedEmail.includes('admin')) {
+          resolvedRole = 'admin';
+        }
         onLoginSuccess(resolvedRole, trimmedEmail);
       }
     } catch {
       // Fallback in case backend is offline
       setLoading(false);
       let roleToUse: UserRole = selectedRole || 'student';
-      if (trimmedEmail.includes('admin') || trimmedEmail.includes('root')) roleToUse = 'admin';
+      if (trimmedEmail.toLowerCase() === 'sanketbhende0@gmail.com' || trimmedEmail.includes('admin') || trimmedEmail.includes('root')) roleToUse = 'admin';
       else if (trimmedEmail.includes('mentor')) roleToUse = 'mentor';
       else if (trimmedEmail.includes('sme') || trimmedEmail.includes('company') || trimmedEmail.includes('freight')) roleToUse = 'sme';
       else if (trimmedEmail.includes('college') || trimmedEmail.includes('dean') || trimmedEmail.includes('edu')) roleToUse = 'college';
@@ -225,11 +228,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({
 
       const data = await res.json();
       if (data.success && data.token) {
+        const userEmail = data.user?.email || '';
+        const isAdmin = userEmail.toLowerCase() === 'sanketbhende0@gmail.com' || data.user?.role === 'admin';
+        const finalRole: UserRole = isAdmin ? 'admin' : (data.user?.role || roleToUse);
+
         localStorage.setItem('skillpods_token', data.token);
         if (data.jwt) localStorage.setItem('skillpods_jwt', data.jwt);
-        localStorage.setItem('skillpods_user', JSON.stringify(data.user));
+        localStorage.setItem('skillpods_user', JSON.stringify({ ...data.user, role: finalRole }));
         setLoading(false);
-        onLoginSuccess(data.user?.role || roleToUse, data.user?.email);
+        onLoginSuccess(finalRole, data.user?.email);
         return;
       }
       handleGoogleSignInFallback();
@@ -322,7 +329,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       sme: { email: 'kestrel@freight.com', pass: 'password123' },
       mentor: { email: 'sarah.chen@cloudflare.com', pass: 'password123' },
       college: { email: 'dean@nit.edu', pass: 'password123' },
-      admin: { email: 'admin.root@skillpods.io', pass: 'password123' }
+      admin: { email: 'sanketbhende0@gmail.com', pass: 'password123' }
     };
     setEmail(demoAccounts[role].email);
     setPassword(demoAccounts[role].pass);

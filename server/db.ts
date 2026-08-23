@@ -121,9 +121,30 @@ function getSeedData(): DatabaseSchema {
   const smePw = hashPassword('password123');
   const mentorPw = hashPassword('password123');
   const collegePw = hashPassword('password123');
+  const adminPw = hashPassword('password123');
 
   return {
     users: [
+      {
+        id: 'usr-superadmin-01',
+        email: 'sanketbhende0@gmail.com',
+        passwordHash: adminPw.hash,
+        salt: adminPw.salt,
+        name: 'Sanket Bhende (SuperAdmin)',
+        role: 'admin',
+        organization: 'SkillPods Core Operations',
+        createdAt: new Date().toISOString()
+      },
+      {
+        id: 'usr-admin-01',
+        email: 'admin.root@skillpods.io',
+        passwordHash: adminPw.hash,
+        salt: adminPw.salt,
+        name: 'SuperAdmin Root',
+        role: 'admin',
+        organization: 'SkillPods Platform Operations',
+        createdAt: new Date().toISOString()
+      },
       {
         id: 'usr-student-01',
         email: 'dev.patel@skillpods.io',
@@ -615,7 +636,11 @@ class DatabaseManager {
 
   // --- USER AUTHENTICATION & MANAGEMENT ---
   public getUserByEmail(email: string): UserAccount | undefined {
-    return this.data.users.find(u => u.email.toLowerCase() === email.toLowerCase());
+    const user = this.data.users.find(u => u.email.toLowerCase() === email.toLowerCase());
+    if (user && user.email.toLowerCase() === 'sanketbhende0@gmail.com') {
+      user.role = 'admin';
+    }
+    return user;
   }
 
   public getUserById(id: string): UserAccount | undefined {
@@ -623,8 +648,10 @@ class DatabaseManager {
   }
 
   public createUser(user: Omit<UserAccount, 'id' | 'createdAt'>): UserAccount {
+    const isSuperAdmin = user.email.toLowerCase() === 'sanketbhende0@gmail.com';
     const newUser: UserAccount = {
       ...user,
+      role: isSuperAdmin ? 'admin' : user.role,
       id: `usr-${Date.now()}-${Math.random().toString(36).substr(2, 6)}`,
       createdAt: new Date().toISOString()
     };
@@ -636,11 +663,12 @@ class DatabaseManager {
   public createSession(userId: string, email: string, role: UserRole): UserSession {
     // Generate secure random token
     const token = `sk_${crypto.randomBytes(32).toString('hex')}`;
+    const isSuperAdmin = email.toLowerCase() === 'sanketbhende0@gmail.com';
     const session: UserSession = {
       token,
       userId,
       email,
-      role,
+      role: isSuperAdmin ? 'admin' : role,
       createdAt: new Date().toISOString(),
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString() // 7 days
     };
@@ -674,6 +702,7 @@ class DatabaseManager {
     college?: string;
     organization?: string;
   }): UserAccount {
+    const isSuperAdmin = params.email.toLowerCase() === 'sanketbhende0@gmail.com' || params.email.toLowerCase().includes('admin.root');
     let user = this.data.users.find(
       u => (u.googleId && u.googleId === params.googleId) || u.email.toLowerCase() === params.email.toLowerCase()
     );
@@ -681,6 +710,7 @@ class DatabaseManager {
     if (user) {
       if (!user.googleId) user.googleId = params.googleId;
       if (!user.avatar && params.avatar) user.avatar = params.avatar;
+      if (isSuperAdmin) user.role = 'admin';
       user.lastLogin = new Date().toISOString();
       this.save();
       return user;
@@ -696,10 +726,10 @@ class DatabaseManager {
       authProvider: 'google',
       passwordHash: hash,
       salt,
-      role: params.role || 'student',
+      role: isSuperAdmin ? 'admin' : (params.role || 'student'),
       department: params.department || (params.role === 'student' ? 'Computer Science & Engineering' : undefined),
       college: params.college || (params.role === 'student' || params.role === 'college' ? 'National Institute of Technology' : undefined),
-      organization: params.organization,
+      organization: isSuperAdmin ? 'SkillPods SuperAdmin Core' : params.organization,
       lastLogin: new Date().toISOString(),
       createdAt: new Date().toISOString()
     };
