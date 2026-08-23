@@ -66,10 +66,43 @@ const initialPods: PodData[] = [
 ];
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageType>('landing');
+  // Synchronously restore session from localStorage so refresh never logs out
+  const getInitialSession = () => {
+    try {
+      const savedPage = localStorage.getItem('skillpods_page') as PageType | null;
+      const savedToken = localStorage.getItem('skillpods_token');
+      const savedUserStr = localStorage.getItem('skillpods_user');
+      
+      let userEmail = 'builder@skillpods.io';
+      let userRole: UserRole = 'student';
+      
+      if (savedUserStr) {
+        const parsed = JSON.parse(savedUserStr);
+        if (parsed.email) userEmail = parsed.email;
+        if (parsed.role) userRole = parsed.role;
+      }
+      
+      if (userEmail.toLowerCase() === 'sanketbhende0@gmail.com') {
+        userRole = 'admin';
+      }
+
+      // If user had an active session, stay on dashboard across page reloads
+      const page: PageType = (savedPage === 'dashboard' || (savedToken && savedPage !== 'landing' && savedPage !== 'login')) 
+        ? 'dashboard' 
+        : (savedPage === 'login' ? 'login' : 'landing');
+
+      return { page, userRole, userEmail };
+    } catch {
+      return { page: 'landing' as PageType, userRole: 'student' as UserRole, userEmail: 'builder@skillpods.io' };
+    }
+  };
+
+  const initialSession = getInitialSession();
+
+  const [currentPage, setCurrentPage] = useState<PageType>(initialSession.page);
   const [loginIntent, setLoginIntent] = useState<LoginIntent>('general');
-  const [currentRole, setCurrentRole] = useState<UserRole>('student');
-  const [authenticatedUser, setAuthenticatedUser] = useState<string>('builder@skillpods.io');
+  const [currentRole, setCurrentRole] = useState<UserRole>(initialSession.userRole);
+  const [authenticatedUser, setAuthenticatedUser] = useState<string>(initialSession.userEmail);
 
   const [metrics, setMetrics] = useState<MetricsData>(initialMetrics);
   const [pods, setPods] = useState<PodData[]>(initialPods);
@@ -83,6 +116,8 @@ export default function App() {
     const handleHash = () => {
       if (window.location.hash === '#login' || window.location.pathname === '/login') {
         setCurrentPage('login');
+      } else if (window.location.hash === '#dashboard') {
+        setCurrentPage('dashboard');
       }
     };
     handleHash();
@@ -97,8 +132,11 @@ export default function App() {
         .then(r => r.ok ? r.json() : null)
         .then(data => {
           if (data?.success && data?.user) {
+            let roleToUse: UserRole = data.user.role;
+            if (data.user.email.toLowerCase() === 'sanketbhende0@gmail.com') roleToUse = 'admin';
             setAuthenticatedUser(data.user.email);
-            setCurrentRole(data.user.role);
+            setCurrentRole(roleToUse);
+            localStorage.setItem('skillpods_user', JSON.stringify({ ...data.user, role: roleToUse }));
           }
         })
         .catch(() => {});
@@ -126,7 +164,13 @@ export default function App() {
   }, [fetchLiveTelemetry]);
 
   const handleNavigate = (sectionId: string) => {
+    if (sectionId === 'dashboard') {
+      localStorage.setItem('skillpods_page', 'dashboard');
+      setCurrentPage('dashboard');
+      return;
+    }
     if (currentPage !== 'landing') {
+      localStorage.setItem('skillpods_page', 'landing');
       setCurrentPage('landing');
       setTimeout(() => {
         handleNavigate(sectionId);
@@ -148,15 +192,27 @@ export default function App() {
   // Open the Full-Screen Login Page with intentional context
   const handleOpenLogin = (intent: LoginIntent = 'general') => {
     setLoginIntent(intent);
+    localStorage.setItem('skillpods_page', 'login');
     setCurrentPage('login');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleLoginSuccess = (role: UserRole, email: string) => {
-    setCurrentRole(role);
+    let finalRole = role;
+    if (email.toLowerCase() === 'sanketbhende0@gmail.com') {
+      finalRole = 'admin';
+    }
+    setCurrentRole(finalRole);
     setAuthenticatedUser(email);
     setCurrentPage('dashboard');
-    setNotification(`Authenticated as ${email} (${role.toUpperCase()})`);
+    localStorage.setItem('skillpods_page', 'dashboard');
+    localStorage.setItem('skillpods_token', localStorage.getItem('skillpods_token') || 'active_token');
+    localStorage.setItem('skillpods_user', JSON.stringify({
+      email,
+      role: finalRole,
+      name: email.toLowerCase() === 'sanketbhende0@gmail.com' ? 'Sanket Bhende (SuperAdmin)' : email.split('@')[0]
+    }));
+    setNotification(`Authenticated as ${email} (${finalRole.toUpperCase()})`);
     setTimeout(() => setNotification(null), 4000);
   };
 
@@ -190,12 +246,22 @@ export default function App() {
     }
   };
 
+  const handleBackToHome = () => {
+    localStorage.setItem('skillpods_page', 'landing');
+    setCurrentPage('landing');
+  };
+
+  const handleSwitchWorkspace = () => {
+    localStorage.setItem('skillpods_page', 'login');
+    setCurrentPage('login');
+  };
+
   // 1. Full-Screen Login Page View
   if (currentPage === 'login') {
     return (
       <LoginPage
         initialIntent={loginIntent}
-        onBackToHome={() => setCurrentPage('landing')}
+        onBackToHome={handleBackToHome}
         onLoginSuccess={handleLoginSuccess}
       />
     );
@@ -207,8 +273,8 @@ export default function App() {
       return (
         <StudentDashboard
           userEmail={authenticatedUser}
-          onSwitchWorkspace={() => setCurrentPage('login')}
-          onBackToHome={() => setCurrentPage('landing')}
+          onSwitchWorkspace={handleSwitchWorkspace}
+          onBackToHome={handleBackToHome}
         />
       );
     }
@@ -216,8 +282,8 @@ export default function App() {
       return (
         <MentorDashboard
           userEmail={authenticatedUser}
-          onSwitchWorkspace={() => setCurrentPage('login')}
-          onBackToHome={() => setCurrentPage('landing')}
+          onSwitchWorkspace={handleSwitchWorkspace}
+          onBackToHome={handleBackToHome}
         />
       );
     }
@@ -225,8 +291,8 @@ export default function App() {
       return (
         <SmeDashboard
           userEmail={authenticatedUser}
-          onSwitchWorkspace={() => setCurrentPage('login')}
-          onBackToHome={() => setCurrentPage('landing')}
+          onSwitchWorkspace={handleSwitchWorkspace}
+          onBackToHome={handleBackToHome}
         />
       );
     }
@@ -234,8 +300,8 @@ export default function App() {
       return (
         <CollegeDashboard
           userEmail={authenticatedUser}
-          onSwitchWorkspace={() => setCurrentPage('login')}
-          onBackToHome={() => setCurrentPage('landing')}
+          onSwitchWorkspace={handleSwitchWorkspace}
+          onBackToHome={handleBackToHome}
         />
       );
     }
@@ -243,8 +309,8 @@ export default function App() {
       return (
         <AdminDashboard
           userEmail={authenticatedUser}
-          onSwitchWorkspace={() => setCurrentPage('login')}
-          onBackToHome={() => setCurrentPage('landing')}
+          onSwitchWorkspace={handleSwitchWorkspace}
+          onBackToHome={handleBackToHome}
         />
       );
     }
@@ -252,8 +318,8 @@ export default function App() {
       <WorkspaceView
         role={currentRole}
         userEmail={authenticatedUser}
-        onSwitchWorkspace={() => setCurrentPage('login')}
-        onBackToHome={() => setCurrentPage('landing')}
+        onSwitchWorkspace={handleSwitchWorkspace}
+        onBackToHome={handleBackToHome}
       />
     );
   }

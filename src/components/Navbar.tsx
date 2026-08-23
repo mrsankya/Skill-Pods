@@ -14,6 +14,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(3);
 
+  const getLoggedInUser = () => {
+    try {
+      const stored = localStorage.getItem('skillpods_user');
+      if (stored) return JSON.parse(stored);
+    } catch {}
+    return null;
+  };
+  const loggedInUser = getLoggedInUser();
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#08070d]/80 backdrop-blur-xl border-b border-white/5 shadow-2xl transition-all duration-300">
       <div className="flex justify-between items-center px-5 sm:px-8 md:px-12 h-20 max-w-[1340px] mx-auto">
@@ -126,21 +135,49 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
             )}
           </div>
 
-          <button
-            onClick={() => onOpenModal('login')}
-            className="text-[#a19ba9] hover:text-white transition-colors text-xs font-mono tracking-widest uppercase cursor-pointer"
-            id="nav-btn-login"
-          >
-            LOGIN
-          </button>
-          
-          <button
-            onClick={() => onOpenModal('join-cohort')}
-            className="glow-pill-secondary text-white text-xs font-mono uppercase tracking-widest px-5 py-2.5 rounded-full font-semibold border border-[#d0bcff]/40 hover:border-[#d0bcff] hover:text-[#d0bcff] transition-all cursor-pointer shadow-[0_0_20px_rgba(160,120,255,0.25)]"
-            id="nav-btn-get-started"
-          >
-            GET STARTED
-          </button>
+          {loggedInUser ? (
+            <div className="flex items-center gap-3">
+              <button
+                onClick={() => onNavigate('dashboard')}
+                className="glow-pill-secondary text-white text-xs font-mono uppercase tracking-widest px-4 py-2.5 rounded-full font-bold border border-[#d0bcff]/40 hover:border-[#d0bcff] hover:text-[#d0bcff] transition-all cursor-pointer shadow-[0_0_20px_rgba(160,120,255,0.25)] flex items-center gap-1.5"
+              >
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <span>DASHBOARD ({loggedInUser.name?.split(' ')[0] || 'PANEL'})</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  localStorage.removeItem('skillpods_token');
+                  localStorage.removeItem('skillpods_jwt');
+                  localStorage.removeItem('skillpods_user');
+                  localStorage.setItem('skillpods_page', 'landing');
+                  window.location.reload();
+                }}
+                className="text-[#a19ba9] hover:text-rose-400 transition-colors text-xs font-mono tracking-widest uppercase cursor-pointer"
+                title="Log out of SkillPods"
+              >
+                LOGOUT
+              </button>
+            </div>
+          ) : (
+            <>
+              <button
+                onClick={() => onOpenModal('login')}
+                className="text-[#a19ba9] hover:text-white transition-colors text-xs font-mono tracking-widest uppercase cursor-pointer"
+                id="nav-btn-login"
+              >
+                LOGIN
+              </button>
+              
+              <button
+                onClick={() => onOpenModal('join-cohort')}
+                className="glow-pill-secondary text-white text-xs font-mono uppercase tracking-widest px-5 py-2.5 rounded-full font-semibold border border-[#d0bcff]/40 hover:border-[#d0bcff] hover:text-[#d0bcff] transition-all cursor-pointer shadow-[0_0_20px_rgba(160,120,255,0.25)]"
+                id="nav-btn-get-started"
+              >
+                GET STARTED
+              </button>
+            </>
+          )}
         </div>
 
         {/* Mobile menu button */}
