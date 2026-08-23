@@ -219,4 +219,60 @@ export interface MarksheetItem {
   uploadDate: string;
 }
 
+export interface CommunityMember {
+  id: string;
+  name: string;
+  email: string;
+  role: UserRole;
+  avatar?: string;
+  bio?: string;
+  organization?: string;
+  college?: string;
+  department?: string;
+  rollNo?: string;
+  gradYear?: string;
+  cgpa?: string;
+  semester?: string;
+  skills?: string[];
+  certificates?: CertificateItem[];
+  marksheets?: MarksheetItem[];
+  github?: string;
+  linkedin?: string;
+  onlineStatus: 'online' | 'away' | 'offline';
+  openForProjects: boolean;
+  projectsCompleted?: number;
+  podName?: string;
+}
+
+export interface DirectMessage {
+  id: string;
+  threadId: string;
+  senderEmail: string;
+  senderName: string;
+  senderRole: UserRole;
+  senderAvatar?: string;
+  recipientEmail: string;
+  recipientName: string;
+  recipientRole: UserRole;
+  text: string;
+  timestamp: string;
+  read: boolean;
+}
+
+export interface ConversationThread {
+  threadId: string;
+  participantEmails: string[];
+  otherUser: {
+    email: string;
+    name: string;
+    role: UserRole;
+    avatar?: string;
+    organizationOrCollege?: string;
+    onlineStatus?: 'online' | 'away' | 'offline';
+  };
+  lastMessage: string;
+  lastMessageTime: string;
+  unreadCount: number;
+}
+
 

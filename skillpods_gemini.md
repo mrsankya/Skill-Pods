@@ -29,6 +29,9 @@
 - 🔄 **Project Reuse / Upgrade**: Enterprise v2.0 upgrade engine to spin up student pods for commercial modernization.
 - 💵 **Earnings Wallet (`StudentEarningsWallet.tsx`)**: Financial ledger tracking sprint stipends, commercial software licensing royalties, escrow balances, and instant withdrawal modal.
 - 🎓 **Academic Scorecard & Document Vault**: Official CGPA standing (e.g. `9.24 / 10.00`), semester class, placement eligibility badge, verified industry certificates vault, and official semester marksheet/transcript uploader with full-screen document lightbox previewer.
+- 🌐 **Community Network Directory (`CommunityNetworkModal.tsx`)**: LinkedIn-style professional community hub allowing Students, SMEs, Mentors, and Admins to browse verified profiles, search by skills/institution/company, filter by roles, and inspect verified marksheet/certificate vaults.
+- 💬 **Private Direct 1-on-1 Messaging System (`DirectMessagingModal.tsx`)**: End-to-end private messaging between Students, SMEs, and Mentors with quick icebreaker prompts, active thread management, and real-time message exchange.
+- 🛡️ **SuperAdmin Exclusive Chat Supervision (`/api/admin/all-chats`)**: Strict privacy architecture where no ordinary user can access another's chat, but SuperAdmin (`sanketbhende0@gmail.com`) has a dedicated Global Audit View for safety, anti-fraud, and compliance monitoring.
 
 ## Experimental Labs & Next-Gen Testing Suite (`[🧪 IN TESTING]` & `[⚡ BETA]`)
 - 🎙️ **Real-Time WebRTC Pod Sprint Room (`LivePodRoomModal.tsx`)**: 4-participant video/audio room with screen-sharing, WebRTC mesh latency radar, and in-room chat.

@@ -11,7 +11,9 @@ import {
   DepartmentAnalytics,
   UserRole,
   CertificateItem,
-  MarksheetItem
+  MarksheetItem,
+  CommunityMember,
+  DirectMessage
 } from '../src/types';
 
 export interface UserAccount {
@@ -85,6 +87,7 @@ interface DatabaseSchema {
   collegeIpRegistry: CollegeIPRegistryItem[];
   departmentAnalytics: DepartmentAnalytics[];
   walletTransactions: WalletTransaction[];
+  messages: DirectMessage[];
   metrics: {
     uptimeSla: number;
     avgLatencyMs: number;
@@ -551,7 +554,8 @@ function getSeedData(): DatabaseSchema {
         status: "Paid Out ✓",
         reference: "Mentor Sarah Chen Approval Gate #101"
       }
-    ]
+    ],
+    messages: []
   };
 }
 
@@ -905,6 +909,283 @@ class DatabaseManager {
     }
     this.save();
     return gate;
+  }
+
+  // --- COMMUNITY NETWORK & DIRECTORY ---
+  public getCommunityMembers(query?: string, roleFilter?: string): CommunityMember[] {
+    const members: CommunityMember[] = this.data.users.map(u => ({
+      id: u.id,
+      name: u.name,
+      email: u.email,
+      role: u.role,
+      avatar: u.avatar || u.photoUrl,
+      bio: u.bio || (u.role === 'student' ? 'Full-stack student builder in Pod Apex-2' : u.role === 'mentor' ? 'Industry Mentor & Code Reviewer' : 'Enterprise Sponsor'),
+      college: u.college || (u.role === 'student' ? 'National Institute of Technology' : undefined),
+      organization: u.organization || (u.role === 'mentor' ? 'Razorpay' : u.role === 'sme' ? 'Kestrel Freight' : undefined),
+      department: u.department || (u.role === 'student' ? 'Computer Science' : undefined),
+      rollNo: u.rollNo,
+      gradYear: u.gradYear,
+      cgpa: u.cgpa || (u.role === 'student' ? '9.24 / 10.00' : undefined),
+      semester: u.semester || (u.role === 'student' ? 'Semester 7 (Final Year)' : undefined),
+      skills: u.skills || ['React 19', 'TypeScript', 'Node.js', 'FastAPI'],
+      certificates: u.certificates || [
+        {
+          id: 'cert-1',
+          title: 'AWS Certified Solutions Architect',
+          issuer: 'Amazon Web Services (AWS)',
+          date: 'July 2026',
+          credentialUrl: 'https://aws.amazon.com/verification',
+          verified: true,
+          fileUrl: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800&auto=format&fit=crop&q=80'
+        }
+      ],
+      marksheets: u.marksheets || [
+        {
+          id: 'mark-1',
+          title: 'Semester 6 Official Grade Sheet',
+          semester: 'Sem 6 (Spring 2026)',
+          uploadDate: 'June 15, 2026',
+          fileUrl: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop&q=80'
+        }
+      ],
+      github: u.github || 'https://github.com',
+      linkedin: u.linkedin || 'https://linkedin.com',
+      onlineStatus: u.role === 'admin' ? 'online' : 'online',
+      openForProjects: true,
+      projectsCompleted: 3,
+      podName: 'Pod Apex-2'
+    }));
+
+    const extraMentorsAndSmes: CommunityMember[] = [
+      {
+        id: 'mentor-priya',
+        name: 'Priya Sharma',
+        email: 'priya.sharma@razorpay.com',
+        role: 'mentor',
+        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
+        bio: 'Staff Engineer & Architect @ Razorpay. Mentoring Pod Apex-2 on distributed payment systems and WebSocket architectures.',
+        organization: 'Razorpay Engineering',
+        skills: ['System Design', 'React 19', 'Payment Gateways', 'Distributed Systems', 'Go'],
+        certificates: [
+          {
+            id: 'cert-m1',
+            title: 'Kubernetes Certified Administrator (CKA)',
+            issuer: 'Cloud Native Computing Foundation (CNCF)',
+            date: 'Jan 2025',
+            verified: true,
+            fileUrl: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800&auto=format&fit=crop&q=80'
+          }
+        ],
+        onlineStatus: 'online',
+        openForProjects: true,
+        projectsCompleted: 18,
+        podName: 'Mentor Lead (Apex Cohort)'
+      },
+      {
+        id: 'mentor-sarah',
+        name: 'Sarah Chen',
+        email: 'sarah.chen@cloudflare.com',
+        role: 'mentor',
+        avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&auto=format&fit=crop&q=80',
+        bio: 'Principal Architect @ Cloudflare. Specialized in edge compute workers, zero-trust security, and high-throughput WebSockets.',
+        organization: 'Cloudflare',
+        skills: ['Edge Compute', 'WebSockets', 'Telemetry', 'Go', 'High-QPS APIs'],
+        onlineStatus: 'away',
+        openForProjects: true,
+        projectsCompleted: 24,
+        podName: 'Security Gatekeeper'
+      },
+      {
+        id: 'sme-kestrel',
+        name: 'Rajesh Nair',
+        email: 'kestrel@freight.com',
+        role: 'sme',
+        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80',
+        bio: 'VP of Technology @ Kestrel Freight & Logistics. Sponsoring real-world vehicle tracking and cold-chain monitoring problems.',
+        organization: 'Kestrel Freight & Logistics',
+        skills: ['Logistics Ops', 'Supply Chain Tech', 'IoT Telemetry', 'PRD Design'],
+        onlineStatus: 'online',
+        openForProjects: true,
+        projectsCompleted: 8,
+        podName: 'SME Sponsor (Apex-2)'
+      },
+      {
+        id: 'student-maya',
+        name: 'Maya Patel',
+        email: 'maya.patel@nit.edu',
+        role: 'student',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80',
+        bio: 'Backend & Cloud Engineer @ NIT. Focused on Go microservices, Redis caching, and PostgreSQL time-series modeling.',
+        college: 'National Institute of Technology',
+        department: 'Information Technology',
+        rollNo: 'IT21B019',
+        gradYear: '2027',
+        cgpa: '9.48 / 10.00',
+        semester: 'Semester 7 (Final Year)',
+        skills: ['Go', 'PostgreSQL', 'Docker', 'Kubernetes', 'Redis'],
+        certificates: [
+          {
+            id: 'cert-maya-1',
+            title: 'AWS Certified Developer Associate',
+            issuer: 'Amazon Web Services',
+            date: 'April 2026',
+            verified: true,
+            fileUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&auto=format&fit=crop&q=80'
+          }
+        ],
+        marksheets: [
+          {
+            id: 'mark-maya-1',
+            title: 'Semester 6 Grade Sheet (9.60 SGPA)',
+            semester: 'Sem 6 (Spring 2026)',
+            uploadDate: 'June 20, 2026',
+            fileUrl: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop&q=80'
+          }
+        ],
+        onlineStatus: 'online',
+        openForProjects: true,
+        projectsCompleted: 4,
+        podName: 'Pod Apex-2'
+      }
+    ];
+
+    let allMembers = [...members];
+    for (const em of extraMentorsAndSmes) {
+      if (!allMembers.some(m => m.email.toLowerCase() === em.email.toLowerCase())) {
+        allMembers.push(em);
+      }
+    }
+
+    if (roleFilter && roleFilter !== 'all') {
+      allMembers = allMembers.filter(m => m.role === roleFilter);
+    }
+
+    if (query && query.trim()) {
+      const q = query.toLowerCase();
+      allMembers = allMembers.filter(m =>
+        m.name.toLowerCase().includes(q) ||
+        m.email.toLowerCase().includes(q) ||
+        m.skills?.some(s => s.toLowerCase().includes(q)) ||
+        m.college?.toLowerCase().includes(q) ||
+        m.organization?.toLowerCase().includes(q) ||
+        m.department?.toLowerCase().includes(q)
+      );
+    }
+
+    return allMembers;
+  }
+
+  public getMemberProfile(idOrEmail: string): CommunityMember | undefined {
+    const members = this.getCommunityMembers();
+    return members.find(m => m.id === idOrEmail || m.email.toLowerCase() === idOrEmail.toLowerCase());
+  }
+
+  // --- DIRECT MESSAGING SYSTEM ---
+  public getDirectMessages(userEmail: string, otherEmail?: string): DirectMessage[] {
+    if (!this.data.messages) {
+      this.data.messages = this.getInitialSeedMessages();
+      this.save();
+    }
+
+    const cleanUser = userEmail.toLowerCase();
+    let msgs = this.data.messages.filter(m =>
+      m.senderEmail.toLowerCase() === cleanUser || m.recipientEmail.toLowerCase() === cleanUser
+    );
+
+    if (otherEmail) {
+      const cleanOther = otherEmail.toLowerCase();
+      msgs = msgs.filter(m =>
+        (m.senderEmail.toLowerCase() === cleanUser && m.recipientEmail.toLowerCase() === cleanOther) ||
+        (m.senderEmail.toLowerCase() === cleanOther && m.recipientEmail.toLowerCase() === cleanUser)
+      );
+    }
+
+    return msgs.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+  }
+
+  public sendDirectMessage(messageData: Omit<DirectMessage, 'id' | 'timestamp' | 'read' | 'threadId'>): DirectMessage {
+    if (!this.data.messages) this.data.messages = [];
+
+    const senderEmail = messageData.senderEmail.toLowerCase();
+    const recipientEmail = messageData.recipientEmail.toLowerCase();
+    const threadId = [senderEmail, recipientEmail].sort().join('_');
+
+    const newMsg: DirectMessage = {
+      id: `msg-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      threadId,
+      senderEmail,
+      senderName: messageData.senderName,
+      senderRole: messageData.senderRole,
+      senderAvatar: messageData.senderAvatar,
+      recipientEmail,
+      recipientName: messageData.recipientName,
+      recipientRole: messageData.recipientRole,
+      text: messageData.text,
+      timestamp: new Date().toISOString(),
+      read: false
+    };
+
+    this.data.messages.push(newMsg);
+    this.save();
+    return newMsg;
+  }
+
+  // Admin exclusive global message inspector: strictly protected for compliance & safety auditing
+  public getAllSystemMessagesForAdmin(requesterRole: UserRole): DirectMessage[] {
+    if (requesterRole !== 'admin') {
+      throw new Error('Access denied. Chat audit is restricted to SuperAdmin role only.');
+    }
+    if (!this.data.messages) {
+      this.data.messages = this.getInitialSeedMessages();
+      this.save();
+    }
+    return this.data.messages;
+  }
+
+  private getInitialSeedMessages(): DirectMessage[] {
+    return [
+      {
+        id: 'msg-seed-1',
+        threadId: 'priya.sharma@razorpay.com_sanketbhende0@gmail.com',
+        senderEmail: 'priya.sharma@razorpay.com',
+        senderName: 'Priya Sharma (Staff Engineer @ Razorpay)',
+        senderRole: 'mentor',
+        senderAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
+        recipientEmail: 'sanketbhende0@gmail.com',
+        recipientName: 'Sanket Bhende',
+        recipientRole: 'admin',
+        text: 'Hi Sanket! I reviewed Pod Apex-2 Sprint 2 deliverables. The WebSocket SKU telemetry architecture and test suite pass rate are outstanding. Verified stamp issued!',
+        timestamp: new Date(Date.now() - 3600000 * 2).toISOString(),
+        read: true
+      },
+      {
+        id: 'msg-seed-2',
+        threadId: 'priya.sharma@razorpay.com_sanketbhende0@gmail.com',
+        senderEmail: 'sanketbhende0@gmail.com',
+        senderName: 'Sanket Bhende',
+        senderRole: 'admin',
+        recipientEmail: 'priya.sharma@razorpay.com',
+        recipientName: 'Priya Sharma',
+        recipientRole: 'mentor',
+        text: 'Thanks Priya! We also added the student academic marksheet and certificate vault for direct placement verification.',
+        timestamp: new Date(Date.now() - 3600000 * 1).toISOString(),
+        read: true
+      },
+      {
+        id: 'msg-seed-3',
+        threadId: 'kestrel@freight.com_sanketbhende0@gmail.com',
+        senderEmail: 'kestrel@freight.com',
+        senderName: 'Rajesh Nair (VP Tech @ Kestrel)',
+        senderRole: 'sme',
+        senderAvatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&auto=format&fit=crop&q=80',
+        recipientEmail: 'sanketbhende0@gmail.com',
+        recipientName: 'Sanket Bhende',
+        recipientRole: 'admin',
+        text: 'Hello! We are ready to lock ₹25,000 for Sprint 3 in the Escrow Vault once the cold-chain telemetry module begins.',
+        timestamp: new Date(Date.now() - 1800000).toISOString(),
+        read: false
+      }
+    ];
   }
 
   // --- IP REGISTRY & DEPARTMENT ANALYTICS ---

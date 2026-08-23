@@ -56,7 +56,7 @@ import {
   FileCode,
   Trash2
 } from 'lucide-react';
-import { CertificateItem, MarksheetItem } from '../types';
+import { CertificateItem, MarksheetItem, CommunityMember } from '../types';
 import { StudentCharacter3D } from './StudentCharacter3D';
 import { SkillPodsLogo } from './SkillPodsLogo';
 import { StudentAiSkillMatch } from './StudentAiSkillMatch';
@@ -72,6 +72,8 @@ import { NaacReportModal } from './NaacReportModal';
 import { PitchDeckModal } from './PitchDeckModal';
 import { PodLeaderboardModal } from './PodLeaderboardModal';
 import { ApiSandboxModal } from './ApiSandboxModal';
+import { CommunityNetworkModal } from './CommunityNetworkModal';
+import { DirectMessagingModal } from './DirectMessagingModal';
 
 interface StudentDashboardProps {
   userEmail: string;
@@ -543,6 +545,9 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   const [showPitchDeckModal, setShowPitchDeckModal] = useState(false);
   const [showLeaderboardModal, setShowLeaderboardModal] = useState(false);
   const [showApiSandboxModal, setShowApiSandboxModal] = useState(false);
+  const [showCommunityModal, setShowCommunityModal] = useState(false);
+  const [showMessagingModal, setShowMessagingModal] = useState(false);
+  const [selectedChatRecipient, setSelectedChatRecipient] = useState<CommunityMember | null>(null);
   const [githubSyncMsg, setGithubSyncMsg] = useState<string | null>(null);
 
   const handleSimulateGithubPush = () => {
@@ -1011,14 +1016,39 @@ interface InventoryTelemetryPacket {
             </div>
           </div>
 
-          {/* Top Right Date Badge & Profile Action */}
-          <div className="flex items-center gap-3">
+          {/* Top Right Actions: Community Network, Direct Messages, Date & Profile */}
+          <div className="flex items-center gap-2.5 flex-wrap">
+            
+            {/* 1. Community Network Button */}
+            <button
+              onClick={() => setShowCommunityModal(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-sm transition-all cursor-pointer"
+              title="Browse Students, SMEs, Mentors & Credentials"
+            >
+              <Users className="w-3.5 h-3.5" />
+              <span>🌐 Community</span>
+            </button>
+
+            {/* 2. Direct Messaging Button */}
+            <button
+              onClick={() => {
+                setSelectedChatRecipient(null);
+                setShowMessagingModal(true);
+              }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 hover:bg-white text-purple-950 border border-purple-200 text-xs font-bold shadow-2xs transition-all cursor-pointer relative"
+              title="Private Direct Messaging"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-purple-700" />
+              <span>💬 Messages</span>
+              <span className="w-2 h-2 rounded-full bg-purple-600 animate-pulse" />
+            </button>
+
             <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100/80 border border-purple-200 text-purple-900 text-xs font-bold shadow-2xs">
               <Sparkles className="w-3.5 h-3.5 text-purple-600 animate-pulse" />
               <span>Match Fit: 96%</span>
             </div>
 
-            <div className="px-3.5 py-1.5 rounded-full bg-white/80 border border-white/90 text-[#3b226e] text-xs font-semibold shadow-2xs">
+            <div className="hidden md:block px-3.5 py-1.5 rounded-full bg-white/80 border border-white/90 text-[#3b226e] text-xs font-semibold shadow-2xs">
               {new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })}
             </div>
 
@@ -3217,6 +3247,30 @@ interface InventoryTelemetryPacket {
       <ApiSandboxModal
         isOpen={showApiSandboxModal}
         onClose={() => setShowApiSandboxModal(false)}
+      />
+
+      {/* ================= MODAL: COMMUNITY NETWORK DIRECTORY ================= */}
+      <CommunityNetworkModal
+        isOpen={showCommunityModal}
+        onClose={() => setShowCommunityModal(false)}
+        currentUserEmail={userEmail || currentProfile.email || 'builder@skillpods.io'}
+        currentUserName={displayName}
+        currentUserRole="student"
+        onOpenChatWithMember={(member) => {
+          setSelectedChatRecipient(member);
+          setShowCommunityModal(false);
+          setShowMessagingModal(true);
+        }}
+      />
+
+      {/* ================= MODAL: DIRECT MESSAGING SYSTEM ================= */}
+      <DirectMessagingModal
+        isOpen={showMessagingModal}
+        onClose={() => setShowMessagingModal(false)}
+        currentUserEmail={userEmail || currentProfile.email || 'builder@skillpods.io'}
+        currentUserName={displayName}
+        currentUserRole="student"
+        initialRecipient={selectedChatRecipient}
       />
 
     </div>

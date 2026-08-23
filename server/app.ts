@@ -410,39 +410,108 @@ app.get("/api/admin/security-audit", (req, res) => {
   });
 });
 
-// Update User Profile (Photo, Bio, Skills, Links)
-app.post("/api/user/profile", (req, res) => {
+// --- COMMUNITY NETWORK DIRECTORY ENDPOINTS ---
+app.get("/api/community/members", (req, res) => {
   try {
-    const { email, name, avatar, photoUrl, bio, college, department, rollNo, gradYear, github, linkedin, skills } = req.body;
-    if (!email) {
-      return res.status(400).json({ success: false, message: "User email is required." });
-    }
-
-    const updatedUser = db.updateUserProfile(email, {
-      name: name ? sanitizeString(name) : undefined,
-      avatar,
-      photoUrl,
-      bio: bio ? sanitizeString(bio) : undefined,
-      college: college ? sanitizeString(college) : undefined,
-      department: department ? sanitizeString(department) : undefined,
-      rollNo: rollNo ? sanitizeString(rollNo) : undefined,
-      gradYear: gradYear ? sanitizeString(gradYear) : undefined,
-      github: github ? sanitizeString(github) : undefined,
-      linkedin: linkedin ? sanitizeString(linkedin) : undefined,
-      skills: Array.isArray(skills) ? skills.map((s: string) => sanitizeString(s)) : undefined
+    const query = req.query.q as string | undefined;
+    const role = req.query.role as string | undefined;
+    const members = db.getCommunityMembers(query, role);
+    return res.json({
+      success: true,
+      members,
+      total: members.length
     });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message || "Failed to fetch community members." });
+  }
+});
 
-    if (!updatedUser) {
-      return res.status(404).json({ success: false, message: "User not found to update." });
+app.get("/api/community/member/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+    const member = db.getMemberProfile(id);
+    if (!member) {
+      return res.status(404).json({ success: false, message: "Member profile not found." });
     }
+    return res.json({ success: true, member });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message || "Failed to fetch member." });
+  }
+});
+
+// --- DIRECT MESSAGING SYSTEM ENDPOINTS ---
+app.get("/api/messages", (req, res) => {
+  try {
+    const userEmail = (req.query.userEmail as string) || '';
+    const otherEmail = req.query.otherEmail as string | undefined;
+
+    if (!userEmail) {
+      return res.status(400).json({ success: false, message: "userEmail query parameter is required." });
+    }
+
+    const messages = db.getDirectMessages(userEmail, otherEmail);
+    return res.json({
+      success: true,
+      messages,
+      total: messages.length
+    });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message || "Failed to load messages." });
+  }
+});
+
+app.post("/api/messages/send", (req, res) => {
+  try {
+    const { senderEmail, senderName, senderRole, senderAvatar, recipientEmail, recipientName, recipientRole, text } = req.body;
+
+    if (!senderEmail || !recipientEmail || !text?.trim()) {
+      return res.status(400).json({ success: false, message: "Sender, recipient, and message text are required." });
+    }
+
+    const newMsg = db.sendDirectMessage({
+      senderEmail: sanitizeString(senderEmail),
+      senderName: sanitizeString(senderName || 'Anonymous'),
+      senderRole: senderRole || 'student',
+      senderAvatar,
+      recipientEmail: sanitizeString(recipientEmail),
+      recipientName: sanitizeString(recipientName || 'Member'),
+      recipientRole: recipientRole || 'student',
+      text: sanitizeString(text)
+    });
 
     return res.json({
       success: true,
-      message: "Profile updated and saved to database!",
-      user: updatedUser
+      message: "Message sent successfully!",
+      data: newMsg
     });
   } catch (err: any) {
-    return res.status(500).json({ success: false, message: err.message || "Failed to update profile." });
+    return res.status(500).json({ success: false, message: err.message || "Failed to send message." });
+  }
+});
+
+// SuperAdmin Exclusive: Global Moderation & Audit View of All System Chats
+app.get("/api/admin/all-chats", (req, res) => {
+  try {
+    const requesterEmail = (req.query.adminEmail as string || '').toLowerCase();
+    const requesterRole = (req.query.role as string || '').toLowerCase();
+
+    // Enforce strict Admin-only access rule
+    if (requesterRole !== 'admin' && requesterEmail !== 'sanketbhende0@gmail.com') {
+      return res.status(403).json({
+        success: false,
+        message: "Forbidden. Only platform SuperAdmin has authorization to inspect global communication channels for safety and compliance."
+      });
+    }
+
+    const allMessages = db.getAllSystemMessagesForAdmin('admin');
+    return res.json({
+      success: true,
+      auditTimestamp: new Date().toISOString(),
+      messages: allMessages,
+      total: allMessages.length
+    });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message || "Failed to access admin chat audit." });
   }
 });
 

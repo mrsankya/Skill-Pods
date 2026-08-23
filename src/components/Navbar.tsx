@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, ArrowRight, ShieldCheck, Zap, Bell } from 'lucide-react';
+import { Menu, X, ArrowRight, ShieldCheck, Zap, Bell, Users, MessageSquare } from 'lucide-react';
 import { ModalView } from '../types';
 import { SkillPodsLogo } from './SkillPodsLogo';
 
@@ -7,9 +7,11 @@ interface NavbarProps {
   onOpenModal: (modal: ModalView) => void;
   activeSection: string;
   onNavigate: (sectionId: string) => void;
+  onOpenCommunity?: () => void;
+  onOpenChat?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNavigate }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNavigate, onOpenCommunity, onOpenChat }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(3);
@@ -74,7 +76,33 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
         </div>
 
         {/* Action Controls */}
-        <div className="hidden md:flex items-center gap-5">
+        <div className="hidden md:flex items-center gap-3">
+          
+          {/* Community Directory Button */}
+          {onOpenCommunity && (
+            <button
+              onClick={onOpenCommunity}
+              className="text-[#d0bcff] hover:text-white bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-xs font-mono tracking-wider uppercase px-3 py-2 rounded-full transition-colors cursor-pointer flex items-center gap-1.5"
+              title="Browse Student Profiles & Verified Credentials"
+            >
+              <Users className="w-3.5 h-3.5 text-purple-400" />
+              <span>COMMUNITY</span>
+            </button>
+          )}
+
+          {/* Direct Chat Button */}
+          {onOpenChat && (
+            <button
+              onClick={onOpenChat}
+              className="text-[#d0bcff] hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono tracking-wider uppercase px-3 py-2 rounded-full transition-colors cursor-pointer flex items-center gap-1.5 relative"
+              title="Direct Private Messaging"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-purple-400" />
+              <span>CHAT</span>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            </button>
+          )}
+
           {/* Notification Bell Dropdown */}
           <div className="relative">
             <button

@@ -19,8 +19,10 @@ import { PodDetailsModal } from './components/PodDetailsModal';
 import { AuthModal } from './components/AuthModal';
 import { DocsModal } from './components/DocsModal';
 import { AppointmentModal } from './components/AppointmentModal';
+import { CommunityNetworkModal } from './components/CommunityNetworkModal';
+import { DirectMessagingModal } from './components/DirectMessagingModal';
 
-import { MetricsData, PodData, SmeProblem, LiveEvent, ModalView, PageType, UserRole, LoginIntent } from './types';
+import { MetricsData, PodData, SmeProblem, LiveEvent, ModalView, PageType, UserRole, LoginIntent, CommunityMember } from './types';
 import { LoginPage } from './components/LoginPage';
 import { WorkspaceView } from './components/WorkspaceView';
 import { StudentDashboard } from './components/StudentDashboard';
@@ -117,6 +119,9 @@ export default function App() {
   const [selectedPod, setSelectedPod] = useState<PodData | null>(null);
   const [activeSection, setActiveSection] = useState<string>('hero');
   const [notification, setNotification] = useState<string | null>(null);
+  const [showCommunityModal, setShowCommunityModal] = useState(false);
+  const [showMessagingModal, setShowMessagingModal] = useState(false);
+  const [selectedChatRecipient, setSelectedChatRecipient] = useState<CommunityMember | null>(null);
 
   // Synchronize browser history / URL hash and resume authenticated session
   useEffect(() => {
@@ -365,6 +370,11 @@ export default function App() {
         onOpenModal={handleModalOrLoginRoute}
         activeSection={activeSection}
         onNavigate={handleNavigate}
+        onOpenCommunity={() => setShowCommunityModal(true)}
+        onOpenChat={() => {
+          setSelectedChatRecipient(null);
+          setShowMessagingModal(true);
+        }}
       />
 
       {/* Main Long-Form Landing Page */}
@@ -430,6 +440,30 @@ export default function App() {
       <DocsModal
         view={activeModal}
         onClose={() => setActiveModal(null)}
+      />
+
+      {/* Community Network Directory Modal */}
+      <CommunityNetworkModal
+        isOpen={showCommunityModal}
+        onClose={() => setShowCommunityModal(false)}
+        currentUserEmail={authenticatedUser}
+        currentUserName={authenticatedUser.split('@')[0]}
+        currentUserRole={currentRole}
+        onOpenChatWithMember={(member) => {
+          setSelectedChatRecipient(member);
+          setShowCommunityModal(false);
+          setShowMessagingModal(true);
+        }}
+      />
+
+      {/* Direct Messaging System Modal */}
+      <DirectMessagingModal
+        isOpen={showMessagingModal}
+        onClose={() => setShowMessagingModal(false)}
+        currentUserEmail={authenticatedUser}
+        currentUserName={authenticatedUser.split('@')[0]}
+        currentUserRole={currentRole}
+        initialRecipient={selectedChatRecipient}
       />
 
     </div>
