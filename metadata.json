@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Skill Pods new",
+  "description": "Turn real SME problems into production-ready products through student skill pods and industry mentorship with real-time telemetry and project pipeline tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

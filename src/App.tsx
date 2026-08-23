@@ -1,0 +1,341 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState, useEffect, useCallback } from 'react';
+import { Navbar } from './components/Navbar';
+import { HeroSection } from './components/HeroSection';
+import { WorkflowSection } from './components/WorkflowSection';
+import { InnovationCarousel } from './components/InnovationCarousel';
+import { FinalCtaSection } from './components/FinalCtaSection';
+import { Footer } from './components/Footer';
+import { BackgroundSparkles } from './components/BackgroundSparkles';
+
+// Modals
+import { SubmitProblemModal } from './components/SubmitProblemModal';
+import { JoinCohortModal } from './components/JoinCohortModal';
+import { PodDetailsModal } from './components/PodDetailsModal';
+import { AuthModal } from './components/AuthModal';
+import { DocsModal } from './components/DocsModal';
+import { AppointmentModal } from './components/AppointmentModal';
+
+import { MetricsData, PodData, SmeProblem, LiveEvent, ModalView, PageType, UserRole, LoginIntent } from './types';
+import { LoginPage } from './components/LoginPage';
+import { WorkspaceView } from './components/WorkspaceView';
+import { StudentDashboard } from './components/StudentDashboard';
+import { MentorDashboard } from './components/MentorDashboard';
+import { SmeDashboard } from './components/SmeDashboard';
+import { CollegeDashboard } from './components/CollegeDashboard';
+
+const initialMetrics: MetricsData = {
+
+  uptimeSla: 99.9,
+  avgLatencyMs: 50,
+  projectsShipped: 4800,
+  apiRequestsToday: 10000000,
+  activePods: 24,
+  activeStudents: 642,
+  industryMentors: 118,
+  liveSmeProblems: 37,
+};
+
+const initialPods: PodData[] = [
+  {
+    id: "pod-101",
+    name: "Pod Apex-2",
+    title: "AI Invoice & Ledger Auto-Reconciliation",
+    sme: "Kestrel Logistics & Freight",
+    stage: 5,
+    stageName: "Launch & Scale",
+    progress: 98,
+    mentor: "Sarah Chen (Staff Eng @ Cloudflare)",
+    students: [
+      { name: "Dev Patel", role: "Full-Stack Lead" },
+      { name: "Maya Lin", role: "Backend / Golang" },
+      { name: "Rohan Gupta", role: "AI Pipeline" }
+    ],
+    techStack: ["React", "FastAPI", "PostgreSQL", "Docker", "Tailwind"],
+    latency: "38ms",
+    health: "Operational",
+    lastCommit: "feat: implemented webhook deduplication and OCR confidence scores",
+    updatedAt: new Date().toISOString(),
+    demoUrl: "https://demo.kestrel-recon.skillpods.io"
+  }
+];
+
+export default function App() {
+  const [currentPage, setCurrentPage] = useState<PageType>('landing');
+  const [loginIntent, setLoginIntent] = useState<LoginIntent>('general');
+  const [currentRole, setCurrentRole] = useState<UserRole>('student');
+  const [authenticatedUser, setAuthenticatedUser] = useState<string>('builder@skillpods.io');
+
+  const [metrics, setMetrics] = useState<MetricsData>(initialMetrics);
+  const [pods, setPods] = useState<PodData[]>(initialPods);
+  const [activeModal, setActiveModal] = useState<ModalView>(null);
+  const [selectedPod, setSelectedPod] = useState<PodData | null>(null);
+  const [activeSection, setActiveSection] = useState<string>('hero');
+  const [notification, setNotification] = useState<string | null>(null);
+
+  // Synchronize browser history / URL hash and resume authenticated session
+  useEffect(() => {
+    const handleHash = () => {
+      if (window.location.hash === '#login' || window.location.pathname === '/login') {
+        setCurrentPage('login');
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+
+    // Auto-resume authenticated session from database
+    const token = localStorage.getItem('skillpods_token');
+    if (token) {
+      fetch('/api/auth/me', {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+        .then(r => r.ok ? r.json() : null)
+        .then(data => {
+          if (data?.success && data?.user) {
+            setAuthenticatedUser(data.user.email);
+            setCurrentRole(data.user.role);
+          }
+        })
+        .catch(() => {});
+    }
+
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  // Fetch live metrics from Express backend
+  const fetchLiveTelemetry = useCallback(async () => {
+    try {
+      const metricsRes = await fetch('/api/metrics').then(r => r.ok ? r.json() : null).catch(() => null);
+      if (metricsRes?.data) {
+        setMetrics(metricsRes.data);
+      }
+    } catch {
+      // fallback
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchLiveTelemetry();
+    const interval = setInterval(fetchLiveTelemetry, 5000);
+    return () => clearInterval(interval);
+  }, [fetchLiveTelemetry]);
+
+  const handleNavigate = (sectionId: string) => {
+    if (currentPage !== 'landing') {
+      setCurrentPage('landing');
+      setTimeout(() => {
+        handleNavigate(sectionId);
+      }, 50);
+      return;
+    }
+    setActiveSection(sectionId);
+    if (sectionId === 'hero' || sectionId === 'about') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (sectionId === 'workflow') {
+      const el = document.getElementById('workflow-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (sectionId === 'pricing') {
+      const el = document.getElementById('final-cta-section');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  // Open the Full-Screen Login Page with intentional context
+  const handleOpenLogin = (intent: LoginIntent = 'general') => {
+    setLoginIntent(intent);
+    setCurrentPage('login');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleLoginSuccess = (role: UserRole, email: string) => {
+    setCurrentRole(role);
+    setAuthenticatedUser(email);
+    setCurrentPage('dashboard');
+    setNotification(`Authenticated as ${email} (${role.toUpperCase()})`);
+    setTimeout(() => setNotification(null), 4000);
+  };
+
+  const handleOpenPodDetails = (pod: PodData) => {
+    setSelectedPod(pod);
+    setActiveModal('pod-details');
+  };
+
+  const handleProblemSubmitted = (newProblem: SmeProblem) => {
+    setNotification(`New problem statement submitted: "${newProblem.title}"`);
+    setTimeout(() => setNotification(null), 4000);
+  };
+
+  const handleApplicationSuccess = (msg: string) => {
+    setNotification(msg);
+    setTimeout(() => setNotification(null), 4000);
+  };
+
+  // Intercept modal actions from landing page that should route to the full-screen Login Page
+  const handleModalOrLoginRoute = (modal: ModalView) => {
+    if (modal === 'login') {
+      handleOpenLogin('general');
+    } else if (modal === 'submit-problem') {
+      handleOpenLogin('submit-problem');
+    } else if (modal === 'join-cohort') {
+      handleOpenLogin('join-student');
+    } else if (modal === 'appointment') {
+      handleOpenLogin('appointment');
+    } else {
+      setActiveModal(modal);
+    }
+  };
+
+  // 1. Full-Screen Login Page View
+  if (currentPage === 'login') {
+    return (
+      <LoginPage
+        initialIntent={loginIntent}
+        onBackToHome={() => setCurrentPage('landing')}
+        onLoginSuccess={handleLoginSuccess}
+      />
+    );
+  }
+
+  // 2. Full-Screen Workspace Dashboard View
+  if (currentPage === 'dashboard') {
+    if (currentRole === 'student') {
+      return (
+        <StudentDashboard
+          userEmail={authenticatedUser}
+          onSwitchWorkspace={() => setCurrentPage('login')}
+          onBackToHome={() => setCurrentPage('landing')}
+        />
+      );
+    }
+    if (currentRole === 'mentor') {
+      return (
+        <MentorDashboard
+          userEmail={authenticatedUser}
+          onSwitchWorkspace={() => setCurrentPage('login')}
+          onBackToHome={() => setCurrentPage('landing')}
+        />
+      );
+    }
+    if (currentRole === 'sme') {
+      return (
+        <SmeDashboard
+          userEmail={authenticatedUser}
+          onSwitchWorkspace={() => setCurrentPage('login')}
+          onBackToHome={() => setCurrentPage('landing')}
+        />
+      );
+    }
+    if (currentRole === 'college') {
+      return (
+        <CollegeDashboard
+          userEmail={authenticatedUser}
+          onSwitchWorkspace={() => setCurrentPage('login')}
+          onBackToHome={() => setCurrentPage('landing')}
+        />
+      );
+    }
+    return (
+      <WorkspaceView
+        role={currentRole}
+        userEmail={authenticatedUser}
+        onSwitchWorkspace={() => setCurrentPage('login')}
+        onBackToHome={() => setCurrentPage('landing')}
+      />
+    );
+  }
+
+  // 3. Primary Landing Page View
+  return (
+    <div className="min-h-screen bg-[#08070d] text-[#e4e1e7] flex flex-col relative font-sans selection:bg-[#a87ffb]/30 selection:text-[#d0bcff]">
+      
+      {/* Ambient Light Purple Background Sparkles and Shines */}
+      <BackgroundSparkles />
+
+      {/* Toast Notification */}
+      {notification && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[#171422] border border-[#a87ffb] text-white px-5 py-3 rounded-2xl shadow-[0_0_30px_rgba(168,127,251,0.4)] flex items-center gap-3 animate-in slide-in-from-bottom duration-300">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#10b981] animate-pulse"></span>
+          <span className="font-mono text-xs">{notification}</span>
+        </div>
+      )}
+
+      {/* Top Navbar */}
+      <Navbar
+        onOpenModal={handleModalOrLoginRoute}
+        activeSection={activeSection}
+        onNavigate={handleNavigate}
+      />
+
+      {/* Main Long-Form Landing Page */}
+      <main className="flex-grow pt-20">
+        
+        {/* Hero Section with Glowing Purple Arc & Curved Metrics Grid */}
+        <HeroSection
+          metrics={metrics}
+          onOpenModal={handleModalOrLoginRoute}
+          onExplorePods={() => handleNavigate('workflow')}
+        />
+
+        {/* Workflow Section: From Problem to Product */}
+        <WorkflowSection
+          pods={pods}
+          onSelectPod={handleOpenPodDetails}
+        />
+
+        {/* Curved Innovation Carousel: Packed with Innovation */}
+        <InnovationCarousel
+          onOpenAppointmentModal={() => handleOpenLogin('appointment')}
+        />
+
+        {/* Bottom CTA: Your project shouldn't end after the viva */}
+        <FinalCtaSection
+          onOpenModal={handleModalOrLoginRoute}
+        />
+
+      </main>
+
+      {/* Footer */}
+      <Footer
+        onOpenModal={handleModalOrLoginRoute}
+        onNavigate={handleNavigate}
+      />
+
+      {/* Interactive Modals (Auxiliary) */}
+      <SubmitProblemModal
+        isOpen={activeModal === 'submit-problem'}
+        onClose={() => setActiveModal(null)}
+        onProblemSubmitted={handleProblemSubmitted}
+      />
+
+      <JoinCohortModal
+        isOpen={activeModal === 'join-cohort'}
+        onClose={() => setActiveModal(null)}
+        onApplicationSuccess={handleApplicationSuccess}
+      />
+
+      <AppointmentModal
+        isOpen={activeModal === 'appointment'}
+        onClose={() => setActiveModal(null)}
+      />
+
+      <PodDetailsModal
+        pod={selectedPod}
+        onClose={() => {
+          setSelectedPod(null);
+          if (activeModal === 'pod-details') setActiveModal(null);
+        }}
+      />
+
+      <DocsModal
+        view={activeModal}
+        onClose={() => setActiveModal(null)}
+      />
+
+    </div>
+  );
+}
+
