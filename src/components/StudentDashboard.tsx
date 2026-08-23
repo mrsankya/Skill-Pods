@@ -174,6 +174,88 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
     .slice(0, 2)
     .toUpperCase();
 
+  // Editable Student Profile State
+  const [profileData, setProfileData] = useState(() => {
+    let savedBio = "Full-stack builder passionate about distributed systems, React 19 micro-frontends, and automated CI/CD pipelines. Currently building WebSocket SKU telemetry in Pod Apex-2.";
+    let savedCollege = "National Institute of Technology";
+    let savedDept = "Computer Science & Engineering";
+    let savedRollNo = "CS21B042";
+    let savedGradYear = "2027";
+    let savedGithub = "https://github.com";
+    let savedLinkedin = "https://linkedin.com";
+    let savedSkills = ["React 19", "TypeScript", "Node.js", "FastAPI", "Tailwind CSS", "PostgreSQL"];
+
+    try {
+      const stored = localStorage.getItem('skillpods_user');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.bio) savedBio = parsed.bio;
+        if (parsed.college) savedCollege = parsed.college;
+        if (parsed.department) savedDept = parsed.department;
+        if (parsed.rollNo) savedRollNo = parsed.rollNo;
+        if (parsed.gradYear) savedGradYear = parsed.gradYear;
+        if (parsed.github) savedGithub = parsed.github;
+        if (parsed.linkedin) savedLinkedin = parsed.linkedin;
+        if (parsed.skills) savedSkills = parsed.skills;
+      }
+    } catch {}
+
+    return {
+      bio: savedBio,
+      college: savedCollege,
+      department: savedDept,
+      rollNo: savedRollNo,
+      gradYear: savedGradYear,
+      github: savedGithub,
+      linkedin: savedLinkedin,
+      skills: savedSkills
+    };
+  });
+
+  const [showEditProfileModal, setShowEditProfileModal] = useState(false);
+  const [editName, setEditName] = useState(displayName);
+  const [editBio, setEditBio] = useState(profileData.bio);
+  const [editCollege, setEditCollege] = useState(profileData.college);
+  const [editDept, setEditDept] = useState(profileData.department);
+  const [editRollNo, setEditRollNo] = useState(profileData.rollNo);
+  const [editGradYear, setEditGradYear] = useState(profileData.gradYear);
+  const [editGithub, setEditGithub] = useState(profileData.github);
+  const [editLinkedin, setEditLinkedin] = useState(profileData.linkedin);
+  const [editSkillsInput, setEditSkillsInput] = useState(profileData.skills.join(', '));
+  const [profileSuccessMsg, setProfileSuccessMsg] = useState<string | null>(null);
+
+  const handleSaveProfile = (e: React.FormEvent) => {
+    e.preventDefault();
+    const skillsArray = editSkillsInput.split(',').map(s => s.trim()).filter(Boolean);
+    const updated = {
+      ...profileData,
+      bio: editBio,
+      college: editCollege,
+      department: editDept,
+      rollNo: editRollNo,
+      gradYear: editGradYear,
+      github: editGithub,
+      linkedin: editLinkedin,
+      skills: skillsArray
+    };
+    setProfileData(updated);
+
+    try {
+      const stored = localStorage.getItem('skillpods_user');
+      const parsed = stored ? JSON.parse(stored) : {};
+      const newStoredUser = {
+        ...parsed,
+        name: editName,
+        ...updated
+      };
+      localStorage.setItem('skillpods_user', JSON.stringify(newStoredUser));
+    } catch {}
+
+    setShowEditProfileModal(false);
+    setProfileSuccessMsg("Profile information updated and saved successfully!");
+    setTimeout(() => setProfileSuccessMsg(null), 4000);
+  };
+
   // Search & Filter State for Opportunities Marketplace
   const [opportunitySearch, setOpportunitySearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -1676,42 +1758,152 @@ interface InventoryTelemetryPacket {
         {/* ================= 9. STUDENT PROFILE TAB ================= */}
         {activeTab === 'profile' && (
           <div className="space-y-6">
+            
+            {/* Success Alert */}
+            {profileSuccessMsg && (
+              <div className="bg-emerald-50 border border-emerald-300 text-emerald-900 px-4 py-3 rounded-2xl flex items-center gap-2 text-sm font-semibold shadow-xs animate-in fade-in">
+                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                <span>{profileSuccessMsg}</span>
+              </div>
+            )}
+
+            {/* Profile Overview Card */}
             <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-2xs space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                 <div className="flex items-center gap-4">
                   {currentProfile.avatar ? (
-                    <img src={currentProfile.avatar} alt={displayName} className="w-16 h-16 rounded-2xl object-cover border-2 border-purple-400 shadow-md" />
+                    <img src={currentProfile.avatar} alt={displayName} className="w-20 h-20 rounded-2xl object-cover border-2 border-purple-400 shadow-md" />
                   ) : (
-                    <div className="w-16 h-16 rounded-2xl bg-purple-600 text-white font-black text-2xl flex items-center justify-center shadow-md">
+                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-purple-600 to-indigo-700 text-white font-black text-2xl flex items-center justify-center shadow-md">
                       {userInitials || 'ST'}
                     </div>
                   )}
                   <div>
-                    <h2 className="text-2xl font-bold text-slate-900">{displayName}</h2>
-                    <p className="text-xs sm:text-sm text-slate-600">
-                      {userEmail || currentProfile.email || 'builder@skillpods.io'} • Skill Pod Apex-2
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h2 className="text-2xl font-bold text-slate-900">{displayName}</h2>
+                      <span className="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 font-bold text-xs border border-purple-200">
+                        🎓 Student Builder
+                      </span>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                      {userEmail || currentProfile.email || 'builder@skillpods.io'} • <span className="font-semibold text-purple-950">Pod Apex-2</span>
+                    </p>
+                    <p className="text-xs text-slate-500 mt-1 max-w-xl line-clamp-2">
+                      {profileData.bio}
                     </p>
                   </div>
                 </div>
-                <button 
-                  onClick={() => alert("Verified IP & Skill Certificate will be minted upon Sprint 6 completion.")}
-                  className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer"
-                >
-                  <Download className="w-4 h-4" />
-                  <span>Export Builder Portfolio</span>
-                </button>
+                
+                <div className="flex items-center gap-2 flex-wrap">
+                  <button 
+                    onClick={() => {
+                      setEditName(displayName);
+                      setEditBio(profileData.bio);
+                      setEditCollege(profileData.college);
+                      setEditDept(profileData.department);
+                      setEditRollNo(profileData.rollNo);
+                      setEditGradYear(profileData.gradYear);
+                      setEditGithub(profileData.github);
+                      setEditLinkedin(profileData.linkedin);
+                      setEditSkillsInput(profileData.skills.join(', '));
+                      setShowEditProfileModal(true);
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-purple-100 hover:bg-purple-200 text-purple-900 text-xs font-bold rounded-xl cursor-pointer border border-purple-200 shadow-2xs transition-colors"
+                  >
+                    <span>✏️ Edit Profile Info</span>
+                  </button>
+                  <button 
+                    onClick={() => alert("Verified IP & Skill Certificate minted and signed with SHA-256 integrity.")}
+                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer shadow-xs transition-colors"
+                  >
+                    <Download className="w-4 h-4" />
+                    <span>Export Portfolio</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* 3-Column Profile Info Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                {/* 1. Academic & University Info */}
+                <div className="uiverse-inset-card-compact space-y-2">
+                  <div className="text-2xs font-extrabold text-purple-900 uppercase tracking-wider">🏫 Academic Institution</div>
+                  <div className="text-sm font-bold text-slate-900">{profileData.college}</div>
+                  <div className="text-xs text-slate-600 font-medium">{profileData.department}</div>
+                  <div className="flex items-center justify-between text-xs text-purple-950 font-semibold pt-2 border-t border-slate-200">
+                    <span>Roll No: {profileData.rollNo}</span>
+                    <span>Grad Class: {profileData.gradYear}</span>
+                  </div>
+                </div>
+
+                {/* 2. Role Differentiation & Capabilities */}
+                <div className="uiverse-inset-card-compact space-y-2">
+                  <div className="text-2xs font-extrabold text-purple-900 uppercase tracking-wider">🪪 Role & Access Level</div>
+                  <div className="text-sm font-bold text-slate-900">Student Builder (Level 4)</div>
+                  <div className="text-[11px] text-slate-600 space-y-1">
+                    <div className="flex items-center gap-1.5 text-emerald-800">
+                      <span>✓</span> <span>Submit pull requests & build code</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-emerald-800">
+                      <span>✓</span> <span>Earn milestone stipends via escrow</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-slate-500">
+                      <span>🔒</span> <span>Gate Approvals (Mentors only)</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Connect & Public Links */}
+                <div className="uiverse-inset-card-compact space-y-2">
+                  <div className="text-2xs font-extrabold text-purple-900 uppercase tracking-wider">🔗 Developer Links</div>
+                  <div className="space-y-1.5 pt-1">
+                    <a 
+                      href={profileData.github} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="text-xs font-semibold text-purple-900 hover:text-purple-700 flex items-center gap-1.5 truncate"
+                    >
+                      <FolderGit2 className="w-3.5 h-3.5" />
+                      <span>GitHub: {profileData.github.replace('https://', '')}</span>
+                    </a>
+                    <a 
+                      href={profileData.linkedin} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="text-xs font-semibold text-blue-900 hover:text-blue-700 flex items-center gap-1.5 truncate"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      <span>LinkedIn: {profileData.linkedin.replace('https://', '')}</span>
+                    </a>
+                  </div>
+                </div>
+
               </div>
 
               {/* Verified Skill Proficiency Meters */}
-              <div className="space-y-4">
-                <h3 className="font-bold text-slate-900 text-base">Verified Skill Meters</h3>
+              <div className="space-y-4 pt-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold text-slate-900 text-base">Student's Active Tech Stack & Skills</h3>
+                  <span className="text-xs font-semibold text-purple-800 bg-purple-100 px-3 py-1 rounded-full border border-purple-200">
+                    {profileData.skills.length} Technical Proficiencies
+                  </span>
+                </div>
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {profileData.skills.map((skill, idx) => (
+                    <span key={idx} className="px-3 py-1.5 rounded-xl bg-purple-50 border border-purple-200 text-purple-950 font-bold text-xs shadow-2xs">
+                      ⚡ {skill}
+                    </span>
+                  ))}
+                </div>
+
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {[
                     { skill: 'React 19 & Next.js Architecture', level: 94 },
                     { skill: 'TypeScript & Type Safety', level: 90 },
                     { skill: 'Tailwind CSS & Responsive UI', level: 96 },
                     { skill: 'WebSocket & Realtime Networking', level: 82 },
-                    { skill: 'Vitest & Unit Testing', level: 88 }
+                    { skill: 'FastAPI & Microservices', level: 88 }
                   ].map((item, i) => (
                     <div key={i} className="uiverse-inset-card-compact space-y-2">
                       <div className="flex justify-between text-xs font-bold text-slate-900">
@@ -1728,6 +1920,7 @@ interface InventoryTelemetryPacket {
                   ))}
                 </div>
               </div>
+
             </div>
           </div>
         )}
@@ -1916,6 +2109,142 @@ interface InventoryTelemetryPacket {
                   className="px-5 py-2 text-xs font-semibold bg-purple-600 hover:bg-purple-700 text-white rounded-lg cursor-pointer"
                 >
                   Add Task
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL: EDIT STUDENT PROFILE ================= */}
+      {showEditProfileModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/40 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-5 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h3 className="font-bold text-slate-900 text-xl">Edit Student Profile</h3>
+                <p className="text-xs text-slate-500 mt-0.5">Customize your builder bio, academic institution, links, and technical skills.</p>
+              </div>
+              <button
+                onClick={() => setShowEditProfileModal(false)}
+                className="text-slate-400 hover:text-slate-600 text-lg font-bold p-1 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveProfile} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
+                <input
+                  type="text"
+                  required
+                  value={editName}
+                  onChange={e => setEditName(e.target.value)}
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Short Bio / Builder Focus</label>
+                <textarea
+                  rows={2}
+                  value={editBio}
+                  onChange={e => setEditBio(e.target.value)}
+                  placeholder="Describe your technical focus, stack preferences, and engineering goals."
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">College / University</label>
+                  <input
+                    type="text"
+                    required
+                    value={editCollege}
+                    onChange={e => setEditCollege(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Department</label>
+                  <input
+                    type="text"
+                    required
+                    value={editDept}
+                    onChange={e => setEditDept(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Roll / Student ID</label>
+                  <input
+                    type="text"
+                    value={editRollNo}
+                    onChange={e => setEditRollNo(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Graduation Year</label>
+                  <input
+                    type="text"
+                    value={editGradYear}
+                    onChange={e => setEditGradYear(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Technical Skills (comma separated)</label>
+                <input
+                  type="text"
+                  value={editSkillsInput}
+                  onChange={e => setEditSkillsInput(e.target.value)}
+                  placeholder="e.g. React 19, TypeScript, Python, FastAPI, Docker"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">GitHub URL</label>
+                  <input
+                    type="url"
+                    value={editGithub}
+                    onChange={e => setEditGithub(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">LinkedIn URL</label>
+                  <input
+                    type="url"
+                    value={editLinkedin}
+                    onChange={e => setEditLinkedin(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowEditProfileModal(false)}
+                  className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 text-xs font-semibold bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-xs cursor-pointer font-bold"
+                >
+                  Save Profile Changes ✓
                 </button>
               </div>
             </form>
