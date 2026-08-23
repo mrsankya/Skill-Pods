@@ -111,8 +111,15 @@ export function hashPassword(password: string, salt?: string): { hash: string; s
 }
 
 export function verifyPassword(password: string, hash: string, salt: string): boolean {
-  const calculated = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
-  return calculated === hash;
+  try {
+    const calculated = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
+    const calcBuf = Buffer.from(calculated, 'hex');
+    const hashBuf = Buffer.from(hash, 'hex');
+    if (calcBuf.length !== hashBuf.length) return false;
+    return crypto.timingSafeEqual(calcBuf, hashBuf);
+  } catch {
+    return false;
+  }
 }
 
 // Initial Seed Data

@@ -1,11 +1,12 @@
 import express from "express";
 import { db, hashPassword, verifyPassword } from "./db";
-import { securityHeaders, rateLimiter, signJWT, verifyJWT, sanitizeString } from "./security";
+import { securityHeaders, rateLimiter, signJWT, verifyJWT, sanitizeString, noSqlSanitizer } from "./security";
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 app.use(securityHeaders);
+app.use(noSqlSanitizer);
 
 // ================= AUTHENTICATION & SESSION MANAGEMENT =================
 
