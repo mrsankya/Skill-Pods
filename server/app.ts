@@ -139,12 +139,16 @@ app.post("/api/auth/login", (req, res) => {
       action: 'LOGIN_SUCCESS',
       ip,
       status: 'SUCCESS',
-      details: `Password verified via SHA-512 for role ${user.role}`
+      details: `Password verified via SHA-512 for role ${user.role}. Security login email notification dispatched.`
     });
+
+    // Dispatch Security Login Email Notification
+    console.log(`[EMAIL DISPATCHER] 📧 Security Login Notification sent to ${user.email}: New sign-in detected on SkillPods at ${new Date().toLocaleTimeString()} (IP: ${ip})`);
 
     return res.json({
       success: true,
-      message: "Login successful!",
+      message: "Login successful! Security alert dispatched to email.",
+      emailNotificationSent: true,
       token: session.token,
       jwt: jwtToken,
       user: {

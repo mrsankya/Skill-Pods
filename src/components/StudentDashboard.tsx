@@ -59,6 +59,12 @@ import { StudentEarningsWallet } from './StudentEarningsWallet';
 import { LivePodRoomModal } from './LivePodRoomModal';
 import { GuruCopilotModal } from './GuruCopilotModal';
 import { EscrowPaymentModal } from './EscrowPaymentModal';
+import { RecruiterHiringModal } from './RecruiterHiringModal';
+import { SmeVoicePrdModal } from './SmeVoicePrdModal';
+import { NaacReportModal } from './NaacReportModal';
+import { PitchDeckModal } from './PitchDeckModal';
+import { PodLeaderboardModal } from './PodLeaderboardModal';
+import { ApiSandboxModal } from './ApiSandboxModal';
 
 interface StudentDashboardProps {
   userEmail: string;
@@ -297,6 +303,12 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   const [showLivePodRoom, setShowLivePodRoom] = useState(false);
   const [showGuruCopilot, setShowGuruCopilot] = useState(false);
   const [showEscrowModal, setShowEscrowModal] = useState(false);
+  const [showRecruiterModal, setShowRecruiterModal] = useState(false);
+  const [showVoicePrdModal, setShowVoicePrdModal] = useState(false);
+  const [showNaacModal, setShowNaacModal] = useState(false);
+  const [showPitchDeckModal, setShowPitchDeckModal] = useState(false);
+  const [showLeaderboardModal, setShowLeaderboardModal] = useState(false);
+  const [showApiSandboxModal, setShowApiSandboxModal] = useState(false);
   const [githubSyncMsg, setGithubSyncMsg] = useState<string | null>(null);
 
   const handleSimulateGithubPush = () => {
@@ -847,34 +859,82 @@ interface InventoryTelemetryPacket {
             <div className="flex flex-wrap items-center gap-2">
               <button
                 onClick={() => setShowLivePodRoom(true)}
-                className="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold font-mono flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+                className="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold font-mono flex items-center gap-1 shadow-md cursor-pointer transition-all"
               >
                 <Video className="w-3.5 h-3.5" />
-                <span>🎙️ Live Pod Room (Beta)</span>
+                <span>🎙️ Live Room</span>
               </button>
 
               <button
                 onClick={() => setShowGuruCopilot(true)}
-                className="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold font-mono flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+                className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold font-mono flex items-center gap-1 shadow-md cursor-pointer transition-all"
               >
                 <Bot className="w-3.5 h-3.5" />
-                <span>🤖 GURU PR Scanner</span>
+                <span>🤖 GURU PR</span>
+              </button>
+
+              <button
+                onClick={() => setShowRecruiterModal(true)}
+                className="px-3 py-1.5 rounded-xl bg-purple-950/80 hover:bg-purple-900 border border-purple-500/40 text-purple-200 text-xs font-bold font-mono flex items-center gap-1 cursor-pointer transition-all"
+              >
+                <Briefcase className="w-3.5 h-3.5 text-purple-400" />
+                <span>💼 Recruiters</span>
+              </button>
+
+              <button
+                onClick={() => setShowVoicePrdModal(true)}
+                className="px-3 py-1.5 rounded-xl bg-rose-950/80 hover:bg-rose-900 border border-rose-500/40 text-rose-200 text-xs font-bold font-mono flex items-center gap-1 cursor-pointer transition-all"
+              >
+                <Radio className="w-3.5 h-3.5 text-rose-400" />
+                <span>🎙️ Voice PRD</span>
+              </button>
+
+              <button
+                onClick={() => setShowPitchDeckModal(true)}
+                className="px-3 py-1.5 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-500/40 text-amber-200 text-xs font-bold font-mono flex items-center gap-1 cursor-pointer transition-all"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <span>📊 Pitch Deck</span>
+              </button>
+
+              <button
+                onClick={() => setShowLeaderboardModal(true)}
+                className="px-3 py-1.5 rounded-xl bg-orange-950/80 hover:bg-orange-900 border border-orange-500/40 text-orange-200 text-xs font-bold font-mono flex items-center gap-1 cursor-pointer transition-all"
+              >
+                <Trophy className="w-3.5 h-3.5 text-orange-400" />
+                <span>🏆 Leaderboard</span>
+              </button>
+
+              <button
+                onClick={() => setShowApiSandboxModal(true)}
+                className="px-3 py-1.5 rounded-xl bg-teal-950/80 hover:bg-teal-900 border border-teal-500/40 text-teal-200 text-xs font-bold font-mono flex items-center gap-1 cursor-pointer transition-all"
+              >
+                <Terminal className="w-3.5 h-3.5 text-teal-400" />
+                <span>💻 API Sandbox</span>
+              </button>
+
+              <button
+                onClick={() => setShowNaacModal(true)}
+                className="px-3 py-1.5 rounded-xl bg-blue-950/80 hover:bg-blue-900 border border-blue-500/40 text-blue-200 text-xs font-bold font-mono flex items-center gap-1 cursor-pointer transition-all"
+              >
+                <Award className="w-3.5 h-3.5 text-blue-400" />
+                <span>🏫 NAAC Exporter</span>
               </button>
 
               <button
                 onClick={handleSimulateGithubPush}
-                className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold font-mono flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+                className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold font-mono flex items-center gap-1 shadow-md cursor-pointer transition-all"
               >
                 <GitPullRequest className="w-3.5 h-3.5" />
-                <span>⚡ Simulate GitHub Push</span>
+                <span>⚡ Git Push</span>
               </button>
 
               <button
                 onClick={() => setShowEscrowModal(true)}
-                className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold font-mono flex items-center gap-1.5 cursor-pointer transition-all"
+                className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold font-mono flex items-center gap-1 cursor-pointer transition-all"
               >
                 <IndianRupee className="w-3.5 h-3.5 text-emerald-400" />
-                <span>💳 Escrow Vault (Test)</span>
+                <span>💳 Escrow</span>
               </button>
             </div>
           </div>
@@ -2428,6 +2488,42 @@ interface InventoryTelemetryPacket {
         onClose={() => setShowEscrowModal(false)}
         podTitle="Pod Apex-2 Sprint 3 Milestone"
         milestoneAmount="₹25,000"
+      />
+
+      {/* ================= MODAL: RECRUITER TALENT ACCESS ================= */}
+      <RecruiterHiringModal
+        isOpen={showRecruiterModal}
+        onClose={() => setShowRecruiterModal(false)}
+      />
+
+      {/* ================= MODAL: SME VOICE TO PRD AI ================= */}
+      <SmeVoicePrdModal
+        isOpen={showVoicePrdModal}
+        onClose={() => setShowVoicePrdModal(false)}
+      />
+
+      {/* ================= MODAL: NAAC & NIRF ACCREDITATION EXPORTER ================= */}
+      <NaacReportModal
+        isOpen={showNaacModal}
+        onClose={() => setShowNaacModal(false)}
+      />
+
+      {/* ================= MODAL: GURU AI INVESTOR PITCH DECK ================= */}
+      <PitchDeckModal
+        isOpen={showPitchDeckModal}
+        onClose={() => setShowPitchDeckModal(false)}
+      />
+
+      {/* ================= MODAL: NATIONAL POD LEADERBOARD ================= */}
+      <PodLeaderboardModal
+        isOpen={showLeaderboardModal}
+        onClose={() => setShowLeaderboardModal(false)}
+      />
+
+      {/* ================= MODAL: IN-BROWSER API TESTBENCH ================= */}
+      <ApiSandboxModal
+        isOpen={showApiSandboxModal}
+        onClose={() => setShowApiSandboxModal(false)}
       />
 
     </div>
