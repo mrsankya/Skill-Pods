@@ -54,8 +54,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
           className="text-sm sm:text-base md:text-lg text-[#b2abc0] max-w-2xl mx-auto leading-relaxed mb-9 font-normal"
         >
-          Turn real business challenges into production-ready software.<br className="hidden sm:inline" />
-          Built by verified student teams and guided by top industry engineers.
+          Turn real business problems into production-ready software.<br className="hidden sm:inline" />
+          Powered by student <span className="text-white font-semibold">Skill Pods</span> and industry mentorship.
         </motion.p>
 
         {/* Dual Action Glowing Pill Buttons */}
@@ -79,7 +79,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 
-          {/* Button 2: JOIN AS STUDENT / MENTOR */}
+          {/* Button 2: JOIN A SKILL POD */}
           <button
             onClick={() => onOpenModal('join-cohort')}
             className="w-full sm:w-auto glow-pill-secondary text-white font-medium text-xs sm:text-xs font-mono uppercase tracking-widest px-6 py-3.5 rounded-full flex items-center justify-between sm:justify-center gap-3 cursor-pointer group hover:scale-105 active:scale-95 transition-all shadow-[0_0_25px_rgba(168,127,251,0.25)]"
@@ -88,7 +88,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
             <div className="w-4 h-4 text-[#d0bcff] group-hover:scale-110 transition-transform">
               <User className="w-4 h-4" />
             </div>
-            <span>JOIN AS STUDENT / MENTOR</span>
+            <span>JOIN A SKILL POD</span>
             <ChevronRight className="w-4 h-4 text-[#a19ba9] group-hover:text-white group-hover:translate-x-1 transition-transform" />
           </button>
 

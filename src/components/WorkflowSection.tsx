@@ -30,8 +30,8 @@ export const WorkflowSection: React.FC<WorkflowSectionProps> = () => {
     {
       id: "02",
       numberColor: "text-[#a855f7]",
-      title: "STUDENT BUILD TEAM",
-      description: "A team of 3 complementary students is assembled to build the application.",
+      title: "STUDENT SKILL POD",
+      description: "A specialized 3-student Skill Pod is assembled to build the solution with expert mentorship.",
       icon: Users,
       iconColor: "text-[#c084fc]",
       borderColor: "border-[#a855f7]/30",
