@@ -87,6 +87,16 @@ graph TD
 | **💻 In-Browser API Testbench** | Interactive REST endpoint execution sandbox with real-time JSON response and latency inspection. | `🧪 Testing` |
 | **🔒 Smart Escrow Vault** | Milestone fund locking and automated release upon mentor sign-off. | `🧪 Testing` |
 
+## 🏛️ System Architecture & Deployment Overview (For Jury & Evaluators)
+
+| Component | Technology | Deployment / Hosting | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Frontend & UI** | React 19, TypeScript, Tailwind CSS v4, Motion | **Cloudflare Pages Global Edge Network** | Sub-20ms global edge delivery with SSL/HSTS security |
+| **Cloud Database** | MongoDB Atlas Cloud Cluster | **MongoDB Atlas Cloud (AWS Mumbai / us-east)** | Multi-collection persistence for users, pods, passports & audit logs |
+| **Backend REST API** | Node.js, Express.js, TypeScript, TSX | **Unified Edge Runtime + Docker Container Engine** | JWT signing, SHA-512 auth, rate limiting, and webhook dispatching |
+| **Realtime Mesh** | WebRTC, WebSocket Protocols | **Browser-to-Browser P2P Mesh** | Low-latency audio, video sprint rooms & telemetry streaming |
+| **AI Co-Pilot** | GURU Autonomous LLM Engine | **In-Browser / REST Inference Pipeline** | PR security scanning, task decomposition, and pitch deck generation |
+
 ---
 
 ## 🛠️ Complete Technology Stack
