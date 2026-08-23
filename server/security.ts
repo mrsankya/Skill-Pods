@@ -196,7 +196,8 @@ export function verifyJWT(token: string): JWTPayload | null {
 export function sanitizeString(input: string): string {
   if (typeof input !== 'string') return '';
   return input
-    .replace(/[<>]/g, '') // remove HTML angle brackets
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // strip script tags entirely
+    .replace(/[<>]/g, '') // remove remaining HTML angle brackets
     .replace(/javascript:/gi, '') // remove javascript pseudo-protocols
     .trim();
 }
