@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
+import { MongoClient, Db } from 'mongodb';
 import {
   PodData,
   MarketplaceProject,
@@ -515,9 +516,65 @@ function getSeedData(): DatabaseSchema {
 
 class DatabaseManager {
   private data: DatabaseSchema;
+  private mongoClient?: MongoClient;
+  private mongoDb?: Db;
+  public isConnectedToMongo: boolean = false;
 
   constructor() {
     this.data = this.loadData();
+    this.initMongo();
+  }
+
+  private async initMongo() {
+    const uri = process.env.MONGODB_URI;
+    if (!uri) {
+      console.log('ℹ️ Local JSON document store active at:', DB_FILE);
+      return;
+    }
+
+    try {
+      this.mongoClient = new MongoClient(uri);
+      await this.mongoClient.connect();
+      this.mongoDb = this.mongoClient.db(process.env.MONGODB_DB_NAME || 'skillpods');
+      this.isConnectedToMongo = true;
+      console.log('✅ Connected to MongoDB Atlas Cloud Cluster!');
+      await this.syncToMongo();
+    } catch (err) {
+      console.warn('⚠️ MongoDB Atlas connection skipped or failed, using local document store:', err);
+      this.isConnectedToMongo = false;
+    }
+  }
+
+  private async syncToMongo() {
+    if (!this.isConnectedToMongo || !this.mongoDb) return;
+    try {
+      // Upsert collections
+      const collections: (keyof DatabaseSchema)[] = [
+        'users',
+        'sessions',
+        'securityLogs',
+        'pods',
+        'marketplaceProjects',
+        'skillPassports',
+        'milestoneGates',
+        'collegeIpRegistry',
+        'departmentAnalytics',
+        'walletTransactions'
+      ];
+
+      for (const col of collections) {
+        const items = this.data[col] as any[];
+        if (items && items.length > 0) {
+          const mongoCol = this.mongoDb.collection(col);
+          for (const item of items) {
+            const query = item.id ? { id: item.id } : item.token ? { token: item.token } : { email: item.email };
+            await mongoCol.updateOne(query, { $set: item }, { upsert: true });
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Error syncing to MongoDB:', err);
+    }
   }
 
   private loadData(): DatabaseSchema {
@@ -544,6 +601,9 @@ class DatabaseManager {
 
   public save() {
     this.saveDataDirect(this.data);
+    if (this.isConnectedToMongo) {
+      this.syncToMongo().catch(err => console.error('Mongo background save error:', err));
+    }
   }
 
   // --- USER AUTHENTICATION & MANAGEMENT ---
