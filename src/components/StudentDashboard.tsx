@@ -45,7 +45,10 @@ import {
   Check,
   Building,
   RefreshCw,
-  GitFork
+  GitFork,
+  FlaskConical,
+  Radio,
+  Video
 } from 'lucide-react';
 import { StudentCharacter3D } from './StudentCharacter3D';
 import { SkillPodsLogo } from './SkillPodsLogo';
@@ -53,6 +56,9 @@ import { StudentAiSkillMatch } from './StudentAiSkillMatch';
 import { StudentMarketplace } from './StudentMarketplace';
 import { StudentSkillPassport } from './StudentSkillPassport';
 import { StudentEarningsWallet } from './StudentEarningsWallet';
+import { LivePodRoomModal } from './LivePodRoomModal';
+import { GuruCopilotModal } from './GuruCopilotModal';
+import { EscrowPaymentModal } from './EscrowPaymentModal';
 
 interface StudentDashboardProps {
   userEmail: string;
@@ -285,6 +291,17 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
     setShowEditProfileModal(false);
     setProfileSuccessMsg("Profile information & photo saved directly to database!");
     setTimeout(() => setProfileSuccessMsg(null), 4000);
+  };
+
+  // Experimental Labs & Active Testing Features State
+  const [showLivePodRoom, setShowLivePodRoom] = useState(false);
+  const [showGuruCopilot, setShowGuruCopilot] = useState(false);
+  const [showEscrowModal, setShowEscrowModal] = useState(false);
+  const [githubSyncMsg, setGithubSyncMsg] = useState<string | null>(null);
+
+  const handleSimulateGithubPush = () => {
+    setGithubSyncMsg("⚡ Webhook Received: Commit 'feat: rate-limiter unit tests' pushed to origin/main! Pod Apex-2 progress updated to 72% ✓");
+    setTimeout(() => setGithubSyncMsg(null), 5000);
   };
 
   // Search & Filter State for Opportunities Marketplace
@@ -809,6 +826,66 @@ interface InventoryTelemetryPacket {
         </div>
 
         <main className="px-4 sm:px-8 py-4 sm:py-6 space-y-6 max-w-7xl w-full">
+          
+          {/* ================= EXPERIMENTAL LABS & TESTING FEATURES BAR ================= */}
+          <div className="bg-gradient-to-r from-[#2a174d] via-[#1c1236] to-[#120a24] text-white p-4 sm:p-5 rounded-3xl border border-purple-500/40 shadow-xl flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300 shrink-0">
+                <FlaskConical className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-bold text-sm sm:text-base text-white">Experimental Labs & Next-Gen Tools</h3>
+                  <span className="text-[10px] font-mono font-bold bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/40">
+                    🧪 IN TESTING / ACTIVE DEVELOPMENT
+                  </span>
+                </div>
+                <p className="text-xs text-purple-200/80 mt-0.5">Explore real-time pod rooms, AI PR security audits, smart escrow locks, and GitHub webhooks.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => setShowLivePodRoom(true)}
+                className="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold font-mono flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+              >
+                <Video className="w-3.5 h-3.5" />
+                <span>🎙️ Live Pod Room (Beta)</span>
+              </button>
+
+              <button
+                onClick={() => setShowGuruCopilot(true)}
+                className="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold font-mono flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+              >
+                <Bot className="w-3.5 h-3.5" />
+                <span>🤖 GURU PR Scanner</span>
+              </button>
+
+              <button
+                onClick={handleSimulateGithubPush}
+                className="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold font-mono flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+              >
+                <GitPullRequest className="w-3.5 h-3.5" />
+                <span>⚡ Simulate GitHub Push</span>
+              </button>
+
+              <button
+                onClick={() => setShowEscrowModal(true)}
+                className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold font-mono flex items-center gap-1.5 cursor-pointer transition-all"
+              >
+                <IndianRupee className="w-3.5 h-3.5 text-emerald-400" />
+                <span>💳 Escrow Vault (Test)</span>
+              </button>
+            </div>
+          </div>
+
+          {/* GitHub Sync Toast Notification */}
+          {githubSyncMsg && (
+            <div className="bg-emerald-950/90 border border-emerald-500 text-emerald-200 px-4 py-3 rounded-2xl text-xs font-mono flex items-center gap-2 animate-in fade-in slide-in-from-top duration-300">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+              <span>{githubSyncMsg}</span>
+            </div>
+          )}
           
           {/* ================= TAB 1: OVERVIEW (TASKFLOW AESTHETIC) ================= */}
           {activeTab === 'overview' && (
@@ -2328,6 +2405,30 @@ interface InventoryTelemetryPacket {
           </div>
         </div>
       )}
+
+      {/* ================= MODAL: LIVE SPRINT POD ROOM (WEBRTC) ================= */}
+      <LivePodRoomModal
+        isOpen={showLivePodRoom}
+        onClose={() => setShowLivePodRoom(false)}
+        podName="Pod Apex-2"
+        userName={displayName}
+        userRole="student"
+      />
+
+      {/* ================= MODAL: GURU AI COPILOT SCANNER ================= */}
+      <GuruCopilotModal
+        isOpen={showGuruCopilot}
+        onClose={() => setShowGuruCopilot(false)}
+        podTitle="AI Invoice & Ledger Auto-Reconciliation"
+      />
+
+      {/* ================= MODAL: ESCROW VAULT PAYMENT GATEWAY ================= */}
+      <EscrowPaymentModal
+        isOpen={showEscrowModal}
+        onClose={() => setShowEscrowModal(false)}
+        podTitle="Pod Apex-2 Sprint 3 Milestone"
+        milestoneAmount="₹25,000"
+      />
 
     </div>
   );

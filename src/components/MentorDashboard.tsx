@@ -37,13 +37,16 @@ import {
   Activity,
   Lock,
   Flame,
-  FileCheck2
+  FileCheck2,
+  FlaskConical
 } from 'lucide-react';
 import { SkillPodsLogo } from './SkillPodsLogo';
 import { MentorCharacter3D } from './MentorCharacter3D';
 import { MentorMilestoneGate } from './MentorMilestoneGate';
 import { MentorSkillVerification } from './MentorSkillVerification';
 import { MentorPodHealthAlerts } from './MentorPodHealthAlerts';
+import { LivePodRoomModal } from './LivePodRoomModal';
+import { GuruCopilotModal } from './GuruCopilotModal';
 
 interface MentorDashboardProps {
   userEmail: string;
@@ -277,6 +280,10 @@ async def infer_batch(files: list[UploadFile] = File(...)):
       githubUrl: 'https://github.com/skillpods/pod-nova-escrow'
     }
   ]);
+
+  // Experimental Labs & Active Testing Features State
+  const [showLivePodRoom, setShowLivePodRoom] = useState(false);
+  const [showGuruCopilot, setShowGuruCopilot] = useState(false);
 
   // Students Directory
   const [students, setStudents] = useState<StudentProgressData[]>([
@@ -594,6 +601,42 @@ async def infer_batch(files: list[UploadFile] = File(...)):
 
         {/* MAIN BODY CONTAINER */}
         <main className="px-4 sm:px-8 py-4 sm:py-6 space-y-8 max-w-7xl w-full">
+          
+          {/* ================= EXPERIMENTAL LABS: MENTOR TESTING TOOLS ================= */}
+          <div className="bg-gradient-to-r from-[#281549] via-[#1d1136] to-[#120824] text-white p-4 sm:p-5 rounded-3xl border border-purple-500/40 shadow-xl flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300 shrink-0">
+                <FlaskConical className="w-5 h-5 animate-pulse" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h3 className="font-bold text-sm sm:text-base text-white">Mentor Next-Gen Testing Suite</h3>
+                  <span className="text-[10px] font-mono font-bold bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/40">
+                    🧪 IN TESTING / ACTIVE DEVELOPMENT
+                  </span>
+                </div>
+                <p className="text-xs text-purple-200/80 mt-0.5">Live video sprint rooms, automated PR security audits, and multi-pod telemetry.</p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => setShowLivePodRoom(true)}
+                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold font-mono flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+              >
+                <Video className="w-3.5 h-3.5" />
+                <span>🎙️ Launch Live Pod Room (Beta)</span>
+              </button>
+
+              <button
+                onClick={() => setShowGuruCopilot(true)}
+                className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold font-mono flex items-center gap-1.5 shadow-md cursor-pointer transition-all"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>🤖 GURU Code & PR Auditor</span>
+              </button>
+            </div>
+          </div>
           
           {/* ================= TAB 1: OVERVIEW ================= */}
           {activeTab === 'overview' && (
@@ -1896,6 +1939,22 @@ async def infer_batch(files: list[UploadFile] = File(...)):
           </div>
         )}
       </AnimatePresence>
+
+      {/* ================= MODAL: LIVE SPRINT POD ROOM (WEBRTC) ================= */}
+      <LivePodRoomModal
+        isOpen={showLivePodRoom}
+        onClose={() => setShowLivePodRoom(false)}
+        podName="Pod Apex-2"
+        userName={mentorDisplayName}
+        userRole="mentor"
+      />
+
+      {/* ================= MODAL: GURU AI COPILOT AUDITOR ================= */}
+      <GuruCopilotModal
+        isOpen={showGuruCopilot}
+        onClose={() => setShowGuruCopilot(false)}
+        podTitle="AI Invoice & Ledger Auto-Reconciliation"
+      />
 
     </div>
   );

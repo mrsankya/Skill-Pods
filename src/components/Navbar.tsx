@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, ArrowRight, ShieldCheck, Zap } from 'lucide-react';
+import { Menu, X, ArrowRight, ShieldCheck, Zap, Bell } from 'lucide-react';
 import { ModalView } from '../types';
 import { SkillPodsLogo } from './SkillPodsLogo';
 
@@ -11,6 +11,8 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNavigate }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(3);
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#08070d]/80 backdrop-blur-xl border-b border-white/5 shadow-2xl transition-all duration-300">
@@ -63,7 +65,67 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
         </div>
 
         {/* Action Controls */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-5">
+          {/* Notification Bell Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setNotificationsOpen(!notificationsOpen)}
+              className="relative p-2.5 rounded-full bg-white/5 hover:bg-white/10 text-[#d0bcff] hover:text-white transition-colors cursor-pointer border border-white/10"
+              aria-label="Notifications"
+            >
+              <Bell className="w-4 h-4" />
+              {unreadCount > 0 && (
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-purple-500 text-white text-[9px] font-mono font-bold flex items-center justify-center animate-pulse">
+                  {unreadCount}
+                </span>
+              )}
+            </button>
+
+            {/* Notification Dropdown Menu */}
+            {notificationsOpen && (
+              <div className="absolute right-0 mt-3 w-80 bg-[#13101f] border border-purple-500/40 rounded-2xl p-4 shadow-2xl space-y-3 animate-in fade-in zoom-in-95 duration-150 z-50">
+                <div className="flex items-center justify-between border-b border-white/10 pb-2">
+                  <div className="flex items-center gap-1.5 font-bold text-white text-xs">
+                    <Bell className="w-3.5 h-3.5 text-purple-400" />
+                    <span>Live Cohort Alerts</span>
+                  </div>
+                  <button 
+                    onClick={() => setUnreadCount(0)} 
+                    className="text-[10px] font-mono text-purple-400 hover:text-purple-300 cursor-pointer"
+                  >
+                    Mark read
+                  </button>
+                </div>
+
+                <div className="space-y-2 max-h-64 overflow-y-auto">
+                  <div className="p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-xs">
+                    <p className="font-bold text-emerald-300 text-[11px]">🎉 Milestone #2 Approved!</p>
+                    <p className="text-[11px] text-slate-300 mt-0.5">Sarah Chen signed off Sprint 2. ₹12,500 escrow released to Dev Patel.</p>
+                    <span className="text-[9px] font-mono text-emerald-400/80 mt-1 block">5 mins ago</span>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-purple-950/30 border border-purple-500/30 text-xs">
+                    <p className="font-bold text-purple-300 text-[11px]">💼 New IP Marketplace Inquiry</p>
+                    <p className="text-[11px] text-slate-300 mt-0.5">Kestrel Freight requested a demo for Smart Attendance System.</p>
+                    <span className="text-[9px] font-mono text-purple-400/80 mt-1 block">22 mins ago</span>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-blue-950/30 border border-blue-500/30 text-xs">
+                    <p className="font-bold text-blue-300 text-[11px]">🤖 GURU AI Pod Match: 96%</p>
+                    <p className="text-[11px] text-slate-300 mt-0.5">You were matched with Pod Apex-2 as Full-Stack Engineer lead.</p>
+                    <span className="text-[9px] font-mono text-blue-400/80 mt-1 block">1 hour ago</span>
+                  </div>
+                </div>
+
+                <div className="pt-1 text-center">
+                  <span className="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
+                    🧪 REAL-TIME ALERTS &bull; BETA TESTING
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+
           <button
             onClick={() => onOpenModal('login')}
             className="text-[#a19ba9] hover:text-white transition-colors text-xs font-mono tracking-widest uppercase cursor-pointer"

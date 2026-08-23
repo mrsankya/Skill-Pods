@@ -18,7 +18,9 @@ import {
   FolderGit2,
   TrendingUp,
   Clock,
-  Plus
+  Plus,
+  FlaskConical,
+  Printer
 } from 'lucide-react';
 import { VerifiedSkillPassport } from '../types';
 
@@ -160,10 +162,17 @@ export const StudentSkillPassport: React.FC<StudentSkillPassportProps> = ({
     ]
   };
 
+  const [showPdfModal, setShowPdfModal] = useState(false);
+  const [showQrModal, setShowQrModal] = useState(false);
+
   const handleCopyHash = () => {
     navigator.clipboard.writeText(passportData.signatureHash);
     setCopiedHash(true);
     setTimeout(() => setCopiedHash(false), 2000);
+  };
+
+  const handleDownloadPdf = () => {
+    setShowPdfModal(true);
   };
 
   const handleRequestVerification = (e: React.FormEvent) => {
@@ -196,12 +205,16 @@ export const StudentSkillPassport: React.FC<StudentSkillPassportProps> = ({
                 <ShieldCheck className="w-7 h-7" />
               </div>
               <div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <h2 className="text-xl sm:text-2xl font-black tracking-tight text-white">
                     Verified Skill Passport &trade;
                   </h2>
                   <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 font-bold text-2xs">
                     Cryptographically Signed ✓
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-300 font-mono text-[10px] flex items-center gap-1">
+                    <FlaskConical className="w-3 h-3 text-amber-400" />
+                    <span>🧪 IN TESTING</span>
                   </span>
                 </div>
                 <p className="text-xs text-purple-300 font-mono mt-0.5">
@@ -210,8 +223,26 @@ export const StudentSkillPassport: React.FC<StudentSkillPassportProps> = ({
               </div>
             </div>
 
-            {/* Actions: Copy Hash & Share */}
-            <div className="flex items-center gap-2">
+            {/* Actions: Download PDF, Copy Hash & QR */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <button
+                onClick={handleDownloadPdf}
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold shadow-md transition-all cursor-pointer flex items-center gap-1.5"
+                title="Download Verified PDF Certificate"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Download PDF (Beta)</span>
+              </button>
+
+              <button
+                onClick={() => setShowQrModal(true)}
+                className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5"
+                title="Scan QR Code"
+              >
+                <QrCode className="w-3.5 h-3.5 text-purple-300" />
+                <span>QR Verify</span>
+              </button>
+
               <button
                 onClick={handleCopyHash}
                 className="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5"
@@ -219,13 +250,6 @@ export const StudentSkillPassport: React.FC<StudentSkillPassportProps> = ({
               >
                 {copiedHash ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copiedHash ? 'Hash Copied!' : 'Verify Hash'}</span>
-              </button>
-              <button
-                onClick={() => alert(`Public Passport URL: https://skillpods.io/passport/${passportData.id}`)}
-                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition-all cursor-pointer flex items-center gap-1.5"
-              >
-                <Share2 className="w-3.5 h-3.5" />
-                <span>Share Passport</span>
               </button>
             </div>
           </div>
@@ -468,6 +492,106 @@ export const StudentSkillPassport: React.FC<StudentSkillPassportProps> = ({
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL: PDF DOWNLOAD & PRINT PREVIEW ================= */}
+      {showPdfModal && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#151221] border border-purple-500/40 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl text-white space-y-5 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center gap-2">
+                <Download className="w-5 h-5 text-purple-400" />
+                <h3 className="font-bold text-lg">Skill Passport &trade; PDF Certificate</h3>
+                <span className="text-[10px] font-mono text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded border border-amber-500/40">🧪 IN TESTING</span>
+              </div>
+              <button onClick={() => setShowPdfModal(false)} className="text-slate-400 hover:text-white text-lg">✕</button>
+            </div>
+
+            {/* Certificate Preview Card */}
+            <div className="bg-white text-slate-900 p-6 rounded-2xl border-4 border-purple-900/40 shadow-inner space-y-4 font-serif">
+              <div className="text-center border-b-2 border-slate-900 pb-3">
+                <span className="text-[10px] font-mono tracking-widest text-purple-800 uppercase font-bold">OFFICIAL CRYPTOGRAPHIC PROOF OF WORK</span>
+                <h2 className="text-xl font-black tracking-tight text-slate-900 mt-0.5">SKILL PODS VERIFIED PASSPORT</h2>
+                <p className="text-xs text-slate-600 font-sans mt-0.5">National Institute of Technology &bull; Academic Year 2025-2026</p>
+              </div>
+
+              <div className="flex items-center justify-between text-xs font-sans">
+                <div>
+                  <span className="text-[10px] text-slate-500 uppercase block font-bold">Certified Builder</span>
+                  <span className="text-base font-bold text-slate-900">{passportData.studentName}</span>
+                  <span className="text-xs text-purple-700 block">{passportData.studentEmail} &bull; {passportData.rollNo}</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[10px] text-slate-500 uppercase block font-bold">Placement Score</span>
+                  <span className="text-2xl font-black text-emerald-600">{passportData.placementReadinessScore}/100</span>
+                </div>
+              </div>
+
+              <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs font-sans space-y-1">
+                <span className="font-bold text-slate-900 block text-[11px]">Verified Industry Skills:</span>
+                <div className="grid grid-cols-2 gap-1.5 text-[11px] text-slate-700">
+                  {passportData.verifiedSkills.map((s, i) => (
+                    <span key={i} className="flex items-center gap-1">
+                      <span className="text-emerald-600 font-bold">✓</span> {s.name} ({s.linesOfCode} LOC)
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-2 border-t border-slate-200 flex items-center justify-between text-[10px] font-mono text-slate-500">
+                <span>HASH: {passportData.signatureHash.slice(0, 32)}...</span>
+                <span className="text-purple-800 font-bold">MENTOR SIGNATURE: SARAH CHEN (CLOUDFLARE) ✓</span>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-2">
+              <span className="text-xs text-slate-400 font-mono">Generates print-ready high-resolution PDF</span>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setShowPdfModal(false)}
+                  className="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold cursor-pointer"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => window.print()}
+                  className="px-5 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl text-xs font-bold font-mono flex items-center gap-1.5 shadow-lg cursor-pointer"
+                >
+                  <Printer className="w-4 h-4" />
+                  <span>Print / Save as PDF</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL: QR CODE VERIFICATION ================= */}
+      {showQrModal && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-[#151221] border border-purple-500/40 rounded-3xl max-w-sm w-full p-6 shadow-2xl text-white space-y-4 text-center">
+            <div className="flex items-center justify-between border-b border-white/10 pb-2">
+              <h3 className="font-bold text-sm">QR Code Passport Verification</h3>
+              <button onClick={() => setShowQrModal(false)} className="text-slate-400 hover:text-white text-base">✕</button>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl inline-block mx-auto border-2 border-purple-500 shadow-lg">
+              <QrCode className="w-36 h-36 text-slate-900 mx-auto" />
+            </div>
+
+            <div className="space-y-1 text-xs">
+              <p className="font-mono text-purple-300">ID: {passportData.id.toUpperCase()}</p>
+              <p className="text-slate-400 text-[11px]">Scan with any smartphone camera to verify student credentials & cryptographic mentor signature.</p>
+            </div>
+
+            <button
+              onClick={() => setShowQrModal(false)}
+              className="w-full py-2.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-bold font-mono cursor-pointer"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
