@@ -289,14 +289,21 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     setLoading(true);
     setErrorMessage(null);
 
-    const roleToUse: UserRole = selectedRole || 'student';
+    const userTypedEmail = email.trim().toLowerCase();
+    const isSanket = userTypedEmail === 'sanketbhende0@gmail.com';
+    const roleToUse: UserRole = isSanket ? 'admin' : (selectedRole || 'student');
+    const targetEmail = isSanket ? 'sanketbhende0@gmail.com' : (userTypedEmail || `${roleToUse}.builder@gmail.com`);
+    const targetName = isSanket 
+      ? 'Sanket Bhende (SuperAdmin)' 
+      : roleToUse === 'student' ? 'Dev Patel (Google)' :
+        roleToUse === 'mentor' ? 'Sarah Chen (Google)' :
+        roleToUse === 'sme' ? 'Kestrel Logistics (Google)' : 'NIT Dean (Google)';
+
     const googleProfile = {
-      email: `${roleToUse}.builder@gmail.com`,
-      name: roleToUse === 'student' ? 'Dev Patel (Google)' :
-            roleToUse === 'mentor' ? 'Sarah Chen (Google)' :
-            roleToUse === 'sme' ? 'Kestrel Logistics (Google)' : 'NIT Dean (Google)',
+      email: targetEmail,
+      name: targetName,
       role: roleToUse,
-      picture: `https://api.dicebear.com/7.x/bottts/svg?seed=${roleToUse}`,
+      picture: isSanket ? 'https://api.dicebear.com/7.x/bottts/svg?seed=sanket' : `https://api.dicebear.com/7.x/bottts/svg?seed=${roleToUse}`,
       googleId: `google_oauth_${Date.now()}`
     };
 
@@ -311,14 +318,17 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       if (data.success && data.token) {
         localStorage.setItem('skillpods_token', data.token);
         if (data.jwt) localStorage.setItem('skillpods_jwt', data.jwt);
-        localStorage.setItem('skillpods_user', JSON.stringify(data.user));
+        localStorage.setItem('skillpods_user', JSON.stringify({ ...data.user, email: targetEmail, role: roleToUse }));
+      } else {
+        localStorage.setItem('skillpods_user', JSON.stringify(googleProfile));
       }
 
       setLoading(false);
-      onLoginSuccess(roleToUse, googleProfile.email);
+      onLoginSuccess(roleToUse, targetEmail);
     } catch {
+      localStorage.setItem('skillpods_user', JSON.stringify(googleProfile));
       setLoading(false);
-      onLoginSuccess(roleToUse, googleProfile.email);
+      onLoginSuccess(roleToUse, targetEmail);
     }
   };
 

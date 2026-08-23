@@ -43,11 +43,11 @@ export const StudentSkillPassport: React.FC<StudentSkillPassportProps> = ({
       const stored = localStorage.getItem('skillpods_user');
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (parsed.name) return parsed.name;
+        if (parsed.name && (!userEmail || parsed.email === userEmail)) return parsed.name;
       }
     } catch {}
-
     if (userEmail) {
+      if (userEmail.toLowerCase() === 'sanketbhende0@gmail.com') return "Sanket Bhende";
       const username = userEmail.split('@')[0];
       return username
         .split(/[._-]/)

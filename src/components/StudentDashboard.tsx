@@ -152,14 +152,15 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
 
   // Dynamically resolve logged-in user profile from database / Google OAuth / localStorage
   const getUserProfile = () => {
+    const effectiveEmail = userEmail || 'builder@skillpods.io';
     try {
       const stored = localStorage.getItem('skillpods_user');
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (parsed.name) {
+        if (parsed && (parsed.email === userEmail || !userEmail)) {
           return {
-            name: parsed.name,
-            email: parsed.email || userEmail,
+            name: parsed.name || 'Student Builder',
+            email: parsed.email || effectiveEmail,
             avatar: parsed.avatar
           };
         }
@@ -167,6 +168,9 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
     } catch {}
 
     if (userEmail) {
+      if (userEmail.toLowerCase() === 'sanketbhende0@gmail.com') {
+        return { name: 'Sanket Bhende', email: 'sanketbhende0@gmail.com' };
+      }
       const username = userEmail.split('@')[0];
       const formatted = username
         .split(/[._-]/)
@@ -174,7 +178,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
         .join(' ');
       return { name: formatted || 'Student Builder', email: userEmail };
     }
-    return { name: 'Student Builder', email: userEmail || 'builder@skillpods.io' };
+    return { name: 'Student Builder', email: effectiveEmail };
   };
 
   const currentProfile = getUserProfile();
