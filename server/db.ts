@@ -68,12 +68,16 @@ interface DatabaseSchema {
   };
 }
 
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+const DATA_DIR = process.env.VERCEL ? path.resolve('/tmp', 'data') : path.resolve(process.cwd(), 'data');
 const DB_FILE = path.resolve(DATA_DIR, 'skillpods.json');
 
 // Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+} catch {
+  // Silent fallback for restricted environments
 }
 
 // Password hashing using Node crypto PBKDF2
