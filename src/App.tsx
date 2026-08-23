@@ -21,6 +21,7 @@ import { DocsModal } from './components/DocsModal';
 import { AppointmentModal } from './components/AppointmentModal';
 import { CommunityNetworkModal } from './components/CommunityNetworkModal';
 import { DirectMessagingModal } from './components/DirectMessagingModal';
+import { DeveloperPortfolioModal } from './components/DeveloperPortfolioModal';
 
 import { MetricsData, PodData, SmeProblem, LiveEvent, ModalView, PageType, UserRole, LoginIntent, CommunityMember } from './types';
 import { LoginPage } from './components/LoginPage';
@@ -121,6 +122,7 @@ export default function App() {
   const [notification, setNotification] = useState<string | null>(null);
   const [showCommunityModal, setShowCommunityModal] = useState(false);
   const [showMessagingModal, setShowMessagingModal] = useState(false);
+  const [showPortfolioModal, setShowPortfolioModal] = useState(false);
   const [selectedChatRecipient, setSelectedChatRecipient] = useState<CommunityMember | null>(null);
 
   // Synchronize browser history / URL hash and resume authenticated session
@@ -375,6 +377,7 @@ export default function App() {
           setSelectedChatRecipient(null);
           setShowMessagingModal(true);
         }}
+        onOpenPortfolio={() => setShowPortfolioModal(true)}
       />
 
       {/* Main Long-Form Landing Page */}
@@ -409,6 +412,7 @@ export default function App() {
       <Footer
         onOpenModal={handleModalOrLoginRoute}
         onNavigate={handleNavigate}
+        onOpenPortfolio={() => setShowPortfolioModal(true)}
       />
 
       {/* Interactive Modals (Auxiliary) */}
@@ -454,6 +458,7 @@ export default function App() {
           setShowCommunityModal(false);
           setShowMessagingModal(true);
         }}
+        onOpenPortfolio={() => setShowPortfolioModal(true)}
       />
 
       {/* Direct Messaging System Modal */}
@@ -464,6 +469,13 @@ export default function App() {
         currentUserName={authenticatedUser.split('@')[0]}
         currentUserRole={currentRole}
         initialRecipient={selectedChatRecipient}
+      />
+
+      {/* Developer Portfolio Showcase Modal */}
+      <DeveloperPortfolioModal
+        isOpen={showPortfolioModal}
+        onClose={() => setShowPortfolioModal(false)}
+        portfolioUrl="https://sanket-portfolio-211.pages.dev/"
       />
 
     </div>

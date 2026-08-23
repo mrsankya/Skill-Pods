@@ -19,7 +19,8 @@ import {
   UserCheck,
   Send,
   Download,
-  FileCheck2
+  FileCheck2,
+  Code2
 } from 'lucide-react';
 import { CommunityMember, CertificateItem, MarksheetItem, UserRole } from '../types';
 
@@ -30,6 +31,7 @@ interface CommunityNetworkModalProps {
   currentUserName: string;
   currentUserRole: UserRole;
   onOpenChatWithMember?: (member: CommunityMember) => void;
+  onOpenPortfolio?: () => void;
 }
 
 export const CommunityNetworkModal: React.FC<CommunityNetworkModalProps> = ({
@@ -38,7 +40,8 @@ export const CommunityNetworkModal: React.FC<CommunityNetworkModalProps> = ({
   currentUserEmail,
   currentUserName,
   currentUserRole,
-  onOpenChatWithMember
+  onOpenChatWithMember,
+  onOpenPortfolio
 }) => {
   const [members, setMembers] = useState<CommunityMember[]>([]);
   const [loading, setLoading] = useState(true);
@@ -237,7 +240,7 @@ export const CommunityNetworkModal: React.FC<CommunityNetworkModalProps> = ({
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-2 pt-3 border-t border-white/10">
+                    <div className="flex items-center gap-2 pt-3 border-t border-white/10 flex-wrap">
                       <button
                         onClick={() => setSelectedMemberDetail(member)}
                         className="flex-1 py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-slate-200 text-xs font-bold flex items-center justify-center gap-1.5 border border-white/10 transition-colors cursor-pointer"
@@ -245,6 +248,17 @@ export const CommunityNetworkModal: React.FC<CommunityNetworkModalProps> = ({
                         <Eye className="w-3.5 h-3.5 text-purple-400" />
                         <span>View Profile & Vault</span>
                       </button>
+
+                      {member.email.toLowerCase() === 'sanketbhende0@gmail.com' && onOpenPortfolio && (
+                        <button
+                          onClick={onOpenPortfolio}
+                          className="py-2 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                          title="View Live Developer Portfolio"
+                        >
+                          <Code2 className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Portfolio</span>
+                        </button>
+                      )}
 
                       {!isCurrentUser && (
                         <button
