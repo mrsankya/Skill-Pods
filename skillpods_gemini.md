@@ -28,6 +28,7 @@
 - 🪪 **Verified Skill Passport & 🏆 Contribution Score (`StudentSkillPassport.tsx`)**: Cryptographically stamped digital passport with SHA-256 hash, verified industry mentor stamps (*Sarah Chen @ Cloudflare*, *Marcus Vance @ Datadog*), and measurable contribution score (94/100, 42 PRs, 18.4k lines of code).
 - 🔄 **Project Reuse / Upgrade**: Enterprise v2.0 upgrade engine to spin up student pods for commercial modernization.
 - 💵 **Earnings Wallet (`StudentEarningsWallet.tsx`)**: Financial ledger tracking sprint stipends, commercial software licensing royalties, escrow balances, and instant withdrawal modal.
+- 🎓 **Academic Scorecard & Document Vault**: Official CGPA standing (e.g. `9.24 / 10.00`), semester class, placement eligibility badge, verified industry certificates vault, and official semester marksheet/transcript uploader with full-screen document lightbox previewer.
 
 ## Experimental Labs & Next-Gen Testing Suite (`[🧪 IN TESTING]` & `[⚡ BETA]`)
 - 🎙️ **Real-Time WebRTC Pod Sprint Room (`LivePodRoomModal.tsx`)**: 4-participant video/audio room with screen-sharing, WebRTC mesh latency radar, and in-room chat.
