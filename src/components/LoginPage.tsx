@@ -77,7 +77,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       student: { email: 'dev.patel@skillpods.io', pass: 'password123', name: 'Dev Patel' },
       sme: { email: 'kestrel@freight.com', pass: 'password123', name: 'Kestrel Freight' },
       mentor: { email: 'sarah.chen@cloudflare.com', pass: 'password123', name: 'Sarah Chen' },
-      college: { email: 'dean@nit.edu', pass: 'password123', name: 'National Institute of Technology' }
+      college: { email: 'dean@nit.edu', pass: 'password123', name: 'National Institute of Technology' },
+      admin: { email: 'admin.root@skillpods.io', pass: 'password123', name: 'SuperAdmin Root' }
     };
 
     const target = demoAccounts[role];
@@ -194,7 +195,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       // Fallback in case backend is offline
       setLoading(false);
       let roleToUse: UserRole = selectedRole || 'student';
-      if (trimmedEmail.includes('mentor')) roleToUse = 'mentor';
+      if (trimmedEmail.includes('admin') || trimmedEmail.includes('root')) roleToUse = 'admin';
+      else if (trimmedEmail.includes('mentor')) roleToUse = 'mentor';
       else if (trimmedEmail.includes('sme') || trimmedEmail.includes('company') || trimmedEmail.includes('freight')) roleToUse = 'sme';
       else if (trimmedEmail.includes('college') || trimmedEmail.includes('dean') || trimmedEmail.includes('edu')) roleToUse = 'college';
 
@@ -319,7 +321,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       student: { email: 'dev.patel@skillpods.io', pass: 'password123' },
       sme: { email: 'kestrel@freight.com', pass: 'password123' },
       mentor: { email: 'sarah.chen@cloudflare.com', pass: 'password123' },
-      college: { email: 'dean@nit.edu', pass: 'password123' }
+      college: { email: 'dean@nit.edu', pass: 'password123' },
+      admin: { email: 'admin.root@skillpods.io', pass: 'password123' }
     };
     setEmail(demoAccounts[role].email);
     setPassword(demoAccounts[role].pass);
@@ -903,7 +906,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       </main>
 
       {/* Footer Links with Pop-up Hover Effect */}
-      <footer className="relative z-20 w-full py-5 text-center flex items-center justify-center gap-6 text-xs text-[#8c8599]">
+      <footer className="relative z-20 w-full py-5 text-center flex items-center justify-center gap-6 text-xs text-[#8c8599] flex-wrap">
         <motion.button 
           whileHover={{ scale: 1.05, y: -1 }}
           whileTap={{ scale: 0.95 }}
@@ -911,6 +914,15 @@ export const LoginPage: React.FC<LoginPageProps> = ({
           className="hover:text-[#d8b4fe] transition-colors cursor-pointer"
         >
           Institutional Innovation Portal
+        </motion.button>
+        <span className="text-white/20">•</span>
+        <motion.button 
+          whileHover={{ scale: 1.05, y: -1 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => handleDirectRolePick('admin')}
+          className="text-rose-400 hover:text-rose-300 font-bold transition-colors cursor-pointer flex items-center gap-1"
+        >
+          <span>🛡️ SuperAdmin Access</span>
         </motion.button>
         <span className="text-white/20">•</span>
         <motion.button 

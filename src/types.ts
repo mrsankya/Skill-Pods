@@ -179,7 +179,7 @@ export interface LiveEvent {
 
 export type PageType = 'landing' | 'login' | 'dashboard';
 
-export type UserRole = 'student' | 'sme' | 'mentor' | 'college';
+export type UserRole = 'student' | 'sme' | 'mentor' | 'college' | 'admin';
 
 export type LoginIntent = 
   | 'general' 

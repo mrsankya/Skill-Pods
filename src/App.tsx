@@ -27,6 +27,7 @@ import { StudentDashboard } from './components/StudentDashboard';
 import { MentorDashboard } from './components/MentorDashboard';
 import { SmeDashboard } from './components/SmeDashboard';
 import { CollegeDashboard } from './components/CollegeDashboard';
+import { AdminDashboard } from './components/AdminDashboard';
 
 const initialMetrics: MetricsData = {
 
@@ -232,6 +233,15 @@ export default function App() {
     if (currentRole === 'college') {
       return (
         <CollegeDashboard
+          userEmail={authenticatedUser}
+          onSwitchWorkspace={() => setCurrentPage('login')}
+          onBackToHome={() => setCurrentPage('landing')}
+        />
+      );
+    }
+    if (currentRole === 'admin') {
+      return (
+        <AdminDashboard
           userEmail={authenticatedUser}
           onSwitchWorkspace={() => setCurrentPage('login')}
           onBackToHome={() => setCurrentPage('landing')}
