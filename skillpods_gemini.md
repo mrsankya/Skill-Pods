@@ -29,6 +29,31 @@
 - 🔄 **Project Reuse / Upgrade**: Enterprise v2.0 upgrade engine to spin up student pods for commercial modernization.
 - 💵 **Earnings Wallet (`StudentEarningsWallet.tsx`)**: Financial ledger tracking sprint stipends, commercial software licensing royalties, escrow balances, and instant withdrawal modal.
 
+## Experimental Labs & Next-Gen Testing Suite (`[🧪 IN TESTING]` & `[⚡ BETA]`)
+- 🎙️ **Real-Time WebRTC Pod Sprint Room (`LivePodRoomModal.tsx`)**: 4-participant video/audio room with screen-sharing, WebRTC mesh latency radar, and in-room chat.
+- 🤖 **GURU AI Co-Pilot & Security Scanner (`GuruCopilotModal.tsx`)**: Automated problem decomposition into 5 developer Kanban tasks + AST pull request OWASP security scanner.
+- 💼 **Corporate Recruiter & Talent Access Portal (`RecruiterHiringModal.tsx`)**: Direct student hiring interface filtered by verified LOC, placement readiness score, and mentor endorsements.
+- 🎙️ **SME Voice Problem-to-PRD AI (`SmeVoicePrdModal.tsx`)**: In-browser speech-to-text converting spoken business pain points into technical PRDs with budget recommendations.
+- 🏫 **NAAC & NIRF Accreditation Exporter (`NaacReportModal.tsx`)**: 1-click official audit certificate for NAAC Criterion 3.5.1 / 5.2.1 and NIRF metrics.
+- 📊 **GURU AI Investor Pitch Deck (`PitchDeckModal.tsx`)**: 5-slide venture memo generator for student projects.
+- 🏆 **National Skill Pods Leaderboard (`PodLeaderboardModal.tsx`)**: Weekly XP, commit velocity, and milestone completion streaks.
+- 💻 **In-Browser API & Telemetry Testbench (`ApiSandboxModal.tsx`)**: Live REST endpoint tester with JSON response viewer and round-trip latency benchmarking.
+- 📧 **Security Login Email Alert Dispatcher**: Automatic logging and security email dispatch upon user or SuperAdmin login.
+- 💳 **Escrow Vault & UPI Gateway Simulator (`EscrowPaymentModal.tsx`)**: Milestone fund locking and automated release upon mentor sign-off.
+- 📄 **Verified PDF Skill Passport & QR Code Scanner (`StudentSkillPassport.tsx`)**: Print-ready cryptographic certificate with scannable QR verification.
+- 🔔 **Real-Time Notification Bell Dropdown (`Navbar.tsx`)**: Dropdown alert system for cohort events.
+
+## Production Deployments & URLs
+- 🌐 **Cloudflare Pages Production URL**: `https://skill-pods.pages.dev`
+- 🐙 **GitHub Repository**: `https://github.com/Sakshi-patil48/Skill-Pods.git` (`main` branch)
+- 🗄️ **MongoDB Atlas Cloud Cluster**: `cluster0.b7x8wdz.mongodb.net/skillpods`
+- 👑 **SuperAdmin Account**: `sanketbhende0@gmail.com`
+
+## Backend Deployment Guide (Render, Railway, Fly.io, or Vercel)
+- **Frontend**: Live on Cloudflare Pages (`https://skill-pods.pages.dev`).
+- **Backend Node.js/Express API**: The codebase has a unified `server.ts` / `server/app.ts` that can run standalone on **Render**, **Railway**, **Fly.io**, or **Vercel Serverless Functions**.
+  - **Render / Railway**: Connect GitHub repo &rarr; Set Build Command: `npm install && npm run build` &rarr; Start Command: `node dist/server.cjs` &rarr; Set Environment Variable `MONGODB_URI`.
+
 ### 2. SME Dashboard (`SmeDashboard.tsx`)
 - 🤖 **AI Pod Recommendation (`SmeAiPodRecommendation.tsx`)**: Matches and ranks top 3 student pods for posted business problems based on tech stack synergy, velocity, and mentor availability.
 - 🎯 **Pod Comparison Tool**: Side-by-side comparison modal evaluating pods on Match %, Velocity, Test Coverage, Latency SLA, and Delivery ETA.
