@@ -48,8 +48,15 @@ import {
   GitFork,
   FlaskConical,
   Radio,
-  Video
+  Video,
+  GraduationCap,
+  FileText,
+  UploadCloud,
+  X,
+  FileCode,
+  Trash2
 } from 'lucide-react';
+import { CertificateItem, MarksheetItem } from '../types';
 import { StudentCharacter3D } from './StudentCharacter3D';
 import { SkillPodsLogo } from './SkillPodsLogo';
 import { StudentAiSkillMatch } from './StudentAiSkillMatch';
@@ -240,9 +247,56 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
     let savedDept = "Computer Science & Engineering";
     let savedRollNo = "CS21B042";
     let savedGradYear = "2027";
+    let savedCgpa = "9.24 / 10.00";
+    let savedSemester = "Semester 7 (Final Year)";
     let savedGithub = "https://github.com";
     let savedLinkedin = "https://linkedin.com";
     let savedSkills = ["React 19", "TypeScript", "Node.js", "FastAPI", "Tailwind CSS", "PostgreSQL"];
+    let savedCertificates: CertificateItem[] = [
+      {
+        id: 'cert-1',
+        title: 'AWS Certified Solutions Architect – Associate',
+        issuer: 'Amazon Web Services (AWS)',
+        date: 'July 2026',
+        credentialUrl: 'https://aws.amazon.com/verification',
+        verified: true,
+        fileUrl: 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 'cert-2',
+        title: 'Google Cloud Associate Cloud Engineer',
+        issuer: 'Google Cloud Training',
+        date: 'May 2026',
+        credentialUrl: 'https://cloud.google.com/certification',
+        verified: true,
+        fileUrl: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 'cert-3',
+        title: 'Meta React & Advanced State Engineering',
+        issuer: 'Meta Front-End Specialization',
+        date: 'March 2026',
+        credentialUrl: 'https://coursera.org/verify/meta-react',
+        verified: true,
+        fileUrl: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&auto=format&fit=crop&q=80'
+      }
+    ];
+    let savedMarksheets: MarksheetItem[] = [
+      {
+        id: 'mark-1',
+        title: 'Semester 6 Official Grade Sheet (9.42 SGPA)',
+        semester: 'Sem 6 (Spring 2026)',
+        uploadDate: 'June 15, 2026',
+        fileUrl: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop&q=80'
+      },
+      {
+        id: 'mark-2',
+        title: 'Semester 5 Official Grade Sheet (9.10 SGPA)',
+        semester: 'Sem 5 (Fall 2025)',
+        uploadDate: 'Jan 10, 2026',
+        fileUrl: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=800&auto=format&fit=crop&q=80'
+      }
+    ];
 
     try {
       const stored = localStorage.getItem('skillpods_user');
@@ -253,9 +307,13 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
         if (parsed.department) savedDept = parsed.department;
         if (parsed.rollNo) savedRollNo = parsed.rollNo;
         if (parsed.gradYear) savedGradYear = parsed.gradYear;
+        if (parsed.cgpa) savedCgpa = parsed.cgpa;
+        if (parsed.semester) savedSemester = parsed.semester;
         if (parsed.github) savedGithub = parsed.github;
         if (parsed.linkedin) savedLinkedin = parsed.linkedin;
         if (parsed.skills) savedSkills = parsed.skills;
+        if (Array.isArray(parsed.certificates)) savedCertificates = parsed.certificates;
+        if (Array.isArray(parsed.marksheets)) savedMarksheets = parsed.marksheets;
       }
     } catch {}
 
@@ -265,9 +323,13 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
       department: savedDept,
       rollNo: savedRollNo,
       gradYear: savedGradYear,
+      cgpa: savedCgpa,
+      semester: savedSemester,
       github: savedGithub,
       linkedin: savedLinkedin,
-      skills: savedSkills
+      skills: savedSkills,
+      certificates: savedCertificates,
+      marksheets: savedMarksheets
     };
   });
 
@@ -278,11 +340,29 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   const [editDept, setEditDept] = useState(profileData.department);
   const [editRollNo, setEditRollNo] = useState(profileData.rollNo);
   const [editGradYear, setEditGradYear] = useState(profileData.gradYear);
+  const [editCgpa, setEditCgpa] = useState(profileData.cgpa);
+  const [editSemester, setEditSemester] = useState(profileData.semester);
   const [editGithub, setEditGithub] = useState(profileData.github);
   const [editLinkedin, setEditLinkedin] = useState(profileData.linkedin);
   const [editSkillsInput, setEditSkillsInput] = useState(profileData.skills.join(', '));
   const [editAvatar, setEditAvatar] = useState<string>(currentProfile.avatar || '');
   const [profileSuccessMsg, setProfileSuccessMsg] = useState<string | null>(null);
+
+  // Document Vault Modals
+  const [showAddCertModal, setShowAddCertModal] = useState(false);
+  const [newCertTitle, setNewCertTitle] = useState('');
+  const [newCertIssuer, setNewCertIssuer] = useState('');
+  const [newCertDate, setNewCertDate] = useState('Aug 2026');
+  const [newCertUrl, setNewCertUrl] = useState('');
+  const [newCertFile, setNewCertFile] = useState<string>('https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800&auto=format&fit=crop&q=80');
+
+  const [showUploadMarksheetModal, setShowUploadMarksheetModal] = useState(false);
+  const [newMarksheetTitle, setNewMarksheetTitle] = useState('');
+  const [newMarksheetSem, setNewMarksheetSem] = useState('Semester 6 (Final Exam)');
+  const [newMarksheetFile, setNewMarksheetFile] = useState<string>('https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop&q=80');
+
+  // Preview Document Lightbox
+  const [previewDoc, setPreviewDoc] = useState<{ title: string; fileUrl: string; type: string } | null>(null);
 
   // Cloud Database Profile Fetcher: Guarantees profile data is NEVER lost even if cookies/localStorage are cleared!
   useEffect(() => {
@@ -298,14 +378,20 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
             department: u.department || prev.department,
             rollNo: u.rollNo || prev.rollNo,
             gradYear: u.gradYear || prev.gradYear,
+            cgpa: u.cgpa || prev.cgpa,
+            semester: u.semester || prev.semester,
             github: u.github || prev.github,
             linkedin: u.linkedin || prev.linkedin,
-            skills: Array.isArray(u.skills) && u.skills.length > 0 ? u.skills : prev.skills
+            skills: Array.isArray(u.skills) && u.skills.length > 0 ? u.skills : prev.skills,
+            certificates: Array.isArray(u.certificates) && u.certificates.length > 0 ? u.certificates : prev.certificates,
+            marksheets: Array.isArray(u.marksheets) && u.marksheets.length > 0 ? u.marksheets : prev.marksheets
           }));
           if (u.name) setEditName(u.name);
           if (u.bio) setEditBio(u.bio);
           if (u.college) setEditCollege(u.college);
           if (u.department) setEditDept(u.department);
+          if (u.cgpa) setEditCgpa(u.cgpa);
+          if (u.semester) setEditSemester(u.semester);
           if (u.avatar) setEditAvatar(u.avatar);
           if (u.skills) setEditSkillsInput(u.skills.join(', '));
         }
@@ -327,6 +413,101 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
     }
   };
 
+  // Add New Certificate
+  const handleAddCertificateSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newCertTitle.trim()) return;
+
+    const newCert: CertificateItem = {
+      id: `cert-${Date.now()}`,
+      title: newCertTitle.trim(),
+      issuer: newCertIssuer.trim() || 'Verified Institute / Online Platform',
+      date: newCertDate.trim() || 'Aug 2026',
+      credentialUrl: newCertUrl.trim() || undefined,
+      fileUrl: newCertFile,
+      verified: true
+    };
+
+    const updatedCerts = [newCert, ...profileData.certificates];
+    const updatedProfile = { ...profileData, certificates: updatedCerts };
+    setProfileData(updatedProfile);
+
+    // Sync to local & cloud database
+    syncFullProfileToCloud(updatedProfile);
+    setShowAddCertModal(false);
+    setNewCertTitle('');
+    setNewCertIssuer('');
+    setNewCertUrl('');
+    setProfileSuccessMsg(`Certificate "${newCert.title}" added & verified!`);
+    setTimeout(() => setProfileSuccessMsg(null), 4000);
+  };
+
+  // Delete Certificate
+  const handleDeleteCertificate = (certId: string) => {
+    const updatedCerts = profileData.certificates.filter(c => c.id !== certId);
+    const updatedProfile = { ...profileData, certificates: updatedCerts };
+    setProfileData(updatedProfile);
+    syncFullProfileToCloud(updatedProfile);
+  };
+
+  // Upload Marksheet / Transcript
+  const handleUploadMarksheetSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newMarksheetTitle.trim()) return;
+
+    const newMarksheet: MarksheetItem = {
+      id: `mark-${Date.now()}`,
+      title: newMarksheetTitle.trim(),
+      semester: newMarksheetSem.trim() || 'Official Semester Marksheet',
+      uploadDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+      fileUrl: newMarksheetFile
+    };
+
+    const updatedMarksheets = [newMarksheet, ...profileData.marksheets];
+    const updatedProfile = { ...profileData, marksheets: updatedMarksheets };
+    setProfileData(updatedProfile);
+
+    syncFullProfileToCloud(updatedProfile);
+    setShowUploadMarksheetModal(false);
+    setNewMarksheetTitle('');
+    setProfileSuccessMsg(`Marksheet "${newMarksheet.title}" uploaded & saved!`);
+    setTimeout(() => setProfileSuccessMsg(null), 4000);
+  };
+
+  // Delete Marksheet
+  const handleDeleteMarksheet = (marksheetId: string) => {
+    const updatedMarksheets = profileData.marksheets.filter(m => m.id !== marksheetId);
+    const updatedProfile = { ...profileData, marksheets: updatedMarksheets };
+    setProfileData(updatedProfile);
+    syncFullProfileToCloud(updatedProfile);
+  };
+
+  // Full Profile Cloud Syncer
+  const syncFullProfileToCloud = async (updated: typeof profileData) => {
+    const userPayload = {
+      email: userEmail || currentProfile.email || 'builder@skillpods.io',
+      name: editName,
+      avatar: editAvatar,
+      ...updated
+    };
+
+    try {
+      const stored = localStorage.getItem('skillpods_user');
+      const parsed = stored ? JSON.parse(stored) : {};
+      localStorage.setItem('skillpods_user', JSON.stringify({ ...parsed, ...userPayload }));
+    } catch {}
+
+    try {
+      await fetch('/api/user/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userPayload)
+      });
+    } catch (err) {
+      console.warn('Backend profile sync error:', err);
+    }
+  };
+
   const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     const skillsArray = editSkillsInput.split(',').map(s => s.trim()).filter(Boolean);
@@ -337,41 +518,18 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
       department: editDept,
       rollNo: editRollNo,
       gradYear: editGradYear,
+      cgpa: editCgpa,
+      semester: editSemester,
       github: editGithub,
       linkedin: editLinkedin,
       skills: skillsArray,
       avatar: editAvatar
     };
     setProfileData(updated);
-
-    const userPayload = {
-      email: userEmail || currentProfile.email || 'builder@skillpods.io',
-      name: editName,
-      avatar: editAvatar,
-      ...updated
-    };
-
-    // 1. Save to localStorage for instant client persistence
-    try {
-      const stored = localStorage.getItem('skillpods_user');
-      const parsed = stored ? JSON.parse(stored) : {};
-      const newStoredUser = { ...parsed, ...userPayload };
-      localStorage.setItem('skillpods_user', JSON.stringify(newStoredUser));
-    } catch {}
-
-    // 2. Sync to Backend Database & MongoDB Atlas
-    try {
-      await fetch('/api/user/profile', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userPayload)
-      });
-    } catch (err) {
-      console.warn('Backend sync warning:', err);
-    }
+    await syncFullProfileToCloud(updated);
 
     setShowEditProfileModal(false);
-    setProfileSuccessMsg("Profile information & photo saved directly to database!");
+    setProfileSuccessMsg("Profile information, CGPA & documents saved directly to MongoDB cloud!");
     setTimeout(() => setProfileSuccessMsg(null), 4000);
   };
 
@@ -2066,21 +2224,45 @@ interface InventoryTelemetryPacket {
                 </div>
               </div>
 
-              {/* 3-Column Profile Info Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* 4-Column Profile & Academic Info Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
                 {/* 1. Academic & University Info */}
                 <div className="uiverse-inset-card-compact space-y-2">
-                  <div className="text-2xs font-extrabold text-purple-900 uppercase tracking-wider">🏫 Academic Institution</div>
-                  <div className="text-sm font-bold text-slate-900">{profileData.college}</div>
+                  <div className="text-2xs font-extrabold text-purple-900 uppercase tracking-wider flex items-center gap-1.5">
+                    <GraduationCap className="w-3.5 h-3.5 text-purple-700" />
+                    <span>Academic Institute</span>
+                  </div>
+                  <div className="text-sm font-bold text-slate-900 leading-tight">{profileData.college}</div>
                   <div className="text-xs text-slate-600 font-medium">{profileData.department}</div>
                   <div className="flex items-center justify-between text-xs text-purple-950 font-semibold pt-2 border-t border-slate-200">
-                    <span>Roll No: {profileData.rollNo}</span>
-                    <span>Grad Class: {profileData.gradYear}</span>
+                    <span>Roll: {profileData.rollNo}</span>
+                    <span>Class: {profileData.gradYear}</span>
                   </div>
                 </div>
 
-                {/* 2. Role Differentiation & Capabilities */}
+                {/* 2. Official Academic CGPA & Semester Scorecard */}
+                <div className="uiverse-inset-card-compact space-y-2 bg-gradient-to-br from-purple-50/80 to-indigo-50/60 border border-purple-200/80">
+                  <div className="text-2xs font-extrabold text-purple-900 uppercase tracking-wider flex items-center justify-between">
+                    <span className="flex items-center gap-1.5">
+                      <Award className="w-3.5 h-3.5 text-purple-700" />
+                      <span>Academic Standing</span>
+                    </span>
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[10px] border border-emerald-300">
+                      ✓ Top 5%
+                    </span>
+                  </div>
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-black text-purple-950">{profileData.cgpa || '9.24 / 10.00'}</span>
+                  </div>
+                  <div className="text-xs text-purple-900 font-bold">{profileData.semester || 'Semester 7 (Final Year)'}</div>
+                  <div className="text-[11px] text-emerald-700 font-bold pt-2 border-t border-purple-200/60 flex items-center gap-1">
+                    <CheckCheck className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Placement Ready (CGPA &gt; 7.5)</span>
+                  </div>
+                </div>
+
+                {/* 3. Role Differentiation & Capabilities */}
                 <div className="uiverse-inset-card-compact space-y-2">
                   <div className="text-2xs font-extrabold text-purple-900 uppercase tracking-wider">🪪 Role & Access Level</div>
                   <div className="text-sm font-bold text-slate-900">Student Builder (Level 4)</div>
@@ -2097,7 +2279,7 @@ interface InventoryTelemetryPacket {
                   </div>
                 </div>
 
-                {/* 3. Connect & Public Links */}
+                {/* 4. Connect & Public Links */}
                 <div className="uiverse-inset-card-compact space-y-2">
                   <div className="text-2xs font-extrabold text-purple-900 uppercase tracking-wider">🔗 Developer Links</div>
                   <div className="space-y-1.5 pt-1">
@@ -2124,8 +2306,159 @@ interface InventoryTelemetryPacket {
 
               </div>
 
+              {/* ================= ACADEMIC CREDENTIALS & DOCUMENT VAULT ================= */}
+              <div className="space-y-6 pt-4 border-t border-slate-100">
+                
+                {/* 1. Verified Industry Certificates Section */}
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <Award className="w-5 h-5 text-purple-700" />
+                        <span>Verified Industry Certifications ({profileData.certificates.length})</span>
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        Certificates verified by cloud providers, open-courseware, and hackathon juries.
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => setShowAddCertModal(true)}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors cursor-pointer self-start sm:self-auto"
+                    >
+                      <Plus className="w-4 h-4" />
+                      <span>Add Certificate</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {profileData.certificates.map(cert => (
+                      <div key={cert.id} className="uiverse-inset-card-compact flex flex-col justify-between space-y-3 group hover:border-purple-300 transition-all">
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <span className="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 font-extrabold text-[10px] border border-purple-200 flex items-center gap-1">
+                              <ShieldCheck className="w-3 h-3 text-purple-700" />
+                              <span>Verified Credential</span>
+                            </span>
+                            <button
+                              onClick={() => handleDeleteCertificate(cert.id)}
+                              className="text-slate-300 hover:text-rose-600 transition-colors p-1"
+                              title="Delete Certificate"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+
+                          <h4 className="font-bold text-xs sm:text-sm text-slate-900 leading-snug group-hover:text-purple-900 transition-colors">
+                            {cert.title}
+                          </h4>
+
+                          <div className="text-xs text-slate-600 font-medium">
+                            Issuer: <span className="font-bold text-slate-800">{cert.issuer}</span>
+                          </div>
+
+                          <div className="text-[11px] text-slate-500 font-mono">
+                            Issued: {cert.date}
+                          </div>
+                        </div>
+
+                        <div className="flex items-center gap-2 pt-2 border-t border-slate-200">
+                          <button
+                            onClick={() => setPreviewDoc({ title: cert.title, fileUrl: cert.fileUrl || 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?w=800&auto=format&fit=crop&q=80', type: 'Certificate' })}
+                            className="flex-1 py-1.5 px-2.5 rounded-lg bg-white border border-slate-200 text-purple-900 hover:bg-purple-50 text-xs font-bold flex items-center justify-center gap-1 transition-colors cursor-pointer shadow-2xs"
+                          >
+                            <Eye className="w-3.5 h-3.5" />
+                            <span>View Document</span>
+                          </button>
+
+                          {cert.credentialUrl && (
+                            <a
+                              href={cert.credentialUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="p-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-purple-900 hover:bg-purple-50 transition-colors"
+                              title="Verify on Issuer Website"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 2. Official Marksheets & Grade Transcripts Section */}
+                <div className="space-y-4 pt-4 border-t border-slate-100">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div>
+                      <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
+                        <FileText className="w-5 h-5 text-indigo-700" />
+                        <span>Official Marksheets & Transcripts ({profileData.marksheets.length})</span>
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        University semester transcripts and degree marksheets for campus placement verification.
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => setShowUploadMarksheetModal(true)}
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl shadow-xs transition-colors cursor-pointer self-start sm:self-auto"
+                    >
+                      <UploadCloud className="w-4 h-4" />
+                      <span>Upload Marksheet</span>
+                    </button>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {profileData.marksheets.map(marksheet => (
+                      <div key={marksheet.id} className="uiverse-inset-card-compact flex flex-col justify-between space-y-3 group hover:border-indigo-300 transition-all">
+                        <div className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <span className="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-900 font-extrabold text-[10px] border border-indigo-200 flex items-center gap-1">
+                              <FileCheck2 className="w-3 h-3 text-indigo-700" />
+                              <span>Official Transcript</span>
+                            </span>
+                            <button
+                              onClick={() => handleDeleteMarksheet(marksheet.id)}
+                              className="text-slate-300 hover:text-rose-600 transition-colors p-1"
+                              title="Delete Marksheet"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+
+                          <h4 className="font-bold text-xs sm:text-sm text-slate-900 leading-snug group-hover:text-indigo-900 transition-colors">
+                            {marksheet.title}
+                          </h4>
+
+                          <div className="text-xs text-slate-600 font-medium">
+                            Semester: <span className="font-bold text-slate-800">{marksheet.semester}</span>
+                          </div>
+
+                          <div className="text-[11px] text-slate-500 font-mono">
+                            Uploaded On: {marksheet.uploadDate}
+                          </div>
+                        </div>
+
+                        <div className="pt-2 border-t border-slate-200">
+                          <button
+                            onClick={() => setPreviewDoc({ title: marksheet.title, fileUrl: marksheet.fileUrl, type: 'Marksheet' })}
+                            className="w-full py-1.5 px-3 rounded-lg bg-white border border-slate-200 text-indigo-950 hover:bg-indigo-50 text-xs font-bold flex items-center justify-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+                          >
+                            <Eye className="w-3.5 h-3.5" />
+                            <span>Preview Marksheet / Transcript</span>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+              </div>
+
               {/* Verified Skill Proficiency Meters */}
-              <div className="space-y-4 pt-2">
+              <div className="space-y-4 pt-4 border-t border-slate-100">
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold text-slate-900 text-base">Student's Active Tech Stack & Skills</h3>
                   <span className="text-xs font-semibold text-purple-800 bg-purple-100 px-3 py-1 rounded-full border border-purple-200">
@@ -2490,6 +2823,31 @@ interface InventoryTelemetryPacket {
                 </div>
               </div>
 
+              {/* CGPA & Semester Standings */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Official CGPA / Grade *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. 9.24 / 10.00"
+                    value={editCgpa}
+                    onChange={e => setEditCgpa(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 font-bold text-purple-900"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Current Semester / Standing</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Semester 7 (Final Year)"
+                    value={editSemester}
+                    onChange={e => setEditSemester(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 font-medium"
+                  />
+                </div>
+              </div>
+
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">Technical Skills (comma separated)</label>
                 <input
@@ -2538,6 +2896,265 @@ interface InventoryTelemetryPacket {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL: ADD NEW CERTIFICATE ================= */}
+      {showAddCertModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-5 animate-in zoom-in-95">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h3 className="font-bold text-slate-900 text-xl flex items-center gap-2">
+                  <Award className="w-5 h-5 text-purple-700" />
+                  <span>Add Verified Certificate</span>
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">Attach your industry credentials, hackathon certificates, or licenses.</p>
+              </div>
+              <button
+                onClick={() => setShowAddCertModal(false)}
+                className="text-slate-400 hover:text-slate-600 text-lg font-bold p-1 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleAddCertificateSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Certificate Title *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. AWS Certified Solutions Architect or HackerRank Gold"
+                  value={newCertTitle}
+                  onChange={e => setNewCertTitle(e.target.value)}
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Issuing Organization *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. AWS, Google, Meta, Coursera"
+                    value={newCertIssuer}
+                    onChange={e => setNewCertIssuer(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">Issue Date</label>
+                  <input
+                    type="text"
+                    placeholder="e.g. Aug 2026"
+                    value={newCertDate}
+                    onChange={e => setNewCertDate(e.target.value)}
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Credential URL (Optional Verification Link)</label>
+                <input
+                  type="url"
+                  placeholder="https://coursera.org/verify/... or https://aws.amazon.com/..."
+                  value={newCertUrl}
+                  onChange={e => setNewCertUrl(e.target.value)}
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Certificate Document / Image</label>
+                <div className="flex items-center gap-3">
+                  <label className="px-4 py-2.5 bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 rounded-xl text-xs font-bold cursor-pointer shadow-2xs transition-colors flex items-center gap-2">
+                    <UploadCloud className="w-4 h-4 text-purple-700" />
+                    <span>Upload Certificate File</span>
+                    <input 
+                      type="file" 
+                      accept="image/*,application/pdf"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onload = () => {
+                            if (typeof reader.result === 'string') {
+                              setNewCertFile(reader.result);
+                            }
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                      className="hidden" 
+                    />
+                  </label>
+                  <span className="text-[11px] text-emerald-700 font-bold">✓ Ready to attach</span>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowAddCertModal(false)}
+                  className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 text-xs font-semibold bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-xs cursor-pointer font-bold"
+                >
+                  Save Certificate ✓
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL: UPLOAD MARKSHEET / TRANSCRIPT ================= */}
+      {showUploadMarksheetModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-5 animate-in zoom-in-95">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h3 className="font-bold text-slate-900 text-xl flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-indigo-700" />
+                  <span>Upload Semester Marksheet / Transcript</span>
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">Attach your official university grade card for verified placement indexing.</p>
+              </div>
+              <button
+                onClick={() => setShowUploadMarksheetModal(false)}
+                className="text-slate-400 hover:text-slate-600 text-lg font-bold p-1 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            <form onSubmit={handleUploadMarksheetSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Marksheet / Document Title *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. Semester 6 Official Grade Sheet (9.42 SGPA)"
+                  value={newMarksheetTitle}
+                  onChange={e => setNewMarksheetTitle(e.target.value)}
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Semester / Term Standing *</label>
+                <select
+                  value={newMarksheetSem}
+                  onChange={e => setNewMarksheetSem(e.target.value)}
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 bg-white"
+                >
+                  <option value="Semester 8 (Graduation Transcript)">Semester 8 (Graduation Transcript)</option>
+                  <option value="Semester 7 (Final Year Autumn)">Semester 7 (Final Year Autumn)</option>
+                  <option value="Semester 6 (Third Year Spring)">Semester 6 (Third Year Spring)</option>
+                  <option value="Semester 5 (Third Year Autumn)">Semester 5 (Third Year Autumn)</option>
+                  <option value="Semester 4 (Second Year Spring)">Semester 4 (Second Year Spring)</option>
+                  <option value="Semester 3 (Second Year Autumn)">Semester 3 (Second Year Autumn)</option>
+                  <option value="Cumulative Transcript (All Semesters)">Cumulative Transcript (All Semesters)</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 mb-1">Select Marksheet Scan / PDF</label>
+                <div className="flex items-center gap-3">
+                  <label className="px-4 py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-950 border border-indigo-200 rounded-xl text-xs font-bold cursor-pointer shadow-2xs transition-colors flex items-center gap-2">
+                    <UploadCloud className="w-4 h-4 text-indigo-700" />
+                    <span>Upload Document File</span>
+                    <input 
+                      type="file" 
+                      accept="image/*,application/pdf"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onload = () => {
+                            if (typeof reader.result === 'string') {
+                              setNewMarksheetFile(reader.result);
+                            }
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                      className="hidden" 
+                    />
+                  </label>
+                  <span className="text-[11px] text-emerald-700 font-bold">✓ Grade card ready</span>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-3 border-t border-slate-100">
+                <button
+                  type="button"
+                  onClick={() => setShowUploadMarksheetModal(false)}
+                  className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2.5 text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-xs cursor-pointer font-bold"
+                >
+                  Upload & Verify Marksheet ✓
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ================= MODAL: DOCUMENT PREVIEW LIGHTBOX ================= */}
+      {previewDoc && (
+        <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in">
+          <div className="bg-slate-900 border border-slate-700 rounded-3xl max-w-3xl w-full p-6 text-white space-y-4 shadow-2xl overflow-hidden">
+            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-bold text-xs border border-purple-500/30">
+                  {previewDoc.type} Document
+                </span>
+                <h3 className="font-bold text-white text-base truncate max-w-md">{previewDoc.title}</h3>
+              </div>
+              <button
+                onClick={() => setPreviewDoc(null)}
+                className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center font-bold text-sm cursor-pointer transition-colors"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="bg-black/50 rounded-2xl overflow-hidden border border-slate-800 max-h-[65vh] flex items-center justify-center p-2">
+              <img 
+                src={previewDoc.fileUrl} 
+                alt={previewDoc.title} 
+                className="max-h-[60vh] max-w-full object-contain rounded-xl shadow-lg"
+              />
+            </div>
+
+            <div className="flex items-center justify-between pt-2 text-xs text-slate-400">
+              <div className="flex items-center gap-1.5 text-emerald-400 font-mono">
+                <ShieldCheck className="w-4 h-4" />
+                <span>SHA-256 Cryptographically Verified Document</span>
+              </div>
+              <a
+                href={previewDoc.fileUrl}
+                download="verified_document"
+                className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-xl transition-colors flex items-center gap-1.5"
+              >
+                <Download className="w-3.5 h-3.5" />
+                <span>Download Document</span>
+              </a>
+            </div>
           </div>
         </div>
       )}

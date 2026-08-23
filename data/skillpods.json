@@ -1,0 +1,498 @@
+{
+  "users": [
+    {
+      "id": "usr-superadmin-01",
+      "email": "sanketbhende0@gmail.com",
+      "passwordHash": "564a4cdf5ca226c802601765f23bdea9537fa6b8572c09fdea10929dfee3a0e199bd389e419e23012cffef1705fd02baa1d2ec561485339214f1b893c5d49af9",
+      "salt": "719e5c458b798368c9bf7ca9d6ebb053",
+      "name": "Sanket Bhende (SuperAdmin)",
+      "role": "admin",
+      "organization": "SkillPods Core Operations",
+      "createdAt": "2026-08-23T19:36:05.407Z"
+    },
+    {
+      "id": "usr-admin-01",
+      "email": "admin.root@skillpods.io",
+      "passwordHash": "564a4cdf5ca226c802601765f23bdea9537fa6b8572c09fdea10929dfee3a0e199bd389e419e23012cffef1705fd02baa1d2ec561485339214f1b893c5d49af9",
+      "salt": "719e5c458b798368c9bf7ca9d6ebb053",
+      "name": "SuperAdmin Root",
+      "role": "admin",
+      "organization": "SkillPods Platform Operations",
+      "createdAt": "2026-08-23T19:36:05.407Z"
+    },
+    {
+      "id": "usr-student-01",
+      "email": "dev.patel@skillpods.io",
+      "passwordHash": "621167e9d6dddb0fa66d0cbf4d24c83081dd86acf3351b3d6f8b46367d9a0342cd5a95d542ccce298a1f26068d3bb1f5d1d392247c440eafbb70b2621ae569c2",
+      "salt": "d2a1ed7aa5d856ceb5eccf61d6acd7cd",
+      "name": "Dev Patel",
+      "role": "student",
+      "department": "Computer Science & Engineering",
+      "college": "National Institute of Technology",
+      "createdAt": "2026-08-23T19:36:05.407Z",
+      "bio": "Updated Vitest Automated Test Bio 2026",
+      "github": "https://github.com/devpatel-test"
+    },
+    {
+      "id": "usr-sme-01",
+      "email": "kestrel@freight.com",
+      "passwordHash": "403963466d2e79a5f253ca6ee6c038c42e5dd466b08ebbc4398ba4f24f0e714362b8736e45ef16456015a68c5f1639386b939b038220ef57f482e9abd8a6ee85",
+      "salt": "ce3e662e5dea8c197dfe9433d1011e1a",
+      "name": "Kestrel Freight & Logistics",
+      "role": "sme",
+      "organization": "Kestrel Freight Logistics Inc.",
+      "createdAt": "2026-08-23T19:36:05.407Z"
+    },
+    {
+      "id": "usr-mentor-01",
+      "email": "sarah.chen@cloudflare.com",
+      "passwordHash": "2f6b007a63de550c53ea0ff3af890a7cb11841b80e713f01511d0e689093cefaad42d038beacb01fb556e0584a28258e0da82686296019343ba701dfdc46a5a6",
+      "salt": "a3ee29de7ad161d2fb91806bc4878fb1",
+      "name": "Sarah Chen",
+      "role": "mentor",
+      "organization": "Cloudflare",
+      "createdAt": "2026-08-23T19:36:05.407Z"
+    },
+    {
+      "id": "usr-college-01",
+      "email": "dean@nit.edu",
+      "passwordHash": "ca594f7469fe8fb9fd462197b94aa881026dec93938188b11e764753455ed362bb09c590e335b8111e64c0c44df20e0c6ab92fd5159743fda832ed22ef5fd8c4",
+      "salt": "f45b86510a4de673ad85d575eb7d9e23",
+      "name": "National Institute of Technology",
+      "role": "college",
+      "college": "National Institute of Technology",
+      "createdAt": "2026-08-23T19:36:05.407Z"
+    }
+  ],
+  "sessions": [],
+  "securityLogs": [
+    {
+      "id": "sec-01",
+      "userEmail": "dev.patel@skillpods.io",
+      "action": "LOGIN_SUCCESS",
+      "ip": "127.0.0.1",
+      "status": "SUCCESS",
+      "details": "Local password authenticated via SHA-512 PBKDF2",
+      "timestamp": "2026-08-23T18:36:05.407Z"
+    },
+    {
+      "id": "sec-02",
+      "userEmail": "sarah.chen@cloudflare.com",
+      "action": "SKILL_VERIFIED",
+      "ip": "127.0.0.1",
+      "status": "SUCCESS",
+      "details": "Cryptographic skill verification stamp issued to Dev Patel",
+      "timestamp": "2026-08-23T19:06:05.407Z"
+    }
+  ],
+  "metrics": {
+    "uptimeSla": 99.94,
+    "avgLatencyMs": 48,
+    "projectsShipped": 4839,
+    "apiRequestsToday": 10482910,
+    "activePods": 24,
+    "activeStudents": 642,
+    "industryMentors": 118,
+    "liveSmeProblems": 37
+  },
+  "pods": [
+    {
+      "id": "pod-101",
+      "name": "Pod Apex-2",
+      "title": "AI Invoice & Ledger Auto-Reconciliation",
+      "sme": "Kestrel Logistics & Freight",
+      "stage": 3,
+      "stageName": "Prototype & MVP",
+      "progress": 68,
+      "mentor": "Sarah Chen (Staff Eng @ Cloudflare)",
+      "students": [
+        {
+          "name": "Dev Patel",
+          "role": "Full-Stack Lead"
+        },
+        {
+          "name": "Maya Lin",
+          "role": "Backend / Golang"
+        },
+        {
+          "name": "Rohan Gupta",
+          "role": "AI Pipeline"
+        }
+      ],
+      "techStack": [
+        "React",
+        "FastAPI",
+        "PostgreSQL",
+        "Docker",
+        "Tailwind"
+      ],
+      "latency": "42ms",
+      "health": "Operational",
+      "lastCommit": "feat: implemented webhook deduplication and OCR confidence scores",
+      "updatedAt": "2026-08-23T19:36:05.407Z",
+      "demoUrl": "https://demo.kestrel-recon.skillpods.io",
+      "matchScore": 96,
+      "matchReasons": [
+        "100% FastAPI & Vector Search synergy",
+        "Lead Dev Patel built DocuQuery AI RAG pipeline",
+        "Sarah Chen (Cloudflare) assigned as Principal Mentor"
+      ],
+      "healthAlert": "None (Velocity 94/100, 2 days ahead of schedule)",
+      "milestoneGateStatus": "APPROVED"
+    },
+    {
+      "id": "pod-102",
+      "name": "Pod Nova-7",
+      "title": "Cold Chain Telemetry & Sensor Mesh",
+      "sme": "Verdant Organics Cold Storage",
+      "stage": 4,
+      "stageName": "Testing & Iteration",
+      "progress": 86,
+      "mentor": "Marcus Vance (Principal Architect @ Datadog)",
+      "students": [
+        {
+          "name": "Elena Rostova",
+          "role": "IoT Firmware"
+        },
+        {
+          "name": "Alex Thorne",
+          "role": "Frontend Visualization"
+        },
+        {
+          "name": "Kavya Nair",
+          "role": "Time-Series DB"
+        }
+      ],
+      "techStack": [
+        "React 19",
+        "TimescaleDB",
+        "MQTT",
+        "Go",
+        "WebSockets"
+      ],
+      "latency": "38ms",
+      "health": "Operational",
+      "lastCommit": "fix: threshold alert backoff during network partitions",
+      "updatedAt": "2026-08-23T19:36:05.407Z",
+      "demoUrl": "https://demo.verdant-iot.skillpods.io",
+      "matchScore": 92,
+      "matchReasons": [
+        "Deep timeseries & TimescaleDB compression expertise",
+        "Low-latency MQTT broker connection pooling",
+        "Marcus Vance (Datadog) assigned as mentor"
+      ],
+      "healthAlert": "Velocity dropped 22% &mdash; 3 PRs blocked on TimescaleDB hypertables migration",
+      "milestoneGateStatus": "PENDING_REVIEW"
+    },
+    {
+      "id": "pod-103",
+      "name": "Pod Horizon-5",
+      "title": "Local Delivery Dispatch & Route Optimization",
+      "sme": "Metropolis Artisan Bakeries Co.",
+      "stage": 5,
+      "stageName": "Launch & Scale",
+      "progress": 98,
+      "mentor": "David Kim (VP Eng @ Stripe)",
+      "students": [
+        {
+          "name": "Samir Al-Mansoor",
+          "role": "Lead Systems"
+        },
+        {
+          "name": "Chloe Zheng",
+          "role": "Mobile PWA"
+        },
+        {
+          "name": "Liam O'Connor",
+          "role": "DevOps & CI/CD"
+        }
+      ],
+      "techStack": [
+        "Next.js",
+        "Express",
+        "Redis",
+        "Google Maps API",
+        "Docker"
+      ],
+      "latency": "51ms",
+      "health": "Operational",
+      "lastCommit": "release: v1.0.0 production deployment onto AWS ECS",
+      "updatedAt": "2026-08-23T19:36:05.407Z",
+      "demoUrl": "https://demo.metropolis-routes.skillpods.io",
+      "matchScore": 89,
+      "matchReasons": [
+        "High throughput distributed caching in Redis",
+        "Geospatial PostGIS sub-50ms query routing",
+        "David Kim (Stripe) architecture supervision"
+      ],
+      "healthAlert": "Optimal Health (Production deploy validated)",
+      "milestoneGateStatus": "APPROVED"
+    }
+  ],
+  "marketplaceProjects": [
+    {
+      "id": "mkt-01",
+      "title": "DocuQuery AI - Enterprise Multi-Modal RAG Document Search",
+      "creatorStudent": "Dev Patel",
+      "studentEmail": "dev.patel@skillpods.io",
+      "college": "National Institute of Technology",
+      "category": "AI",
+      "description": "High-throughput semantic document search with hybrid BM25 + dense embeddings and citation verification. Proven for 500k+ enterprise contracts.",
+      "techStack": [
+        "FastAPI",
+        "Python",
+        "React 19",
+        "Qdrant",
+        "Docker"
+      ],
+      "monetizationModel": "Commercial License",
+      "licensePrice": "₹1,15,000 ($1,450)",
+      "buyoutPrice": "₹4,60,000 ($5,800)",
+      "views": 342,
+      "inquiriesCount": 14,
+      "shortlistedCount": 8,
+      "offersReceived": 3,
+      "mentorVerified": true,
+      "mentorName": "Sarah Chen",
+      "mentorCompany": "Staff Eng @ Cloudflare",
+      "verifiedSkills": [
+        "FastAPI",
+        "Vector Search",
+        "Docker",
+        "React 19"
+      ],
+      "liveDemoUrl": "https://demo.docuquery.skillpods.io",
+      "githubUrl": "https://github.com/skillpods/docuquery-ai",
+      "rating": 4.9,
+      "commercialReadinessScore": 94,
+      "status": "Available",
+      "upgradeSuggestions": [
+        "Upgrade to v2.0 for Kestrel Freight Invoice Pipeline",
+        "Add multi-tenant RBAC for enterprise ERPs"
+      ],
+      "inquiries": [
+        {
+          "id": "inq-01",
+          "companyName": "Kestrel Freight & Logistics",
+          "contactPerson": "Rahul Verma (VP Operations)",
+          "type": "License",
+          "message": "Looking to deploy DocuQuery AI for 1,200 daily freight manifests.",
+          "offeredAmount": "₹1,15,000",
+          "date": "Aug 20, 2026"
+        }
+      ]
+    },
+    {
+      "id": "mkt-02",
+      "title": "EdgeSensor Mesh & High-Velocity MQTT Gateway",
+      "creatorStudent": "Elena Rostova",
+      "studentEmail": "elena.rostova@skillpods.io",
+      "college": "National Institute of Technology",
+      "category": "IoT",
+      "description": "Low-latency MQTT sensor ingest broker with automatic backpressure handling and TimescaleDB streaming compression.",
+      "techStack": [
+        "Go",
+        "TimescaleDB",
+        "MQTT",
+        "WebSockets",
+        "React"
+      ],
+      "monetizationModel": "Full IP Buyout",
+      "licensePrice": "₹75,000 ($950)",
+      "buyoutPrice": "₹3,35,000 ($4,200)",
+      "views": 289,
+      "inquiriesCount": 11,
+      "shortlistedCount": 6,
+      "offersReceived": 2,
+      "mentorVerified": true,
+      "mentorName": "Marcus Vance",
+      "mentorCompany": "Principal Architect @ Datadog",
+      "verifiedSkills": [
+        "Go",
+        "MQTT",
+        "TimescaleDB",
+        "System Architecture"
+      ],
+      "liveDemoUrl": "https://demo.edgesensor.skillpods.io",
+      "githubUrl": "https://github.com/skillpods/edgesensor-mesh",
+      "rating": 4.8,
+      "commercialReadinessScore": 91,
+      "status": "Inquiry Received",
+      "upgradeSuggestions": [
+        "Add LoRaWAN gateway support for outdoor cold rooms",
+        "Integrate SMS failover alert bridge"
+      ]
+    }
+  ],
+  "skillPassports": [
+    {
+      "id": "pass-01",
+      "studentName": "Dev Patel",
+      "studentEmail": "dev.patel@skillpods.io",
+      "rollNo": "CS21B042",
+      "department": "Computer Science & Engineering",
+      "college": "National Institute of Technology",
+      "placementReadinessScore": 94,
+      "totalContributionScore": 94,
+      "totalPullRequests": 42,
+      "totalLinesOfCode": 18450,
+      "codeQualityRating": 4.95,
+      "signatureHash": "0x8F4A9C2B1E7D03A4E5B8C1D2E3F4A5B6C7D8E9F0",
+      "issuedAt": "Aug 18, 2026",
+      "verifiedSkills": [
+        {
+          "name": "FastAPI & Microservices",
+          "category": "Backend",
+          "level": "Expert",
+          "mentorName": "Sarah Chen",
+          "mentorCompany": "Staff Eng @ Cloudflare",
+          "projectAttribution": "DocuQuery AI (Pod Apex-2)",
+          "verifiedDate": "Aug 18, 2026",
+          "linesOfCode": 6840,
+          "evidenceNotes": "Idempotent webhook queue with 0 memory leaks in stress testing.",
+          "isVerified": true
+        },
+        {
+          "name": "React 19 & State Architecture",
+          "category": "Frontend",
+          "level": "Expert",
+          "mentorName": "Marcus Vance",
+          "mentorCompany": "Principal Architect @ Datadog",
+          "projectAttribution": "Fleet Telemetry Hub",
+          "verifiedDate": "Jul 29, 2026",
+          "linesOfCode": 5200,
+          "evidenceNotes": "Optimized React 19 concurrent render loop with sub-16ms frames.",
+          "isVerified": true
+        }
+      ],
+      "projectContributions": [
+        {
+          "podName": "Pod Apex-2",
+          "projectTitle": "DocuQuery AI - Enterprise Multi-Modal RAG Document Search",
+          "role": "Full-Stack Pod Lead",
+          "contributionPercentage": 48,
+          "prsMerged": 28,
+          "peerReviewScore": 4.9,
+          "mentorEndorsement": "Dev demonstrated production-tier architecture rigor in handling asynchronous OCR queues with high idempotency."
+        }
+      ]
+    }
+  ],
+  "milestoneGates": [
+    {
+      "id": "gate-101",
+      "podId": "pod-101",
+      "podName": "Pod Apex-2",
+      "projectTitle": "AI Invoice & Ledger Auto-Reconciliation",
+      "sprintNumber": 3,
+      "milestoneTitle": "Stage 3 -> Stage 4 Gate: OCR Accuracy & Idempotency Sign-off",
+      "currentStage": "Stage 3: Prototype & MVP",
+      "nextStage": "Stage 4: Testing & Iteration",
+      "status": "APPROVED",
+      "deliverables": [
+        "OCR Extraction pipeline with 99.2% confidence on logistics manifests",
+        "PostgreSQL schema migration with pgvector ledger balancing tables",
+        "Cypress E2E stress test suite with 94.2% test coverage"
+      ],
+      "testCoverage": "94.2%",
+      "ciCdPassing": true,
+      "mentorNotes": "Architecture review passed. Webhook deduplication validated under network partition tests. Approved for Stage 4 live testing.",
+      "submittedAt": "Yesterday at 4:30 PM",
+      "unlockedAt": "Today at 10:15 AM"
+    },
+    {
+      "id": "gate-102",
+      "podId": "pod-102",
+      "podName": "Pod Nova-7",
+      "projectTitle": "Cold Chain Telemetry & Sensor Mesh",
+      "sprintNumber": 4,
+      "milestoneTitle": "Stage 4 -> Stage 5 Gate: Production Load Testing & Failover Sign-off",
+      "currentStage": "Stage 4: Testing & Iteration",
+      "nextStage": "Stage 5: Launch & Scale",
+      "status": "PENDING_REVIEW",
+      "deliverables": [
+        "TimescaleDB data retention policy and compression benchmarks (sub-40ms queries)",
+        "SMS escalation gateway with Twilio LTE failover when primary link drops",
+        "Security audit for MQTT broker TLS certificates"
+      ],
+      "testCoverage": "91.8%",
+      "ciCdPassing": true,
+      "mentorNotes": "Awaiting final 12,000 req/sec stress test report before unlocking Production Launch.",
+      "submittedAt": "Today at 9:00 AM"
+    }
+  ],
+  "collegeIpRegistry": [
+    {
+      "id": "ip-01",
+      "title": "DocuQuery AI - Enterprise Multi-Modal RAG Document Search",
+      "department": "CSE",
+      "leadStudent": "Dev Patel",
+      "teamSize": 3,
+      "mentor": "Sarah Chen (Staff Eng @ Cloudflare)",
+      "industryPartner": "Kestrel Freight & Logistics",
+      "status": "🚀 Commercialized",
+      "ipCategory": "AI Model Architecture",
+      "valuationOrGrant": "₹1,15,000 ($1,450)",
+      "commercialStatusNote": "Commercial License deployed for 1,200 daily freight manifests.",
+      "lastUpdated": "Jul 15, 2026"
+    }
+  ],
+  "departmentAnalytics": [
+    {
+      "department": "Computer Science & Engineering",
+      "studentCount": 240,
+      "activeInPods": 198,
+      "verifiedProjectsCount": 8,
+      "industryEngagementScore": 82.5,
+      "placementReadinessScore": 91.2,
+      "topSkills": [
+        "FastAPI",
+        "React 19",
+        "PostgreSQL",
+        "Docker",
+        "Redis"
+      ],
+      "avgBountyEarned": "₹52,500"
+    },
+    {
+      "department": "Information Technology",
+      "studentCount": 180,
+      "activeInPods": 142,
+      "verifiedProjectsCount": 5,
+      "industryEngagementScore": 78.8,
+      "placementReadinessScore": 86.4,
+      "topSkills": [
+        "Go",
+        "MQTT",
+        "TimescaleDB",
+        "AWS",
+        "WebSockets"
+      ],
+      "avgBountyEarned": "₹44,000"
+    }
+  ],
+  "walletTransactions": [
+    {
+      "id": "tx-101",
+      "userEmail": "dev.patel@skillpods.io",
+      "title": "DocuQuery AI Commercial License Fee",
+      "source": "Kestrel Logistics & Freight",
+      "category": "Licensing",
+      "amount": "₹1,15,000 ($1,450)",
+      "date": "Aug 21, 2026",
+      "status": "Paid Out ✓",
+      "reference": "Licensing Contract #KESTREL-RAG-01"
+    },
+    {
+      "id": "tx-102",
+      "userEmail": "dev.patel@skillpods.io",
+      "title": "Pod Apex-2 Sprint 3 Milestone Sign-off Bounty",
+      "source": "SkillPods Escrow (ABC Retail Pilot)",
+      "category": "Bounties",
+      "amount": "₹12,500",
+      "date": "Aug 18, 2026",
+      "status": "Paid Out ✓",
+      "reference": "Mentor Sarah Chen Approval Gate #101"
+    }
+  ]
+}

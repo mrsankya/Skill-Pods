@@ -332,9 +332,13 @@ app.get("/api/user/profile", (req, res) => {
         department: user.department,
         rollNo: user.rollNo,
         gradYear: user.gradYear,
+        cgpa: user.cgpa,
+        semester: user.semester,
         github: user.github,
         linkedin: user.linkedin,
-        skills: user.skills
+        skills: user.skills,
+        certificates: user.certificates,
+        marksheets: user.marksheets
       }
     });
   } catch (err: any) {
@@ -344,7 +348,7 @@ app.get("/api/user/profile", (req, res) => {
 
 app.post("/api/user/profile", (req, res) => {
   try {
-    const { email, name, avatar, bio, college, department, rollNo, gradYear, github, linkedin, skills } = req.body;
+    const { email, name, avatar, bio, college, department, rollNo, gradYear, cgpa, semester, github, linkedin, skills, certificates, marksheets } = req.body;
     if (!email) {
       return res.status(400).json({ success: false, message: "Email is required to update profile." });
     }
@@ -357,9 +361,13 @@ app.post("/api/user/profile", (req, res) => {
       department: department ? sanitizeString(department) : undefined,
       rollNo: rollNo ? sanitizeString(rollNo) : undefined,
       gradYear: gradYear ? sanitizeString(gradYear) : undefined,
+      cgpa: cgpa ? sanitizeString(cgpa) : undefined,
+      semester: semester ? sanitizeString(semester) : undefined,
       github: github ? sanitizeString(github) : undefined,
       linkedin: linkedin ? sanitizeString(linkedin) : undefined,
-      skills: Array.isArray(skills) ? skills.map(s => sanitizeString(s)) : undefined
+      skills: Array.isArray(skills) ? skills.map(s => sanitizeString(s)) : undefined,
+      certificates: Array.isArray(certificates) ? certificates : undefined,
+      marksheets: Array.isArray(marksheets) ? marksheets : undefined
     });
 
     if (!updated) {
@@ -376,9 +384,13 @@ app.post("/api/user/profile", (req, res) => {
         department,
         rollNo,
         gradYear,
+        cgpa,
+        semester,
         github,
         linkedin,
-        skills
+        skills,
+        certificates,
+        marksheets
       });
       return res.json({ success: true, message: "Profile created and saved to MongoDB!", user: newUser });
     }

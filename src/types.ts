@@ -201,4 +201,22 @@ export type ModalView =
   | 'docs' 
   | 'contact';
 
+export interface CertificateItem {
+  id: string;
+  title: string;
+  issuer: string;
+  date: string;
+  fileUrl?: string;
+  credentialUrl?: string;
+  verified: boolean;
+}
+
+export interface MarksheetItem {
+  id: string;
+  title: string;
+  semester: string;
+  fileUrl: string;
+  uploadDate: string;
+}
+
 

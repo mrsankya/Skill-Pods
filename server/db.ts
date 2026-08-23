@@ -9,7 +9,9 @@ import {
   MilestoneGateItem,
   CollegeIPRegistryItem,
   DepartmentAnalytics,
-  UserRole
+  UserRole,
+  CertificateItem,
+  MarksheetItem
 } from '../src/types';
 
 export interface UserAccount {
@@ -29,9 +31,13 @@ export interface UserAccount {
   college?: string;
   rollNo?: string;
   gradYear?: string;
+  cgpa?: string;
+  semester?: string;
   github?: string;
   linkedin?: string;
   skills?: string[];
+  certificates?: CertificateItem[];
+  marksheets?: MarksheetItem[];
   lastLogin?: string;
   createdAt: string;
 }
@@ -778,9 +784,13 @@ class DatabaseManager {
     if (updates.department) user.department = updates.department;
     if (updates.rollNo !== undefined) user.rollNo = updates.rollNo;
     if (updates.gradYear !== undefined) user.gradYear = updates.gradYear;
+    if (updates.cgpa !== undefined) user.cgpa = updates.cgpa;
+    if (updates.semester !== undefined) user.semester = updates.semester;
     if (updates.github !== undefined) user.github = updates.github;
     if (updates.linkedin !== undefined) user.linkedin = updates.linkedin;
     if (updates.skills !== undefined) user.skills = updates.skills;
+    if (updates.certificates !== undefined) user.certificates = updates.certificates;
+    if (updates.marksheets !== undefined) user.marksheets = updates.marksheets;
     if (updates.organization) user.organization = updates.organization;
 
     this.save();
