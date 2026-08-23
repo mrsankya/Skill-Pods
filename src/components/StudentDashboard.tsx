@@ -138,6 +138,42 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<StudentDashboardTab>('overview');
 
+  // Dynamically resolve logged-in user profile from database / Google OAuth / localStorage
+  const getUserProfile = () => {
+    try {
+      const stored = localStorage.getItem('skillpods_user');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.name) {
+          return {
+            name: parsed.name,
+            email: parsed.email || userEmail,
+            avatar: parsed.avatar
+          };
+        }
+      }
+    } catch {}
+
+    if (userEmail) {
+      const username = userEmail.split('@')[0];
+      const formatted = username
+        .split(/[._-]/)
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
+      return { name: formatted || 'Student Builder', email: userEmail };
+    }
+    return { name: 'Student Builder', email: userEmail || 'builder@skillpods.io' };
+  };
+
+  const currentProfile = getUserProfile();
+  const displayName = currentProfile.name;
+  const userInitials = displayName
+    .split(' ')
+    .map(n => n.charAt(0))
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+
   // Search & Filter State for Opportunities Marketplace
   const [opportunitySearch, setOpportunitySearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -366,7 +402,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
     {
       id: 'g-1',
       sender: 'guru',
-      text: 'Hey Alex! 👋 I am GURU, your Skill Pod Technical & Opportunity Copilot. Whether you are turning a college project into an SME solution or implementing WebSocket telemetry for Pod Apex-2, I am here to help!',
+      text: `Hey ${displayName.split(' ')[0]}! 👋 I am GURU, your Skill Pod Technical & Opportunity Copilot. Whether you are turning a college project into an SME solution or implementing WebSocket telemetry for Pod Apex-2, I am here to help!`,
       timestamp: '10:14 AM'
     },
     {
@@ -614,10 +650,14 @@ interface InventoryTelemetryPacket {
               onClick={() => setActiveTab('passport')}
               className="flex items-center gap-2 p-1 sm:pr-3 rounded-full bg-white/80 border border-white/90 shadow-2xs hover:bg-white transition-all cursor-pointer"
             >
-              <div className="w-8 h-8 rounded-full bg-[#5d3ebb] text-white flex items-center justify-center font-bold text-xs shadow-xs">
-                {userEmail ? userEmail.charAt(0).toUpperCase() : 'A'}
-              </div>
-              <span className="hidden sm:inline text-xs font-bold text-[#261543]">Alex Rivera (94 XP)</span>
+              {currentProfile.avatar ? (
+                <img src={currentProfile.avatar} alt={displayName} className="w-8 h-8 rounded-full object-cover border border-purple-300 shadow-xs" />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-[#5d3ebb] text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                  {userInitials || (userEmail ? userEmail.charAt(0).toUpperCase() : 'S')}
+                </div>
+              )}
+              <span className="hidden sm:inline text-xs font-bold text-[#261543]">{displayName} (94 XP)</span>
             </button>
           </div>
         </header>
@@ -1357,7 +1397,7 @@ interface InventoryTelemetryPacket {
                 <h3 className="font-bold text-slate-900 text-base mb-4">Pod Member Roster (4 Members)</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {[
-                    { id: 'm1', name: 'Alex Rivera (You)', role: 'Frontend & UI Architect', status: 'Online', focus: 'WebSocket telemetry map' },
+                    { id: 'm1', name: `${displayName} (You)`, role: 'Frontend & UI Architect', status: 'Online', focus: 'WebSocket telemetry map' },
                     { id: 'm2', name: 'Maya Patel', role: 'Backend & Cloud Engineer', status: 'Online', focus: 'Go microservice & PostgreSQL' },
                     { id: 'm3', name: 'Liam Zhang', role: 'Data & Algorithm Specialist', status: 'In Standup', focus: 'Dijkstra route optimization' },
                     { id: 'm4', name: 'Sofia Mendez', role: 'QA & Security Lead', status: 'Reviewing', focus: 'Cypress E2E & Load tests' }
@@ -1639,13 +1679,17 @@ interface InventoryTelemetryPacket {
             <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/90 shadow-2xs space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
                 <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-2xl bg-purple-600 text-white font-black text-2xl flex items-center justify-center shadow-md">
-                    AR
-                  </div>
+                  {currentProfile.avatar ? (
+                    <img src={currentProfile.avatar} alt={displayName} className="w-16 h-16 rounded-2xl object-cover border-2 border-purple-400 shadow-md" />
+                  ) : (
+                    <div className="w-16 h-16 rounded-2xl bg-purple-600 text-white font-black text-2xl flex items-center justify-center shadow-md">
+                      {userInitials || 'ST'}
+                    </div>
+                  )}
                   <div>
-                    <h2 className="text-2xl font-bold text-slate-900">Alex Rivera</h2>
+                    <h2 className="text-2xl font-bold text-slate-900">{displayName}</h2>
                     <p className="text-xs sm:text-sm text-slate-600">
-                      {userEmail || 'alex.rivera@student.skillpods.dev'} • Skill Pod Apex-2
+                      {userEmail || currentProfile.email || 'builder@skillpods.io'} • Skill Pod Apex-2
                     </p>
                   </div>
                 </div>

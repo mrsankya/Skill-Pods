@@ -127,6 +127,42 @@ export const MentorDashboard: React.FC<MentorDashboardProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<MentorTab>('overview');
 
+  // Dynamically resolve logged-in mentor profile from database / Google OAuth / localStorage
+  const getMentorProfile = () => {
+    try {
+      const stored = localStorage.getItem('skillpods_user');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.name) {
+          return {
+            name: parsed.name,
+            email: parsed.email || userEmail,
+            avatar: parsed.avatar
+          };
+        }
+      }
+    } catch {}
+
+    if (userEmail) {
+      const username = userEmail.split('@')[0];
+      const formatted = username
+        .split(/[._-]/)
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
+      return { name: formatted || 'Sarah Chen', email: userEmail };
+    }
+    return { name: 'Sarah Chen', email: userEmail || 'sarah.chen@cloudflare.com' };
+  };
+
+  const currentMentorProfile = getMentorProfile();
+  const mentorDisplayName = currentMentorProfile.name;
+  const mentorInitials = mentorDisplayName
+    .split(' ')
+    .map(n => n.charAt(0))
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+
   // Interactive Reviews State
   const [reviews, setReviews] = useState<PodReviewItem[]>([
     {
@@ -509,11 +545,15 @@ async def infer_batch(files: list[UploadFile] = File(...)):
               onClick={() => setActiveTab('profile')}
               className="flex items-center gap-2 p-1 sm:pr-3 rounded-full bg-white/80 border border-white/80 shadow-2xs hover:bg-white transition-all cursor-pointer"
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-700 to-indigo-700 text-white flex items-center justify-center font-bold text-xs shadow-xs">
-                SC
-              </div>
+              {currentMentorProfile.avatar ? (
+                <img src={currentMentorProfile.avatar} alt={mentorDisplayName} className="w-8 h-8 rounded-full object-cover border border-purple-300 shadow-xs" />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-700 to-indigo-700 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                  {mentorInitials || 'SC'}
+                </div>
+              )}
               <div className="hidden sm:flex flex-col text-left leading-tight">
-                <span className="text-xs font-bold text-[#261543]">Sarah Chen</span>
+                <span className="text-xs font-bold text-[#261543]">{mentorDisplayName}</span>
                 <span className="text-[10px] text-purple-700 font-semibold">Staff Architect</span>
               </div>
             </button>

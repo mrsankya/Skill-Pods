@@ -35,9 +35,31 @@ export const StudentSkillPassport: React.FC<StudentSkillPassportProps> = ({
   const [newSkillNotes, setNewSkillNotes] = useState('');
   const [requestSent, setRequestSent] = useState(false);
 
+  // Dynamically resolve student name
+  const getStudentDisplayName = () => {
+    try {
+      const stored = localStorage.getItem('skillpods_user');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.name) return parsed.name;
+      }
+    } catch {}
+
+    if (userEmail) {
+      const username = userEmail.split('@')[0];
+      return username
+        .split(/[._-]/)
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
+    }
+    return "Dev Patel";
+  };
+
+  const studentDisplayName = getStudentDisplayName();
+
   const passportData: VerifiedSkillPassport = {
     id: "pass-dev-01",
-    studentName: "Dev Patel (Alex)",
+    studentName: studentDisplayName,
     studentEmail: userEmail || "dev.patel@skillpods.io",
     rollNo: "CS21B042",
     department: "Computer Science & Engineering",

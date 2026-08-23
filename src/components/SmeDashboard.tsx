@@ -164,6 +164,42 @@ export const SmeDashboard: React.FC<SmeDashboardProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<SmeTab>('overview');
 
+  // Dynamically resolve logged-in company profile
+  const getSmeProfile = () => {
+    try {
+      const stored = localStorage.getItem('skillpods_user');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.name || parsed.organization) {
+          return {
+            name: parsed.organization || parsed.name,
+            email: parsed.email || userEmail,
+            avatar: parsed.avatar
+          };
+        }
+      }
+    } catch {}
+
+    if (userEmail) {
+      const username = userEmail.split('@')[0];
+      const formatted = username
+        .split(/[._-]/)
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
+      return { name: formatted || 'Kestrel Freight', email: userEmail };
+    }
+    return { name: 'Kestrel Freight & Logistics', email: userEmail || 'kestrel@freight.com' };
+  };
+
+  const currentSmeProfile = getSmeProfile();
+  const smeDisplayName = currentSmeProfile.name;
+  const smeInitials = smeDisplayName
+    .split(' ')
+    .map(n => n.charAt(0))
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+
   // Interactive Toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const showToast = (msg: string) => {
@@ -603,11 +639,15 @@ export const SmeDashboard: React.FC<SmeDashboardProps> = ({
               onClick={() => setActiveTab('profile')}
               className="flex items-center gap-2 p-1 sm:pr-3 rounded-full bg-white/80 border border-white/90 shadow-2xs hover:bg-white transition-all cursor-pointer"
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-700 to-indigo-800 text-white flex items-center justify-center font-bold text-xs shadow-xs">
-                KF
-              </div>
+              {currentSmeProfile.avatar ? (
+                <img src={currentSmeProfile.avatar} alt={smeDisplayName} className="w-8 h-8 rounded-full object-cover border border-blue-300 shadow-xs" />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-700 to-indigo-800 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                  {smeInitials || 'KF'}
+                </div>
+              )}
               <div className="hidden sm:flex flex-col text-left leading-tight">
-                <span className="text-xs font-bold text-[#261543]">Kestrel Freight</span>
+                <span className="text-xs font-bold text-[#261543]">{smeDisplayName}</span>
                 <span className="text-[10px] text-blue-700 font-semibold">Verified Enterprise</span>
               </div>
             </button>

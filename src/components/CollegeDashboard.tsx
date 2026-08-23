@@ -129,6 +129,42 @@ export const CollegeDashboard: React.FC<CollegeDashboardProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState<CollegeTab>('overview');
 
+  // Dynamically resolve logged-in college profile
+  const getCollegeProfile = () => {
+    try {
+      const stored = localStorage.getItem('skillpods_user');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.name || parsed.college) {
+          return {
+            name: parsed.college || parsed.name,
+            email: parsed.email || userEmail,
+            avatar: parsed.avatar
+          };
+        }
+      }
+    } catch {}
+
+    if (userEmail) {
+      const username = userEmail.split('@')[0];
+      const formatted = username
+        .split(/[._-]/)
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
+      return { name: formatted || 'National Institute of Technology', email: userEmail };
+    }
+    return { name: 'National Institute of Technology', email: userEmail || 'dean@nit.edu' };
+  };
+
+  const currentCollegeProfile = getCollegeProfile();
+  const collegeDisplayName = currentCollegeProfile.name;
+  const collegeInitials = collegeDisplayName
+    .split(' ')
+    .map(n => n.charAt(0))
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+
   // Interactive Toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const showToast = (msg: string) => {
@@ -538,11 +574,15 @@ export const CollegeDashboard: React.FC<CollegeDashboardProps> = ({
               onClick={() => setActiveTab('profile')}
               className="flex items-center gap-2 p-1 sm:pr-3 rounded-full bg-white/80 border border-white/90 shadow-2xs hover:bg-white transition-all cursor-pointer"
             >
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-700 to-purple-800 text-white flex items-center justify-center font-bold text-xs shadow-xs">
-                AI
-              </div>
+              {currentCollegeProfile.avatar ? (
+                <img src={currentCollegeProfile.avatar} alt={collegeDisplayName} className="w-8 h-8 rounded-full object-cover border border-indigo-300 shadow-xs" />
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-700 to-purple-800 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                  {collegeInitials || 'NIT'}
+                </div>
+              )}
               <div className="hidden sm:flex flex-col text-left leading-tight">
-                <span className="text-xs font-bold text-[#261543]">Abhinav Institute</span>
+                <span className="text-xs font-bold text-[#261543]">{collegeDisplayName}</span>
                 <span className="text-[10px] text-indigo-700 font-semibold">Autonomous COE • Tier 1</span>
               </div>
             </button>
