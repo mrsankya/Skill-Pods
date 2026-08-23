@@ -1,39 +1,39 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React from 'react';
 import { ShieldAlert, RefreshCw, Home } from 'lucide-react';
 
-interface Props {
-  children: ReactNode;
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
 }
 
-interface State {
+interface ErrorBoundaryState {
   hasError: boolean;
   error: Error | null;
-  errorInfo: ErrorInfo | null;
 }
 
-export class ErrorBoundary extends Component<Props, State> {
-  public state: State = {
-    hasError: false,
-    error: null,
-    errorInfo: null
-  };
-
-  public static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error, errorInfo: null };
+export class ErrorBoundary extends (React.Component as any) {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = {
+      hasError: false,
+      error: null
+    };
   }
 
-  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('🛡️ SkillPods Crash Defense Caught Exception:', error, errorInfo);
-    this.setState({ errorInfo });
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return { hasError: true, error };
   }
 
-  private handleReset = () => {
+  componentDidCatch(error: Error, errorInfo: any) {
+    console.error('🛡️ SkillPods Crash Defense Intercepted Exception:', error, errorInfo);
+  }
+
+  handleReset = () => {
     localStorage.removeItem('skillpods_page');
     window.location.hash = '';
     window.location.reload();
   };
 
-  public render() {
+  render() {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen bg-[#08070d] text-white flex items-center justify-center p-6 font-sans">
