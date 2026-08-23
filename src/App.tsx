@@ -86,8 +86,15 @@ export default function App() {
         userRole = 'admin';
       }
 
-      // If user had an active session, stay on dashboard across page reloads
-      const page: PageType = (savedPage === 'dashboard' || (savedToken && savedPage !== 'landing' && savedPage !== 'login')) 
+      // Check direct URL deep links (#profile, #marketplace, #passport, #tasks, #mentors, etc.)
+      const currentHash = typeof window !== 'undefined' ? window.location.hash.toLowerCase() : '';
+      const isDashboardHash = [
+        '#dashboard', '#profile', '#marketplace', '#passport', '#tasks',
+        '#mentors', '#earnings', '#guru', '#explore', '#my-projects', '#admin'
+      ].includes(currentHash);
+
+      // If user had an active session or opened a dashboard deep link, go to dashboard
+      const page: PageType = (isDashboardHash || savedPage === 'dashboard' || (savedToken && savedPage !== 'landing' && savedPage !== 'login')) 
         ? 'dashboard' 
         : (savedPage === 'login' ? 'login' : 'landing');
 
@@ -114,9 +121,23 @@ export default function App() {
   // Synchronize browser history / URL hash and resume authenticated session
   useEffect(() => {
     const handleHash = () => {
-      if (window.location.hash === '#login' || window.location.pathname === '/login') {
+      const h = window.location.hash.toLowerCase();
+      const p = window.location.pathname.toLowerCase();
+      if (h === '#login' || p === '/login') {
         setCurrentPage('login');
-      } else if (window.location.hash === '#dashboard') {
+      } else if (
+        h === '#dashboard' || 
+        h === '#profile' || 
+        h === '#marketplace' || 
+        h === '#passport' || 
+        h === '#tasks' || 
+        h === '#mentors' || 
+        h === '#earnings' || 
+        h === '#guru' || 
+        h === '#explore' || 
+        h === '#my-projects' ||
+        h === '#admin'
+      ) {
         setCurrentPage('dashboard');
       }
     };

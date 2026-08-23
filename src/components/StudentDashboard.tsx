@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Layers,
@@ -148,7 +148,50 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   onSwitchWorkspace,
   onBackToHome
 }) => {
-  const [activeTab, setActiveTab] = useState<StudentDashboardTab>('overview');
+  // URL Hash-based Multi-Page Routing & Tab Persistence
+  const getInitialTab = (): StudentDashboardTab => {
+    try {
+      const hash = window.location.hash.replace('#', '').trim().toLowerCase();
+      const validTabs: StudentDashboardTab[] = [
+        'overview', 'profile', 'marketplace', 'passport', 'explore',
+        'my-projects', 'pod', 'tasks', 'mentors', 'earnings', 'guru', 'ai-match'
+      ];
+      if (validTabs.includes(hash as StudentDashboardTab)) {
+        return hash as StudentDashboardTab;
+      }
+      const saved = localStorage.getItem('skillpods_student_tab') as StudentDashboardTab;
+      if (validTabs.includes(saved)) {
+        return saved;
+      }
+    } catch {}
+    return 'overview';
+  };
+
+  const [activeTab, setActiveTabState] = useState<StudentDashboardTab>(getInitialTab);
+
+  const setActiveTab = (tab: StudentDashboardTab) => {
+    setActiveTabState(tab);
+    try {
+      window.location.hash = tab;
+      localStorage.setItem('skillpods_student_tab', tab);
+    } catch {}
+  };
+
+  // Synchronize browser forward/back buttons and direct URL hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').trim().toLowerCase();
+      const validTabs: StudentDashboardTab[] = [
+        'overview', 'profile', 'marketplace', 'passport', 'explore',
+        'my-projects', 'pod', 'tasks', 'mentors', 'earnings', 'guru', 'ai-match'
+      ];
+      if (validTabs.includes(hash as StudentDashboardTab)) {
+        setActiveTabState(hash as StudentDashboardTab);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Dynamically resolve logged-in user profile from database / Google OAuth / localStorage
   const getUserProfile = () => {
@@ -240,6 +283,35 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   const [editSkillsInput, setEditSkillsInput] = useState(profileData.skills.join(', '));
   const [editAvatar, setEditAvatar] = useState<string>(currentProfile.avatar || '');
   const [profileSuccessMsg, setProfileSuccessMsg] = useState<string | null>(null);
+
+  // Cloud Database Profile Fetcher: Guarantees profile data is NEVER lost even if cookies/localStorage are cleared!
+  useEffect(() => {
+    const targetEmail = userEmail || 'sanketbhende0@gmail.com';
+    fetch(`/api/user/profile?email=${encodeURIComponent(targetEmail)}`)
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (data?.success && data?.user) {
+          const u = data.user;
+          setProfileData(prev => ({
+            bio: u.bio || prev.bio,
+            college: u.college || prev.college,
+            department: u.department || prev.department,
+            rollNo: u.rollNo || prev.rollNo,
+            gradYear: u.gradYear || prev.gradYear,
+            github: u.github || prev.github,
+            linkedin: u.linkedin || prev.linkedin,
+            skills: Array.isArray(u.skills) && u.skills.length > 0 ? u.skills : prev.skills
+          }));
+          if (u.name) setEditName(u.name);
+          if (u.bio) setEditBio(u.bio);
+          if (u.college) setEditCollege(u.college);
+          if (u.department) setEditDept(u.department);
+          if (u.avatar) setEditAvatar(u.avatar);
+          if (u.skills) setEditSkillsInput(u.skills.join(', '));
+        }
+      })
+      .catch(() => {});
+  }, [userEmail]);
 
   // Handle local image file upload for avatar
   const handleAvatarFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {

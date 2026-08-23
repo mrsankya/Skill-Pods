@@ -307,6 +307,88 @@ app.post("/api/auth/logout", (req, res) => {
   return res.json({ success: true, message: "Logged out successfully." });
 });
 
+// ================= USER PROFILE PERSISTENCE (MONGODB ATLAS) =================
+
+app.get("/api/user/profile", (req, res) => {
+  try {
+    const email = (req.query.email as string)?.toLowerCase();
+    if (!email) {
+      return res.status(400).json({ success: false, message: "Email query parameter is required." });
+    }
+    const user = db.getUserByEmail(email);
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found in cloud database." });
+    }
+    return res.json({
+      success: true,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        avatar: user.avatar,
+        bio: user.bio,
+        college: user.college,
+        department: user.department,
+        rollNo: user.rollNo,
+        gradYear: user.gradYear,
+        github: user.github,
+        linkedin: user.linkedin,
+        skills: user.skills
+      }
+    });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message || "Failed to fetch profile." });
+  }
+});
+
+app.post("/api/user/profile", (req, res) => {
+  try {
+    const { email, name, avatar, bio, college, department, rollNo, gradYear, github, linkedin, skills } = req.body;
+    if (!email) {
+      return res.status(400).json({ success: false, message: "Email is required to update profile." });
+    }
+    const cleanEmail = sanitizeString(email).toLowerCase();
+    const updated = db.updateUserProfile(cleanEmail, {
+      name: name ? sanitizeString(name) : undefined,
+      avatar,
+      bio: bio ? sanitizeString(bio) : undefined,
+      college: college ? sanitizeString(college) : undefined,
+      department: department ? sanitizeString(department) : undefined,
+      rollNo: rollNo ? sanitizeString(rollNo) : undefined,
+      gradYear: gradYear ? sanitizeString(gradYear) : undefined,
+      github: github ? sanitizeString(github) : undefined,
+      linkedin: linkedin ? sanitizeString(linkedin) : undefined,
+      skills: Array.isArray(skills) ? skills.map(s => sanitizeString(s)) : undefined
+    });
+
+    if (!updated) {
+      const { hash, salt } = hashPassword('password123');
+      const newUser = db.createUser({
+        email: cleanEmail,
+        passwordHash: hash,
+        salt,
+        name: name || cleanEmail.split('@')[0],
+        role: cleanEmail === 'sanketbhende0@gmail.com' ? 'admin' : 'student',
+        avatar,
+        bio,
+        college,
+        department,
+        rollNo,
+        gradYear,
+        github,
+        linkedin,
+        skills
+      });
+      return res.json({ success: true, message: "Profile created and saved to MongoDB!", user: newUser });
+    }
+
+    return res.json({ success: true, message: "Profile updated and saved to MongoDB!", user: updated });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message || "Failed to update profile." });
+  }
+});
+
 // Security Audit Log Inspector Endpoint
 app.get("/api/admin/security-audit", (req, res) => {
   res.json({
