@@ -222,9 +222,24 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   const [editGithub, setEditGithub] = useState(profileData.github);
   const [editLinkedin, setEditLinkedin] = useState(profileData.linkedin);
   const [editSkillsInput, setEditSkillsInput] = useState(profileData.skills.join(', '));
+  const [editAvatar, setEditAvatar] = useState<string>(currentProfile.avatar || '');
   const [profileSuccessMsg, setProfileSuccessMsg] = useState<string | null>(null);
 
-  const handleSaveProfile = (e: React.FormEvent) => {
+  // Handle local image file upload for avatar
+  const handleAvatarFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (typeof reader.result === 'string') {
+          setEditAvatar(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     const skillsArray = editSkillsInput.split(',').map(s => s.trim()).filter(Boolean);
     const updated = {
@@ -236,23 +251,39 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
       gradYear: editGradYear,
       github: editGithub,
       linkedin: editLinkedin,
-      skills: skillsArray
+      skills: skillsArray,
+      avatar: editAvatar
     };
     setProfileData(updated);
 
+    const userPayload = {
+      email: userEmail || currentProfile.email || 'builder@skillpods.io',
+      name: editName,
+      avatar: editAvatar,
+      ...updated
+    };
+
+    // 1. Save to localStorage for instant client persistence
     try {
       const stored = localStorage.getItem('skillpods_user');
       const parsed = stored ? JSON.parse(stored) : {};
-      const newStoredUser = {
-        ...parsed,
-        name: editName,
-        ...updated
-      };
+      const newStoredUser = { ...parsed, ...userPayload };
       localStorage.setItem('skillpods_user', JSON.stringify(newStoredUser));
     } catch {}
 
+    // 2. Sync to Backend Database & MongoDB Atlas
+    try {
+      await fetch('/api/user/profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userPayload)
+      });
+    } catch (err) {
+      console.warn('Backend sync warning:', err);
+    }
+
     setShowEditProfileModal(false);
-    setProfileSuccessMsg("Profile information updated and saved successfully!");
+    setProfileSuccessMsg("Profile information & photo saved directly to database!");
     setTimeout(() => setProfileSuccessMsg(null), 4000);
   };
 
@@ -2134,6 +2165,52 @@ interface InventoryTelemetryPacket {
             </div>
 
             <form onSubmit={handleSaveProfile} className="space-y-4">
+              {/* Profile Photo Upload & Preset Selector */}
+              <div className="bg-purple-50/50 p-4 rounded-2xl border border-purple-100 flex flex-col sm:flex-row items-center gap-4">
+                <div className="relative group shrink-0">
+                  <div className="w-16 h-16 rounded-2xl bg-purple-600 text-white font-bold flex items-center justify-center text-xl overflow-hidden border-2 border-purple-300 shadow-md">
+                    {editAvatar ? (
+                      <img src={editAvatar} alt="Avatar" className="w-full h-full object-cover" />
+                    ) : (
+                      editName.charAt(0).toUpperCase()
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex-1 w-full text-center sm:text-left">
+                  <label className="block text-xs font-bold text-slate-800 mb-1">Profile Photo / Avatar</label>
+                  <p className="text-[11px] text-slate-500 mb-2">Upload a custom image from your device or paste a photo URL.</p>
+                  
+                  <div className="flex flex-wrap items-center gap-2">
+                    <label className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-xs font-semibold cursor-pointer shadow-xs transition-colors">
+                      📁 Upload Photo
+                      <input 
+                        type="file" 
+                        accept="image/*" 
+                        onChange={handleAvatarFileUpload} 
+                        className="hidden" 
+                      />
+                    </label>
+
+                    <button
+                      type="button"
+                      onClick={() => setEditAvatar(`https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(editName || 'Builder')}`)}
+                      className="px-2.5 py-1.5 bg-white border border-slate-200 hover:border-purple-300 text-slate-700 rounded-lg text-xs font-mono transition-colors cursor-pointer"
+                    >
+                      🤖 Bot Avatar
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setEditAvatar(`https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(editName || 'Dev')}`)}
+                      className="px-2.5 py-1.5 bg-white border border-slate-200 hover:border-purple-300 text-slate-700 rounded-lg text-xs font-mono transition-colors cursor-pointer"
+                    >
+                      🧑‍💻 Dev Avatar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name</label>
                 <input

@@ -311,6 +311,82 @@ app.get("/api/admin/security-audit", (req, res) => {
   });
 });
 
+// Update User Profile (Photo, Bio, Skills, Links)
+app.post("/api/user/profile", (req, res) => {
+  try {
+    const { email, name, avatar, photoUrl, bio, college, department, rollNo, gradYear, github, linkedin, skills } = req.body;
+    if (!email) {
+      return res.status(400).json({ success: false, message: "User email is required." });
+    }
+
+    const updatedUser = db.updateUserProfile(email, {
+      name: name ? sanitizeString(name) : undefined,
+      avatar,
+      photoUrl,
+      bio: bio ? sanitizeString(bio) : undefined,
+      college: college ? sanitizeString(college) : undefined,
+      department: department ? sanitizeString(department) : undefined,
+      rollNo: rollNo ? sanitizeString(rollNo) : undefined,
+      gradYear: gradYear ? sanitizeString(gradYear) : undefined,
+      github: github ? sanitizeString(github) : undefined,
+      linkedin: linkedin ? sanitizeString(linkedin) : undefined,
+      skills: Array.isArray(skills) ? skills.map((s: string) => sanitizeString(s)) : undefined
+    });
+
+    if (!updatedUser) {
+      return res.status(404).json({ success: false, message: "User not found to update." });
+    }
+
+    return res.json({
+      success: true,
+      message: "Profile updated and saved to database!",
+      user: updatedUser
+    });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message || "Failed to update profile." });
+  }
+});
+
+// Submit New SME Problem (supports /api/sme/problems and /api/problems)
+const handleSmeProblemSubmission = (req: express.Request, res: express.Response) => {
+  try {
+    const { title, smeName, industry, description, bounty, skills } = req.body;
+    if (!title || !description) {
+      return res.status(400).json({ success: false, message: "Title and description required." });
+    }
+    const newPod = db.addSmeProblem({
+      title: sanitizeString(title),
+      smeName: smeName ? sanitizeString(smeName) : 'Verified Enterprise',
+      industry: industry ? sanitizeString(industry) : 'Enterprise Software',
+      description: sanitizeString(description),
+      bounty: bounty || '₹30,000',
+      skills: Array.isArray(skills) ? skills.map((s: string) => sanitizeString(s)) : ['React', 'FastAPI']
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: "Problem submitted and Pod created!",
+      problem: {
+        id: newPod.id,
+        title: newPod.title,
+        smeName: newPod.sme,
+        industry: industry || 'Enterprise Software',
+        description: description,
+        bounty: bounty || '₹30,000',
+        skills: newPod.techStack,
+        status: 'Under Review & Pod Matching',
+        submittedAt: 'Just now'
+      },
+      pod: newPod
+    });
+  } catch (err: any) {
+    return res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+app.post("/api/sme/problems", handleSmeProblemSubmission);
+app.post("/api/problems", handleSmeProblemSubmission);
+
 // In-memory data store with live state
 export const dynamicMetrics = {
   uptimeSla: 99.94,

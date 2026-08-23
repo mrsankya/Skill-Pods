@@ -20,11 +20,18 @@ export interface UserAccount {
   name: string;
   role: UserRole;
   avatar?: string;
+  photoUrl?: string;
+  bio?: string;
   googleId?: string;
   authProvider?: 'local' | 'google';
   organization?: string;
   department?: string;
   college?: string;
+  rollNo?: string;
+  gradYear?: string;
+  github?: string;
+  linkedin?: string;
+  skills?: string[];
   lastLogin?: string;
   createdAt: string;
 }
@@ -719,6 +726,51 @@ class DatabaseManager {
 
   public getSecurityLogs(): SecurityAuditLog[] {
     return this.data.securityLogs || [];
+  }
+
+  // --- COMPREHENSIVE PROFILE & USER INPUT MUTATIONS ---
+  public updateUserProfile(email: string, updates: Partial<UserAccount>): UserAccount | undefined {
+    const user = this.data.users.find(u => u.email.toLowerCase() === email.toLowerCase());
+    if (!user) return undefined;
+
+    if (updates.name) user.name = updates.name;
+    if (updates.avatar) user.avatar = updates.avatar;
+    if (updates.photoUrl) user.photoUrl = updates.photoUrl;
+    if (updates.bio !== undefined) user.bio = updates.bio;
+    if (updates.college) user.college = updates.college;
+    if (updates.department) user.department = updates.department;
+    if (updates.rollNo !== undefined) user.rollNo = updates.rollNo;
+    if (updates.gradYear !== undefined) user.gradYear = updates.gradYear;
+    if (updates.github !== undefined) user.github = updates.github;
+    if (updates.linkedin !== undefined) user.linkedin = updates.linkedin;
+    if (updates.skills !== undefined) user.skills = updates.skills;
+    if (updates.organization) user.organization = updates.organization;
+
+    this.save();
+    return user;
+  }
+
+  public addSmeProblem(problem: any) {
+    if (!this.data.pods) this.data.pods = [];
+    const newPod: PodData = {
+      id: `pod-${Date.now()}`,
+      name: `Pod ${problem.title?.slice(0, 12) || 'Alpha'}`,
+      title: problem.title,
+      sme: problem.smeName || 'Verified Enterprise',
+      stage: 1,
+      stageName: 'Problem Scoping & AI Matching',
+      progress: 15,
+      mentor: 'Assigned on Cohort Kickoff',
+      students: [],
+      techStack: problem.skills || ['React', 'Node.js', 'FastAPI'],
+      latency: '24ms',
+      health: 'Operational',
+      lastCommit: 'Sprint 0 Kickoff',
+      updatedAt: 'Just now'
+    };
+    this.data.pods.unshift(newPod);
+    this.save();
+    return newPod;
   }
 
   // --- PODS ---
