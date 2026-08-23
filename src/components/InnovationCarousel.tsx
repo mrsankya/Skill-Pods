@@ -30,7 +30,30 @@ interface InnovationCarouselProps {
 
 export const InnovationCarousel: React.FC<InnovationCarouselProps> = ({ onOpenAppointmentModal }) => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const [flowOffset, setFlowOffset] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const animFrameRef = useRef<number | null>(null);
+  const lastTimeRef = useRef<number | null>(null);
+
+  // Continuous orbital conveyor-belt animation loop
+  React.useEffect(() => {
+    const animateFlow = (time: number) => {
+      if (lastTimeRef.current !== null && !isPaused && hoveredCard === null) {
+        const delta = time - lastTimeRef.current;
+        // Complete full orbit every ~32 seconds for a calm, premium gliding effect
+        const speed = 1 / 32000;
+        setFlowOffset(prev => (prev + delta * speed) % 1);
+      }
+      lastTimeRef.current = time;
+      animFrameRef.current = requestAnimationFrame(animateFlow);
+    };
+
+    animFrameRef.current = requestAnimationFrame(animateFlow);
+    return () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, [isPaused, hoveredCard]);
 
   // Smooth scroll tracking for parabolic expansion effect
   const { scrollYProgress } = useScroll({
@@ -42,112 +65,76 @@ export const InnovationCarousel: React.FC<InnovationCarouselProps> = ({ onOpenAp
   const arcScale = useTransform(smoothProgress, [0, 1], [0.85, 1]);
   const arcOpacity = useTransform(smoothProgress, [0, 0.4], [0, 1]);
 
-  // Cards positioned along the parabolic / semi-circular arc
-  // Coordinates (x in %, y in px) to form a true parabolic arch
+  // Base list of innovation items along the conveyor arc
   const arcCards = [
     {
       id: 0,
       type: 'image',
       src: deepCodeImg,
-      label: 'Deep Code',
-      x: 6,
-      y: 130,
-      rotate: -28
+      label: 'Deep Code'
     },
     {
       id: 1,
       type: 'image',
-      // Happy celebrating female coder with glasses and laptop
       src: studentCelebrationImg,
-      label: 'Student Builder',
-      x: 14,
-      y: 80,
-      rotate: -20
+      label: 'Student Builder'
     },
     {
       id: 2,
       type: 'image',
       src: mentorTechImg,
-      label: 'Tech Lead',
-      x: 23,
-      y: 40,
-      rotate: -12
+      label: 'Tech Lead'
     },
     {
       id: 3,
       type: 'image',
       src: founderImg,
-      label: 'SME Founder',
-      x: 32,
-      y: 15,
-      rotate: -6
+      label: 'SME Founder'
     },
     {
       id: 4,
       type: 'icon',
       icon: MessageSquareText,
       label: 'SME Problem',
-      color: '#d0bcff',
-      x: 41,
-      y: 0,
-      rotate: -2
+      color: '#d0bcff'
     },
     {
       id: 5,
       type: 'portrait',
       src: studentTeamImg,
       label: 'Student Pod',
-      color: '#a87ffb',
-      x: 50,
-      y: -5,
-      rotate: 0,
-      featured: true
+      color: '#a87ffb'
     },
     {
       id: 6,
       type: 'icon',
       icon: UserCheck,
       label: 'Mentor',
-      color: '#d0bcff',
-      x: 59,
-      y: 0,
-      rotate: 2
+      color: '#d0bcff'
     },
     {
       id: 7,
       type: 'image',
       src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=300&auto=format&fit=crop&q=80',
-      label: 'Solar & IoT',
-      x: 68,
-      y: 15,
-      rotate: 6
+      label: 'Solar & IoT'
     },
     {
       id: 8,
       type: 'image',
       src: hardwareLabImg,
-      label: 'Hardware Lab',
-      x: 77,
-      y: 40,
-      rotate: 12
+      label: 'Hardware Lab'
     },
     {
       id: 9,
       type: 'image',
       src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=300&auto=format&fit=crop&q=80',
-      label: 'Product Live',
-      x: 86,
-      y: 80,
-      rotate: 20
+      label: 'Product Live'
     },
     {
       id: 10,
       type: 'image',
       src: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&auto=format&fit=crop&q=80',
-      label: 'Fast Delivery',
-      x: 94,
-      y: 130,
-      rotate: 28
+      label: 'Fast Delivery'
     }
   ];
 
@@ -162,18 +149,20 @@ export const InnovationCarousel: React.FC<InnovationCarouselProps> = ({ onOpenAp
 
       <div className="max-w-[1240px] mx-auto relative">
         
-        {/* Desktop Curved Arc View (Visible on md and up) */}
+        {/* Desktop Curved Arc View (Continuous Semi-Arc Orbital Animation) */}
         <motion.div 
           style={{ scale: arcScale, opacity: arcOpacity }}
-          className="relative h-[240px] md:h-[280px] w-full mb-10 hidden sm:block"
+          className="relative h-[250px] md:h-[290px] w-full mb-10 hidden sm:block select-none"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
         >
           {/* Subtle Arc Guideline SVG */}
           <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1000 240" fill="none">
             <motion.path 
               d="M 50 160 Q 500 -20 950 160" 
-              stroke="rgba(168, 127, 251, 0.25)" 
+              stroke="rgba(168, 127, 251, 0.3)" 
               strokeWidth="1.5" 
-              strokeDasharray="5 5"
+              strokeDasharray="4 4"
               initial={{ pathLength: 0, opacity: 0 }}
               whileInView={{ pathLength: 1, opacity: 1 }}
               viewport={{ once: false, amount: 0.2 }}
@@ -183,49 +172,51 @@ export const InnovationCarousel: React.FC<InnovationCarouselProps> = ({ onOpenAp
 
           {arcCards.map((card, index) => {
             const isHovered = hoveredCard === card.id;
-            // Calculate delay for staggered wave from left to right
-            const staggerDelay = 0.08 * index;
+            const total = arcCards.length;
+            
+            // Normalized parameter t along the curve [0, 1] with continuous gliding offset
+            const t = ((index / total) + flowOffset) % 1;
+
+            // Parabolic curve formulas:
+            // x: horizontal placement from 5% to 95%
+            const posX = 5 + t * 90;
+            // y: parabolic vertical trajectory peaking at t = 0.5 (y = -5px) and descending at edges (y = 135px)
+            const posY = 135 * 4 * Math.pow(t - 0.5, 2) - 5;
+            // rotate: tangent tilt along the arch curve (-28 deg to +28 deg)
+            const rotDeg = (t - 0.5) * 56;
+
+            // Edge opacity fade in / out for smooth entrance & exit
+            let edgeOpacity = 1;
+            if (t < 0.05) edgeOpacity = Math.max(0, t / 0.05);
+            else if (t > 0.95) edgeOpacity = Math.max(0, (1 - t) / 0.05);
+
+            // Is near center peak (top apex)
+            const isNearPeak = Math.abs(t - 0.5) < 0.08;
 
             return (
               <motion.div
                 key={card.id}
-                initial={{ 
-                  opacity: 0, 
-                  scale: 0.3, 
-                  y: card.y + 70,
-                  rotate: card.rotate - 20
-                }}
-                whileInView={{ 
-                  opacity: 1, 
-                  scale: 1, 
-                  y: card.y,
-                  rotate: card.rotate
-                }}
-                viewport={{ once: false, amount: 0.2 }}
-                transition={{ 
-                  duration: 0.65, 
-                  delay: staggerDelay, 
-                  type: 'spring', 
-                  bounce: 0.35 
-                }}
                 onMouseEnter={() => setHoveredCard(card.id)}
                 onMouseLeave={() => setHoveredCard(null)}
                 style={{
-                  left: `${card.x}%`,
+                  left: `${posX}%`,
                   position: 'absolute',
-                  zIndex: card.featured ? 30 : isHovered ? 50 : 20,
+                  zIndex: isHovered ? 60 : isNearPeak ? 35 : 20,
+                  opacity: edgeOpacity,
+                  transform: `translate3d(-50%, ${posY}px, 0) rotate(${rotDeg}deg) scale(${isHovered ? 1.25 : isNearPeak ? 1.12 : 1})`,
+                  transition: isHovered 
+                    ? 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), z-index 0s' 
+                    : 'opacity 0.15s ease-out'
                 }}
-                whileHover={{
-                  scale: 1.25,
-                  y: card.y - 12,
-                  rotate: 0,
-                  transition: { duration: 0.25 }
-                }}
-                className="cursor-pointer -translate-x-1/2"
+                className="cursor-pointer will-change-transform"
               >
                 {/* Icon Card (SME Problem / Mentor) */}
                 {card.type === 'icon' && card.icon && (
-                  <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-[#171422] border border-[#a87ffb]/40 shadow-[0_0_20px_rgba(168,127,251,0.25)] flex flex-col items-center justify-center p-2 group hover:border-[#a87ffb] hover:shadow-[0_0_30px_rgba(168,127,251,0.6)] transition-all">
+                  <div className={`w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-[#171422] border transition-all flex flex-col items-center justify-center p-2 group ${
+                    isNearPeak 
+                      ? 'border-[#c084fc] shadow-[0_0_30px_rgba(192,132,252,0.5)]' 
+                      : 'border-[#a87ffb]/40 shadow-[0_0_20px_rgba(168,127,251,0.25)] hover:border-[#a87ffb] hover:shadow-[0_0_30px_rgba(168,127,251,0.6)]'
+                  }`}>
                     <div className="text-[#d0bcff] mb-1 group-hover:rotate-12 transition-transform duration-300">
                       <card.icon className="w-6 h-6 animate-pulse" />
                     </div>
@@ -237,7 +228,11 @@ export const InnovationCarousel: React.FC<InnovationCarouselProps> = ({ onOpenAp
 
                 {/* Featured Portrait Card (Student Pod) */}
                 {card.type === 'portrait' && (
-                  <div className="w-18 h-18 md:w-22 md:h-22 rounded-2xl bg-[#1b172a] border-2 border-[#d0bcff] shadow-[0_0_35px_rgba(208,188,255,0.45)] flex flex-col items-center justify-between p-1.5 overflow-hidden group-hover:shadow-[0_0_45px_rgba(208,188,255,0.7)] transition-all">
+                  <div className={`w-18 h-18 md:w-22 md:h-22 rounded-2xl bg-[#1b172a] border-2 transition-all flex flex-col items-center justify-between p-1.5 overflow-hidden group ${
+                    isNearPeak 
+                      ? 'border-[#d0bcff] shadow-[0_0_40px_rgba(208,188,255,0.65)] ring-2 ring-purple-400/30' 
+                      : 'border-[#a87ffb]/60 shadow-[0_0_25px_rgba(168,127,251,0.35)]'
+                  }`}>
                     <img 
                       src={card.src} 
                       alt={card.label}
@@ -252,11 +247,15 @@ export const InnovationCarousel: React.FC<InnovationCarouselProps> = ({ onOpenAp
 
                 {/* Image Card Vignette */}
                 {card.type === 'image' && (
-                  <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-[#151220] border border-white/10 shadow-lg overflow-hidden p-1 hover:border-[#d0bcff]/60 hover:shadow-[0_0_25px_rgba(208,188,255,0.4)] transition-all">
+                  <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-[#151220] border transition-all overflow-hidden p-1 ${
+                    isNearPeak
+                      ? 'border-[#d0bcff] shadow-[0_0_25px_rgba(208,188,255,0.5)]'
+                      : 'border-white/10 shadow-lg hover:border-[#d0bcff]/60 hover:shadow-[0_0_25px_rgba(208,188,255,0.4)]'
+                  }`}>
                     <img 
                       src={card.src} 
                       alt={card.label}
-                      className="w-full h-full object-cover rounded-xl grayscale-[20%] hover:grayscale-0 transition-all"
+                      className="w-full h-full object-cover rounded-xl grayscale-[15%] hover:grayscale-0 transition-all"
                       referrerPolicy="no-referrer"
                     />
                   </div>

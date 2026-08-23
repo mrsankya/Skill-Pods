@@ -37,6 +37,8 @@ export const LoginPage: React.FC<LoginPageProps> = ({
   const [rememberMe, setRememberMe] = useState(true);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [torchLevel, setTorchLevel] = useState<number>(1); // 1 = Soft (default), 2 = Medium, 3 = Turbo High-Beam, 0 = Off (stealth mode)
+  const [torchClickedFeedback, setTorchClickedFeedback] = useState(false);
 
   // Parallax Scroll Animation & Scroll Progress
   const { scrollY, scrollYProgress } = useScroll();
@@ -484,34 +486,83 @@ export const LoginPage: React.FC<LoginPageProps> = ({
           </motion.p>
 
           {/* ===================================================================== */}
-          {/* REALISTIC WALL LAMP SCONCE FIXTURE & CONICAL DOWNLIGHT                */}
+          {/* REALISTIC WALL LAMP SCONCE FIXTURE & CONICAL DOWNLIGHT (4-STAGE TORCH) */}
           {/* ===================================================================== */}
           <div className="relative flex flex-col items-center w-full">
             
-            {/* Wall Sconce Symmetrical Trapezoid Housing */}
+            {/* Wall Sconce Symmetrical Trapezoid Housing (Interactive Torch Mode) */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="relative z-20 w-28 sm:w-36 h-6 bg-gradient-to-b from-[#1c2237] via-[#14192b] to-[#0d1222] border-t border-x border-[#3b4870]/70 rounded-t-md shadow-[0_4px_12px_rgba(0,0,0,0.8)] flex flex-col items-center justify-end"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.94 }}
+              onClick={() => {
+                setTorchLevel(prev => (prev + 1) % 4);
+                setTorchClickedFeedback(true);
+                setTimeout(() => setTorchClickedFeedback(false), 2000);
+              }}
+              title="Click torch lamp to cycle brightness (Level 1 → 2 → 3 → Off)"
+              className="relative z-30 w-28 sm:w-36 h-6 bg-gradient-to-b from-[#1c2237] via-[#14192b] to-[#0d1222] border-t border-x border-[#3b4870]/70 rounded-t-md shadow-[0_4px_12px_rgba(0,0,0,0.8)] flex flex-col items-center justify-end cursor-pointer group select-none transition-all"
             >
               {/* Metallic top accent ridge */}
-              <div className="w-16 h-1 bg-[#475569] rounded-t-sm mb-1 opacity-70" />
+              <div className="w-16 h-1 bg-[#475569] rounded-t-sm mb-1 opacity-70 group-hover:bg-[#94a3b8] transition-colors" />
+              
               {/* Luminous bottom slit emitting warm golden light */}
-              <div className="w-full h-2 bg-gradient-to-r from-[#ca8a04] via-[#fef08a] to-[#ca8a04] rounded-b-sm shadow-[0_0_20px_#fef08a]" />
+              <div 
+                className={`w-full h-2 rounded-b-sm transition-all duration-300 ${
+                  torchLevel === 0 ? 'bg-[#1e293b] shadow-none opacity-40' :
+                  torchLevel === 1 ? 'bg-gradient-to-r from-[#ca8a04] via-[#fef08a] to-[#ca8a04] shadow-[0_0_18px_#fef08a]' :
+                  torchLevel === 2 ? 'bg-gradient-to-r from-[#eab308] via-[#ffffff] to-[#eab308] shadow-[0_0_28px_#fef08a,0_0_40px_#eab308]' :
+                  'bg-gradient-to-r from-[#ffffff] via-[#fef08a] to-[#ffffff] shadow-[0_0_45px_#ffffff,0_0_70px_#fef08a]'
+                }`} 
+              />
             </motion.div>
 
+            {/* Micro Floating Torch Indicator Badge on Tap / Hover */}
+            <div className="absolute -top-7 z-30 transition-all duration-300 pointer-events-none">
+              <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-wider border shadow-lg transition-all duration-300 ${
+                torchLevel === 0 ? 'bg-slate-900/90 text-slate-400 border-slate-700' :
+                torchLevel === 1 ? 'bg-amber-950/90 text-amber-300 border-amber-500/40 shadow-amber-900/40' :
+                torchLevel === 2 ? 'bg-yellow-950/90 text-yellow-200 border-yellow-400/60 shadow-yellow-900/50' :
+                'bg-white text-purple-950 border-amber-300 font-black shadow-white/50 scale-105'
+              }`}>
+                {torchLevel === 0 && '🌑 TORCH: OFF (Tap to Turn On)'}
+                {torchLevel === 1 && '💡 TORCH: LEVEL 1/3 (Soft)'}
+                {torchLevel === 2 && '⚡ TORCH: LEVEL 2/3 (Bright)'}
+                {torchLevel === 3 && '🔥 TORCH: LEVEL 3/3 (TURBO MAX)'}
+              </span>
+            </div>
+
             {/* Glowing Lamp Bulb Core */}
-            <div className="absolute top-4 z-10 w-24 h-6 bg-[#fef08a] blur-[6px] opacity-95 rounded-full pointer-events-none" />
+            <div 
+              className={`absolute top-4 z-10 h-6 bg-[#fef08a] rounded-full pointer-events-none transition-all duration-300 ${
+                torchLevel === 0 ? 'opacity-0 scale-50' :
+                torchLevel === 1 ? 'w-20 opacity-70 blur-[6px]' :
+                torchLevel === 2 ? 'w-24 opacity-90 blur-[8px] scale-105' :
+                'w-28 opacity-100 blur-[12px] scale-120 bg-white shadow-[0_0_30px_#ffffff]'
+              }`} 
+            />
 
             {/* Wide Downward Spotlight Cone washing over the brick wall and card with Parallax */}
             <motion.div 
               style={{ scale: lampLightScale, clipPath: 'polygon(28% 0%, 72% 0%, 100% 100%, 0% 100%)' }}
-              className="w-[340px] sm:w-[460px] h-32 bg-gradient-to-b from-[#fef08a]/45 via-[#fef08a]/20 to-transparent blur-xl pointer-events-none -mt-1"
+              className={`w-[340px] sm:w-[460px] pointer-events-none -mt-1 transition-all duration-300 ${
+                torchLevel === 0 ? 'h-0 opacity-0' :
+                torchLevel === 1 ? 'h-32 opacity-40 bg-gradient-to-b from-[#fef08a]/35 via-[#fef08a]/15 to-transparent blur-xl' :
+                torchLevel === 2 ? 'h-36 opacity-75 bg-gradient-to-b from-[#fef08a]/60 via-[#fef08a]/30 to-transparent blur-2xl' :
+                'h-40 opacity-100 bg-gradient-to-b from-[#ffffff]/85 via-[#fef08a]/50 to-transparent blur-2xl'
+              }`}
             />
             
             {/* Soft Ambient Purple Wall Bloom beneath the lamp */}
-            <div className="absolute top-6 w-[520px] h-36 bg-[#a855f7]/25 blur-[45px] pointer-events-none rounded-full" />
+            <div 
+              className={`absolute top-6 w-[520px] h-36 bg-[#a855f7] blur-[45px] pointer-events-none rounded-full transition-all duration-300 ${
+                torchLevel === 0 ? 'opacity-5' :
+                torchLevel === 1 ? 'opacity-25' :
+                torchLevel === 2 ? 'opacity-45' :
+                'opacity-75 bg-gradient-to-r from-[#a855f7] via-[#c084fc] to-[#a855f7]'
+              }`} 
+            />
 
           </div>
 

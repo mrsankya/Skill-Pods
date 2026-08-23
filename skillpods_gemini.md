@@ -115,3 +115,10 @@ docker build -t skillpods:latest .
 # Run Docker container
 docker run -p 3000:3000 -e PORT=3000 skillpods:latest
 ```
+
+## Recent Interactive UI Enhancements (Localhost Tested)
+- 🎡 **Parabolic Arc Continuous Orbital Animation (`InnovationCarousel.tsx`)**: 11 profile/builder cards continuously glide from left-to-right along the parametric quadratic Bézier curve with pause-on-hover, soft boundary wrap-around fading, and apex bloom elevation.
+- 🔦 **Interactive 4-Stage Torch Lamp (`LoginPage.tsx`)**: The realistic overhead wall sconce lamp now acts as a multi-tap flashlight (Level 1: Soft Glow, Level 2: Bright, Level 3: Turbo Max High-Beam, Level 4: Stealth Darkness Mode OFF) with dynamic downlight cones, micro floating indicator pill badges, and realistic wall illumination.
+- 🚀 **Official Brand Favicon (`index.html` & `public/favicon.jpg`)**: Integrated the official diamond-rocket SkillPods brand icon as the website favicon and Apple touch icon.
+
+

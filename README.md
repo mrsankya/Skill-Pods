@@ -54,8 +54,10 @@ graph TD
 ### 🎓 1. Student Builder Workspace
 * **🤖 AI Skill Match Engine**: Benchmarks student GitHub competencies against open SME problems with 96% fit scoring.
 * **💼 Project Marketplace & Monetization**: List capstone & hackathon projects for *Commercial Licensing*, *Full IP Buyout*, or *SME Pilot Upgrades*.
-* **🪪 Verified Skill Passport**: Cryptographically signed proof-of-work with SHA-256 hash, verified LOC (18.4k LOC), and mentor endorsements.
+* **🪪 Verified Skill Passport & Academic Vault**: Cryptographically signed proof-of-work with SHA-256 hash, verified LOC (18.4k LOC), mentor endorsements, official CGPA metrics, and full-screen document lightbox for verified marksheets and certificates.
 * **💵 Earnings Wallet**: Financial ledger tracking sprint stipends, licensing royalties, and instant UPI payouts.
+* **🌐 Community Network & Vault Viewer**: LinkedIn-style cross-role directory to explore verified student marksheets, SME problems, and mentor profiles.
+* **💬 Private 1-on-1 Direct Messaging**: Private student-mentor-SME real-time chat threads with quick icebreakers and SuperAdmin global audit supervision.
 
 ### 🏢 2. SME Company Portal
 * **🎙️ Voice Problem-to-PRD AI**: Speak into your mic for 30s &mdash; GURU AI transcribes and outputs a complete technical specification, stack, and budget.
@@ -74,10 +76,20 @@ graph TD
 
 ---
 
+## 🎨 Interactive Visual Innovations & Micro-Interactions
+* **🎡 Parabolic Arc Continuous Orbital Animation (`InnovationCarousel.tsx`)**: 11 builder profiles, mentor badges, and SME problems glide smoothly along a parametric quadratic Bézier curve with pause-on-hover, soft boundary wrap-around fading, and apex bloom elevation.
+* **🔦 4-Stage Interactive Torch Lamp (`LoginPage.tsx`)**: Overhead wall sconce lamp behaves as a multi-tap flashlight (Level 1: Soft Glow, Level 2: Bright, Level 3: Turbo Max High-Beam, Level 4: Stealth Darkness Mode OFF) with dynamic downlight cone washing over the brick wall.
+* **👨‍💻 Interactive Embedded Developer Portfolio (`DeveloperPortfolioModal.tsx`)**: Full in-browser live showcase embedding [`sanket-portfolio-211.pages.dev`](https://sanket-portfolio-211.pages.dev/) with responsive Desktop, Tablet, and Mobile device preview mockups.
+* **🚀 Official Brand Favicon & Assets**: High-resolution diamond-rocket brand logo integrated across browser tabs and Apple mobile shortcuts.
+
+---
+
 ## 🧪 Experimental Labs & Next-Gen Beta Suite `[🧪 IN TESTING]`
 
 | Feature | Description | Status |
 | :--- | :--- | :--- |
+| **🌐 Community Network & Vault** | LinkedIn-style verified student, SME, and mentor directory with cryptographic transcript inspection. | `✅ Live` |
+| **💬 Direct Messaging & SuperAdmin Audit** | Private 1-on-1 chat streams protected by SuperAdmin global supervisory oversight. | `✅ Live` |
 | **🎙️ Live WebRTC Sprint Room** | 4-participant video/audio room with screen-sharing, WebRTC mesh latency radar (24ms), and in-room sprint chat. | `🧪 Testing` |
 | **🤖 GURU AI PR Scanner** | Automated AST pull request security auditor checking OWASP Top 10 vulnerabilities with instant scoring (96/100 A+). | `🧪 Testing` |
 | **💼 Recruiter 1-Click Hiring** | Direct talent pipeline allowing HR to filter students by verified lines of code and send 1-click offers. | `⚡ Beta` |
