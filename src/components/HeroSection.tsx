@@ -54,8 +54,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
           className="text-sm sm:text-base md:text-lg text-[#b2abc0] max-w-2xl mx-auto leading-relaxed mb-9 font-normal"
         >
-          Turn real SME problems into production-ready products.<br className="hidden sm:inline" />
-          Through student skill pods and industry mentorship.
+          Turn real business challenges into production-ready software.<br className="hidden sm:inline" />
+          Built by verified student teams and guided by top industry engineers.
         </motion.p>
 
         {/* Dual Action Glowing Pill Buttons */}
@@ -66,7 +66,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
           className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full sm:w-auto justify-center mb-16 md:mb-20"
         >
           
-          {/* Button 1: SUBMIT AN SME PROBLEM */}
+          {/* Button 1: POST A BUSINESS PROBLEM */}
           <button
             onClick={() => onOpenModal('submit-problem')}
             className="w-full sm:w-auto glow-pill-primary text-[#240356] font-bold text-xs sm:text-xs font-mono uppercase tracking-widest px-6 py-3.5 rounded-full flex items-center justify-between sm:justify-center gap-3 cursor-pointer group hover:scale-105 active:scale-95 transition-all shadow-[0_0_30px_rgba(168,127,251,0.4)]"
@@ -75,7 +75,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
             <div className="w-4 h-4 text-[#240356] group-hover:rotate-12 transition-transform duration-300">
               <FileEdit className="w-4 h-4" />
             </div>
-            <span>SUBMIT AN SME PROBLEM</span>
+            <span>POST A BUSINESS PROBLEM</span>
             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 

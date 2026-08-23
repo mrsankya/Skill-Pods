@@ -19,8 +19,8 @@ export const WorkflowSection: React.FC<WorkflowSectionProps> = () => {
     {
       id: "01",
       numberColor: "text-[#38bdf8]",
-      title: "SME PROBLEM",
-      description: "A real business identifies an operational problem that needs a solution.",
+      title: "REAL BUSINESS PROBLEM",
+      description: "A company or startup posts a real-world software challenge that needs solving.",
       icon: FileSearch,
       iconColor: "text-[#38bdf8]",
       borderColor: "border-[#38bdf8]/30",
@@ -30,8 +30,8 @@ export const WorkflowSection: React.FC<WorkflowSectionProps> = () => {
     {
       id: "02",
       numberColor: "text-[#a855f7]",
-      title: "STUDENT SKILL POD",
-      description: "A specialized team of students works on the problem with an industry mentor.",
+      title: "STUDENT BUILD TEAM",
+      description: "A team of 3 complementary students is assembled to build the application.",
       icon: Users,
       iconColor: "text-[#c084fc]",
       borderColor: "border-[#a855f7]/30",
@@ -41,8 +41,8 @@ export const WorkflowSection: React.FC<WorkflowSectionProps> = () => {
     {
       id: "03",
       numberColor: "text-[#10b981]",
-      title: "MENTOR VALIDATION",
-      description: "The product is reviewed, tested and validated before release.",
+      title: "EXPERT MENTORSHIP",
+      description: "An experienced tech engineer reviews code quality, architecture, and tests.",
       icon: ShieldCheck,
       iconColor: "text-[#10b981]",
       borderColor: "border-[#10b981]/30",
@@ -52,8 +52,8 @@ export const WorkflowSection: React.FC<WorkflowSectionProps> = () => {
     {
       id: "04",
       numberColor: "text-[#f97316]",
-      title: "SHIPPED PRODUCT",
-      description: "The approved solution becomes a usable production product.",
+      title: "WORKING PRODUCT & STIPEND",
+      description: "The solution goes live in production, students get hired and receive verified proof of work.",
       icon: Rocket,
       iconColor: "text-[#fb923c]",
       borderColor: "border-[#f97316]/30",
