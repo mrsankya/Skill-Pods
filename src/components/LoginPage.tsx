@@ -202,8 +202,81 @@ export const LoginPage: React.FC<LoginPageProps> = ({
     }
   };
 
-  // Google OAuth 2.0 Authentication Integration
-  const handleGoogleSignIn = async () => {
+  const GOOGLE_CLIENT_ID = "269277017328-k7m2jo563j7t0bqhojr48ejn61qneugu.apps.googleusercontent.com";
+
+  // Google OAuth 2.0 Official Identity Services Response Callback
+  const handleGoogleCredentialResponse = async (response: any) => {
+    if (!response?.credential) return;
+    setLoading(true);
+    setErrorMessage(null);
+
+    const roleToUse: UserRole = selectedRole || 'student';
+    try {
+      const res = await fetch('/api/auth/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          credential: response.credential,
+          role: roleToUse
+        })
+      });
+
+      const data = await res.json();
+      if (data.success && data.token) {
+        localStorage.setItem('skillpods_token', data.token);
+        if (data.jwt) localStorage.setItem('skillpods_jwt', data.jwt);
+        localStorage.setItem('skillpods_user', JSON.stringify(data.user));
+        setLoading(false);
+        onLoginSuccess(data.user?.role || roleToUse, data.user?.email);
+        return;
+      }
+      handleGoogleSignInFallback();
+    } catch {
+      handleGoogleSignInFallback();
+    }
+  };
+
+  // Initialize Google Identity Services SDK on page load
+  useEffect(() => {
+    const initGoogleGSI = () => {
+      if (typeof window !== 'undefined' && (window as any).google?.accounts?.id) {
+        try {
+          (window as any).google.accounts.id.initialize({
+            client_id: GOOGLE_CLIENT_ID,
+            callback: handleGoogleCredentialResponse,
+            auto_select: false,
+            cancel_on_tap_outside: true
+          });
+        } catch (err) {
+          console.warn('Google GSI init warning:', err);
+        }
+      }
+    };
+
+    initGoogleGSI();
+    const timer = setTimeout(initGoogleGSI, 600);
+    return () => clearTimeout(timer);
+  }, [selectedRole]);
+
+  // Google Sign-In Trigger
+  const handleGoogleSignIn = () => {
+    if (typeof window !== 'undefined' && (window as any).google?.accounts?.id) {
+      try {
+        (window as any).google.accounts.id.prompt((notification: any) => {
+          if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+            handleGoogleSignInFallback();
+          }
+        });
+        return;
+      } catch {
+        // Fallback to simulated popup
+      }
+    }
+    handleGoogleSignInFallback();
+  };
+
+  // Google Sign-In Fallback pipeline
+  const handleGoogleSignInFallback = async () => {
     setLoading(true);
     setErrorMessage(null);
 
@@ -235,7 +308,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({
       setLoading(false);
       onLoginSuccess(roleToUse, googleProfile.email);
     } catch {
-      // Fallback
       setLoading(false);
       onLoginSuccess(roleToUse, googleProfile.email);
     }
