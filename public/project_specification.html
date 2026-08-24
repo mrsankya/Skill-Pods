@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SkillPods - Complete Project Specification & Master Guide (SIH 2026)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+    @page {
+      size: A4;
+      margin: 14mm 14mm 16mm 14mm;
+      @bottom-right {
+        content: "Page " counter(page) " of " counter(pages);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 7.5pt;
+        color: #71717a;
+      }
+      @bottom-left {
+        content: "SkillPods Master Specification • SIH 2026";
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 7.5pt;
+        color: #71717a;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0f172a;
+      background-color: #ffffff;
+      line-height: 1.48;
+      font-size: 9pt;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4 {
+      color: #09090b;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-top: 1.1em;
+      margin-bottom: 0.3em;
+      page-break-after: avoid;
+    }
+
+    h1 { font-size: 19pt; line-height: 1.2; color: #4c1d95; }
+    h2 { font-size: 12pt; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 3px; margin-top: 1.3em; color: #581c87; }
+    h3 { font-size: 10pt; color: #1e1b4b; margin-top: 0.8em; }
+    h4 { font-size: 9pt; color: #334155; }
+
+    p, li {
+      color: #334155;
+      font-size: 8.5pt;
+      line-height: 1.45;
+    }
+
+    ul, ol {
+      margin-top: 3px;
+      margin-bottom: 6px;
+      padding-left: 18px;
+    }
+
+    li { margin-bottom: 2.5px; }
+
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7.5pt;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 8px 10px;
+      border-radius: 6px;
+      overflow-x: auto;
+      border: 1px solid #1e293b;
+      margin: 6px 0;
+      page-break-inside: avoid;
+      line-height: 1.3;
+    }
+
+    .cover-page {
+      page-break-after: always;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 86vh;
+      padding: 24px 10px 10px 10px;
+    }
+
+    .badge-pill {
+      display: inline-block;
+      padding: 3px 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 9999px;
+      background: #f3e8ff;
+      color: #6b21a8;
+      border: 1px solid #d8b4fe;
+      margin-bottom: 10px;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px;
+      margin: 12px 0;
+    }
+
+    .meta-item label {
+      font-size: 6.5pt;
+      font-family: 'JetBrains Mono', monospace;
+      text-transform: uppercase;
+      color: #64748b;
+      display: block;
+      font-weight: 600;
+    }
+
+    .meta-item span {
+      font-size: 8pt;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .callout-box {
+      background: #f0fdf4;
+      border-left: 3.5px solid #16a34a;
+      border-radius: 0 6px 6px 0;
+      padding: 8px 10px;
+      margin: 8px 0;
+      page-break-inside: avoid;
+    }
+
+    .callout-title {
+      font-weight: 700;
+      color: #15803d;
+      font-size: 8pt;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 2px;
+    }
+
+    .callout-text {
+      color: #14532d;
+      font-size: 8pt;
+      margin: 0;
+      line-height: 1.38;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0;
+      font-size: 7.5pt;
+      page-break-inside: avoid;
+    }
+
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 5px 7px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 7pt;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    .qa-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 7px 9px;
+      margin-bottom: 6px;
+      page-break-inside: avoid;
+    }
+
+    .qa-question {
+      font-weight: 700;
+      color: #4338ca;
+      font-size: 8pt;
+      margin-bottom: 2px;
+    }
+
+    .qa-answer {
+      color: #334155;
+      font-size: 7.8pt;
+      line-height: 1.35;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= COVER PAGE ================= -->
+  <div class="cover-page">
+    <div>
+      <div class="badge-pill">SMART INDIA HACKATHON 2026 • MASTER SPECIFICATION</div>
+      <h1>SKILL PODS</h1>
+      <h3 style="color: #6b21a8; font-weight: 700; margin-top: -4px; margin-bottom: 10px;">
+        Complete Project Specification & Viva Defense Master Guide
+      </h3>
+      <p style="font-size: 9pt; color: #475569; max-width: 600px;">
+        A comprehensive end-to-end blueprint detailing project objectives, problem statement mapping, core workflow, system architecture, database schemas, and plain-English answers to all technical questions.
+      </p>
+
+      <div class="meta-grid">
+        <div class="meta-item">
+          <label>Project Name</label>
+          <span>SkillPods (Demand-First Experiential Engineering Platform)</span>
+        </div>
+        <div class="meta-item">
+          <label>Creator & Lead Architect</label>
+          <span>Sanket Bhende (Computer Engineering • SuperAdmin)</span>
+        </div>
+        <div class="meta-item">
+          <label>Target Problem Statement</label>
+          <span>SIH26044 (Primary: Skill Mapping & Placements) • SIH26043 (Secondary)</span>
+        </div>
+        <div class="meta-item">
+          <label>Live Production URL</label>
+          <span>https://skill-pods.pages.dev</span>
+        </div>
+        <div class="meta-item">
+          <label>GitHub Repository</label>
+          <span>https://github.com/Sakshi-patil48/Skill-Pods.git</span>
+        </div>
+        <div class="meta-item">
+          <label>Document Edition</label>
+          <span>Official Master Dossier • SIH 2026 Edition</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout-box">
+      <div class="callout-title">💡 HOW TO USE THIS SPECIFICATION DURING VIVA / EVALUATION</div>
+      <div class="callout-text">
+        This document contains complete answers to all functional and technical questions. You do not need to memorize complex code—read the green callout summaries and the verbatim Q&A section when explaining the project to judges.
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 1. OBJECTIVE & PROBLEM STATEMENT ================= -->
+  <h2>1. 🎯 Objective & Problem Statement</h2>
+
+  <p><strong>Main Objective:</strong> To replace useless, throwaway college capstone projects with real-world SME problem solving, empowering students to build production software, earn milestone stipends in escrow, and graduate with verified cryptographic Skill Passports for campus placements.</p>
+
+  <p><strong>Problem Statement Mapping:</strong></p>
+  <ul>
+    <li><strong>Primary Match (SIH26044):</strong> <em>"Portal for Academia - Industry collaboration for Skill Mapping, Internships and Placement"</em> (Ministry of Ayush / Central Gov).</li>
+    <li><strong>Secondary Match (SIH26043):</strong> <em>"A digital platform to crowdsource societal challenges and facilitate collaborative problem solving through universities and industry partnerships"</em>.</li>
+  </ul>
+
+  <p><strong>The Core Problem it Solves:</strong></p>
+  <ul>
+    <li><strong>For Students:</strong> Engineering students build dummy projects with no real users and graduate with unverified resumes that corporate recruiters cannot trust.</li>
+    <li><strong>For Indian SMEs:</strong> Small businesses and startups have real software needs but cannot afford expensive dev agencies charging ₹5,00,000+ for basic MVPs.</li>
+    <li><strong>The SkillPods Bridge:</strong> SMEs post real problems with money; students form 3-person teams to build solutions; industry mentors review the code; students get paid and receive cryptographic proof-of-work certificates.</li>
+  </ul>
+
+  <!-- ================= 2. TARGET AUDIENCE ================= -->
+  <h2>2. 👥 Target Audience & Stakeholders</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Stakeholder</th>
+        <th>Who They Are</th>
+        <th>Why They Use SkillPods</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Students</strong></td>
+        <td>Engineering / CS college students</td>
+        <td>Get authentic industry experience, earn sprint bounties in escrow, and earn a QR-verified Skill Passport.</td>
+      </tr>
+      <tr>
+        <td><strong>SMEs & Startups</strong></td>
+        <td>Small & Medium Enterprises</td>
+        <td>Get custom software solutions delivered at 70% lower cost than traditional IT agencies.</td>
+      </tr>
+      <tr>
+        <td><strong>Industry Mentors</strong></td>
+        <td>Staff / Senior Software Engineers</td>
+        <td>Guide student teams, enforce code quality, and scout top engineering talent before campus placements.</td>
+      </tr>
+      <tr>
+        <td><strong>Colleges & Deans</strong></td>
+        <td>Universities & Placement Cells</td>
+        <td>Track verified student placement metrics and export 1-click NAAC (Criterion 3.5.1/5.2.1) & NIRF reports.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= 3. CORE FEATURES ================= -->
+  <div class="page-break"></div>
+  <h2>3. ⚡ Core Platform Features</h2>
+
+  <ul>
+    <li><strong>Demand-First SME Problem Hub:</strong> SMEs post real business software requirements with escrow milestone budgets.</li>
+    <li><strong>Automated AI Pod Match Engine:</strong> Algorithmic matching assembling 3-student pods (Frontend, Backend, AI/Data) based on technical synergy (96% fit).</li>
+    <li><strong>Smart Escrow Milestone Vault:</strong> SME funds are safely locked in escrow before coding begins; auto-released via UPI upon mentor sign-off.</li>
+    <li><strong>Industry Mentor Sprint Gating:</strong> Senior engineers review GitHub pull requests and test coverage before approving sprint milestones.</li>
+    <li><strong>Cryptographic Skill Passport (HMAC-SHA256):</strong> Digital proof-of-work verified with cryptographic signatures and scannable QR codes.</li>
+    <li><strong>Academic Document Vault:</strong> Verified university transcripts, CGPA records, and industry certificates with full-screen document lightbox.</li>
+    <li><strong>LinkedIn-Style Community & 1-on-1 Direct Messaging:</strong> Cross-role networking with private messaging protected by SuperAdmin global audit supervision.</li>
+  </ul>
+
+  <!-- ================= 4. TECH STACK ================= -->
+  <h2>4. 🛠️ Technology Stack Breakdown</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Layer</th>
+        <th>Technologies Used</th>
+        <th>Why This Technology Was Chosen (Simple Rationale)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Frontend</strong></td>
+        <td>React 19, TypeScript, Tailwind CSS v4, Motion, WebGL</td>
+        <td>Super-fast edge rendering, modern purple dark-mode UI, smooth animations, and zero-runtime type safety.</td>
+      </tr>
+      <tr>
+        <td><strong>Backend</strong></td>
+        <td>Node.js, Express.js, REST APIs, WebSockets, WebRTC</td>
+        <td>Lightweight asynchronous event loop handling logins, real-time messaging, and live sprint room audio/video.</td>
+      </tr>
+      <tr>
+        <td><strong>AI Engine</strong></td>
+        <td>Google Gemini API, GURU Co-Pilot, Web Speech API</td>
+        <td>Converts spoken voice into technical PRDs and automatically breaks big problems into 5 developer Kanban tickets.</td>
+      </tr>
+      <tr>
+        <td><strong>Database</strong></td>
+        <td>MongoDB Atlas Cloud, WiredTiger Engine, JSON/SQLite Store</td>
+        <td>Flexible document model natively storing nested pod rosters, cryptographic passports, and message threads.</td>
+      </tr>
+      <tr>
+        <td><strong>Security</strong></td>
+        <td>HMAC-SHA256, PBKDF2 (SHA-512), Sliding Rate Limiter</td>
+        <td>Cryptographic passport integrity, brute-force defense, and timing-safe equality comparison.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= 5. 5-STEP CORE WORKFLOW ================= -->
+  <h2>5. 🔄 Step-by-Step Core Workflow</h2>
+
+<pre>
+[SME Posts Problem & Locks Escrow Funds]
+                  │
+                  ▼
+[AI Assembles 3-Student Skill Pod] ─── (Frontend + Backend + AI/Data)
+                  │
+                  ▼
+[Students Build Sprints on GitHub] ─── (Weekly Pull Requests & Tests)
+                  │
+                  ▼
+[Industry Mentor Reviews & Approves Sprint Gate]
+                  │
+                  ▼
+[Smart Escrow Releases UPI Payout + Issues Cryptographic Skill Passport]
+</pre>
+
+  <!-- ================= 6. TECHNICAL CHALLENGES & VIVA DEFENSE ================= -->
+  <div class="page-break"></div>
+  <h2>6. 🛡️ Technical Challenges & Master Viva Defense (Cheat Sheet)</h2>
+
+  <div class="qa-box">
+    <div class="qa-question">Q1: What are the main technical challenges in building SkillPods?</div>
+    <div class="qa-answer">
+      <strong>Answer:</strong> Three main challenges: (1) <em>State Synchronization</em> between student PRs, mentor approvals, and escrow releases; (2) <em>Tamper-Proof Verification</em> ensuring nobody can forge a Skill Passport; and (3) <em>Low-Latency Telemetry</em> for real-time collaboration. We solved these using HMAC-SHA256 signatures, sliding-window rate limiters, and Cloudflare edge caching.
+    </div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-question">Q2: How does the Smart Escrow Vault protect both SME and students?</div>
+    <div class="qa-answer">
+      <strong>Answer:</strong> SMEs deposit milestone funds into the escrow vault <em>before</em> work starts so students are guaranteed payment. However, funds are only released when the <em>Industry Mentor signs off on the code quality</em>. If students abandon the project, the SME gets a 100% refund.
+    </div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-question">Q3: How does the Skill Passport prevent fake resumes and credential fraud?</div>
+    <div class="qa-answer">
+      <strong>Answer:</strong> Every Skill Passport is sealed with an HMAC-SHA256 digital signature incorporating the student's ID, mentor ID, and the exact merged GitHub commit SHA. When recruiters scan the QR code, it verifies against the live tamper-proof record.
+    </div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-question">Q4: Why use MongoDB Atlas Cloud instead of PostgreSQL?</div>
+    <div class="qa-answer">
+      <strong>Answer:</strong> SkillPods manages deeply nested, dynamic documents—such as multi-skill passport stamps, fluctuating PR contributions, and real-time chat streams. MongoDB's document model with WiredTiger Snappy compression allows zero-downtime schema updates and high write throughput.
+    </div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-question">Q5: How can the system scale if 10,000+ students join?</div>
+    <div class="qa-answer">
+      <strong>Answer:</strong> The frontend is globally distributed across Cloudflare's edge network (sub-20ms latency). The backend is containerized in Docker for horizontal auto-scaling, backed by MongoDB Atlas cloud replica sets.
+    </div>
+  </div>
+
+  <div class="qa-box">
+    <div class="qa-question">Q6: What are the security best practices implemented in this stack?</div>
+    <div class="qa-answer">
+      <strong>Answer:</strong> (1) PBKDF2 (SHA-512) password hashing with 32-byte salts; (2) Constant-time equality checks (`crypto.timingSafeEqual`) to stop timing attacks; (3) Recursive NoSQL operator stripping to prevent `$gt` injection; and (4) Sliding-window rate limiting.
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; padding: 8px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; text-align: center;">
+    <p style="margin: 0; font-weight: 700; color: #4c1d95; font-size: 8pt;">
+      SkillPods • Official SIH 2026 Master Specification • Live at https://skill-pods.pages.dev
+    </p>
+  </div>
+
+</body>
+</html>
