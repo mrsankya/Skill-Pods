@@ -14,7 +14,6 @@ import {
   Trophy,
   Bot,
   Send,
-  Code2,
   Terminal,
   ShieldCheck,
   Zap,
@@ -74,7 +73,6 @@ import { PodLeaderboardModal } from './PodLeaderboardModal';
 import { ApiSandboxModal } from './ApiSandboxModal';
 import { CommunityNetworkModal } from './CommunityNetworkModal';
 import { DirectMessagingModal } from './DirectMessagingModal';
-import { DeveloperPortfolioModal } from './DeveloperPortfolioModal';
 
 interface StudentDashboardProps {
   userEmail: string;
@@ -548,7 +546,6 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
   const [showApiSandboxModal, setShowApiSandboxModal] = useState(false);
   const [showCommunityModal, setShowCommunityModal] = useState(false);
   const [showMessagingModal, setShowMessagingModal] = useState(false);
-  const [showPortfolioModal, setShowPortfolioModal] = useState(false);
   const [selectedChatRecipient, setSelectedChatRecipient] = useState<CommunityMember | null>(null);
   const [githubSyncMsg, setGithubSyncMsg] = useState<string | null>(null);
 
@@ -1043,16 +1040,6 @@ interface InventoryTelemetryPacket {
               <MessageSquare className="w-3.5 h-3.5 text-purple-700" />
               <span>💬 Messages</span>
               <span className="w-2 h-2 rounded-full bg-purple-600 animate-pulse" />
-            </button>
-
-            {/* 3. Developer Portfolio Button */}
-            <button
-              onClick={() => setShowPortfolioModal(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/15 hover:bg-amber-500/25 text-amber-900 border border-amber-300 text-xs font-bold shadow-2xs transition-all cursor-pointer"
-              title="View Sanket Bhende Developer Portfolio"
-            >
-              <Code2 className="w-3.5 h-3.5 text-amber-600" />
-              <span>👨‍💻 Portfolio</span>
             </button>
 
             <div className="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100/80 border border-purple-200 text-purple-900 text-xs font-bold shadow-2xs">
@@ -3283,13 +3270,6 @@ interface InventoryTelemetryPacket {
         currentUserName={displayName}
         currentUserRole="student"
         initialRecipient={selectedChatRecipient}
-      />
-
-      {/* ================= MODAL: DEVELOPER PORTFOLIO SHOWCASE ================= */}
-      <DeveloperPortfolioModal
-        isOpen={showPortfolioModal}
-        onClose={() => setShowPortfolioModal(false)}
-        portfolioUrl="https://sanket-portfolio-211.pages.dev/"
       />
 
     </div>

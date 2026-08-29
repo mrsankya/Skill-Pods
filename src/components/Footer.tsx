@@ -5,10 +5,9 @@ import { SkillPodsLogo } from './SkillPodsLogo';
 interface FooterProps {
   onOpenModal: (modal: ModalView) => void;
   onNavigate: (sectionId: string) => void;
-  onOpenPortfolio?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenModal, onNavigate, onOpenPortfolio }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenModal, onNavigate }) => {
   return (
     <footer className="w-full bg-[#08070d] border-t border-white/5 py-10 sm:py-14 px-5 sm:px-8 md:px-12 text-[#958ea0]">
       <div className="max-w-[1340px] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
@@ -19,14 +18,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenModal, onNavigate, onOpenP
           <span className="text-[10px] font-mono text-[#767082] tracking-wider uppercase sm:border-l sm:border-white/10 sm:pl-4">
             © 2026 SKILL PODS · SME INNOVATION ENGINE
           </span>
-          {onOpenPortfolio && (
-            <button
-              onClick={onOpenPortfolio}
-              className="text-[10px] font-mono text-purple-300 hover:text-white bg-purple-500/10 hover:bg-purple-500/20 px-2.5 py-1 rounded-full border border-purple-500/30 transition-all cursor-pointer"
-            >
-              👑 Created by Sanket Bhende &bull; Live Portfolio
-            </button>
-          )}
         </div>
 
         {/* Legal & Navigation Links */}

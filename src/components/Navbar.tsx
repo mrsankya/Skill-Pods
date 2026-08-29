@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, ArrowRight, ShieldCheck, Zap, Bell, Users, MessageSquare, Code2 } from 'lucide-react';
+import { Menu, X, ArrowRight, ShieldCheck, Zap, Bell, Users, MessageSquare } from 'lucide-react';
 import { ModalView } from '../types';
 import { SkillPodsLogo } from './SkillPodsLogo';
 
@@ -9,10 +9,9 @@ interface NavbarProps {
   onNavigate: (sectionId: string) => void;
   onOpenCommunity?: () => void;
   onOpenChat?: () => void;
-  onOpenPortfolio?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNavigate, onOpenCommunity, onOpenChat, onOpenPortfolio }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNavigate, onOpenCommunity, onOpenChat }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(3);
@@ -101,18 +100,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
               <MessageSquare className="w-3.5 h-3.5 text-purple-400" />
               <span>CHAT</span>
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            </button>
-          )}
-
-          {/* Developer Portfolio Button */}
-          {onOpenPortfolio && (
-            <button
-              onClick={onOpenPortfolio}
-              className="text-amber-200 hover:text-white bg-amber-500/15 hover:bg-amber-500/25 border border-amber-400/40 text-xs font-mono tracking-wider uppercase px-3.5 py-2 rounded-full transition-all cursor-pointer flex items-center gap-1.5 shadow-[0_0_15px_rgba(245,158,11,0.2)]"
-              title="View Sanket Bhende Developer Portfolio"
-            >
-              <Code2 className="w-3.5 h-3.5 text-amber-400" />
-              <span>PORTFOLIO</span>
             </button>
           )}
 
@@ -262,15 +249,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
             >
               PRICING
             </button>
-            {onOpenPortfolio && (
-              <button
-                onClick={() => { onOpenPortfolio(); setMobileMenuOpen(false); }}
-                className="text-left text-amber-300 font-bold hover:text-white py-2 flex items-center gap-2"
-              >
-                <Code2 className="w-4 h-4 text-amber-400" />
-                <span>👨‍💻 DEVELOPER PORTFOLIO</span>
-              </button>
-            )}
           </div>
           <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
             <button
