@@ -17,6 +17,7 @@ import {
   Activity
 } from 'lucide-react';
 import { MetricsData, ModalView } from '../types';
+import { HeroImageShowcase } from './HeroImageShowcase';
 
 interface HeroSectionProps {
   metrics: MetricsData;
@@ -95,6 +96,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
         </motion.div>
 
       </div>
+
+      {/* Real-World SME Field Discovery & Pod Cohort Sprints Sliding Strip (Left-to-Right) */}
+      <HeroImageShowcase />
 
       {/* Dramatic Purple Curved Light Arc & Integrated Feature Grid */}
       <div className="relative max-w-[1240px] mx-auto mt-4 sm:mt-8">
