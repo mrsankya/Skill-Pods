@@ -1,0 +1,226 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Skill Pods - Core Database Schemas & Mock Payload Registry (SIH26044)",
+  "description": "Database schemas and production-grade mock payloads for student cryptographic passports, pod-fit matching vectors, and milestone-gated escrow ledgers.",
+  "metadata": {
+    "target_problem_statement": "SIH26044 (Academia-Industry Collaboration for Skill Mapping, Internships, and Placement)",
+    "system_architecture_version": "v1.4.0-release",
+    "hash_algorithm": "HMAC-SHA256"
+  },
+  "schemas": {
+    "student_passport": {
+      "type": "object",
+      "properties": {
+        "student_id": { "type": "string", "pattern": "^STU-[0-9]{5}$" },
+        "personal_details": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "college_id": { "type": "string" },
+            "academic_credits_earned": { "type": "integer", "minimum": 0 },
+            "nisp_mapped_status": { "type": "boolean" }
+          },
+          "required": ["name", "college_id", "academic_credits_earned", "nisp_mapped_status"]
+        },
+        "verified_skill_badges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "skill_name": { "type": "string" },
+              "competency_level": { "type": "string", "enum": ["Novice", "Intermediate", "Advanced", "Expert"] },
+              "verified_by_mentor_id": { "type": "string" },
+              "linked_commit_sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+              "verification_timestamp": { "type": "string", "format": "date-time" }
+            },
+            "required": ["skill_name", "competency_level", "verified_by_mentor_id", "linked_commit_sha", "verification_timestamp"]
+          }
+        },
+        "cryptographic_signatures": {
+          "type": "object",
+          "properties": {
+            "hmac_payload_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            "verification_qr_payload": { "type": "string" }
+          },
+          "required": ["hmac_payload_hash", "verification_qr_payload"]
+        }
+      },
+      "required": ["student_id", "personal_details", "verified_skill_badges", "cryptographic_signatures"]
+    },
+    "pod_matching_vector": {
+      "type": "object",
+      "properties": {
+        "pod_id": { "type": "string", "pattern": "^POD-[0-9]{4}$" },
+        "sme_challenge_id": { "type": "string", "pattern": "^CHL-[0-9]{5}$" },
+        "requirements_vector": {
+          "type": "object",
+          "properties": {
+            "required_tech_stack": { "type": "array", "items": { "type": "string" } },
+            "difficulty_rating": { "type": "integer", "minimum": 1, "maximum": 5 }
+          },
+          "required": ["required_tech_stack", "difficulty_rating"]
+        },
+        "allocated_team_score": {
+          "type": "object",
+          "properties": {
+            "pod_fit_score": { "type": "number", "minimum": 0, "maximum": 100 },
+            "jaccard_similarity_index": { "type": "number", "minimum": 0, "maximum": 1.0 },
+            "team_velocity_coefficient": { "type": "number", "minimum": 0 }
+          },
+          "required": ["pod_fit_score", "jaccard_similarity_index", "team_velocity_coefficient"]
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "student_id": { "type": "string" },
+              "allocated_role": { "type": "string", "enum": ["Frontend-Lead", "Backend-Architect", "Database-Engineer", "QA-Specialist"] }
+            },
+            "required": ["student_id", "allocated_role"]
+          }
+        },
+        "industry_mentor": {
+          "type": "object",
+          "properties": {
+            "mentor_id": { "type": "string" },
+            "name": { "type": "string" },
+            "corporate_affiliation": { "type": "string" }
+          },
+          "required": ["mentor_id", "name", "corporate_affiliation"]
+        }
+      },
+      "required": ["pod_id", "sme_challenge_id", "requirements_vector", "allocated_team_score", "members", "industry_mentor"]
+    },
+    "escrow_milestone_contract": {
+      "type": "object",
+      "properties": {
+        "escrow_id": { "type": "string", "pattern": "^ESC-[0-9]{6}$" },
+        "pod_id": { "type": "string" },
+        "sme_id": { "type": "string" },
+        "financials": {
+          "type": "object",
+          "properties": {
+            "total_contract_value": { "type": "integer" },
+            "currency": { "type": "string", "default": "INR" },
+            "razorpay_virtual_account_id": { "type": "string" }
+          },
+          "required": ["total_contract_value", "currency", "razorpay_virtual_account_id"]
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "milestone_index": { "type": "integer" },
+              "description": { "type": "string" },
+              "payout_allocation_percent": { "type": "integer", "minimum": 1, "maximum": 100 },
+              "status": { "type": "string", "enum": ["LOCKED", "PENDING_MENTOR_APPROVAL", "RELEASED", "DISPUTED"] },
+              "mentor_signoff": { "type": "boolean" },
+              "verification_commit_sha": { "type": "string" }
+            },
+            "required": ["milestone_index", "description", "payout_allocation_percent", "status", "mentor_signoff"]
+          }
+        }
+      },
+      "required": ["escrow_id", "pod_id", "sme_id", "financials", "milestones"]
+    }
+  },
+  "mock_payloads": {
+    "student_passport": [
+      {
+        "student_id": "STU-08421",
+        "personal_details": {
+          "name": "Sakshi Patil",
+          "college_id": "GHRCEM-JAL-2023-CS04",
+          "academic_credits_earned": 16,
+          "nisp_mapped_status": true
+        },
+        "verified_skill_badges": [
+          {
+            "skill_name": "React-TypeScript UI Architecture",
+            "competency_level": "Advanced",
+            "verified_by_mentor_id": "MNT-90124",
+            "linked_commit_sha": "d4b1a20cfbc4a3390de25a1768bc3e85ac39c4fa",
+            "verification_timestamp": "2026-08-28T14:32:00Z"
+          },
+          {
+            "skill_name": "Node.js High-Velocity API Routing",
+            "competency_level": "Intermediate",
+            "verified_by_mentor_id": "MNT-90124",
+            "linked_commit_sha": "f1205c09a88eb2125e0b04a806c9a33bc7df7fe1",
+            "verification_timestamp": "2026-08-30T11:15:30Z"
+          }
+        ],
+        "cryptographic_signatures": {
+          "hmac_payload_hash": "f62b7194f1c1a93e39b98687f87ae196f183ef995de0e02c6762ee9cf451a9f0",
+          "verification_qr_payload": "https://skill-pods.pages.dev/verify/STU-08421?sig=f62b7194f1c1a93e39b98687f87ae196f183ef995de0e02c6762ee9cf451a9f0"
+        }
+      }
+    ],
+    "pod_matching_vector": [
+      {
+        "pod_id": "POD-1024",
+        "sme_challenge_id": "CHL-00352",
+        "requirements_vector": {
+          "required_tech_stack": ["React", "TailwindCSS", "Node.js", "Express", "MongoDB"],
+          "difficulty_rating": 3
+        },
+        "allocated_team_score": {
+          "pod_fit_score": 94.25,
+          "jaccard_similarity_index": 0.833,
+          "team_velocity_coefficient": 1.45
+        },
+        "members": [
+          { "student_id": "STU-08421", "allocated_role": "Frontend-Lead" },
+          { "student_id": "STU-08422", "allocated_role": "Backend-Architect" },
+          { "student_id": "STU-08423", "allocated_role": "Database-Engineer" },
+          { "student_id": "STU-08424", "allocated_role": "QA-Specialist" }
+        ],
+        "industry_mentor": {
+          "mentor_id": "MNT-90124",
+          "name": "Arvind Mehta",
+          "corporate_affiliation": "Google LLC India"
+        }
+      }
+    ],
+    "escrow_milestone_contract": [
+      {
+        "escrow_id": "ESC-402941",
+        "pod_id": "POD-1024",
+        "sme_id": "SME-77218",
+        "financials": {
+          "total_contract_value": 45000,
+          "currency": "INR",
+          "razorpay_virtual_account_id": "va_RzpP_901xLpq8Wq"
+        },
+        "milestones": [
+          {
+            "milestone_index": 1,
+            "description": "Figma Wireframes, DB Schema Approval & React boilerplate layout setup",
+            "payout_allocation_percent": 20,
+            "status": "RELEASED",
+            "mentor_signoff": true,
+            "verification_commit_sha": "a1b2c3d4e5f60718293041526374859607182930"
+          },
+          {
+            "milestone_index": 2,
+            "description": "Voice-to-PRD Parsing modules & Kanban Dynamic Interface integration",
+            "payout_allocation_percent": 40,
+            "status": "PENDING_MENTOR_APPROVAL",
+            "mentor_signoff": false,
+            "verification_commit_sha": "f1205c09a88eb2125e0b04a806c9a33bc7df7fe1"
+          },
+          {
+            "milestone_index": 3,
+            "description": "Full end-to-end integration testing, secure checkout deployment, and NISP compliance telemetry pass",
+            "payout_allocation_percent": 40,
+            "status": "LOCKED",
+            "mentor_signoff": false,
+            "verification_commit_sha": "N/A"
+          }
+        ]
+      }
+    ]
+  }
+}

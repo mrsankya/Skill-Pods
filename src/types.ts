@@ -177,7 +177,7 @@ export interface LiveEvent {
   type: 'deploy' | 'mentor' | 'perf' | 'sme' | 'pod' | 'marketplace' | 'milestone';
 }
 
-export type PageType = 'landing' | 'login' | 'dashboard';
+export type PageType = 'landing' | 'login' | 'dashboard' | 'not-found';
 
 export type UserRole = 'student' | 'sme' | 'mentor' | 'college' | 'admin';
 
@@ -199,7 +199,9 @@ export type ModalView =
   | 'pricing'
   | 'appointment'
   | 'docs' 
-  | 'contact';
+  | 'contact'
+  | 'privacy'
+  | 'terms';
 
 export interface CertificateItem {
   id: string;

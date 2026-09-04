@@ -134,25 +134,32 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
                   </button>
                 </div>
 
-                <div className="space-y-2 max-h-64 overflow-y-auto">
-                  <div className="p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-xs">
-                    <p className="font-bold text-emerald-300 text-[11px]">🎉 Milestone #2 Approved!</p>
-                    <p className="text-[11px] text-slate-300 mt-0.5">Sarah Chen signed off Sprint 2. ₹12,500 escrow released to Dev Patel.</p>
-                    <span className="text-[9px] font-mono text-emerald-400/80 mt-1 block">5 mins ago</span>
-                  </div>
+                {unreadCount > 0 ? (
+                  <div className="space-y-2 max-h-64 overflow-y-auto">
+                    <div className="p-2.5 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-xs">
+                      <p className="font-bold text-emerald-300 text-[11px]">🎉 Milestone #2 Approved!</p>
+                      <p className="text-[11px] text-slate-300 mt-0.5">Sarah Chen signed off Sprint 2. ₹12,500 escrow released to Dev Patel.</p>
+                      <span className="text-[9px] font-mono text-emerald-400/80 mt-1 block">5 mins ago</span>
+                    </div>
 
-                  <div className="p-2.5 rounded-xl bg-purple-950/30 border border-purple-500/30 text-xs">
-                    <p className="font-bold text-purple-300 text-[11px]">💼 New IP Marketplace Inquiry</p>
-                    <p className="text-[11px] text-slate-300 mt-0.5">Kestrel Freight requested a demo for Smart Attendance System.</p>
-                    <span className="text-[9px] font-mono text-purple-400/80 mt-1 block">22 mins ago</span>
-                  </div>
+                    <div className="p-2.5 rounded-xl bg-purple-950/30 border border-purple-500/30 text-xs">
+                      <p className="font-bold text-purple-300 text-[11px]">💼 New IP Marketplace Inquiry</p>
+                      <p className="text-[11px] text-slate-300 mt-0.5">Kestrel Freight requested a demo for Smart Attendance System.</p>
+                      <span className="text-[9px] font-mono text-purple-400/80 mt-1 block">22 mins ago</span>
+                    </div>
 
-                  <div className="p-2.5 rounded-xl bg-blue-950/30 border border-blue-500/30 text-xs">
-                    <p className="font-bold text-blue-300 text-[11px]">🤖 GURU AI Pod Match: 96%</p>
-                    <p className="text-[11px] text-slate-300 mt-0.5">You were matched with Pod Apex-2 as Full-Stack Engineer lead.</p>
-                    <span className="text-[9px] font-mono text-blue-400/80 mt-1 block">1 hour ago</span>
+                    <div className="p-2.5 rounded-xl bg-blue-950/30 border border-blue-500/30 text-xs">
+                      <p className="font-bold text-blue-300 text-[11px]">🤖 GURU AI Pod Match: 96%</p>
+                      <p className="text-[11px] text-slate-300 mt-0.5">You were matched with Pod Apex-2 as Full-Stack Engineer lead.</p>
+                      <span className="text-[9px] font-mono text-blue-400/80 mt-1 block">1 hour ago</span>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="py-6 text-center text-xs text-[#958ea0] font-mono space-y-1">
+                    <p className="text-emerald-400 font-bold">✓ All caught up</p>
+                    <p className="text-[11px]">No unread cohort alerts right now.</p>
+                  </div>
+                )}
 
                 <div className="pt-1 text-center">
                   <span className="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
@@ -209,19 +216,30 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
         </div>
 
         {/* Mobile menu button */}
-        <div className="flex md:hidden items-center gap-3">
-          <button
-            onClick={() => onOpenModal('join-cohort')}
-            className="glow-pill-secondary text-white text-[11px] font-mono uppercase px-3.5 py-1.5 rounded-full border border-[#d0bcff]/40"
-          >
-            START
-          </button>
+        <div className="flex md:hidden items-center gap-2">
+          {loggedInUser ? (
+            <button
+              onClick={() => onNavigate('dashboard')}
+              className="glow-pill-secondary text-white text-[10px] font-mono uppercase px-3 py-1.5 rounded-full border border-[#d0bcff]/40 flex items-center gap-1"
+            >
+              <Zap className="w-3 h-3 text-amber-400" />
+              <span>DASHBOARD</span>
+            </button>
+          ) : (
+            <button
+              onClick={() => onOpenModal('join-cohort')}
+              className="glow-pill-secondary text-white text-[11px] font-mono uppercase px-3.5 py-1.5 rounded-full border border-[#d0bcff]/40"
+            >
+              START
+            </button>
+          )}
+
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="text-[#a19ba9] hover:text-white p-1.5 rounded-lg"
+            className="text-[#a19ba9] hover:text-white p-2 rounded-lg border border-white/10"
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
 
@@ -229,40 +247,97 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0e0c16] border-b border-white/10 px-6 py-6 space-y-4 animate-in slide-in-from-top duration-200">
+        <div className="md:hidden bg-[#0e0c16]/95 backdrop-blur-2xl border-b border-white/10 px-6 py-6 space-y-4 animate-in slide-in-from-top duration-200">
           <div className="flex flex-col space-y-3 font-mono text-xs uppercase tracking-widest">
             <button
               onClick={() => { onNavigate('about'); setMobileMenuOpen(false); }}
-              className="text-left text-[#cbc3d7] hover:text-white py-2"
+              className="text-left text-[#cbc3d7] hover:text-white py-2 flex items-center justify-between"
             >
-              ABOUT
+              <span>ABOUT</span>
+              <ArrowRight className="w-3.5 h-3.5 text-white/30" />
             </button>
             <button
               onClick={() => { onNavigate('workflow'); setMobileMenuOpen(false); }}
-              className="text-left text-[#cbc3d7] hover:text-white py-2"
+              className="text-left text-[#cbc3d7] hover:text-white py-2 flex items-center justify-between"
             >
-              HOW IT WORKS
+              <span>HOW IT WORKS</span>
+              <ArrowRight className="w-3.5 h-3.5 text-white/30" />
             </button>
             <button
               onClick={() => { onNavigate('pricing'); setMobileMenuOpen(false); }}
-              className="text-left text-[#cbc3d7] hover:text-white py-2"
+              className="text-left text-[#cbc3d7] hover:text-white py-2 flex items-center justify-between"
             >
-              PRICING
+              <span>PRICING &amp; BOUNTIES</span>
+              <ArrowRight className="w-3.5 h-3.5 text-white/30" />
             </button>
+
+            {onOpenCommunity && (
+              <button
+                onClick={() => { onOpenCommunity(); setMobileMenuOpen(false); }}
+                className="text-left text-[#d0bcff] hover:text-white py-2 flex items-center justify-between border-t border-white/5 pt-3"
+              >
+                <span className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-purple-400" />
+                  COMMUNITY DIRECTORY
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300">EXPLORE</span>
+              </button>
+            )}
+
+            {onOpenChat && (
+              <button
+                onClick={() => { onOpenChat(); setMobileMenuOpen(false); }}
+                className="text-left text-[#d0bcff] hover:text-white py-2 flex items-center justify-between"
+              >
+                <span className="flex items-center gap-2">
+                  <MessageSquare className="w-4 h-4 text-emerald-400" />
+                  DIRECT MESSAGING
+                </span>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              </button>
+            )}
           </div>
+
           <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
-            <button
-              onClick={() => { onOpenModal('login'); setMobileMenuOpen(false); }}
-              className="w-full text-center text-xs font-mono text-white py-2.5 rounded-xl border border-white/10"
-            >
-              LOGIN
-            </button>
-            <button
-              onClick={() => { onOpenModal('join-cohort'); setMobileMenuOpen(false); }}
-              className="w-full text-center text-xs font-mono font-bold text-[#3c0091] bg-[#d0bcff] py-3 rounded-xl shadow-lg"
-            >
-              GET STARTED
-            </button>
+            {loggedInUser ? (
+              <>
+                <button
+                  onClick={() => { onNavigate('dashboard'); setMobileMenuOpen(false); }}
+                  className="w-full text-center text-xs font-mono font-bold text-[#3c0091] bg-[#d0bcff] py-3 rounded-xl shadow-lg flex items-center justify-center gap-2"
+                >
+                  <Zap className="w-4 h-4" />
+                  <span>OPEN DASHBOARD ({loggedInUser.name?.split(' ')[0] || 'WORKSPACE'})</span>
+                </button>
+                <button
+                  onClick={() => {
+                    localStorage.removeItem('skillpods_token');
+                    localStorage.removeItem('skillpods_jwt');
+                    localStorage.removeItem('skillpods_user');
+                    localStorage.setItem('skillpods_page', 'landing');
+                    setMobileMenuOpen(false);
+                    window.location.reload();
+                  }}
+                  className="w-full text-center text-xs font-mono text-rose-400 hover:text-rose-300 py-2.5 rounded-xl border border-rose-500/20 bg-rose-500/10"
+                >
+                  LOGOUT
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => { onOpenModal('login'); setMobileMenuOpen(false); }}
+                  className="w-full text-center text-xs font-mono text-white py-2.5 rounded-xl border border-white/10 hover:bg-white/5"
+                >
+                  LOGIN
+                </button>
+                <button
+                  onClick={() => { onOpenModal('join-cohort'); setMobileMenuOpen(false); }}
+                  className="w-full text-center text-xs font-mono font-bold text-[#3c0091] bg-[#d0bcff] py-3 rounded-xl shadow-lg"
+                >
+                  GET STARTED
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

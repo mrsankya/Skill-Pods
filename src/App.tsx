@@ -30,6 +30,7 @@ import { MentorDashboard } from './components/MentorDashboard';
 import { SmeDashboard } from './components/SmeDashboard';
 import { CollegeDashboard } from './components/CollegeDashboard';
 import { AdminDashboard } from './components/AdminDashboard';
+import { NotFoundPage } from './components/NotFoundPage';
 
 const initialMetrics: MetricsData = {
 
@@ -123,6 +124,40 @@ export default function App() {
   const [showMessagingModal, setShowMessagingModal] = useState(false);
   const [selectedChatRecipient, setSelectedChatRecipient] = useState<CommunityMember | null>(null);
 
+  // Synchronize dynamic Page Titles & Meta Descriptions across views
+  useEffect(() => {
+    let title = 'SKILL PODS - Demand-First Product Engine';
+    let desc = 'Turn real SME problems into production-ready products through student skill pods and industry mentorship.';
+
+    if (currentPage === 'login') {
+      title = 'Sign In / Register | SKILL PODS';
+      desc = 'Access your SkillPods workspace, manage active sprint pods, or list your college project.';
+    } else if (currentPage === 'dashboard') {
+      const roleTitles: Record<UserRole, string> = {
+        student: 'Student Workspace & Skill Passport | SKILL PODS',
+        mentor: 'Mentor Command Center & Stage-Gates | SKILL PODS',
+        sme: 'SME Problem Hub & AI Pod Matcher | SKILL PODS',
+        college: 'Institutional IP Registry & Deans Hub | SKILL PODS',
+        admin: 'SuperAdmin Security & Telemetry Console | SKILL PODS'
+      };
+      title = roleTitles[currentRole] || 'Workspace Dashboard | SKILL PODS';
+      desc = 'Live telemetry, verified skill passport endorsements, and production delivery milestones.';
+    } else if (currentPage === 'not-found') {
+      title = '404 Page Not Found | SKILL PODS';
+      desc = 'The requested pod workspace or node was not found.';
+    }
+
+    document.title = title;
+    
+    // Dynamic Meta Tags for SEO & Social Graph
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', desc);
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', title);
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', desc);
+  }, [currentPage, currentRole]);
+
   // Synchronize browser history / URL hash and resume authenticated session
   useEffect(() => {
     const handleHash = () => {
@@ -130,6 +165,8 @@ export default function App() {
       const p = window.location.pathname.toLowerCase();
       if (h === '#login' || p === '/login') {
         setCurrentPage('login');
+      } else if (h === '#404' || p === '/404') {
+        setCurrentPage('not-found');
       } else if (
         h === '#dashboard' || 
         h === '#profile' || 
@@ -350,7 +387,21 @@ export default function App() {
     );
   }
 
-  // 3. Primary Landing Page View
+  // 3. 404 Dedicated Not Found Page View
+  if (currentPage === 'not-found') {
+    return (
+      <NotFoundPage
+        onBackToHome={handleBackToHome}
+        onGoToLogin={() => handleOpenLogin('general')}
+        onGoToCommunity={() => {
+          handleBackToHome();
+          setTimeout(() => setShowCommunityModal(true), 100);
+        }}
+      />
+    );
+  }
+
+  // 4. Primary Landing Page View
   return (
     <div className="min-h-screen bg-[#08070d] text-[#e4e1e7] flex flex-col relative font-sans selection:bg-[#a87ffb]/30 selection:text-[#d0bcff]">
       
@@ -359,9 +410,18 @@ export default function App() {
 
       {/* Toast Notification */}
       {notification && (
-        <div className="fixed bottom-6 right-6 z-50 bg-[#171422] border border-[#a87ffb] text-white px-5 py-3 rounded-2xl shadow-[0_0_30px_rgba(168,127,251,0.4)] flex items-center gap-3 animate-in slide-in-from-bottom duration-300">
-          <span className="w-2.5 h-2.5 rounded-full bg-[#10b981] animate-pulse"></span>
-          <span className="font-mono text-xs">{notification}</span>
+        <div className="fixed bottom-6 right-6 z-50 bg-[#171422]/95 border border-[#a87ffb] text-white px-5 py-3 rounded-2xl shadow-[0_0_30px_rgba(168,127,251,0.4)] flex items-center justify-between gap-3 animate-in slide-in-from-bottom duration-300 backdrop-blur-xl">
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#10b981] animate-pulse"></span>
+            <span className="font-mono text-xs">{notification}</span>
+          </div>
+          <button
+            onClick={() => setNotification(null)}
+            className="text-[#958ea0] hover:text-white ml-2 text-xs font-mono p-1"
+            aria-label="Dismiss notification"
+          >
+            ✕
+          </button>
         </div>
       )}
 

@@ -300,7 +300,13 @@ export const CommunityNetworkModal: React.FC<CommunityNetworkModalProps> = ({
                     </span>
                   </div>
                   <p className="text-xs text-slate-400 mt-0.5">
-                    {selectedMemberDetail.email} • {selectedMemberDetail.organization || selectedMemberDetail.college}
+                    <a
+                      href={`mailto:${selectedMemberDetail.email}`}
+                      className="text-purple-400 hover:text-purple-300 hover:underline"
+                    >
+                      {selectedMemberDetail.email}
+                    </a>{' '}
+                    • {selectedMemberDetail.organization || selectedMemberDetail.college}
                   </p>
                 </div>
               </div>

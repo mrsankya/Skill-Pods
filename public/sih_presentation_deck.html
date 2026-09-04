@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SIH 2026 Pitch Deck — SIH26043 (Skill-Pods)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Geist', sans-serif;
+      background-color: #08070d;
+      color: #f1edfa;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .slide {
+      display: none;
+      min-height: 85vh;
+    }
+    .slide.active {
+      display: flex;
+    }
+    @media print {
+      body { background: white; color: black; }
+      .no-print { display: none !important; }
+      .slide { display: flex !important; page-break-after: always; min-height: 100vh; }
+    }
+  </style>
+</head>
+<body class="selection:bg-purple-500/30 selection:text-purple-200">
+
+  <!-- Top Fixed Bar -->
+  <header class="no-print border-b border-white/10 bg-[#0e0c18]/90 backdrop-blur-xl px-6 py-3.5 flex items-center justify-between sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-lg">
+        ⚡
+      </div>
+      <div>
+        <h1 class="text-xs font-mono font-bold text-white uppercase tracking-wider">SIH 2026 &bull; PS ID: SIH26043</h1>
+        <p class="text-[10px] text-purple-300">Govt of Jharkhand &bull; Ministry of Education Innovation Cell (MIC)</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a
+        href="/SkillPods_SIH26043_Official_Presentation.pdf"
+        download
+        class="text-xs font-mono font-bold bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/40 px-3.5 py-1.5 rounded-full flex items-center gap-1.5 transition-colors"
+      >
+        <span>📥 Download Official PDF</span>
+      </a>
+      <button
+        onclick="window.print()"
+        class="text-xs font-mono bg-purple-600/30 hover:bg-purple-600/50 text-purple-200 border border-purple-500/40 px-3.5 py-1.5 rounded-full transition-colors"
+      >
+        🖨️ Print Slides
+      </button>
+    </div>
+  </header>
+
+  <!-- Slide Presentation Container -->
+  <main class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- ================= SLIDE 1 ================= -->
+    <section class="slide active flex-col justify-between bg-[#120f21] border border-purple-500/30 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden" id="slide-1">
+      <div class="space-y-6">
+        <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono uppercase tracking-wider">
+          <span>🏛️ MINISTRY OF EDUCATION'S INNOVATION CELL (MIC) &bull; GOVT OF JHARKHAND</span>
+        </div>
+
+        <div>
+          <h1 class="text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-[#d0bcff] to-purple-400 leading-tight">
+            SKILL-PODS: DEMAND-FIRST SOCIETAL INNOVATION ENGINE
+          </h1>
+          <p class="text-sm sm:text-base text-purple-200/80 mt-3 font-normal leading-relaxed max-w-4xl">
+            A Digital Platform to Crowdsource Societal Challenges & Facilitate Collaborative Problem-Solving through Universities and Industry Partnerships
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-2">
+            <h3 class="text-xs font-mono text-purple-400 font-bold uppercase tracking-wider">Problem Statement Details</h3>
+            <p class="text-xs text-slate-300"><b class="text-white">PS ID:</b> <span class="text-emerald-400 font-mono font-bold">SIH26043</span></p>
+            <p class="text-xs text-slate-300"><b class="text-white">Problem Creator:</b> Sarim Moin</p>
+            <p class="text-xs text-slate-300"><b class="text-white">Organization:</b> Government of Jharkhand</p>
+            <p class="text-xs text-slate-300"><b class="text-white">Department:</b> Ministry of Education's Innovation Cell (MIC)</p>
+          </div>
+
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-2">
+            <h3 class="text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider">Core Solution Pillars</h3>
+            <p class="text-xs text-slate-300">• <b class="text-white">Citizen Crowdsourcing:</b> Web, Mobile & Multilingual Voice-to-PRD</p>
+            <p class="text-xs text-slate-300">• <b class="text-white">GURU AI Matching:</b> Automatic 10-domain routing to Higher Education Institutions</p>
+            <p class="text-xs text-slate-300">• <b class="text-white">Multidisciplinary Pods:</b> Student + Faculty + Industry Mentors</p>
+            <p class="text-xs text-slate-300">• <b class="text-white">NEP 2020 Skill Passports:</b> Cryptographic SHA-256 academic credits</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400 mt-6">
+        <span class="text-purple-300 font-bold">Footer: [Your Team Name]</span>
+        <span>Slide 1 of 6 &bull; Cover</span>
+      </div>
+    </section>
+
+    <!-- ================= SLIDE 2 ================= -->
+    <section class="slide flex-col justify-between bg-[#120f21] border border-purple-500/30 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden" id="slide-2">
+      <div class="space-y-6">
+        <div>
+          <span class="text-xs font-mono text-purple-400 font-bold uppercase tracking-widest">📌 Slide 2 &bull; Idea Title</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">Proposed Solution & Unique Innovation</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-purple-300 font-bold uppercase">1. Detailed Solution</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              • <b>Citizen Ingestion:</b> Citizens, Panchayats & ULBs submit hyper-local challenges with GPS, photos & voice audio.<br><br>
+              • <b>AI Domain Routing:</b> Categorizes challenges into 10 state themes (Agriculture, Water, Health, Sanitation, etc.).<br><br>
+              • <b>Multidisciplinary Pods:</b> Student engineers & faculty form specialized sprint pods.
+            </p>
+          </div>
+
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-emerald-300 font-bold uppercase">2. Problem Addressed</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              • <b>Eliminates Fragmentation:</b> Connects grassroot citizen problems with university engineering labs.<br><br>
+              • <b>Stage-Gate Accountability:</b> 5-stage milestone gates ensure student projects don't die after college exams.<br><br>
+              • <b>Rural Inclusivity:</b> Spoken audio intake empowers non-technical rural Panchayat leaders.
+            </p>
+          </div>
+
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-amber-300 font-bold uppercase">3. Innovation & Uniqueness</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              • <b>🪪 Verifiable Skill Passport:</b> Cryptographic SHA-256 stamped proof-of-work for NEP 2020 credits.<br><br>
+              • <b>🔒 Milestone Escrow Vault:</b> Zero-loss fund locking for CSR & MSME sponsors.<br><br>
+              • <b>🏫 NAAC/NIRF Exporter:</b> 1-click official audit certificates for criteria 3.5.1 and 5.2.1.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400 mt-6">
+        <span class="text-purple-300 font-bold">Footer: [Your Team Name]</span>
+        <span>Slide 2 of 6</span>
+      </div>
+    </section>
+
+    <!-- ================= SLIDE 3 ================= -->
+    <section class="slide flex-col justify-between bg-[#120f21] border border-purple-500/30 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden" id="slide-3">
+      <div class="space-y-6">
+        <div>
+          <span class="text-xs font-mono text-purple-400 font-bold uppercase tracking-widest">📌 Slide 3 &bull; Technical Approach</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">Technologies & Implementation Methodology</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-purple-300 font-bold uppercase">Technology Stack Breakdown</h3>
+            <ul class="text-xs text-slate-300 space-y-2">
+              <li>• <b class="text-white">Frontend:</b> React 19, TypeScript, Tailwind CSS v4, Motion, Lucide icons</li>
+              <li>• <b class="text-white">Backend APIs:</b> Node.js / Express.js REST APIs with TypeScript runtime</li>
+              <li>• <b class="text-white">AI / NLP Engine:</b> Gemini / GenAI multi-modal models for voice-to-text PRD translation</li>
+              <li>• <b class="text-white">Database & Auth:</b> MongoDB Atlas / SQLite persistence with SHA-256 HMAC JWT tokens</li>
+              <li>• <b class="text-white">Cloud & DevOps:</b> Docker containerization, WebRTC mesh video pods, GitHub Actions CI/CD</li>
+            </ul>
+          </div>
+
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-emerald-300 font-bold uppercase">5-Stage Implementation Methodology</h3>
+            <ol class="text-xs text-slate-300 space-y-2 list-decimal list-inside">
+              <li><b class="text-white">Problem Crowdsourcing:</b> Citizens & Panchayats submit challenges with GPS & evidence.</li>
+              <li><b class="text-white">AI Classification & Allocation:</b> Automatic domain routing to matched universities.</li>
+              <li><b class="text-white">Multidisciplinary Pod Sprints:</b> Student pods build solutions with faculty & mentors.</li>
+              <li><b class="text-white">Milestone Gate & Escrow Release:</b> Mentors verify PRs & tests before fund disbursement.</li>
+              <li><b class="text-white">Field Deployment & IP Transfer:</b> Deploy to local bodies & institutional IP registry.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400 mt-6">
+        <span class="text-purple-300 font-bold">Footer: [Your Team Name]</span>
+        <span>Slide 3 of 6</span>
+      </div>
+    </section>
+
+    <!-- ================= SLIDE 4 ================= -->
+    <section class="slide flex-col justify-between bg-[#120f21] border border-purple-500/30 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden" id="slide-4">
+      <div class="space-y-6">
+        <div>
+          <span class="text-xs font-mono text-purple-400 font-bold uppercase tracking-widest">📌 Slide 4 &bull; Feasibility & Viability</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">Feasibility, Risk Analysis & Mitigation Strategy</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-purple-300 font-bold uppercase">1. Feasibility Analysis</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              • <b>Technical Feasibility:</b> Responsive, low-bandwidth architecture (&lt;50ms latency) optimized for mobile networks.<br><br>
+              • <b>Operational Feasibility:</b> Integrates seamlessly with semester capstone projects & NEP 2020 internships.<br><br>
+              • <b>Financial Viability:</b> Self-sustaining escrow model funded by CSR, MSMEs, and state innovation grants.
+            </p>
+          </div>
+
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-rose-300 font-bold uppercase">2. Challenges & Risks</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              • <b>Rural Digital Divide:</b> Remote citizens struggling with written English forms.<br><br>
+              • <b>Project Abandonment:</b> Students abandoning code after semester viva.<br><br>
+              • <b>Code Quality:</b> Substandard deliverables or AI hallucinations.<br><br>
+              • <b>Industry Reluctance:</b> MSME hesitation regarding IP rights.
+            </p>
+          </div>
+
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-emerald-300 font-bold uppercase">3. Mitigation Strategies</h3>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              • <b>Fix A:</b> Spoken regional Voice-to-PRD AI & Common Service Center integration.<br><br>
+              • <b>Fix B:</b> Milestone escrow bounties & NEP credits tied to graduation.<br><br>
+              • <b>Fix C:</b> Mandatory CI/CD testing & mentor sign-off gates.<br><br>
+              • <b>Fix D:</b> 100% commercial usage rights for sponsors.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400 mt-6">
+        <span class="text-purple-300 font-bold">Footer: [Your Team Name]</span>
+        <span>Slide 4 of 6</span>
+      </div>
+    </section>
+
+    <!-- ================= SLIDE 5 ================= -->
+    <section class="slide flex-col justify-between bg-[#120f21] border border-purple-500/30 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden" id="slide-5">
+      <div class="space-y-6">
+        <div>
+          <span class="text-xs font-mono text-purple-400 font-bold uppercase tracking-widest">📌 Slide 5 &bull; Impact & Benefits</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">Multi-Dimensional Social & Economic Benefits</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-purple-300 font-bold uppercase">Impact on Target Audience</h3>
+            <ul class="text-xs text-slate-300 space-y-2">
+              <li>• <b class="text-white">Citizens of Jharkhand:</b> Fast, transparent resolution of civic, healthcare & farming bottlenecks.</li>
+              <li>• <b class="text-white">Students & Researchers:</b> Real-world problem-solving, ₹10k–₹50k sprint bounties, verified portfolio.</li>
+              <li>• <b class="text-white">Universities (HEIs):</b> High NAAC/NIRF innovation ratings, corporate placements, software royalties.</li>
+              <li>• <b class="text-white">MSMEs & Startups:</b> Agile R&D talent and ready-to-deploy software at a fraction of IT costs.</li>
+            </ul>
+          </div>
+
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-emerald-300 font-bold uppercase">Multi-Dimensional Benefits</h3>
+            <ul class="text-xs text-slate-300 space-y-2">
+              <li>• <b class="text-white">Social Impact:</b> Direct empowerment of Panchayats, rural healthcare & water management.</li>
+              <li>• <b class="text-white">Economic Impact:</b> Direct wealth creation for student builders & local business digitization.</li>
+              <li>• <b class="text-white">Academic NEP 2020:</b> Complete multidisciplinary experiential learning credit transfer.</li>
+              <li>• <b class="text-white">Governance Impact:</b> Real-time district telemetry for Govt of Jharkhand & MIC.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400 mt-6">
+        <span class="text-purple-300 font-bold">Footer: [Your Team Name]</span>
+        <span>Slide 5 of 6</span>
+      </div>
+    </section>
+
+    <!-- ================= SLIDE 6 ================= -->
+    <section class="slide flex-col justify-between bg-[#120f21] border border-purple-500/30 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden" id="slide-6">
+      <div class="space-y-6">
+        <div>
+          <span class="text-xs font-mono text-purple-400 font-bold uppercase tracking-widest">📌 Slide 6 &bull; Research & References</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">Research Work, Policy Standards & Live Prototype</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-purple-300 font-bold uppercase">Policy & Research Work References</h3>
+            <ul class="text-xs text-slate-300 space-y-2">
+              <li>• <b class="text-white">NEP 2020:</b> National Education Policy (Sections 11 & 12 on Experiential Learning & Industry Linkages).</li>
+              <li>• <b class="text-white">AICTE & MIC:</b> National Innovation and Startup Policy (NISP) for HEIs.</li>
+              <li>• <b class="text-white">NAAC Manual:</b> Criterion 3.5.1 (Collaborations) & 5.2.1 (Student Progression).</li>
+              <li>• <b class="text-white">Academic Papers:</b> Open Innovation Models (Chesbrough, H.) & Distributed Agile Sprint Orchestration (IEEE).</li>
+            </ul>
+          </div>
+
+          <div class="bg-black/30 p-5 rounded-2xl border border-white/5 space-y-3">
+            <h3 class="text-xs font-mono text-emerald-300 font-bold uppercase">Live Prototype & Source Assets</h3>
+            <ul class="text-xs text-slate-300 space-y-2">
+              <li>• <b class="text-white">🌐 Live Prototype:</b> <a href="https://skill-pods.pages.dev" target="_blank" class="text-purple-400 hover:underline">https://skill-pods.pages.dev</a></li>
+              <li>• <b class="text-white">🐙 GitHub Repository:</b> <a href="https://github.com/Sakshi-patil48/Skill-Pods.git" target="_blank" class="text-purple-400 hover:underline">github.com/Sakshi-patil48/Skill-Pods</a></li>
+              <li>• <b class="text-white">👑 SuperAdmin Console:</b> sanketbhende0@gmail.com</li>
+              <li>• <b class="text-white">🧪 Evaluation Roles:</b> Student, Mentor, SME, College Dean, Admin</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-white/10 flex items-center justify-between text-xs font-mono text-slate-400 mt-6">
+        <span class="text-purple-300 font-bold">Footer: [Your Team Name]</span>
+        <span>Slide 6 of 6 &bull; Final Slide</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Interactive Slide Controls (No Print) -->
+  <footer class="no-print max-w-6xl mx-auto px-4 pb-12 flex items-center justify-between">
+    <button
+      id="prev-btn"
+      onclick="prevSlide()"
+      class="text-xs font-mono uppercase tracking-widest px-6 py-2.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all disabled:opacity-30 cursor-pointer"
+    >
+      &larr; Previous Slide
+    </button>
+
+    <div class="flex items-center gap-2" id="slide-indicators">
+      <span class="w-2.5 h-2.5 rounded-full bg-purple-500 cursor-pointer" onclick="goToSlide(1)"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-white/20 cursor-pointer" onclick="goToSlide(2)"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-white/20 cursor-pointer" onclick="goToSlide(3)"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-white/20 cursor-pointer" onclick="goToSlide(4)"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-white/20 cursor-pointer" onclick="goToSlide(5)"></span>
+      <span class="w-2.5 h-2.5 rounded-full bg-white/20 cursor-pointer" onclick="goToSlide(6)"></span>
+    </div>
+
+    <button
+      id="next-btn"
+      onclick="nextSlide()"
+      class="text-xs font-mono uppercase tracking-widest px-7 py-2.5 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white font-bold transition-all cursor-pointer shadow-lg shadow-purple-900/40"
+    >
+      Next Slide &rarr;
+    </button>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 6;
+
+    function updateSlides() {
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        if (slide) {
+          if (i === currentSlide) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
+        }
+      }
+
+      // Update dots
+      const dots = document.querySelectorAll('#slide-indicators span');
+      dots.forEach((dot, idx) => {
+        if (idx + 1 === currentSlide) {
+          dot.className = 'w-6 h-2.5 rounded-full bg-purple-400 transition-all';
+        } else {
+          dot.className = 'w-2.5 h-2.5 rounded-full bg-white/20 hover:bg-white/40 transition-all cursor-pointer';
+        }
+      });
+
+      document.getElementById('prev-btn').disabled = currentSlide === 1;
+      document.getElementById('next-btn').innerText = currentSlide === totalSlides ? 'Restart ↺' : 'Next Slide →';
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+      } else {
+        currentSlide = 1;
+      }
+      updateSlides();
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlides();
+      }
+    }
+
+    function goToSlide(n) {
+      currentSlide = n;
+      updateSlides();
+    }
+
+    // Keyboard Arrow navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    updateSlides();
+  </script>
+</body>
+</html>
