@@ -38,6 +38,10 @@ import {
 import { ThematicDomain, JharkhandDistrict, SmeProblem } from '../types';
 import { SkillPodsLogo } from './SkillPodsLogo';
 import { CitizenEasySubmitModal, EasyProblemSubmission } from './CitizenEasySubmitModal';
+import { JharkhandDistrictHeatmap } from './JharkhandDistrictHeatmap';
+import { CitizenWhatsAppSimulatorModal } from './CitizenWhatsAppSimulatorModal';
+import { CsrGrantPledgeModal } from './CsrGrantPledgeModal';
+import { PriFieldSignOffModal } from './PriFieldSignOffModal';
 import { translations, Language } from '../data/translations';
 import sihDataset from '../data/sih_problem_statements.json';
 
@@ -95,6 +99,12 @@ export const PublicSocietalDashboard: React.FC<PublicSocietalDashboardProps> = (
   const [trackedChallenge, setTrackedChallenge] = useState<PublicChallenge | null>(null);
   const [visibleLimit, setVisibleLimit] = useState(24);
   const [isEasySubmitModalOpen, setIsEasySubmitModalOpen] = useState(false);
+  const [isHeatmapOpen, setIsHeatmapOpen] = useState(false);
+  const [isWhatsAppModalOpen, setIsWhatsAppModalOpen] = useState(false);
+  const [pledgeTargetChallenge, setPledgeTargetChallenge] = useState<PublicChallenge | null>(null);
+  const [priTargetChallenge, setPriTargetChallenge] = useState<PublicChallenge | null>(null);
+  const [csrOverrideBounties, setCsrOverrideBounties] = useState<Record<string, { bounty: string; partner: string }>>({});
+  const [priValidatedIds, setPriValidatedIds] = useState<Record<string, boolean>>({});
   const [userCreatedChallenges, setUserCreatedChallenges] = useState<PublicChallenge[]>([]);
   const [copiedPsId, setCopiedPsId] = useState<string | null>(null);
 
@@ -295,7 +305,78 @@ export const PublicSocietalDashboard: React.FC<PublicSocietalDashboardProps> = (
     submittedCount: s.submittedCount
   }));
 
-  const allChallenges = [...userCreatedChallenges, ...challengesList, ...formattedSihList];
+  const allChallenges = [...userCreatedChallenges, ...challengesList, ...formattedSihList].map(c => {
+    const csr = csrOverrideBounties[c.id];
+    const isPri = priValidatedIds[c.id];
+    return {
+      ...c,
+      bounty: csr ? `${c.bounty} + ${csr.bounty}` : c.bounty,
+      csrPartner: csr ? `${csr.partner}` : c.csrPartner,
+      stage: isPri ? (5 as 1 | 2 | 3 | 4 | 5) : c.stage,
+      stageName: isPri ? ('Deployed & Validated' as const) : c.stageName
+    };
+  });
+
+  const handleWhatsAppTicketCreated = (ticket: any) => {
+    const newChallenge: PublicChallenge = {
+      id: ticket.id,
+      ticketNo: ticket.ticketNo,
+      title: ticket.title,
+      thematicDomain: ticket.thematicDomain,
+      district: ticket.district,
+      blockVillage: ticket.blockVillage,
+      submitterType: ticket.submitterType,
+      submitterName: ticket.submitterName,
+      description: ticket.description,
+      bounty: '₹50,000 Govt/CSR Pilot Grant',
+      csrPartner: 'Jharkhand State Civic Fund',
+      upvotes: 1,
+      stage: 1,
+      stageName: 'Submitted',
+      assignedPod: 'AI Triaging for University Pod Match...',
+      university: 'State HEI Consortium',
+      facultyMentor: 'District Technical Advisor',
+      beneficiaries: 'Panchayat Hamlet',
+      evidenceSummary: ticket.mediaType === 'voice' ? 'WhatsApp Voice Audio Transcribed' : 'WhatsApp Text Helpline Message',
+      submittedDate: 'Just now'
+    };
+
+    setUserCreatedChallenges(prev => [newChallenge, ...prev]);
+    setTrackTicketInput(ticket.ticketNo);
+    setTrackedChallenge(newChallenge);
+    setActiveTabMode('ALL');
+  };
+
+  const handlePledgeSuccess = (pledge: {
+    companyName: string;
+    amount: number;
+    formattedAmount: string;
+    certificateId: string;
+  }) => {
+    if (pledgeTargetChallenge) {
+      setCsrOverrideBounties(prev => ({
+        ...prev,
+        [pledgeTargetChallenge.id]: {
+          bounty: pledge.formattedAmount,
+          partner: `${pledge.companyName} (Escrow Sealed)`
+        }
+      }));
+    }
+  };
+
+  const handlePriValidationSuccess = (result: {
+    ticketNo: string;
+    sarpanchName: string;
+    panchayatName: string;
+    certificateNumber: string;
+  }) => {
+    if (priTargetChallenge) {
+      setPriValidatedIds(prev => ({
+        ...prev,
+        [priTargetChallenge.id]: true
+      }));
+    }
+  };
 
   const handleTrackTicket = (e: React.FormEvent) => {
     e.preventDefault();
@@ -360,6 +441,41 @@ export const PublicSocietalDashboard: React.FC<PublicSocietalDashboardProps> = (
         onSubmitSuccess={handleEasySubmitSuccess}
       />
 
+      {/* WhatsApp & SMS Citizen Simulator Modal */}
+      <CitizenWhatsAppSimulatorModal
+        isOpen={isWhatsAppModalOpen}
+        onClose={() => setIsWhatsAppModalOpen(false)}
+        onTicketCreated={handleWhatsAppTicketCreated}
+      />
+
+      {/* CSR Grant Pledge Modal */}
+      {pledgeTargetChallenge && (
+        <CsrGrantPledgeModal
+          isOpen={!!pledgeTargetChallenge}
+          onClose={() => setPledgeTargetChallenge(null)}
+          challengeTitle={pledgeTargetChallenge.title}
+          ticketNo={pledgeTargetChallenge.ticketNo}
+          district={pledgeTargetChallenge.district}
+          currentBounty={pledgeTargetChallenge.bounty}
+          onPledgeSuccess={handlePledgeSuccess}
+        />
+      )}
+
+      {/* Gram Panchayat (PRI) Validation Modal */}
+      {priTargetChallenge && (
+        <PriFieldSignOffModal
+          isOpen={!!priTargetChallenge}
+          onClose={() => setPriTargetChallenge(null)}
+          ticketNo={priTargetChallenge.ticketNo}
+          challengeTitle={priTargetChallenge.title}
+          district={priTargetChallenge.district}
+          assignedPod={priTargetChallenge.assignedPod || 'Engineering Student Pod'}
+          university={priTargetChallenge.university || 'State University'}
+          facultyMentor={priTargetChallenge.facultyMentor || 'District Technical Advisor'}
+          onValidationSuccess={handlePriValidationSuccess}
+        />
+      )}
+
       {/* Top Navigation Bar - Fully Responsive */}
       <header className="sticky top-0 z-50 bg-[#13111c]/95 backdrop-blur-md border-b border-[#312a45]">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-0 sm:h-20 flex flex-wrap items-center justify-between gap-2.5 sm:gap-4">
@@ -391,7 +507,31 @@ export const PublicSocietalDashboard: React.FC<PublicSocietalDashboardProps> = (
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+            {/* 24-District GIS Map Button */}
+            <button
+              onClick={() => setIsHeatmapOpen(prev => !prev)}
+              className={`font-mono text-[11px] sm:text-xs font-bold px-3 py-2 rounded-full border transition-all cursor-pointer flex items-center gap-1.5 ${
+                isHeatmapOpen
+                  ? 'bg-indigo-500 text-white border-indigo-400 shadow-md shadow-indigo-500/30'
+                  : 'bg-white/5 hover:bg-white/10 text-[#d0bcff] border-[#d0bcff]/30'
+              }`}
+              title="Toggle 24-District Societal GIS Heatmap"
+            >
+              <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+              <span className="hidden sm:inline">24-District</span> Heatmap
+            </button>
+
+            {/* WhatsApp Helpline Simulator */}
+            <button
+              onClick={() => setIsWhatsAppModalOpen(true)}
+              className="bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-mono text-[11px] sm:text-xs font-bold px-3 py-2 rounded-full transition-all cursor-pointer flex items-center gap-1.5"
+              title="Offline Rural WhatsApp/SMS Helpline (24x7)"
+            >
+              <span className="text-emerald-400">💬</span>
+              <span className="hidden md:inline">WhatsApp</span> Helpline
+            </button>
+
             {/* Language Selector (EN / HI / MR) */}
             <div className="flex items-center p-1 bg-[#1c182b] border border-[#3d3356] rounded-xl text-xs font-mono">
               <button
@@ -565,11 +705,43 @@ export const PublicSocietalDashboard: React.FC<PublicSocietalDashboardProps> = (
                     <div className="text-[10px] text-slate-400">Chhota video upload</div>
                   </div>
                 </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIsWhatsAppModalOpen(true)}
+                  className="p-3 rounded-2xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/40 hover:border-emerald-400 transition-all text-left flex items-center gap-2.5 group cursor-pointer col-span-2 sm:col-span-1"
+                >
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500/20 group-hover:bg-emerald-500/30 text-emerald-300 flex items-center justify-center shrink-0">
+                    💬
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-white group-hover:text-emerald-300">WhatsApp</div>
+                    <div className="text-[10px] text-emerald-300/80">Gramin Bot 24x7</div>
+                  </div>
+                </button>
               </div>
             </div>
 
           </div>
         </div>
+
+        {/* Interactive 24-District GIS Heatmap (SIH26043 Mandate) */}
+        {isHeatmapOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+          >
+            <JharkhandDistrictHeatmap
+              selectedDistrict={selectedDistrict}
+              onSelectDistrict={(dist) => {
+                setSelectedDistrict(dist);
+                setActiveTabMode('LOCAL_JHARKHAND');
+              }}
+              onClose={() => setIsHeatmapOpen(false)}
+            />
+          </motion.div>
+        )}
 
         {/* Citizen "Track My Issue" Search Widget - Responsive Form */}
         <div className="p-4 sm:p-6 rounded-2xl bg-[#171424] border border-[#d0bcff]/20 space-y-3">
@@ -894,6 +1066,13 @@ export const PublicSocietalDashboard: React.FC<PublicSocietalDashboardProps> = (
                           </span>
                         )}
 
+                        {priValidatedIds[ch.id] && (
+                          <span className="font-mono text-[10px] sm:text-2xs font-bold text-emerald-300 bg-emerald-500/20 border border-emerald-400/40 px-2 sm:px-2.5 py-0.5 rounded-md flex items-center gap-1">
+                            <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                            <span>PRI Validated ✓</span>
+                          </span>
+                        )}
+
                         <span className="font-mono text-[10px] sm:text-2xs text-[#d0bcff] bg-[#d0bcff]/10 border border-[#d0bcff]/20 px-2 sm:px-2.5 py-0.5 rounded-md font-bold">
                           {ch.ticketNo}
                         </span>
@@ -975,6 +1154,30 @@ export const PublicSocietalDashboard: React.FC<PublicSocietalDashboardProps> = (
                         <div className="text-[10px] sm:text-2xs font-mono text-[#a78bfa] uppercase">{t.pilotGrant}</div>
                         <div className="text-xs sm:text-sm font-black text-white">{ch.bounty}</div>
                         <div className="text-[9px] sm:text-[10px] text-slate-400 max-w-[160px] truncate">{ch.csrPartner}</div>
+
+                        <div className="flex items-center gap-1.5 mt-2 justify-end flex-wrap">
+                          <button
+                            type="button"
+                            onClick={() => setPledgeTargetChallenge(ch)}
+                            className="px-2.5 py-1 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 font-mono text-[10px] font-bold transition-all cursor-pointer flex items-center gap-1"
+                            title="Pledge CSR Pilot Funding into Escrow"
+                          >
+                            <Building2 className="w-3 h-3" />
+                            <span>Pledge CSR</span>
+                          </button>
+
+                          {!ch.isNationalSih && (
+                            <button
+                              type="button"
+                              onClick={() => setPriTargetChallenge(ch)}
+                              className="px-2.5 py-1 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 font-mono text-[10px] font-bold transition-all cursor-pointer flex items-center gap-1"
+                              title="Issue Gram Panchayat (PRI) Field Completion Seal"
+                            >
+                              <Landmark className="w-3 h-3" />
+                              <span>PRI Seal</span>
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>

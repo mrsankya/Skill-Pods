@@ -27,6 +27,7 @@ import {
   Sparkle
 } from 'lucide-react';
 import { ThematicDomain, JharkhandDistrict, THEMATIC_DOMAINS, JHARKHAND_DISTRICTS } from '../types';
+import { AiDuplicateCheckBanner, DuplicateMatchResult } from './AiDuplicateCheckBanner';
 
 export interface EasyProblemSubmission {
   id: string;
@@ -111,7 +112,47 @@ export const CitizenEasySubmitModal: React.FC<CitizenEasySubmitModalProps> = ({
     }
   ]);
   const [chatInput, setChatInput] = useState('');
+  const [isDuplicateDismissed, setIsDuplicateDismissed] = useState(false);
   const chatBottomRef = useRef<HTMLDivElement>(null);
+
+  // AI Semantic Deduplication calculation
+  const duplicateMatch: DuplicateMatchResult | null = React.useMemo(() => {
+    if (isDuplicateDismissed) return null;
+    const textToCheck = `${problemTitle} ${description} ${chatInput}`.toLowerCase();
+    if (!textToCheck.trim() || textToCheck.length < 10) return null;
+
+    if (textToCheck.includes('water') || textToCheck.includes('fluoride') || textToCheck.includes('handpump') || textToCheck.includes('paani') || textToCheck.includes('pani')) {
+      return {
+        similarityScore: 92,
+        existingTicketNo: 'JH-WATER-2026-081',
+        existingTitle: 'Solar IoT Fluoride & Water Contaminant Alert Network',
+        district: 'Khunti',
+        assignedPod: 'Jal-Rakshak Pod (IIT Dhanbad)',
+        existingId: 'ch-01'
+      };
+    }
+    if (textToCheck.includes('waste') || textToCheck.includes('plastic') || textToCheck.includes('kachra') || textToCheck.includes('kooda')) {
+      return {
+        similarityScore: 88,
+        existingTicketNo: 'JH-URBAN-2026-067',
+        existingTitle: 'Automated Municipal Solid Waste Segregation & Plastic Buyback Hub',
+        district: 'Ranchi',
+        assignedPod: 'Ranchi University CS Dept',
+        existingId: 'ch-06'
+      };
+    }
+    if (textToCheck.includes('irrigation') || textToCheck.includes('kheti') || textToCheck.includes('drought') || textToCheck.includes('sukha') || textToCheck.includes('canal')) {
+      return {
+        similarityScore: 78,
+        existingTicketNo: 'JH-AGRI-2026-034',
+        existingTitle: 'Solar Automated Tail-End Canal Telemetry & Drip Hub',
+        district: 'Palamu',
+        assignedPod: 'Birsa Agri Tech Pod',
+        existingId: 'ch-03'
+      };
+    }
+    return null;
+  }, [problemTitle, description, chatInput, isDuplicateDismissed]);
 
   useEffect(() => {
     chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -562,6 +603,30 @@ export const CitizenEasySubmitModal: React.FC<CitizenEasySubmitModalProps> = ({
                 )}
               </div>
             )}
+
+            {/* AI Semantic Deduplication Banner */}
+            <AiDuplicateCheckBanner
+              match={duplicateMatch}
+              onCorroborateExisting={(existingId, ticketNo) => {
+                setSubmittedTicket(ticketNo);
+                onSubmitSuccess({
+                  id: `corroborate-${Date.now()}`,
+                  ticketNo: ticketNo,
+                  title: problemTitle || 'Community Evidence Corroboration',
+                  description: `[Corroborated by ${citizenName || 'Local Villager'}]: ${description || 'Evidence corroborated for this ground problem.'}`,
+                  thematicDomain: domain,
+                  district: district,
+                  blockVillage: villageBlock || 'Village Hamlet',
+                  submitterName: citizenName || 'Villager',
+                  submitterPhone: citizenPhone,
+                  submitterType: 'Villager (Corroborating Evidence)',
+                  mediaType: activeTab,
+                  photoFiles: uploadedPhotos,
+                  submittedAt: 'Just now'
+                });
+              }}
+              onProceedAnyway={() => setIsDuplicateDismissed(true)}
+            />
 
             {/* Common Details Form (District, Village, Contact) */}
             <form onSubmit={handleFinalSubmit} className="space-y-3.5 pt-2 border-t border-[#262038]">
