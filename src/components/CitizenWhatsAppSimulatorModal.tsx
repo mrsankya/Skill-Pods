@@ -59,7 +59,7 @@ export const CitizenWhatsAppSimulatorModal: React.FC<CitizenWhatsAppSimulatorMod
     {
       id: 'msg-1',
       sender: 'bot',
-      text: '🙏 Namaste! Jharkhand Sarkar & SkillPods MIC Civic Helpline me aapka swagat hai.\n\nAap bina kisi technical jhanjhat ke apne gaon ya shahar ki koi bhi samasya (pani, bijli, rasta, swasthya, fasal) yahan text ya voice message me likhkar bhej sakte hain.',
+      text: '🙏 Namaste! Jharkhand Sarkar & SkillPods Civic Helpline (+91 9822725265) me aapka swagat hai.\n\nAap direct WhatsApp (+91 9822725265) ya email: sanketbhende0@gmail.com par bhi sampark kar sakte hain.\n\nAap bina kisi technical jhanjhat ke apne gaon ya shahar ki koi bhi samasya (pani, bijli, rasta, swasthya, fasal) yahan text ya voice message me likhkar bhej sakte hain.',
       time: 'Just now'
     }
   ]);
@@ -262,7 +262,7 @@ export const CitizenWhatsAppSimulatorModal: React.FC<CitizenWhatsAppSimulatorMod
                   Verified ✓
                 </span>
               </div>
-              <div className="text-[11px] text-emerald-400 font-mono">WhatsApp Civic Helpline 24x7</div>
+              <div className="text-[11px] text-emerald-400 font-mono">Helpline: +91 9822725265</div>
             </div>
           </div>
 
@@ -273,7 +273,7 @@ export const CitizenWhatsAppSimulatorModal: React.FC<CitizenWhatsAppSimulatorMod
                   {
                     id: 'msg-1',
                     sender: 'bot',
-                    text: '🙏 Namaste! Jharkhand Sarkar & SkillPods MIC Civic Helpline me aapka swagat hai.\n\nAap bina kisi technical jhanjhat ke apne gaon ya shahar ki koi bhi samasya text ya voice message me likhkar bhej sakte hain.',
+                    text: '🙏 Namaste! Jharkhand Sarkar & SkillPods Civic Helpline (+91 9822725265) me aapka swagat hai.\n\nAap direct WhatsApp (+91 9822725265) ya email: sanketbhende0@gmail.com par bhi sampark kar sakte hain.\n\nAap bina kisi technical jhanjhat ke apne gaon ya shahar ki koi bhi samasya text ya voice message me likhkar bhej sakte hain.',
                     time: 'Just now'
                   }
                 ]);
@@ -293,9 +293,17 @@ export const CitizenWhatsAppSimulatorModal: React.FC<CitizenWhatsAppSimulatorMod
           </div>
         </div>
 
-        {/* Info Banner */}
+        {/* Info Banner with Direct WhatsApp action */}
         <div className="bg-[#182229] px-3.5 py-2 border-b border-[#253238] flex items-center justify-between text-[11px] text-[#8696a0]">
-          <span>🔒 End-to-End Encrypted Civic Helpline</span>
+          <a
+            href="https://wa.me/919822725265?text=Namaste%20Jharkhand%20MIC%20Civic%20Helpline"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-bold hover:underline transition-colors"
+          >
+            <span>Chat on WhatsApp: +91 9822725265</span>
+            <ExternalLink className="w-3 h-3" />
+          </a>
           <span className="text-emerald-400 font-mono font-bold">24 Districts Linked</span>
         </div>
 

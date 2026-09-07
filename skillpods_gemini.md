@@ -186,5 +186,13 @@ docker run -p 3000:3000 -e PORT=3000 skillpods:latest
     - **🤖 Real-Time AI Semantic Deduplication & Clustering (`AiDuplicateCheckBanner.tsx`)**: Real-time semantic overlap analyzer running as citizens type/speak. Flags potential duplicate clusters (e.g. 92% match with existing Khunti fluoride challenge) and offers a 1-click option to corroborate/upvote the existing issue instead of creating redundant triage clutter.
     - **💼 CSR Grant Pledging & Corporate Matching Gateway (`CsrGrantPledgeModal.tsx`)**: Dedicated modal for industry partners (Tata Steel, Coal India, SAIL, NTPC, Jindal) to pledge prototype hardware kits (₹25k), field testing grants (₹50k), or full commercialization grants (₹1L) locked into the milestone escrow vault with Section 80G tax exemption receipts.
     - **📜 Gram Panchayat (PRI) Digital Sign-Off & Field Closure Certificate (`PriFieldSignOffModal.tsx`)**: Community field validation inspection tool allowing the Gram Pradhan, Sarpanch, or BDO to issue a digitally signed, printable validation certificate with an official Government of Jharkhand seal, automatically closing the ticket and advancing the challenge to Stage 5 (Deployed & Validated).
-
-
+15. **Personal Contact Information & Direct WhatsApp Helpline Integration**:
+    - **Email**: `sanketbhende0@gmail.com` integrated as primary support, partnership, founder desk, and SuperAdmin across all platform touchpoints (`DocsModal.tsx`, `Footer.tsx`, `NotFoundPage.tsx`, `CitizenWhatsAppSimulatorModal.tsx`, `App.tsx`).
+    - **Phone & WhatsApp**: `+91 9822725265` integrated into global footer, documentation modal, public portal header, and WhatsApp simulator modal with direct clickable links (`tel:+919822725265` and `https://wa.me/919822725265`).
+16. **SPA Architecture & Clean URL Path Routing**:
+    - **Single Page Application (SPA) Rationale**: The app is built with Vite + React as an SPA for instantaneous page-to-page transitions without full-page server reloads, flickering, or lost client-side state.
+    - **Clean URL Path Routing**: Integrated HTML5 History API (`window.history.pushState`, `popstate`, and `hashchange` listeners in `src/App.tsx`) providing clean URLs (`/`, `/public`, `/login`, `/dashboard`, `/404`) with backward compatibility for hash routes (`#public`, `#login`, `#dashboard`).
+    - **Cloudflare Pages Compatibility**: Backed by `public/_redirects` (`/* /index.html 200`), allowing direct deep links and browser refreshes on any URL path.
+17. **Cloudflare Pages & GitHub Sync**:
+    - Deployed to Cloudflare Pages: `https://skill-pods.pages.dev` (Preview: `https://3b3ccd36.skill-pods.pages.dev`).
+    - Synced with GitHub remote `https://github.com/Sakshi-patil48/Skill-Pods.git` on branch `main`.

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Home, Compass, ArrowLeft, Terminal, ShieldAlert } from 'lucide-react';
 import { SkillPodsLogo } from './SkillPodsLogo';
 
@@ -117,7 +117,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({
 
       {/* Footer */}
       <footer className="w-full border-t border-white/5 py-4 px-6 text-center text-xs font-mono text-[#767082] z-10">
-        &copy; 2026 SKILL PODS &bull; Demand-First SME Innovation Engine &bull; Support: <a href="mailto:support@skillpods.io" className="text-purple-400 hover:underline">support@skillpods.io</a>
+        &copy; 2026 SKILL PODS &bull; Demand-First SME Innovation Engine &bull; Support: <a href="mailto:sanketbhende0@gmail.com" className="text-purple-400 hover:underline">sanketbhende0@gmail.com</a> &bull; Helpline: <a href="https://wa.me/919822725265" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline">+91 9822725265</a>
       </footer>
 
     </div>

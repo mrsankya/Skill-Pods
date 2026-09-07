@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Mail, Phone, ShieldCheck, Heart } from 'lucide-react';
 import { ModalView } from '../types';
 import { SkillPodsLogo } from './SkillPodsLogo';
@@ -58,19 +58,28 @@ export const Footer: React.FC<FooterProps> = ({ onOpenModal, onNavigate }) => {
         <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
           <div className="flex flex-wrap items-center gap-4 text-[#767082]">
             <a
-              href="mailto:support@skillpods.io"
+              href="mailto:sanketbhende0@gmail.com"
               className="flex items-center gap-1.5 text-purple-400 hover:text-purple-300 transition-colors"
             >
               <Mail className="w-3.5 h-3.5" />
-              <span>support@skillpods.io</span>
+              <span>sanketbhende0@gmail.com</span>
             </a>
             <span className="hidden sm:inline text-white/20">&bull;</span>
             <a
-              href="tel:+918005557788"
+              href="tel:+919822725265"
               className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 transition-colors"
             >
               <Phone className="w-3.5 h-3.5" />
-              <span>+91 800 555 7788 (Toll-Free)</span>
+              <span>+91 9822725265</span>
+            </a>
+            <span className="hidden sm:inline text-white/20">&bull;</span>
+            <a
+              href="https://wa.me/919822725265?text=Hello%20SkillPods%20Team"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-[#25D366] hover:text-[#25D366]/80 transition-colors"
+            >
+              <span>💬 WhatsApp: +91 9822725265</span>
             </a>
           </div>
 

@@ -90,17 +90,30 @@ export default function App() {
         userRole = 'admin';
       }
 
-      // Check direct URL deep links (#profile, #marketplace, #passport, #tasks, #mentors, etc.)
+      // Check direct URL pathnames and deep links
+      const currentPath = typeof window !== 'undefined' ? window.location.pathname.toLowerCase() : '';
       const currentHash = typeof window !== 'undefined' ? window.location.hash.toLowerCase() : '';
       const isDashboardHash = [
         '#dashboard', '#profile', '#marketplace', '#passport', '#tasks',
         '#mentors', '#earnings', '#guru', '#explore', '#my-projects', '#admin'
       ].includes(currentHash);
 
-      // If user had an active session or opened a dashboard deep link, go to dashboard
-      const page: PageType = (isDashboardHash || savedPage === 'dashboard' || (savedToken && savedPage !== 'landing' && savedPage !== 'login')) 
-        ? 'dashboard' 
-        : (savedPage === 'login' ? 'login' : 'landing');
+      let page: PageType = 'landing';
+      if (currentPath === '/public' || currentHash === '#public' || currentHash === '#societal') {
+        page = 'public-dashboard';
+      } else if (currentPath === '/login' || currentHash === '#login') {
+        page = 'login';
+      } else if (currentPath === '/dashboard' || isDashboardHash) {
+        page = 'dashboard';
+      } else if (currentPath === '/404' || currentHash === '#404') {
+        page = 'not-found';
+      } else if (savedPage === 'dashboard' || (savedToken && savedPage !== 'landing' && savedPage !== 'login' && savedPage !== 'public-dashboard')) {
+        page = 'dashboard';
+      } else if (savedPage === 'login') {
+        page = 'login';
+      } else if (savedPage === 'public-dashboard') {
+        page = 'public-dashboard';
+      }
 
       return { page, userRole, userEmail };
     } catch {
@@ -124,6 +137,24 @@ export default function App() {
   const [showCommunityModal, setShowCommunityModal] = useState(false);
   const [showMessagingModal, setShowMessagingModal] = useState(false);
   const [selectedChatRecipient, setSelectedChatRecipient] = useState<CommunityMember | null>(null);
+
+  // Unified clean URL path navigation with HTML5 History API
+  const navigateToPage = (targetPage: PageType, pushHistory = true) => {
+    setCurrentPage(targetPage);
+    localStorage.setItem('skillpods_page', targetPage);
+
+    if (pushHistory && typeof window !== 'undefined') {
+      let targetPath = '/';
+      if (targetPage === 'public-dashboard') targetPath = '/public';
+      else if (targetPage === 'login') targetPath = '/login';
+      else if (targetPage === 'dashboard') targetPath = '/dashboard';
+      else if (targetPage === 'not-found') targetPath = '/404';
+
+      if (window.location.pathname !== targetPath) {
+        window.history.pushState({ page: targetPage }, '', targetPath);
+      }
+    }
+  };
 
   // Synchronize dynamic Page Titles & Meta Descriptions across views
   useEffect(() => {
@@ -162,35 +193,39 @@ export default function App() {
     if (ogDesc) ogDesc.setAttribute('content', desc);
   }, [currentPage, currentRole]);
 
-  // Synchronize browser history / URL hash and resume authenticated session
+  // Synchronize browser history / URL path / hash and resume authenticated session
   useEffect(() => {
-    const handleHash = () => {
-      const h = window.location.hash.toLowerCase();
+    const handleLocationChange = () => {
       const p = window.location.pathname.toLowerCase();
-      if (h === '#login' || p === '/login') {
-        setCurrentPage('login');
-      } else if (h === '#public' || p === '/public' || h === '#societal') {
+      const h = window.location.hash.toLowerCase();
+
+      if (p === '/public' || h === '#public' || h === '#societal') {
         setCurrentPage('public-dashboard');
-      } else if (h === '#404' || p === '/404') {
-        setCurrentPage('not-found');
+        localStorage.setItem('skillpods_page', 'public-dashboard');
+      } else if (p === '/login' || h === '#login') {
+        setCurrentPage('login');
+        localStorage.setItem('skillpods_page', 'login');
       } else if (
-        h === '#dashboard' || 
-        h === '#profile' || 
-        h === '#marketplace' || 
-        h === '#passport' || 
-        h === '#tasks' || 
-        h === '#mentors' || 
-        h === '#earnings' || 
-        h === '#guru' || 
-        h === '#explore' || 
-        h === '#my-projects' ||
-        h === '#admin'
+        p === '/dashboard' ||
+        h === '#dashboard' ||
+        [
+          '#profile', '#marketplace', '#passport', '#tasks',
+          '#mentors', '#earnings', '#guru', '#explore', '#my-projects', '#admin'
+        ].includes(h)
       ) {
         setCurrentPage('dashboard');
+        localStorage.setItem('skillpods_page', 'dashboard');
+      } else if (p === '/404' || h === '#404') {
+        setCurrentPage('not-found');
+        localStorage.setItem('skillpods_page', 'not-found');
+      } else if (p === '/' || p === '') {
+        setCurrentPage('landing');
+        localStorage.setItem('skillpods_page', 'landing');
       }
     };
-    handleHash();
-    window.addEventListener('hashchange', handleHash);
+
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
 
     // Auto-resume authenticated session from database
     const token = localStorage.getItem('skillpods_token');
@@ -211,7 +246,10 @@ export default function App() {
         .catch(() => {});
     }
 
-    return () => window.removeEventListener('hashchange', handleHash);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
   }, []);
 
   // Fetch live metrics from Express backend
@@ -234,13 +272,11 @@ export default function App() {
 
   const handleNavigate = (sectionId: string) => {
     if (sectionId === 'dashboard') {
-      localStorage.setItem('skillpods_page', 'dashboard');
-      setCurrentPage('dashboard');
+      navigateToPage('dashboard');
       return;
     }
     if (currentPage !== 'landing') {
-      localStorage.setItem('skillpods_page', 'landing');
-      setCurrentPage('landing');
+      navigateToPage('landing');
       setTimeout(() => {
         handleNavigate(sectionId);
       }, 50);
@@ -261,8 +297,7 @@ export default function App() {
   // Open the Full-Screen Login Page with intentional context
   const handleOpenLogin = (intent: LoginIntent = 'general') => {
     setLoginIntent(intent);
-    localStorage.setItem('skillpods_page', 'login');
-    setCurrentPage('login');
+    navigateToPage('login');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -273,8 +308,7 @@ export default function App() {
     }
     setCurrentRole(finalRole);
     setAuthenticatedUser(email);
-    setCurrentPage('dashboard');
-    localStorage.setItem('skillpods_page', 'dashboard');
+    navigateToPage('dashboard');
     localStorage.setItem('skillpods_token', localStorage.getItem('skillpods_token') || 'active_token');
     localStorage.setItem('skillpods_user', JSON.stringify({
       email,
@@ -316,13 +350,11 @@ export default function App() {
   };
 
   const handleBackToHome = () => {
-    localStorage.setItem('skillpods_page', 'landing');
-    setCurrentPage('landing');
+    navigateToPage('landing');
   };
 
   const handleSwitchWorkspace = () => {
-    localStorage.setItem('skillpods_page', 'login');
-    setCurrentPage('login');
+    navigateToPage('login');
   };
 
   // 1. Full-Screen Login Page View
@@ -451,10 +483,7 @@ export default function App() {
         activeSection={activeSection}
         onNavigate={handleNavigate}
         onOpenCommunity={() => setShowCommunityModal(true)}
-        onOpenPublicDashboard={() => {
-          localStorage.setItem('skillpods_page', 'public-dashboard');
-          setCurrentPage('public-dashboard');
-        }}
+        onOpenPublicDashboard={() => navigateToPage('public-dashboard')}
         onOpenChat={() => {
           setSelectedChatRecipient(null);
           setShowMessagingModal(true);
@@ -468,10 +497,7 @@ export default function App() {
         <HeroSection
           metrics={metrics}
           onOpenModal={handleModalOrLoginRoute}
-          onOpenPublicDashboard={() => {
-            localStorage.setItem('skillpods_page', 'public-dashboard');
-            setCurrentPage('public-dashboard');
-          }}
+          onOpenPublicDashboard={() => navigateToPage('public-dashboard')}
           onExplorePods={() => handleNavigate('workflow')}
         />
 

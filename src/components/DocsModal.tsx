@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, BookOpen, Shield, Phone, Mail, CheckCircle2, FileText, Lock, MessageCircle } from 'lucide-react';
 import { ModalView } from '../types';
 
@@ -97,13 +97,25 @@ export const DocsModal: React.FC<DocsModalProps> = ({ view, onClose }) => {
               <div className="flex items-center justify-between text-xs sm:text-sm py-1 border-b border-white/5">
                 <span className="text-[#958ea0] font-mono flex items-center gap-2">
                   <Mail className="w-3.5 h-3.5 text-purple-400" />
+                  Primary &amp; Support Email:
+                </span>
+                <a
+                  href="mailto:sanketbhende0@gmail.com"
+                  className="text-[#d0bcff] hover:text-white font-mono font-medium hover:underline transition-colors"
+                >
+                  sanketbhende0@gmail.com
+                </a>
+              </div>
+              <div className="flex items-center justify-between text-xs sm:text-sm py-1 border-b border-white/5">
+                <span className="text-[#958ea0] font-mono flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-purple-400" />
                   SME &amp; Industry Partners:
                 </span>
                 <a
-                  href="mailto:sme-partners@skillpods.io"
+                  href="mailto:sanketbhende0@gmail.com"
                   className="text-[#d0bcff] hover:text-white font-mono font-medium hover:underline transition-colors"
                 >
-                  sme-partners@skillpods.io
+                  sanketbhende0@gmail.com
                 </a>
               </div>
               <div className="flex items-center justify-between text-xs sm:text-sm py-1 border-b border-white/5">
@@ -112,34 +124,22 @@ export const DocsModal: React.FC<DocsModalProps> = ({ view, onClose }) => {
                   University &amp; Campuses:
                 </span>
                 <a
-                  href="mailto:campus-cohorts@skillpods.io"
+                  href="mailto:sanketbhende0@gmail.com"
                   className="text-[#d0bcff] hover:text-white font-mono font-medium hover:underline transition-colors"
                 >
-                  campus-cohorts@skillpods.io
-                </a>
-              </div>
-              <div className="flex items-center justify-between text-xs sm:text-sm py-1 border-b border-white/5">
-                <span className="text-[#958ea0] font-mono flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5 text-purple-400" />
-                  Principal Mentorship:
-                </span>
-                <a
-                  href="mailto:mentorship@skillpods.io"
-                  className="text-[#d0bcff] hover:text-white font-mono font-medium hover:underline transition-colors"
-                >
-                  mentorship@skillpods.io
+                  sanketbhende0@gmail.com
                 </a>
               </div>
               <div className="flex items-center justify-between text-xs sm:text-sm py-1">
                 <span className="text-[#958ea0] font-mono flex items-center gap-2">
                   <Mail className="w-3.5 h-3.5 text-purple-400" />
-                  General Support &amp; Helpdesk:
+                  Direct Founder Desk:
                 </span>
                 <a
-                  href="mailto:support@skillpods.io"
+                  href="mailto:sanketbhende0@gmail.com"
                   className="text-[#d0bcff] hover:text-white font-mono font-medium hover:underline transition-colors"
                 >
-                  support@skillpods.io
+                  sanketbhende0@gmail.com
                 </a>
               </div>
             </div>
@@ -148,33 +148,35 @@ export const DocsModal: React.FC<DocsModalProps> = ({ view, onClose }) => {
             <div className="bg-[#131317] p-5 rounded-2xl border border-[#494454]/30 mb-6 space-y-3">
               <h4 className="text-xs font-mono uppercase tracking-widest text-emerald-400 flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5" />
-                <span>Instant Call Hotlines (Mon-Sat, 9AM-8PM IST)</span>
+                <span>Instant Call Hotlines (24x7 Direct Support)</span>
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <a
-                  href="tel:+918005557788"
+                  href="tel:+919822725265"
                   className="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 transition-all text-xs font-mono text-white group"
                 >
-                  <span className="text-[#958ea0] group-hover:text-white">Toll-Free Support:</span>
-                  <span className="text-emerald-400 font-bold">+91 800 555 7788</span>
+                  <span className="text-[#958ea0] group-hover:text-white">Direct Phone:</span>
+                  <span className="text-emerald-400 font-bold">+91 9822725265</span>
                 </a>
                 <a
-                  href="tel:+912067890123"
+                  href="https://wa.me/919822725265?text=Hello%20SkillPods%20Team%2C%20I%20would%20like%20to%20inquire%20about%20a%20cohort."
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-between p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-emerald-500/40 transition-all text-xs font-mono text-white group"
                 >
-                  <span className="text-[#958ea0] group-hover:text-white">Pune HQ Office:</span>
-                  <span className="text-emerald-400 font-bold">+91 20 6789 0123</span>
+                  <span className="text-[#958ea0] group-hover:text-white">WhatsApp Line:</span>
+                  <span className="text-emerald-400 font-bold">+91 9822725265</span>
                 </a>
               </div>
               <div className="pt-2">
                 <a
-                  href="https://wa.me/918005557788?text=Hello%20SkillPods%20Team%2C%20I%20would%20like%20to%20inquire%20about%20a%20cohort."
+                  href="https://wa.me/919822725265?text=Hello%20SkillPods%20Team%2C%20I%20would%20like%20to%20inquire%20about%20a%20cohort."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-[#25D366]/20 hover:bg-[#25D366]/30 text-[#25D366] border border-[#25D366]/40 p-2.5 rounded-xl font-mono text-xs font-bold transition-colors"
                 >
                   <MessageCircle className="w-4 h-4" />
-                  <span>Chat with Coordinator on WhatsApp</span>
+                  <span>Chat with Coordinator on WhatsApp (+91 9822725265)</span>
                 </a>
               </div>
             </div>

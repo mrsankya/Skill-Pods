@@ -522,14 +522,14 @@ export const PublicSocietalDashboard: React.FC<PublicSocietalDashboardProps> = (
               <span className="hidden sm:inline">24-District</span> Heatmap
             </button>
 
-            {/* WhatsApp Helpline Simulator */}
+            {/* WhatsApp Helpline Simulator & Direct Link */}
             <button
               onClick={() => setIsWhatsAppModalOpen(true)}
               className="bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/40 text-emerald-300 font-mono text-[11px] sm:text-xs font-bold px-3 py-2 rounded-full transition-all cursor-pointer flex items-center gap-1.5"
-              title="Offline Rural WhatsApp/SMS Helpline (24x7)"
+              title="Civic Helpline (+91 9822725265)"
             >
               <span className="text-emerald-400">💬</span>
-              <span className="hidden md:inline">WhatsApp</span> Helpline
+              <span className="hidden md:inline">WhatsApp</span> Helpline (+91 9822725265)
             </button>
 
             {/* Language Selector (EN / HI / MR) */}
