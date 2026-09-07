@@ -1,0 +1,2009 @@
+[
+  {
+    "sno": "1",
+    "organization": "Ministry of Development",
+    "title": "of North Eastern Region (MDoNER) AI-Based early warning and landslide Risk Monitoring System in NER",
+    "category": "Software",
+    "psNumber": "SIH26001",
+    "submittedCount": "2/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "2",
+    "organization": "Ministry of Development",
+    "title": "of North Eastern Region (MDoNER) Al-Based Smart Logistics and Accessibility Intelligence Platform for North Eastern Region (NER)",
+    "category": "Software",
+    "psNumber": "SIH26002",
+    "submittedCount": "0/500",
+    "theme": "Transportation & Logistics"
+  },
+  {
+    "sno": "3",
+    "organization": "Ministry of Development",
+    "title": "of North Eastern Region (MDoNER) AI-Based Cognitive Gaming and Memory Assistance Platform for Elderly Dementia Patients in North Eastern Region (NER)",
+    "category": "Software",
+    "psNumber": "SIH26003",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "4",
+    "organization": "Ministry of Development",
+    "title": "of North Eastern Region (MDoNER) Al-Assisted Early Detection System for Osteoarthritis (OA) Risk Markers in North Eastern Region (NER)",
+    "category": "Hardware",
+    "psNumber": "SIH26004",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "5",
+    "organization": "Ministry of Development",
+    "title": "of North Eastern Region (MDoNER) Solar-Powered Smart Mini Cold Storage System for Fresh Vegetables in North Eastern Region (NER)",
+    "category": "Hardware",
+    "psNumber": "SIH26005",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "6",
+    "organization": "Ministry of Steel Development of an Intelligent",
+    "title": "Freight Forecasting Model for Optimized Vessel Chartering and Bulk Cargo Procurement from overseas to East Coast of India",
+    "category": "Software",
+    "psNumber": "SIH26006",
+    "submittedCount": "0/500",
+    "theme": "Transportation & Logistics"
+  },
+  {
+    "sno": "7",
+    "organization": "Ministry of Steel Safe and Efficient Operation of",
+    "title": "Mine Vehicles in Fog and Low- Visibility Conditions in Open Cast Iron Ore Mines.",
+    "category": "Hardware",
+    "psNumber": "SIH26007",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "8",
+    "organization": "Ministry of Steel Belt Joint Rupture and Conveyor",
+    "title": "Belt Damages in Iron Ore Mining Industry: Intelligent Monitoring and Prediction of Conveyor Belt Joint Rupture and Damages in Iron Ore Mining Industry.",
+    "category": "Hardware",
+    "psNumber": "SIH26008",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "9",
+    "organization": "Ministry of Steel Using AI/ML and Space",
+    "title": "Technology to Identify Manganese Reserves and Overcome Production Shortfalls.",
+    "category": "Software",
+    "psNumber": "SIH26009",
+    "submittedCount": "0/500",
+    "theme": "Space Technology"
+  },
+  {
+    "sno": "10",
+    "organization": "Ministry of Rural",
+    "title": "Development Survey/Resurvey of Rural Agricultural Land in lndia",
+    "category": "Hardware",
+    "psNumber": "SIH26010",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "11",
+    "organization": "Ministry of Rural",
+    "title": "Development 3D ULPIN Generation and vertical Property Mapping SYstem",
+    "category": "Software",
+    "psNumber": "SIH26011",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "12",
+    "organization": "Ministry of Rural",
+    "title": "Development AI-Based Automated Urban Parcel Mapping and Cadastral Feature Extraction System using Drone lmagery",
+    "category": "Software",
+    "psNumber": "SIH26012",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "13",
+    "organization": "Ministry of Rural",
+    "title": "Development Automated lntegration and lntelligent Harmonization of Multi- source Geospatial Data for urban Land Record Management.",
+    "category": "Software",
+    "psNumber": "SIH26013",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "14",
+    "organization": "Ministry of Rural",
+    "title": "Development An lntegrated GIS-based Digital Public lnfrastructure for Land Governance",
+    "category": "Software",
+    "psNumber": "SIH26014",
+    "submittedCount": "1/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "15",
+    "organization": "Ministry of Rural",
+    "title": "Development Application of Geospatial Techniques for visualization and analysis to interpret Geo-Coded lmages to enhance watershed Development Outcomes.",
+    "category": "Software",
+    "psNumber": "SIH26015",
+    "submittedCount": "1/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "16",
+    "organization": "Ministry of Rural",
+    "title": "Development Real-Time National Land Acquisition & Management System for End-to-End Digital Monitoring and Decision Support",
+    "category": "Software",
+    "psNumber": "SIH26016",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "17",
+    "organization": "Ministry of Rural",
+    "title": "Development Predictive Analytics System for Early Detection of Land Acquisition Delays",
+    "category": "Software",
+    "psNumber": "SIH26017",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "18",
+    "organization": "Ministry of Rural",
+    "title": "Development Intelligent Land Record Digitization and Validation System",
+    "category": "Software",
+    "psNumber": "SIH26018",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "19",
+    "organization": "Ministry of Rural",
+    "title": "Development National Digital Platform for Research, Policy Innovation, and Evidence-Based Land Governance",
+    "category": "Software",
+    "psNumber": "SIH26019",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "20",
+    "organization": "Ministry of MSME Design and Development of",
+    "title": "Innovative Hand-Spinning Equipment for Enhancing Khadi Artisan Productivity and Income",
+    "category": "Hardware",
+    "psNumber": "SIH26020",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "26021",
+    "organization": "0/500 Agriculture, FoodTech",
+    "title": "& Rural Development 22 Ministry of MSME Design and develop a smart, solar-powered drying and compact packaging system to support home-based agarbatti manufacturing by rural women artisans.",
+    "category": "Hardware",
+    "psNumber": "SIH26022",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "23",
+    "organization": "Ministry of Coal AI-Powered Geological, Mining",
+    "title": "and other Reporting Solution for CMPDI/CIL subsidiaries",
+    "category": "Software",
+    "psNumber": "SIH26023",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "24",
+    "organization": "Ministry of Coal AI-Based Smart Governance and",
+    "title": "Compliance Monitoring System for Coal Mines",
+    "category": "Software",
+    "psNumber": "SIH26024",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "25",
+    "organization": "Ministry of Coal Development of an AI-enabled",
+    "title": "Low Cost Real Time Mine Subsidence Monitoring, Prediction and Early Warning System for Underground Coal Mines in India",
+    "category": "Hardware",
+    "psNumber": "SIH26025",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "26",
+    "organization": "Ministry of Railways Development of Mobile",
+    "title": "(Quadruped)/Handheld Device/System for Real-Time Detection of Narcotics and Explosives across Indian Railways.",
+    "category": "Hardware",
+    "psNumber": "SIH26026",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "27",
+    "organization": "Ministry of Railways Al-Powered Automatic Block",
+    "title": "Planning to Maximize Asset Availability for Train Operations on Indian Railways",
+    "category": "Software",
+    "psNumber": "SIH26027",
+    "submittedCount": "0/500",
+    "theme": "Transportation & Logistics"
+  },
+  {
+    "sno": "28",
+    "organization": "Ministry of Railways Dynamic Forecast of Expected",
+    "title": "Time of Arrival (ETA) for Coaching Trains",
+    "category": "Software",
+    "psNumber": "SIH26028",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "29",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution Automated High-Current Short- Circuit Test System for IEC 60898-1:2015 MCB Compliance.",
+    "category": "Hardware",
+    "psNumber": "SIH26029",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "30",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution Automated Cable Specimen Preparation System for IS 10810 and IS 7098 Compliance.",
+    "category": "Hardware",
+    "psNumber": "SIH26030",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "31",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution Quality assessment and grading of onions are often subjective and vary across procurement centers, resulting in disputes and inconsistencies.",
+    "category": "Software",
+    "psNumber": "SIH26031",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "32",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution Farmers often face long waiting times, lack of information regarding procurement schedules, and uncertainty about procurement status.",
+    "category": "Software",
+    "psNumber": "SIH26032",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "33",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution Multiple intermediaries reduce farmers earnings and increase consumer prices.",
+    "category": "Software",
+    "psNumber": "SIH26033",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "34",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution Software System to check compliance of Packaged Commodities under Legal Metrology(Packaged Commodities) Rules, 2011 by scanning products, images and labels.",
+    "category": "Software",
+    "psNumber": "SIH26034",
+    "submittedCount": "1/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "35",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution Development of a Software Program/Application for Generation of Test Reports for Non-Automatic Weighing Instruments (NAWI) as per OIML Recommendation R- 76",
+    "category": "Software",
+    "psNumber": "SIH26035",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "36",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution Development of an Online Verification System for Weighing and Measuring Instruments",
+    "category": "Software",
+    "psNumber": "SIH26036",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "37",
+    "organization": "MathWorks Adaptive Path Planning and",
+    "title": "Collision Avoidance for Autonomous Vehicles on Unstructured Indian Roads",
+    "category": "Software",
+    "psNumber": "SIH26037",
+    "submittedCount": "0/500",
+    "theme": "Smart Vehicles"
+  },
+  {
+    "sno": "38",
+    "organization": "MathWorks Explainable AI for Diabetic",
+    "title": "Retinopathy Screening in Rural India",
+    "category": "Software",
+    "psNumber": "SIH26038",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "39",
+    "organization": "Government of",
+    "title": "Jharkhand Al-Powered Underground Mine Safety, Monitoring and Rescue System.",
+    "category": "Hardware",
+    "psNumber": "SIH26039",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "40",
+    "organization": "Government of",
+    "title": "Jharkhand Smart Water Purification and Quality Monitoring System for Rural and Mining-Affected Areas.",
+    "category": "Hardware",
+    "psNumber": "SIH26040",
+    "submittedCount": "0/500",
+    "theme": "Clean & Green Technology"
+  },
+  {
+    "sno": "41",
+    "organization": "Government of",
+    "title": "Jharkhand AR-Based Vocational Training Simulator for Industrial Safety in Jharkhand's Mining & Manufacturing Sector",
+    "category": "Software",
+    "psNumber": "SIH26041",
+    "submittedCount": "0/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "42",
+    "organization": "Government of",
+    "title": "Jharkhand Al-Powered Vernacular Pedagogy and Real-Time Translation Tool for Mother Tongue-Based Primary Education",
+    "category": "Software",
+    "psNumber": "SIH26042",
+    "submittedCount": "0/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "43",
+    "organization": "Government of",
+    "title": "Jharkhand A digital platform to crowdsource societal challenges and facilitate collaborative problem solving through universities and industry partnerships",
+    "category": "Software",
+    "psNumber": "SIH26043",
+    "submittedCount": "0/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "44",
+    "organization": "Ministry of Ayush Portal for Academia - Industry",
+    "title": "collaboration for Skill Mapping, Internships and Placement",
+    "category": "Software",
+    "psNumber": "SIH26044",
+    "submittedCount": "2/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "45",
+    "organization": "Ministry of Ayush IP-SAKTI Sahayak a multilingual,",
+    "title": "RAG-based (source-cited) AI assistant for Intellectual Property and regulatory guidance in Ayurveda, across national and international regimes.",
+    "category": "Software",
+    "psNumber": "SIH26045",
+    "submittedCount": "1/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "46",
+    "organization": "Ministry of Ayush AIIA Clinical Trials Dashboard - a",
+    "title": "real-time, cloud-based, GCP- compliant Clinical Trial Management System (CTMS) for Ayurveda research, with CDISC/FHIR-interoperable data, role-based KPIs, and integrated ethics, regulatory (CTRI / NDCT Rules 2019) and pharma covigilance tracking.",
+    "category": "Software",
+    "psNumber": "SIH26046",
+    "submittedCount": "1/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "47",
+    "organization": "Ministry of Ayush Patient Case-Taking Software Software SIH26047 1/500 MedTech / BioTech /",
+    "title": "HealthTech 48 Ministry of Ayush iKwath - a pod-based smart Kwatha (Kadha) maker that prepares a fresh, AFI/API- standardized decoction from coarse powder (yavaku?a c?r?a) on demand, in the shortest practical time without altering the decoctions quality or yield",
+    "category": "Hardware",
+    "psNumber": "SIH26048",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "49",
+    "organization": "DRDO Modifications to improve the",
+    "title": "reliability, efficiency,and lifespan of electrical and electronic equipment and systems in the ambient condition of subzero temperature and low pressure of High Altitude Areas(HAA) and Super High Altitude Areas (SHAA) of Ladakh region.",
+    "category": "Hardware",
+    "psNumber": "SIH26049",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "50",
+    "organization": "DRDO High Altitude Performance",
+    "title": "Optimization and Robust Design of Anti-Drone System.",
+    "category": "Hardware",
+    "psNumber": "SIH26050",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "51",
+    "organization": "DRDO Software Based Model",
+    "title": "Development for Design of Area Specific Shelter for Thermal Comfort Maintenance.",
+    "category": "Software",
+    "psNumber": "SIH26051",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "52",
+    "organization": "DRDO To develop an AI/ML-enabled",
+    "title": "adaptive noise cancellation (ANC) system that effectively suppresses stationary, non- stationary, and impulsive defence noises while maintaining high speech intelligibility and real-time performance on embedded hardware.",
+    "category": "Hardware",
+    "psNumber": "SIH26052",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "53",
+    "organization": "DRDO Adaptive Variable Resolution",
+    "title": "2.5D Lidar Mapping for Dynamic Environment Perception",
+    "category": "Software",
+    "psNumber": "SIH26053",
+    "submittedCount": "0/500",
+    "theme": "Smart Vehicles"
+  },
+  {
+    "sno": "54",
+    "organization": "DRDO AI-Enabled Real-Time Digital",
+    "title": "Twin System for Health Monitoring, Fault Prediction and Mission Reliability Enhancement of Aero Piston Engines used in MALE UAVs.",
+    "category": "Software",
+    "psNumber": "SIH26054",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "55",
+    "organization": "DRDO Smart Scan strategy for",
+    "title": "Electronic Warfare",
+    "category": "Software",
+    "psNumber": "SIH26055",
+    "submittedCount": "1/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "56",
+    "organization": "MoSPI Development of a Real-time",
+    "title": "Airfare Price Index for India through Automated Web Scraping of Airline and Online Travel Aggregator Portals for Augmentation of the Consumer Price Index (CPI).",
+    "category": "Software",
+    "psNumber": "SIH26056",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "57",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) AI-Powered Automated Underwater Marine Debris and Anomaly Detection System using Side-Scan Sonar Imagery",
+    "category": "Software",
+    "psNumber": "SIH26057",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "58",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Development of a Low-Power, Real-Time Adaptive Software- Defined Sonar Transmitter Payload for Autonomous Underwater Vehicles (AUVs)",
+    "category": "Hardware",
+    "psNumber": "SIH26058",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "59",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) AI-Enabled Antarctic Sea-Ice, Iceberg Trajectory, and Navigation Decision Support System",
+    "category": "Software",
+    "psNumber": "SIH26059",
+    "submittedCount": "0/500",
+    "theme": "Transportation & Logistics"
+  },
+  {
+    "sno": "60",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Digital Platform for efficient remote management of Indian Antarctic Research Stations",
+    "category": "Software",
+    "psNumber": "SIH26060",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "61",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) AI-Driven Smart Energy Management System for Polar Research Stations",
+    "category": "Software",
+    "psNumber": "SIH26061",
+    "submittedCount": "0/500",
+    "theme": "Clean & Green Technology"
+  },
+  {
+    "sno": "62",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Integrated Polar Expedition Logistics and Asset Management System",
+    "category": "Software",
+    "psNumber": "SIH26062",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "63",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Integrated Polar Science Outreach, Knowledge Repository and Media Dissemination Portal",
+    "category": "Software",
+    "psNumber": "SIH26063",
+    "submittedCount": "0/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "64",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Low-Cost Deployable Seafloor Metal Detection Sensor for Ocean Resource Exploration",
+    "category": "Hardware",
+    "psNumber": "SIH26064",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "65",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Autonomous Low-Cost Ocean Observation Platform for Polar and Southern Oceans",
+    "category": "Hardware",
+    "psNumber": "SIH26065",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "66",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) OceanEmbed - Satellite Embedding-Based Deep Learning Framework for Reconstruction of Subsurface Ocean Temperature from Surface Satellite Observations.",
+    "category": "Software",
+    "psNumber": "SIH26066",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "67",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Develop a web-based interactive 3D visualization platform that integrates numerical ocean model outputs and in-situ observations.",
+    "category": "Software",
+    "psNumber": "SIH26067",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "68",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) WeatherGPT: Conversational AI for Weather Forecasting, Alerts, and Climate Information",
+    "category": "Software",
+    "psNumber": "SIH26068",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "69",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) National Weather Big Data Analytics Platform",
+    "category": "Software",
+    "psNumber": "SIH26069",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "70",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) To develop an Artificial Intelligence (AI) / Machine Learning (ML) based system for identification, classification, and prediction of different tropical cyclone patterns using multi- source satellite data.",
+    "category": "Software",
+    "psNumber": "SIH26070",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "71",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) AI/ML-Based Integrated heavy rainfall Early Warning and Inundation Prediction System using Satellite, Radar, observational Weather and numerical weather prediction model data.",
+    "category": "Software",
+    "psNumber": "SIH26071",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "72",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) AIML based Nowcasting of thunderstorm and lightning using atmospheric observation including multiple radars, satellite, lightning and model data.",
+    "category": "Software",
+    "psNumber": "SIH26072",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "73",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) AI/ML-Based Intelligent Anomaly Detection for Automatic Weather Stations (AWS)",
+    "category": "Software",
+    "psNumber": "SIH26073",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "74",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Downscaling of weather forecast from Block level to Panchayat level: Inferring high-resolution plots/ data/ information from low- resolution plot /data /information /variables for agro-meteorological advisory services.",
+    "category": "Software",
+    "psNumber": "SIH26074",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "75",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Participants are invited to design and develop **CAPACITY CONNECT A Digital Capacity Building and Learning Management Portal** to support organizational training, competency development, and knowledge sharing through a centralized web-based platform.",
+    "category": "Software",
+    "psNumber": "SIH26075",
+    "submittedCount": "0/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "76",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Development of personalized homepage for 'Mausam' mobile application:",
+    "category": "Software",
+    "psNumber": "SIH26076",
+    "submittedCount": "1/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "77",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) AI-Driven Hyper-Local Early Warning System for Severe Weather Nowcasting",
+    "category": "Software",
+    "psNumber": "SIH26077",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "78",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) AI-Driven Spatio-Temporal Tracking of Extreme Weather Anomalies in Medium-Range Forecasts",
+    "category": "Software",
+    "psNumber": "SIH26078",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "79",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) AI-Based Forecast Bust Detection for Medium-Range Weather Forecasts",
+    "category": "Software",
+    "psNumber": "SIH26079",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "80",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Regime-Aware AI Post- Processing of Monsoon Rainfall Forecasts",
+    "category": "Software",
+    "psNumber": "SIH26080",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "81",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Hybrid AI–NWP Multi-Model Forecast Blending System",
+    "category": "Software",
+    "psNumber": "SIH26081",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "82",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Air Pollution–Weather Coupled Forecasting System (Delhi NCR Focus)",
+    "category": "Software",
+    "psNumber": "SIH26082",
+    "submittedCount": "0/500",
+    "theme": "Clean & Green Technology"
+  },
+  {
+    "sno": "83",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Extreme Heatwave Early Warning and Human Thermal Stress Index",
+    "category": "Software",
+    "psNumber": "SIH26083",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "84",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Convective scale nowcasting for Thunderstorms, Hail & Cloudbursts (06 hr)",
+    "category": "Software",
+    "psNumber": "SIH26084",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "85",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Urban Flood Nowcasting System (Drainage and Rainfall Coupling)",
+    "category": "Software",
+    "psNumber": "SIH26085",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "86",
+    "organization": "Ministry of Earth",
+    "title": "Sciences (MoES) Hyperlocal Monsoon Onset & Break Prediction System (Block/Village Scale)",
+    "category": "Software",
+    "psNumber": "SIH26086",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "26087",
+    "organization": "0/500 Smart Education",
+    "title": "88 Ministry of Cooperation Multilingual Cooperative Governance & Legal Assistance Chatbot",
+    "category": "Hardware",
+    "psNumber": "SIH26088",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "89",
+    "organization": "Ministry of Cooperation Cooperative Gig Services",
+    "title": "Platform for Household & Community Services",
+    "category": "Software",
+    "psNumber": "SIH26089",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "90",
+    "organization": "Ministry of Social",
+    "title": "Justice and Empowerment (MoSJE) AI-Driven Market Linkage and Smart Cataloging Mobile Application for Marginalized Artisans",
+    "category": "Software",
+    "psNumber": "SIH26090",
+    "submittedCount": "1/500",
+    "theme": "Heritage & Culture"
+  },
+  {
+    "sno": "91",
+    "organization": "Ministry of Social",
+    "title": "Justice and Empowerment (MoSJE) AI-Driven Hyper-Local Business Advisory and Financial Structuring Assistant for Rural Micro-Entrepreneurs",
+    "category": "Software",
+    "psNumber": "SIH26091",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "92",
+    "organization": "Ministry of Social",
+    "title": "Justice and Empowerment (MoSJE) AI-Driven Scheme Matching for Marginalized Entrepreneurs",
+    "category": "Software",
+    "psNumber": "SIH26092",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "93",
+    "organization": "Ministry of Social",
+    "title": "Justice and Empowerment (MoSJE) AI-Based Real-Time Stress and Trauma Assessment Module for Victims/Complainants Accessing NHAA (14566) and Integrated Portal",
+    "category": "Software",
+    "psNumber": "SIH26093",
+    "submittedCount": "1/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "94",
+    "organization": "Ministry of Social",
+    "title": "Justice and Empowerment (MoSJE) AI-Powered Dynamic Mental Health Monitoring and Distress Prediction System for Victims of Atrocities",
+    "category": "Software",
+    "psNumber": "SIH26094",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "95",
+    "organization": "Ministry of Social",
+    "title": "Justice and Empowerment (MoSJE) Smart Real-Time Monitoring & Inspection Mobile App",
+    "category": "Software",
+    "psNumber": "SIH26095",
+    "submittedCount": "1/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "96",
+    "organization": "Ministry of Social",
+    "title": "Justice and Empowerment (MoSJE) Digital Heritage Archive for Memorials, Manuscripts & Ambedkar: AI-Powered Institutional Archive and Audio- Visual Knowledge Platform",
+    "category": "Hardware",
+    "psNumber": "SIH26096",
+    "submittedCount": "0/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "97",
+    "organization": "Ministry of Social",
+    "title": "Justice and Empowerment (MoSJE) AI-Driven voice Assistant for livelihood Mapping and NSQF- Aligned Skilling Recommendations for SC Communities under GIA component of PM-AJAY",
+    "category": "Software",
+    "psNumber": "SIH26097",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "98",
+    "organization": "Ministry of Defence",
+    "title": "(MoD) Development of a Low-Cost Precision Guidance and Smart Electronic Fuze System for a 155 mm Artillery Shell",
+    "category": "Hardware",
+    "psNumber": "SIH26098",
+    "submittedCount": "0/500",
+    "theme": "Smart Vehicles"
+  },
+  {
+    "sno": "26099",
+    "organization": "0/500 Smart Automation",
+    "title": "100 Ministry of Petroleum & Natural Gas AI-Powered Integrated Bid Compliance Verification Platform for GeM Procurement",
+    "category": "Software",
+    "psNumber": "SIH26100",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "101",
+    "organization": "MoSPI Develop an AI enabled learning",
+    "title": "platform that identifies competency gaps, recommends personalized training through integration with the iGOT Karmayogi ecosystem, and capable of generating Quizzes and Multiple choice questions (MCQs) from uploaded learning materials to strengthen capacity building in India's Official Statistical System.",
+    "category": "Software",
+    "psNumber": "SIH26101",
+    "submittedCount": "0/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "102",
+    "organization": "MoSPI Development of an AI-powered",
+    "title": "system to detect anomalies, fraud, and inefficiencies in MPLAD Scheme implementation regd.",
+    "category": "Software",
+    "psNumber": "SIH26102",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "103",
+    "organization": "MoSPI Use case on web-based",
+    "title": "integrated project-monitoring platform",
+    "category": "Software",
+    "psNumber": "SIH26103",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "104",
+    "organization": "All India Council for",
+    "title": "Technical Education (Cyber Security Cell) AI-Powered Real-Time Detection and Prevention of Voice Cloning Impersonation Attacks",
+    "category": "Software",
+    "psNumber": "SIH26104",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "105",
+    "organization": "All India Council for",
+    "title": "Technical Education (Cyber Security Cell) AI-Powered Continuous Cyber Risk Quantification and Investment Optimization Platform",
+    "category": "Software",
+    "psNumber": "SIH26105",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "106",
+    "organization": "All India Council for",
+    "title": "Technical Education (Cyber Security Cell) AI-Powered Email Threat Detection, GeoLocation and Forensic Intelligence Platform",
+    "category": "Software",
+    "psNumber": "SIH26106",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "107",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution Al-powered Intelligent Assistant for Indian Standards and BIS Services for Industries and Consumers",
+    "category": "Software",
+    "psNumber": "SIH26107",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "108",
+    "organization": "Ministry of Consumer",
+    "title": "Affairs, Food & Public Distribution AI-Powered Recommendation Engine for Identifying Applicable Indian Standards for Procurement Specifications",
+    "category": "Software",
+    "psNumber": "SIH26108",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "109",
+    "organization": "Ministry of Fisheries,",
+    "title": "Animal Husbandry & Dairying Al-Based Predictive Modelling for Early Forecasting of Bovine Mastitis in lndian Dairy Farms",
+    "category": "Hardware",
+    "psNumber": "SIH26109",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "110",
+    "organization": "Ministry of Fisheries,",
+    "title": "Animal Husbandry & Dairying Development of a Low-Cost Light- weight Milk Chilling Can for Small- Scale Dairy Farmers",
+    "category": "Hardware",
+    "psNumber": "SIH26110",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "111",
+    "organization": "Ministry of Fisheries,",
+    "title": "Animal Husbandry & Dairying Smart Al-Enabled Rapid Feed and Silage Quality Testing System for Dairy Farmers",
+    "category": "Software",
+    "psNumber": "SIH26111",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "112",
+    "organization": "Autodesk Design and Develop a Modular",
+    "title": "Autonomous Mobile Robot (AMR) Platform for Smart Warehouse Automation",
+    "category": "Hardware",
+    "psNumber": "SIH26112",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "113",
+    "organization": "Autodesk Human augmentation",
+    "title": "technologies are transforming healthcare,rehabilitation, industrial ergonomics, assistive living, sports, and personal mobility by improving human capabilities and enhancing quality of life.",
+    "category": "Hardware",
+    "psNumber": "SIH26113",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "114",
+    "organization": "Autodesk Smart City Site Planning using",
+    "title": "Autodesk Forma Site Design",
+    "category": "Software",
+    "psNumber": "SIH26114",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "115",
+    "organization": "Autodesk Design and Develop a Smart",
+    "title": "Mobile Medical-Waste Collection and Segregation System",
+    "category": "Software",
+    "psNumber": "SIH26115",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "116",
+    "organization": "Autodesk Urban Mixed-Use Design",
+    "title": "Challenge-Design a centrally located mixed-use building in Autodesk Revit with commercial spaces (Ground + 1st floor) and residential units (up to 8 floors). 1 Level of Basement (Car Parking + EV Charging), Total (B+G+9)(Note: Plot size and all required dimensions may be assumed by students (in mm units).",
+    "category": "Software",
+    "psNumber": "SIH26116",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "117",
+    "organization": "Mangalore Refinery and",
+    "title": "Petrochemicals Limited (MRPL) Sovereign On-Premise Agentic AI Workbench using Open-Weight Multimodal LLMs for Confidential Industrial Work",
+    "category": "Software",
+    "psNumber": "SIH26117",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "118",
+    "organization": "Mangalore Refinery and",
+    "title": "Petrochemicals Limited (MRPL) Passive Colorimetric H2S Exposure-Dosimeter Wristband with AI-Based Quantitative Reading",
+    "category": "Hardware",
+    "psNumber": "SIH26118",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "119",
+    "organization": "Mangalore Refinery and",
+    "title": "Petrochemicals Limited (MRPL) Indigenous GPU-Accelerated Optimization Solver (Sovereign Alternative to Express / CEPLEX)",
+    "category": "Software",
+    "psNumber": "SIH26119",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "120",
+    "organization": "Oil India Limited Digital Twin for Well-to-Surface",
+    "title": "Optimization of Cyclic Steam Stimulation (CSS) and Sucker Rod Pump (SRP) Operations for Heavy Oil Wells of Baghewala Field.",
+    "category": "Software",
+    "psNumber": "SIH26120",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "121",
+    "organization": "Oil India Limited eRTMAC-NWIS (Nearby Wells",
+    "title": "Intelligence System): An AI- Powered Offset Well Knowledge and Decision Support Platform for Drilling Operations",
+    "category": "Software",
+    "psNumber": "SIH26121",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "26122",
+    "organization": "1/500 Smart Automation",
+    "title": "123 Bharat Electronics Limited Edge-AI Based Distributed Fleet Coordination for Autonomous Mobile Robots (AMRs) in Smart Warehouses",
+    "category": "Software",
+    "psNumber": "SIH26123",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "124",
+    "organization": "Bharat Electronics",
+    "title": "Limited AI-Powered Mobile Urban Intelligence Platform Using Public Transport Fleet",
+    "category": "Software",
+    "psNumber": "SIH26124",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "125",
+    "organization": "Bharat Electronics",
+    "title": "Limited Blockchain-Based Secure Platform for Identity,Access Control, and Digital Asset Management",
+    "category": "Software",
+    "psNumber": "SIH26125",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "126",
+    "organization": "Bharat Electronics",
+    "title": "Limited Vision Based Autonomous Navigation for Unmanned Ground Vehicle for Outdoor environment",
+    "category": "Software",
+    "psNumber": "SIH26126",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "127",
+    "organization": "Bharat Electronics",
+    "title": "Limited City-Wide AI Engine for Multi- Camera ANPR Trajectory Tracking and Urban Traffic Analytics",
+    "category": "Software",
+    "psNumber": "SIH26127",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "128",
+    "organization": "Government Of",
+    "title": "Maharashtra Efficient systems for early detection,prevention,and management of livestock diseases and animal health issues",
+    "category": "Software",
+    "psNumber": "SIH26128",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "129",
+    "organization": "Government Of",
+    "title": "Maharashtra System integration and interoperability among government digital platforms,resulting in fragmented service delivery",
+    "category": "Software",
+    "psNumber": "SIH26129",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "130",
+    "organization": "Government Of",
+    "title": "Maharashtra Efficiency in streamlining industrial approvals,compliance processes,and access to government support services",
+    "category": "Software",
+    "psNumber": "SIH26130",
+    "submittedCount": "1/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "131",
+    "organization": "Government Of",
+    "title": "Maharashtra Early detection and management of crop diseases and pest infestations",
+    "category": "Software",
+    "psNumber": "SIH26131",
+    "submittedCount": "1/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "132",
+    "organization": "Government Of",
+    "title": "Maharashtra Strengthening market linkages and price discovery for farmers",
+    "category": "Software",
+    "psNumber": "SIH26132",
+    "submittedCount": "2/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "133",
+    "organization": "Government Of",
+    "title": "Maharashtra Accessibility and quality of public healthcare services,particularly in rural and underserved areas",
+    "category": "Software",
+    "psNumber": "SIH26133",
+    "submittedCount": "2/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "134",
+    "organization": "Government Of",
+    "title": "Maharashtra Challenges in aligning skill development programs with industry requirements and emerging job market demands",
+    "category": "Software",
+    "psNumber": "SIH26134",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "135",
+    "organization": "Government Of",
+    "title": "Maharashtra Difficulties in tracking employment outcomes,skill gaps, and the impact of skilling initiatives",
+    "category": "Software",
+    "psNumber": "SIH26135",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "136",
+    "organization": "Government Of",
+    "title": "Maharashtra Startup friendly public procurement mechanism that enables government departments to identify,pilot, procure,and scale innovative solutions from eligible startups",
+    "category": "Software",
+    "psNumber": "SIH26136",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "137",
+    "organization": "Egreen Quanta Quantum-Inspired Intelligent",
+    "title": "Traffic Route Optimization in Transportation Systems Using Metaheuristic Optimization",
+    "category": "Software",
+    "psNumber": "SIH26137",
+    "submittedCount": "0/500",
+    "theme": "Transportation & Logistics"
+  },
+  {
+    "sno": "138",
+    "organization": "Egreen Quanta Quantum-Inspired Fuel",
+    "title": "Consumption Prediction and Green Fleet Optimization",
+    "category": "Software",
+    "psNumber": "SIH26138",
+    "submittedCount": "0/500",
+    "theme": "Clean & Green Technology"
+  },
+  {
+    "sno": "139",
+    "organization": "Egreen Quanta Hybrid Quantum Machine",
+    "title": "Learning Platform for Early Disease Detection",
+    "category": "Software",
+    "psNumber": "SIH26139",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "140",
+    "organization": "Egreen Quanta AI-Based Interactive Quantum",
+    "title": "Algorithm Learning Platform",
+    "category": "Software",
+    "psNumber": "SIH26140",
+    "submittedCount": "0/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "141",
+    "organization": "Egreen Quanta Quantum-Inspired Cyber Threat",
+    "title": "Detection for Digital Signature Security",
+    "category": "Software",
+    "psNumber": "SIH26141",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "142",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Deep Learning Based Super Resolution Mapping (SRM) from Medium Resolution Satellite Imageries",
+    "category": "Software",
+    "psNumber": "SIH26142",
+    "submittedCount": "0/500",
+    "theme": "Space Technology"
+  },
+  {
+    "sno": "143",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Leveraging satellite imagery to determine Oil spills at sea along with AIS data correlations to identify vessel responsible for the spill.",
+    "category": "Software",
+    "psNumber": "SIH26143",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "144",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Design & Development of a High- Sensitivity Micro barometer Infrasound sensor",
+    "category": "Hardware",
+    "psNumber": "SIH26144",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "145",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) AI-Based Detection of Cyber Threats in Unidirectional IP Traffic",
+    "category": "Software",
+    "psNumber": "SIH26145",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "146",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) AI-Powered Monitoring & Analysis of Bitcoin Transaction Traffic",
+    "category": "Software",
+    "psNumber": "SIH26146",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "147",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Automated model for analysis of .IQ and .wav files along with signal parameter extraction",
+    "category": "Software",
+    "psNumber": "SIH26147",
+    "submittedCount": "0/500",
+    "theme": "Space Technology"
+  },
+  {
+    "sno": "148",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Creation of scripts/functions with new programming language to commence Computer & Network forensic analysis without triggering security solutions",
+    "category": "Software",
+    "psNumber": "SIH26148",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "149",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Design and Development of an Integrated Secure Data Erasure and Advanced File Recovery Tool for Digital Forensics and Data Sanitization",
+    "category": "Software",
+    "psNumber": "SIH26149",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "150",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Development of a Multi-Vendor DVR/NVR Forensic Analysis Tool for Standardized Acquisition, Recovery, and Analysis of Surveillance Evidence.",
+    "category": "Software",
+    "psNumber": "SIH26150",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "151",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Dark web threat actor de- anonymization",
+    "category": "Software",
+    "psNumber": "SIH26151",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "152",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Social Media Analytics Software SIH26152 1/500 Blockchain & Cybersecurity 153 National Technical Research Organisation (NTRO) AI based Network Attack Forecasting from Network Traffic Data",
+    "category": "Software",
+    "psNumber": "SIH26153",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "154",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Gen AI Platform for Automated Content Transformation",
+    "category": "Software",
+    "psNumber": "SIH26154",
+    "submittedCount": "2/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "155",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) AI-Driven Multi-Vendor Network Security Compliance Auditor",
+    "category": "Software",
+    "psNumber": "SIH26155",
+    "submittedCount": "1/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "156",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Universal Log Pre-processing Framework",
+    "category": "Software",
+    "psNumber": "SIH26156",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "157",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Supervisory Analytics Tool for SOC Assessment (SAT-SA)",
+    "category": "Software",
+    "psNumber": "SIH26157",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "158",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Single-Pass Drone Video to Accurate 3D Model Generation System",
+    "category": "Software",
+    "psNumber": "SIH26158",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "159",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) SecureMailScope: AI-Assisted Cryptographic Security Posture Assessment for Secure Email Communications",
+    "category": "Software",
+    "psNumber": "SIH26159",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "160",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) AI-Powered IPsec VPN Protocol Analyzer and Security Assessment Framework",
+    "category": "Software",
+    "psNumber": "SIH26160",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "161",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Dam Break Inundation Modelling Using Hydrodynamic Modelling of any River",
+    "category": "Software",
+    "psNumber": "SIH26161",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "162",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) AI-Based Detection and Classification of Industrial Fires and Persistent Thermal Sources Using NASA FIRMS, OSM & Satellite Data",
+    "category": "Software",
+    "psNumber": "SIH26162",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "163",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Security Assessment of the World Monitor application",
+    "category": "Software",
+    "psNumber": "SIH26163",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "164",
+    "organization": "National Technical",
+    "title": "Research Organisation (NTRO) Enterprise Cryptographic Discovery & Analysis Tool (ECDAT)",
+    "category": "Software",
+    "psNumber": "SIH26164",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "165",
+    "organization": "Oil India Limited AI/NLP Engine to Detect Serious",
+    "title": "Injury & Fatality (SIF) Precursors in OIL's Unsafe-Act/Unsafe- Condition and Near-Miss Reports",
+    "category": "Software",
+    "psNumber": "SIH26165",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "166",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) Multi-modal, Sun angle and scale invariant image correspondence using Chandrayaan-2 optical images (OHRC, TMC and IIRS)",
+    "category": "Software",
+    "psNumber": "SIH26166",
+    "submittedCount": "0/500",
+    "theme": "Space Technology"
+  },
+  {
+    "sno": "167",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) SatQuery AI - An Interactive Vision-Language Assistant for Multimodal Remote Sensing Image Analysis through Text Queries",
+    "category": "Software",
+    "psNumber": "SIH26167",
+    "submittedCount": "0/500",
+    "theme": "Space Technology"
+  },
+  {
+    "sno": "168",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) AI-ML based Intelligent Dead Reckoning system for seamless navigation",
+    "category": "Software",
+    "psNumber": "SIH26168",
+    "submittedCount": "0/500",
+    "theme": "Smart Vehicles"
+  },
+  {
+    "sno": "169",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) Development of an AI-Based Virtual Camera Tracking System for Coarse Alignment of Mobile Free Space Optical Communication (FSOC) Terminals",
+    "category": "Software",
+    "psNumber": "SIH26169",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "170",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) AI-Driven Anomaly Detection in Component Burn-In & Screening",
+    "category": "Software",
+    "psNumber": "SIH26170",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "171",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) On-device Visual Perception for Light-weight Browser Agents",
+    "category": "Software",
+    "psNumber": "SIH26171",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "172",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) Low Latency and Efficient Voice Activator for Edge Devices",
+    "category": "Hardware",
+    "psNumber": "SIH26172",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "173",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) iTantra -Indian Multilingual TTS & STT Aided Neural Transceiver Radio Access for low bitrate links",
+    "category": "Software",
+    "psNumber": "SIH26173",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "174",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) AI Human Activity Recognition for On-board BAS Experiments",
+    "category": "Software",
+    "psNumber": "SIH26174",
+    "submittedCount": "0/500",
+    "theme": "Space Technology"
+  },
+  {
+    "sno": "175",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) DepthWizard - Single-View Height Estimation and 3D Flythrough",
+    "category": "Software",
+    "psNumber": "SIH26175",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "176",
+    "organization": "Indian Space Research",
+    "title": "Organisation(ISRO) ORCA Marine EcOsystem Reasoning with Collaborative Agents",
+    "category": "Software",
+    "psNumber": "SIH26176",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "177",
+    "organization": "Qualcomm Inc A deployable AI-powered",
+    "title": "autonomous drone that aids search-and-rescue operations by detecting people and hazards, thereby improving responder safety and reducing victim discovery time.",
+    "category": "Hardware",
+    "psNumber": "SIH26177",
+    "submittedCount": "1/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "178",
+    "organization": "Qualcomm Inc A resilient, AI-powered",
+    "title": "environmental monitoring network that provides early detection, localized intelligence, and actionable alerts for floods, forest fires, pollution events, and other environmental hazards common in India, enabling authorities and communities to shift from reactive disaster response to proactive risk prevention.",
+    "category": "Hardware",
+    "psNumber": "SIH26178",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "179",
+    "organization": "Qualcomm Inc To build an AI-powered retail",
+    "title": "intelligence platform that delivers real-time shopper analytics, automated inventory visibility, and proactive queue management through on-device AI,enabling retailers to reduce stock-outs, improve customer experience, optimize staffing, and increase operational efficiency while maintaining privacy and minimizing cloud dependency.",
+    "category": "Hardware",
+    "psNumber": "SIH26179",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "180",
+    "organization": "Qualcomm Inc A field-deployable AI-powered",
+    "title": "Smart Farming Assistant that helps farmers detect crop diseases, pests, nutrient deficiencies, and irrigation needs at an early stage, while improving resilience against droughts, floods, heat waves, and other agricultural risks common in India. The solution should enable higher yields, lower input costs, more efficient water usage, and faster response to emerging threats through real-time on- device intelligence.",
+    "category": "Hardware",
+    "psNumber": "SIH26180",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "181",
+    "organization": "Qualcomm Inc A secure, AI-powered Personal",
+    "title": "Health Companion that delivers real-time, privacy-preserving health monitoring and early warning capabilities, helping individuals recognize health risks before they become emergencies. The solution should improve resilience during heat waves, floods, pollution events, and other disasters common in India while enabling continuous health support through on-device intelligence.",
+    "category": "Hardware",
+    "psNumber": "SIH26181",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "182",
+    "organization": "Ministry of Home Affairs Automated Attribution of",
+    "title": "Unknown Cryptocurrency Wallets to Nearest Virtual Asset Service Providers (VASPs) through Blockchain Intelligence APIs",
+    "category": "Software",
+    "psNumber": "SIH26182",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "183",
+    "organization": "Ministry of Home Affairs Real-Time Identification of Fraud-",
+    "title": "Linked Cryptocurrency Exchanges from Victim-Reported Suspect Wallet Addresses through Automated Blockchain Analytics",
+    "category": "Software",
+    "psNumber": "SIH26183",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "184",
+    "organization": "Ministry of Home Affairs Development of a Predictive",
+    "title": "Analytics Framework for Cybercrime Complaints to Forecast Likely Cash Withdrawal Locations in Advance, Enabling Generation of Actionable Intelligence for Timely and Proactive Cybercrime Intervention.",
+    "category": "Software",
+    "psNumber": "SIH26184",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "185",
+    "organization": "Ministry of Home Affairs Helmet mounted conformal",
+    "title": "antenna for tactical communications in urban CQB environments.",
+    "category": "Hardware",
+    "psNumber": "SIH26185",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "186",
+    "organization": "Ministry of Home Affairs AI-Based Predictive Personnel",
+    "title": "Stress and Welfare Monitoring System for Uniformed Forces",
+    "category": "Software",
+    "psNumber": "SIH26186",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "187",
+    "organization": "Ministry of Home Affairs AI-Based Intelligent Video",
+    "title": "Analytics Platform for Border Surveillance using existing CCTV Infrastructure.",
+    "category": "Software",
+    "psNumber": "SIH26187",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "189",
+    "organization": "Ministry of Home Affairs AI-Powered Criminal Network",
+    "title": "Analysis System",
+    "category": "Software",
+    "psNumber": "SIH26189",
+    "submittedCount": "1/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "190",
+    "organization": "Ministry of Home Affairs Secure Digital Document",
+    "title": "Management System for Legal and Investigation Documents",
+    "category": "Software",
+    "psNumber": "SIH26190",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "191",
+    "organization": "Ministry of Home Affairs Intelligent Identification of Hazard-",
+    "title": "Based Red Zones, Carrying Capacity Assessment, and Immediate Relocation Needs for Vulnerable Habitations",
+    "category": "Software",
+    "psNumber": "SIH26191",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "192",
+    "organization": "Ministry of Home Affairs Flash Flood Prediction System",
+    "title": "for Hilly Regions using Multi- Source Data Theme",
+    "category": "Software",
+    "psNumber": "SIH26192",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "193",
+    "organization": "AICTE Student Innovation-Developing",
+    "title": "solutions, keeping in mind the need to enhance the primary sector of India - Agriculture and to manage and process our agriculture produce.",
+    "category": "Software",
+    "psNumber": "SIH26193",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "194",
+    "organization": "AICTE Student Innovation-Provide ideas",
+    "title": "in a decentralized and distributed ledger technology used to store digital information that powers cryptocurrencies and NFTs and can radically change multiple sectors.",
+    "category": "Software",
+    "psNumber": "SIH26194",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "195",
+    "organization": "AICTE Student Innovation-Solutions",
+    "title": "could be in the form of waste segregation, disposal, and improve sanitization system.",
+    "category": "Software",
+    "psNumber": "SIH26195",
+    "submittedCount": "0/500",
+    "theme": "Clean & Green Technology"
+  },
+  {
+    "sno": "196",
+    "organization": "AICTE Student Innovation-Ideas that can",
+    "title": "boost fitness activities and assist in keeping fit.",
+    "category": "Software",
+    "psNumber": "SIH26196",
+    "submittedCount": "0/500",
+    "theme": "Fitness & Sports"
+  },
+  {
+    "sno": "197",
+    "organization": "AICTE Student Innovation-Ideas that",
+    "title": "showcase the rich cultural heritage and traditions of India.",
+    "category": "Software",
+    "psNumber": "SIH26197",
+    "submittedCount": "0/500",
+    "theme": "Heritage & Culture"
+  },
+  {
+    "sno": "198",
+    "organization": "AICTE Student Innovation-Cutting-edge",
+    "title": "technology in these sectors continues to be in demand. Recent shifts in healthcare trends, growing populations also present an array of opportunities for innovation.",
+    "category": "Software",
+    "psNumber": "SIH26198",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "199",
+    "organization": "AICTE Student Innovation-Technology",
+    "title": "ideas in tertiary sectors like Hospitality, Financial Services, Entertainment and Retail.",
+    "category": "Software",
+    "psNumber": "SIH26199",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "200",
+    "organization": "AICTE Student Innovation-Innovative",
+    "title": "ideas that help manage and generate renewable /sustainable sources more efficiently",
+    "category": "Software",
+    "psNumber": "SIH26200",
+    "submittedCount": "0/500",
+    "theme": "Renewable / Sustainable Energy"
+  },
+  {
+    "sno": "201",
+    "organization": "AICTE Student Innovation-There is a",
+    "title": "need to design drones and robots that can solve some of the pressing challenges of India such as handling medical emergencies, search and rescue operations, etc.",
+    "category": "Software",
+    "psNumber": "SIH26201",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "202",
+    "organization": "AICTE Student Innovation-Ideas focused",
+    "title": "on the intelligent use of resources for transforming and advancements of technology with combining the artificial intelligence to explore more various sources and get valuable insights.",
+    "category": "Software",
+    "psNumber": "SIH26202",
+    "submittedCount": "0/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "203",
+    "organization": "AICTE Student Innovation-Creating",
+    "title": "intelligent devices to improve commutation sector.",
+    "category": "Software",
+    "psNumber": "SIH26203",
+    "submittedCount": "0/500",
+    "theme": "Smart Vehicles"
+  },
+  {
+    "sno": "204",
+    "organization": "AICTE Student Innovation-A",
+    "title": "solution/idea that can boost the current situation of the tourism industries including hotels, travel and others.",
+    "category": "Software",
+    "psNumber": "SIH26204",
+    "submittedCount": "0/500",
+    "theme": "Travel & Tourism"
+  },
+  {
+    "sno": "205",
+    "organization": "AICTE Student Innovation-Submit your",
+    "title": "ideas to address the growing pressures on the city’s resources, transport networks, and logistic infrastructure.",
+    "category": "Software",
+    "psNumber": "SIH26205",
+    "submittedCount": "0/500",
+    "theme": "Transportation & Logistics"
+  },
+  {
+    "sno": "206",
+    "organization": "AICTE Student Innovation-Disaster",
+    "title": "management includes ideas related to risk mitigation, Planning and management before, after or during a disaster.",
+    "category": "Software",
+    "psNumber": "SIH26206",
+    "submittedCount": "2/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "207",
+    "organization": "AICTE Student Innovation-Smart",
+    "title": "education,a concept that describes learning in digital age. It enables learners to learn more effectively, efficiently, flexibly and comfortably.",
+    "category": "Software",
+    "psNumber": "SIH26207",
+    "submittedCount": "1/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "208",
+    "organization": "AICTE Student Innovation-Challenge",
+    "title": "your creative mind to conceptualize and develop unique toys and games based on our civilization, history, and culture etc.",
+    "category": "Software",
+    "psNumber": "SIH26208",
+    "submittedCount": "0/500",
+    "theme": "Toys & Games"
+  },
+  {
+    "sno": "209",
+    "organization": "AICTE Student Innovation-Space",
+    "title": "technology refers to the application of engineering principles to the design, development, manufacture, and operation of devices and systems for space travel and exploration.",
+    "category": "Software",
+    "psNumber": "SIH26209",
+    "submittedCount": "0/500",
+    "theme": "Space Technology"
+  },
+  {
+    "sno": "210",
+    "organization": "AICTE Student Innovation-Developing",
+    "title": "solutions, keeping in mind the need to enhance the primary sector of India - Agriculture and to manage and process our agriculture produce.",
+    "category": "Hardware",
+    "psNumber": "SIH26210",
+    "submittedCount": "0/500",
+    "theme": "Agriculture, FoodTech & Rural Development"
+  },
+  {
+    "sno": "211",
+    "organization": "AICTE Student Innovation-Provide ideas",
+    "title": "in a decentralized and distributed ledger technology used to store digital information that powers cryptocurrencies and NFTs and can radically change multiple sectors.",
+    "category": "Hardware",
+    "psNumber": "SIH26211",
+    "submittedCount": "0/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "212",
+    "organization": "AICTE Student Innovation-Solutions",
+    "title": "could be in the form of waste segregation, disposal, and improve sanitization system.",
+    "category": "Hardware",
+    "psNumber": "SIH26212",
+    "submittedCount": "0/500",
+    "theme": "Clean & Green Technology"
+  },
+  {
+    "sno": "213",
+    "organization": "AICTE Student Innovation-Ideas that can",
+    "title": "boost fitness activities and assist in keeping fit.",
+    "category": "Hardware",
+    "psNumber": "SIH26213",
+    "submittedCount": "0/500",
+    "theme": "Fitness & Sports"
+  },
+  {
+    "sno": "214",
+    "organization": "AICTE Student Innovation-Ideas that",
+    "title": "showcase the rich cultural heritage and traditions of India.",
+    "category": "Hardware",
+    "psNumber": "SIH26214",
+    "submittedCount": "0/500",
+    "theme": "Heritage & Culture"
+  },
+  {
+    "sno": "215",
+    "organization": "AICTE Student Innovation-Cutting-edge",
+    "title": "technology in these sectors continues to be in demand. Recent shifts in healthcare trends, growing populations also present an array of opportunities for innovation.",
+    "category": "Hardware",
+    "psNumber": "SIH26215",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "216",
+    "organization": "AICTE Student Innovation-Technology",
+    "title": "ideas in tertiary sectors like Hospitality, Financial Services, Entertainment and Retail.",
+    "category": "Hardware",
+    "psNumber": "SIH26216",
+    "submittedCount": "0/500",
+    "theme": "Miscellaneous"
+  },
+  {
+    "sno": "217",
+    "organization": "AICTE Student Innovation-Innovative",
+    "title": "ideas that help manage and generate renewable /sustainable sources more efficiently",
+    "category": "Hardware",
+    "psNumber": "SIH26217",
+    "submittedCount": "0/500",
+    "theme": "Renewable / Sustainable Energy"
+  },
+  {
+    "sno": "218",
+    "organization": "AICTE Student Innovation-There is a",
+    "title": "need to design drones and robots that can solve some of the pressing challenges of India such as handling medical emergencies, search and rescue operations, etc.",
+    "category": "Hardware",
+    "psNumber": "SIH26218",
+    "submittedCount": "0/500",
+    "theme": "Robotics and Drones"
+  },
+  {
+    "sno": "219",
+    "organization": "AICTE Student Innovation-Ideas focused",
+    "title": "on the intelligent use of resources for transforming and advancements of technology with combining the artificial intelligence to explore more various sources and get valuable insights.",
+    "category": "Hardware",
+    "psNumber": "SIH26219",
+    "submittedCount": "1/500",
+    "theme": "Smart Automation"
+  },
+  {
+    "sno": "220",
+    "organization": "AICTE Student Innovation-Creating",
+    "title": "intelligent devices to improve commutation sector.",
+    "category": "Hardware",
+    "psNumber": "SIH26220",
+    "submittedCount": "0/500",
+    "theme": "Smart Vehicles"
+  },
+  {
+    "sno": "221",
+    "organization": "AICTE Student Innovation-A",
+    "title": "solution/idea that can boost the current situation of the tourism industries including hotels, travel and others.",
+    "category": "Hardware",
+    "psNumber": "SIH26221",
+    "submittedCount": "0/500",
+    "theme": "Travel & Tourism"
+  },
+  {
+    "sno": "222",
+    "organization": "AICTE Student Innovation-Submit your",
+    "title": "ideas to address the growing pressures on the city’s resources, transport networks, and logistic infrastructure.",
+    "category": "Hardware",
+    "psNumber": "SIH26222",
+    "submittedCount": "0/500",
+    "theme": "Transportation & Logistics"
+  },
+  {
+    "sno": "223",
+    "organization": "AICTE Student Innovation-Disaster",
+    "title": "management includes ideas related to risk mitigation, Planning and management before, after or during a disaster.",
+    "category": "Hardware",
+    "psNumber": "SIH26223",
+    "submittedCount": "0/500",
+    "theme": "Disaster Management"
+  },
+  {
+    "sno": "224",
+    "organization": "AICTE Student Innovation-Smart",
+    "title": "education,a concept that describes learning in digital age. It enables learners to learn more effectively, efficiently, flexibly and comfortably.",
+    "category": "Hardware",
+    "psNumber": "SIH26224",
+    "submittedCount": "0/500",
+    "theme": "Smart Education"
+  },
+  {
+    "sno": "225",
+    "organization": "AICTE Student Innovation-Challenge",
+    "title": "your creative mind to conceptualize and develop unique toys and games based on our civilization, history, and culture etc.",
+    "category": "Hardware",
+    "psNumber": "SIH26225",
+    "submittedCount": "0/500",
+    "theme": "Toys & Games"
+  },
+  {
+    "sno": "226",
+    "organization": "AICTE Student Innovation-Space",
+    "title": "technology refers to the application of engineering principles to the design, development, manufacture, and operation of devices and systems for space travel and exploration.",
+    "category": "Hardware",
+    "psNumber": "SIH26226",
+    "submittedCount": "0/500",
+    "theme": "Space Technology"
+  },
+  {
+    "sno": "227",
+    "organization": "Ministry of defence",
+    "title": "(MoD) Semantic Retrieval and Multi- Temporal Change Analysis of Satellite lmagery.",
+    "category": "Software",
+    "psNumber": "SIH26227",
+    "submittedCount": "0/500",
+    "theme": "Space Technology"
+  },
+  {
+    "sno": "228",
+    "organization": "Ministry of defence",
+    "title": "(MoD) Trustworthy Computer Vision Integrity Assurance for Data, Models and Inference Outputs in Multi-Contributor Pipelines",
+    "category": "Software",
+    "psNumber": "SIH26228",
+    "submittedCount": "1/500",
+    "theme": "Blockchain & Cybersecurity"
+  },
+  {
+    "sno": "230",
+    "organization": "Ministry of Home Affairs Breath-Based Detection Device",
+    "title": "for Drug Consumption",
+    "category": "Hardware",
+    "psNumber": "SIH26230",
+    "submittedCount": "0/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  },
+  {
+    "sno": "231",
+    "organization": "Ministry of Home Affairs Digital Companion for Field Drug",
+    "title": "Testing",
+    "category": "Software",
+    "psNumber": "SIH26231",
+    "submittedCount": "1/500",
+    "theme": "MedTech / BioTech / HealthTech"
+  }
+]

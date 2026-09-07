@@ -64,8 +64,45 @@
       "createdAt": "2026-08-23T19:36:05.407Z"
     }
   ],
-  "sessions": [],
+  "sessions": [
+    {
+      "token": "sk_7194bc51141eb7122906bdd35077060c77aaba9c8c6daca2bcfaeaa334dbd993",
+      "userId": "usr-student-01",
+      "email": "dev.patel@skillpods.io",
+      "role": "student",
+      "createdAt": "2026-09-07T11:35:57.029Z",
+      "expiresAt": "2026-09-14T11:35:57.029Z"
+    },
+    {
+      "token": "sk_b024bdc05c07a2714cd2b9034b62e008fbf6e6939e6c4de75872506fa081f353",
+      "userId": "usr-sme-01",
+      "email": "kestrel@freight.com",
+      "role": "sme",
+      "createdAt": "2026-09-07T11:36:48.220Z",
+      "expiresAt": "2026-09-14T11:36:48.220Z"
+    }
+  ],
   "securityLogs": [
+    {
+      "userId": "usr-sme-01",
+      "userEmail": "kestrel@freight.com",
+      "action": "LOGIN_SUCCESS",
+      "ip": "127.0.0.1",
+      "status": "SUCCESS",
+      "details": "Password verified via SHA-512 for role sme. Security login email notification dispatched.",
+      "id": "sec-1788781008223-1oo9",
+      "timestamp": "2026-09-07T11:36:48.223Z"
+    },
+    {
+      "userId": "usr-student-01",
+      "userEmail": "dev.patel@skillpods.io",
+      "action": "LOGIN_SUCCESS",
+      "ip": "127.0.0.1",
+      "status": "SUCCESS",
+      "details": "Password verified via SHA-512 for role student. Security login email notification dispatched.",
+      "id": "sec-1788780957032-6b04",
+      "timestamp": "2026-09-07T11:35:57.033Z"
+    },
     {
       "id": "sec-01",
       "userEmail": "dev.patel@skillpods.io",

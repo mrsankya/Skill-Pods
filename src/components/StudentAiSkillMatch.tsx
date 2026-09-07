@@ -40,16 +40,22 @@ interface MatchOpportunity {
   mentorCompany: string;
   podSlots: string;
   status: string;
+  categoryType: 'SME' | 'SOCIETAL';
+  thematicDomain?: string;
+  district?: string;
+  communityImpact?: string;
+  csrPartner?: string;
 }
 
 export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
   userEmail,
   onSelectProblem
 }) => {
-  const [selectedOppId, setSelectedOppId] = useState<string | null>('opp-match-1');
+  const [selectedOppId, setSelectedOppId] = useState<string | null>('opp-match-sih-1');
   const [appliedOpps, setAppliedOpps] = useState<Record<string, boolean>>({});
   const [searchQuery, setSearchQuery] = useState('');
   const [filterThreshold, setFilterThreshold] = useState<number>(85);
+  const [categoryFilter, setCategoryFilter] = useState<'ALL' | 'SME' | 'SOCIETAL'>('ALL');
 
   const studentProfileSkills = [
     { name: 'FastAPI & Async Microservices', level: 'Expert (95%)', verified: true, mentor: 'Sarah Chen (Cloudflare)' },
@@ -62,6 +68,60 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
 
   const matchOpportunities: MatchOpportunity[] = [
     {
+      id: 'opp-match-sih-1',
+      smeName: 'Gram Panchayat Torpa / Khunti District',
+      industry: 'Water Resources & Sanitation',
+      title: 'Solar IoT Fluoride & Water Contaminant Alert Network',
+      description: 'High fluoride and heavy metal levels detected in 14 village hand-pumps. Automated solar sensor telemetry with GSM/SMS alert dispatch to District PHC and real-time community dashboard.',
+      bounty: '₹50,000 CSR Grant / Govt Pilot',
+      matchScore: 94,
+      categoryType: 'SOCIETAL',
+      thematicDomain: 'Water Resources & Sanitation',
+      district: 'Khunti District, Jharkhand',
+      communityImpact: 'Directly serves 14 tribal villages (6,200+ rural residents) with clean water alerts.',
+      csrPartner: 'Tata Steel CSR & District Innovation Fund',
+      matchedSkills: [
+        { skill: 'React 19 & Telemetry UI', studentLevel: 'Expert', requiredLevel: 'Expert' },
+        { skill: 'FastAPI & Async Workers', studentLevel: 'Expert', requiredLevel: 'Expert' },
+        { skill: 'PostgreSQL Time Queries', studentLevel: 'Advanced', requiredLevel: 'Advanced' }
+      ],
+      missingSkills: [
+        { skill: 'LoRaWAN Packet Decoding', learningEta: '1-2 days', recommendedResource: 'SkillPods LoRaWAN Field Sensor Primer' }
+      ],
+      synergyReason: 'Your real-time WebSocket telemetry experience matches this critical Jharkhand rural water problem. Mentor Dr. Rajeshwar Soren (IIT ISM Dhanbad) leads the environmental validation.',
+      mentorName: 'Dr. Rajeshwar Soren',
+      mentorCompany: 'IIT (ISM) Dhanbad / Water Lab',
+      podSlots: 'Jal-Rakshak Pod (Seeking Full-Stack Lead)',
+      status: 'SIH26043 High Priority 🔥'
+    },
+    {
+      id: 'opp-match-sih-2',
+      smeName: 'Dumka Tribal Cooperative & JSLPS',
+      industry: 'Rural Livelihoods & Tribal Development',
+      title: 'Minor Forest Produce (Lac & Millets) Traceability & Direct Payouts',
+      description: 'Decentralized ledger connecting 850+ Santhal tribal forest produce collectors with fair-trade pricing, digital weigh-scale API, and instant direct bank transfers.',
+      bounty: '₹65,000 Govt Pilot Grant',
+      matchScore: 92,
+      categoryType: 'SOCIETAL',
+      thematicDomain: 'Rural Livelihoods & Tribal Development',
+      district: 'Dumka District, Jharkhand',
+      communityImpact: 'Eliminates middleman price exploitation for 850+ tribal women self-help groups (SHGs).',
+      csrPartner: 'Jharkhand State Livelihood Promotion Society (JSLPS)',
+      matchedSkills: [
+        { skill: 'TypeScript & Type Systems', studentLevel: 'Expert', requiredLevel: 'Expert' },
+        { skill: 'PostgreSQL Ledger Schema', studentLevel: 'Advanced', requiredLevel: 'Advanced' },
+        { skill: 'Docker Containerization', studentLevel: 'Advanced', requiredLevel: 'Intermediate' }
+      ],
+      missingSkills: [
+        { skill: 'Vernacular Audio Prompts (Santhali/Hindi)', learningEta: '1 day', recommendedResource: 'Web Speech Vernacular Synthesis' }
+      ],
+      synergyReason: '100% data schema synergy with your previous fintech projects. Direct societal impact recognized by Ministry of Education Innovation Cell (MIC).',
+      mentorName: 'Sunil Besra',
+      mentorCompany: 'Birsa Agricultural University / Agri-Tech',
+      podSlots: 'Aranya Pod (Seeking Frontend/State Lead)',
+      status: 'SIH26043 Open Formation 🟢'
+    },
+    {
       id: 'opp-match-1',
       smeName: 'Kestrel Logistics & Freight',
       industry: 'Logistics & Supply Chain',
@@ -69,6 +129,7 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
       description: 'Zero-shot OCR ingestion of 1,200 daily PDF and scan manifests with automated PostgreSQL ledger balancing and dispute flagging.',
       bounty: '₹2,80,000 ($3,500) SME Pilot Grant',
       matchScore: 96,
+      categoryType: 'SME',
       matchedSkills: [
         { skill: 'FastAPI', studentLevel: 'Expert', requiredLevel: 'Expert' },
         { skill: 'PostgreSQL & Vector Embeddings', studentLevel: 'Advanced', requiredLevel: 'Advanced' },
@@ -92,6 +153,7 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
       description: 'Distributed MQTT temperature ingest from 40+ cold rooms streaming to live WebSocket visualizer with SMS escalation.',
       bounty: '₹3,20,000 ($4,000) SME Pilot Grant',
       matchScore: 91,
+      categoryType: 'SME',
       matchedSkills: [
         { skill: 'React 19 & Telemetry UI', studentLevel: 'Expert', requiredLevel: 'Expert' },
         { skill: 'WebSockets Streaming', studentLevel: 'Advanced', requiredLevel: 'Advanced' },
@@ -115,6 +177,7 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
       description: 'Lightweight timeseries vibration ingest from 8 Haas CNC machines with remaining cutter lifespan estimation and auto-maintenance booking.',
       bounty: '₹4,00,000 ($5,000) Pilot Grant',
       matchScore: 88,
+      categoryType: 'SME',
       matchedSkills: [
         { skill: 'FastAPI Backend', studentLevel: 'Expert', requiredLevel: 'Expert' },
         { skill: 'React 19 Dashboard', studentLevel: 'Expert', requiredLevel: 'Advanced' },
@@ -135,10 +198,12 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
     const matchesSearch = opp.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           opp.smeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           opp.industry.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSearch && opp.matchScore >= filterThreshold;
+    const matchesScore = opp.matchScore >= filterThreshold;
+    const matchesCategory = categoryFilter === 'ALL' || opp.categoryType === categoryFilter;
+    return matchesSearch && matchesScore && matchesCategory;
   });
 
-  const selectedOpp = matchOpportunities.find(o => o.id === selectedOppId) || matchOpportunities[0];
+  const selectedOpp = filteredOpps.find(o => o.id === selectedOppId) || filteredOpps[0] || matchOpportunities[0];
 
   const handleApply = (oppId: string, title: string) => {
     setAppliedOpps(prev => ({ ...prev, [oppId]: true }));
@@ -210,12 +275,52 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
         
         {/* Left List of Matched Opportunities (5 cols) */}
         <div className="lg:col-span-5 space-y-4">
+          
+          {/* Category Filter Tabs */}
+          <div className="flex items-center gap-1.5 p-1 bg-purple-100/70 rounded-2xl border border-purple-200/70">
+            <button
+              type="button"
+              onClick={() => setCategoryFilter('ALL')}
+              className={`flex-1 py-1.5 px-2 rounded-xl text-2xs font-bold transition-all cursor-pointer text-center ${
+                categoryFilter === 'ALL'
+                  ? 'bg-purple-900 text-white shadow-xs'
+                  : 'text-[#5c4780] hover:text-purple-950 hover:bg-purple-200/50'
+              }`}
+            >
+              All ({matchOpportunities.length})
+            </button>
+            <button
+              type="button"
+              onClick={() => setCategoryFilter('SOCIETAL')}
+              className={`flex-1 py-1.5 px-2 rounded-xl text-2xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                categoryFilter === 'SOCIETAL'
+                  ? 'bg-[#6d4ec7] text-white shadow-xs'
+                  : 'text-[#5c4780] hover:text-purple-950 hover:bg-purple-200/50'
+              }`}
+            >
+              <span>🏛️ Societal</span>
+              <span className="text-[10px] bg-purple-200 text-purple-950 px-1.5 rounded-full font-black">2</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setCategoryFilter('SME')}
+              className={`flex-1 py-1.5 px-2 rounded-xl text-2xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
+                categoryFilter === 'SME'
+                  ? 'bg-purple-900 text-white shadow-xs'
+                  : 'text-[#5c4780] hover:text-purple-950 hover:bg-purple-200/50'
+              }`}
+            >
+              <span>🏢 SME</span>
+              <span className="text-[10px] bg-purple-200 text-purple-950 px-1.5 rounded-full font-black">3</span>
+            </button>
+          </div>
+
           <div className="flex items-center justify-between gap-3 pb-2">
             <div className="relative flex-1">
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search AI recommendations..."
+                placeholder="Search recommendations..."
                 value={searchQuery}
                 onChange={e => setSearchQuery(e.target.value)}
                 className="w-full pl-9 pr-3 py-2 bg-white/80 border border-purple-200/70 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500"
@@ -240,6 +345,7 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
             {filteredOpps.map(opp => {
               const isSelected = selectedOpp.id === opp.id;
               const isApplied = appliedOpps[opp.id];
+              const isSocietal = opp.categoryType === 'SOCIETAL';
               return (
                 <motion.div
                   key={opp.id}
@@ -248,17 +354,30 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
                   whileTap={{ scale: 0.99 }}
                   className={`p-5 rounded-2xl cursor-pointer transition-all border ${
                     isSelected
-                      ? 'bg-white border-purple-600 shadow-[0_8px_25px_rgba(109,78,199,0.18)] ring-2 ring-purple-600/20'
+                      ? isSocietal
+                        ? 'bg-white border-indigo-600 shadow-[0_8px_25px_rgba(99,102,241,0.22)] ring-2 ring-indigo-500/25'
+                        : 'bg-white border-purple-600 shadow-[0_8px_25px_rgba(109,78,199,0.18)] ring-2 ring-purple-600/20'
                       : 'bg-white/70 hover:bg-white border-purple-100 shadow-2xs'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <div className="text-2xs font-extrabold uppercase tracking-wider text-purple-800 bg-purple-100/70 px-2.5 py-0.5 rounded-full inline-block mb-1">
-                        {opp.industry}
+                      <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                        {isSocietal ? (
+                          <span className="text-2xs font-black uppercase tracking-wider text-indigo-900 bg-indigo-100 border border-indigo-200 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1">
+                            🏛️ SIH26043 &bull; {opp.district?.split(' ')[0] || 'Jharkhand'}
+                          </span>
+                        ) : (
+                          <span className="text-2xs font-extrabold uppercase tracking-wider text-purple-800 bg-purple-100/70 px-2.5 py-0.5 rounded-full inline-block">
+                            🏢 {opp.industry}
+                          </span>
+                        )}
                       </div>
                       <h4 className="text-sm font-black text-[#261543] leading-snug">{opp.title}</h4>
-                      <p className="text-xs text-[#5c4780] font-medium mt-0.5">SME: <strong>{opp.smeName}</strong></p>
+                      <p className="text-xs text-[#5c4780] font-medium mt-0.5">
+                        {isSocietal ? 'Submitter: ' : 'SME: '}
+                        <strong>{opp.smeName}</strong>
+                      </p>
                     </div>
 
                     {/* Match Score Badge */}
@@ -274,8 +393,14 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
                     </div>
                   </div>
 
+                  {isSocietal && opp.communityImpact && (
+                    <div className="mt-2.5 px-2.5 py-1.5 rounded-lg bg-indigo-50/80 border border-indigo-100 text-[11px] text-indigo-900 font-medium">
+                      🌱 <strong>Impact:</strong> {opp.communityImpact}
+                    </div>
+                  )}
+
                   <div className="mt-3 pt-3 border-t border-purple-100/70 flex items-center justify-between text-2xs text-[#5c4780]">
-                    <span className="font-bold text-slate-900">{opp.bounty.split(' ')[0]}</span>
+                    <span className="font-bold text-slate-900">{opp.bounty.split(' ')[0]} {opp.bounty.split(' ')[1]}</span>
                     <span className="font-semibold">{opp.matchedSkills.length} Matched Skills ✓</span>
                   </div>
                 </motion.div>
@@ -291,10 +416,16 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-5 border-b border-purple-100">
               <div>
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-0.5 rounded-full bg-purple-100 text-purple-900 font-extrabold text-2xs uppercase tracking-wider">
-                    {selectedOpp.industry}
-                  </span>
+                <div className="flex items-center gap-2 flex-wrap">
+                  {selectedOpp.categoryType === 'SOCIETAL' ? (
+                    <span className="px-3 py-0.5 rounded-full bg-indigo-100 border border-indigo-200 text-indigo-950 font-extrabold text-2xs uppercase tracking-wider flex items-center gap-1">
+                      🏛️ SIH26043 &bull; Govt of Jharkhand &amp; MIC
+                    </span>
+                  ) : (
+                    <span className="px-3 py-0.5 rounded-full bg-purple-100 text-purple-900 font-extrabold text-2xs uppercase tracking-wider">
+                      {selectedOpp.industry}
+                    </span>
+                  )}
                   <span className="text-2xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
                     {selectedOpp.status}
                   </span>
@@ -303,8 +434,14 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
                   {selectedOpp.title}
                 </h3>
                 <p className="text-xs text-[#5c4780] font-semibold mt-1">
-                  Enterprise Client: <strong className="text-slate-900">{selectedOpp.smeName}</strong> &bull; Mentor: <strong className="text-purple-900">{selectedOpp.mentorName} ({selectedOpp.mentorCompany})</strong>
+                  {selectedOpp.categoryType === 'SOCIETAL' ? 'Community Submitter: ' : 'Enterprise Client: '}
+                  <strong className="text-slate-900">{selectedOpp.smeName}</strong> &bull; Mentor: <strong className="text-purple-900">{selectedOpp.mentorName} ({selectedOpp.mentorCompany})</strong>
                 </p>
+                {selectedOpp.district && (
+                  <p className="text-2xs text-indigo-800 font-bold mt-0.5 flex items-center gap-1">
+                    📍 {selectedOpp.district} &bull; CSR Co-Sponsor: {selectedOpp.csrPartner}
+                  </p>
+                )}
               </div>
 
               {/* Large Match Dial */}
@@ -327,6 +464,27 @@ export const StudentAiSkillMatch: React.FC<StudentAiSkillMatchProps> = ({
                 {selectedOpp.description}
               </p>
             </div>
+
+            {/* Societal Impact Banner for SIH26043 Challenges */}
+            {selectedOpp.categoryType === 'SOCIETAL' && (
+              <div className="p-4 rounded-2xl bg-indigo-50 border border-indigo-200/80 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-indigo-950 flex items-center gap-1.5">
+                    🌱 Real-World Societal Impact & Community Beneficiaries
+                  </span>
+                  <span className="text-2xs font-extrabold text-indigo-800 bg-indigo-200/60 px-2.5 py-0.5 rounded-full">
+                    NEP 2020 Aligned
+                  </span>
+                </div>
+                <p className="text-xs text-indigo-900 font-medium leading-relaxed">
+                  {selectedOpp.communityImpact}
+                </p>
+                <div className="text-2xs text-indigo-800 font-semibold pt-1.5 border-t border-indigo-100 flex flex-wrap items-center justify-between gap-2">
+                  <span>📍 Target Location: <strong>{selectedOpp.district}</strong></span>
+                  <span>🤝 Co-Sponsor: <strong>{selectedOpp.csrPartner}</strong></span>
+                </div>
+              </div>
+            )}
 
             {/* AI Synergy Explanation Box */}
             <div className="p-4 rounded-2xl bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200/80 space-y-1.5">

@@ -31,6 +31,7 @@ import { SmeDashboard } from './components/SmeDashboard';
 import { CollegeDashboard } from './components/CollegeDashboard';
 import { AdminDashboard } from './components/AdminDashboard';
 import { NotFoundPage } from './components/NotFoundPage';
+import { PublicSocietalDashboard } from './components/PublicSocietalDashboard';
 
 const initialMetrics: MetricsData = {
 
@@ -142,6 +143,9 @@ export default function App() {
       };
       title = roleTitles[currentRole] || 'Workspace Dashboard | SKILL PODS';
       desc = 'Live telemetry, verified skill passport endorsements, and production delivery milestones.';
+    } else if (currentPage === 'public-dashboard') {
+      title = 'Public Societal Innovation Portal | SIH26043 | SKILL PODS';
+      desc = 'Crowdsourcing societal challenges across Jharkhand for university student pods and corporate CSR partners.';
     } else if (currentPage === 'not-found') {
       title = '404 Page Not Found | SKILL PODS';
       desc = 'The requested pod workspace or node was not found.';
@@ -165,6 +169,8 @@ export default function App() {
       const p = window.location.pathname.toLowerCase();
       if (h === '#login' || p === '/login') {
         setCurrentPage('login');
+      } else if (h === '#public' || p === '/public' || h === '#societal') {
+        setCurrentPage('public-dashboard');
       } else if (h === '#404' || p === '/404') {
         setCurrentPage('not-found');
       } else if (
@@ -330,7 +336,21 @@ export default function App() {
     );
   }
 
-  // 2. Full-Screen Workspace Dashboard View
+  // 2. Public Societal Dashboard View (SIH26043 Crowdsourced Citizen & HEI Innovation Hub)
+  if (currentPage === 'public-dashboard') {
+    return (
+      <PublicSocietalDashboard
+        onBackToHome={handleBackToHome}
+        onOpenSubmitModal={() => {
+          handleBackToHome();
+          setTimeout(() => setActiveModal('submit-problem'), 100);
+        }}
+        onOpenLogin={() => handleOpenLogin('general')}
+      />
+    );
+  }
+
+  // 3. Full-Screen Workspace Dashboard View
   if (currentPage === 'dashboard') {
     if (currentRole === 'student') {
       return (
@@ -431,6 +451,10 @@ export default function App() {
         activeSection={activeSection}
         onNavigate={handleNavigate}
         onOpenCommunity={() => setShowCommunityModal(true)}
+        onOpenPublicDashboard={() => {
+          localStorage.setItem('skillpods_page', 'public-dashboard');
+          setCurrentPage('public-dashboard');
+        }}
         onOpenChat={() => {
           setSelectedChatRecipient(null);
           setShowMessagingModal(true);
@@ -444,6 +468,10 @@ export default function App() {
         <HeroSection
           metrics={metrics}
           onOpenModal={handleModalOrLoginRoute}
+          onOpenPublicDashboard={() => {
+            localStorage.setItem('skillpods_page', 'public-dashboard');
+            setCurrentPage('public-dashboard');
+          }}
           onExplorePods={() => handleNavigate('workflow')}
         />
 

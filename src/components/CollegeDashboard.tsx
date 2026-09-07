@@ -39,13 +39,15 @@ import {
   CheckCheck,
   HelpCircle,
   Zap,
-  Printer
+  Printer,
+  Landmark
 } from 'lucide-react';
 import { SkillPodsLogo } from './SkillPodsLogo';
 import { CollegeCharacter3D } from './CollegeCharacter3D';
 import { CollegeSkillPassportView } from './CollegeSkillPassportView';
 import { CollegeIpRegistry } from './CollegeIpRegistry';
 import { CollegeDepartmentComparison } from './CollegeDepartmentComparison';
+import { CollegeSocietalImpactView } from './CollegeSocietalImpactView';
 
 interface CollegeDashboardProps {
   userEmail: string;
@@ -56,6 +58,7 @@ interface CollegeDashboardProps {
 export type CollegeTab =
   | 'overview'
   | 'skill-passports'
+  | 'societal-impact'
   | 'ip-registry'
   | 'department-analytics'
   | 'students'
@@ -485,6 +488,7 @@ export const CollegeDashboard: React.FC<CollegeDashboardProps> = ({
             {[
               { id: 'overview', icon: Layers, label: 'Dashboard' },
               { id: 'skill-passports', icon: GraduationCap, label: 'Student Skill Passports' },
+              { id: 'societal-impact', icon: Landmark, label: '🏛️ Societal Innovation (SIH26043)', badge: 38 },
               { id: 'ip-registry', icon: Award, label: 'Innovation & IP Registry' },
               { id: 'department-analytics', icon: BarChart3, label: 'Department Analytics & Placement' },
               { id: 'students', icon: Users, label: 'Students', badge: 1248 },
@@ -594,6 +598,7 @@ export const CollegeDashboard: React.FC<CollegeDashboardProps> = ({
           {[
             { id: 'overview', label: 'Dashboard' },
             { id: 'skill-passports', label: '🪪 Skill Passports' },
+            { id: 'societal-impact', label: '🏛️ Societal Innovation (SIH)' },
             { id: 'ip-registry', label: '💡 IP Registry' },
             { id: 'department-analytics', label: '📊 Dept Analytics' },
             { id: 'students', label: 'Students (1,248)' },
@@ -1202,6 +1207,11 @@ export const CollegeDashboard: React.FC<CollegeDashboardProps> = ({
         {/* ================= TAB: STUDENT SKILL PASSPORTS DIRECTORY ================= */}
         {activeTab === 'skill-passports' && (
           <CollegeSkillPassportView userEmail={userEmail} />
+        )}
+
+        {/* ================= TAB: SOCIETAL INNOVATION & SIH26043 ================= */}
+        {activeTab === 'societal-impact' && (
+          <CollegeSocietalImpactView userEmail={userEmail} onOpenNaacModal={() => setShowNaacModal(true)} />
         )}
 
         {/* ================= TAB: INNOVATION & IP REGISTRY ================= */}

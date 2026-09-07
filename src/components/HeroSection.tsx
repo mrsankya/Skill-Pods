@@ -14,7 +14,8 @@ import {
   ArrowUpRight,
   ShieldCheck,
   CheckCircle2,
-  Activity
+  Activity,
+  Landmark
 } from 'lucide-react';
 import { MetricsData, ModalView } from '../types';
 import { HeroImageShowcase } from './HeroImageShowcase';
@@ -23,9 +24,10 @@ interface HeroSectionProps {
   metrics: MetricsData;
   onOpenModal: (modal: ModalView) => void;
   onExplorePods: () => void;
+  onOpenPublicDashboard?: () => void;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, onExplorePods }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, onExplorePods, onOpenPublicDashboard }) => {
   return (
     <section className="relative pt-8 sm:pt-14 pb-20 md:pb-28 px-4 sm:px-6 md:px-10 overflow-hidden" id="hero-section">
       
@@ -37,6 +39,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
       {/* Hero Header Content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
         
+        {/* SIH26043 Govt of Jharkhand & MIC Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-950/60 border border-purple-400/30 text-purple-200 text-2xs font-mono tracking-wider uppercase mb-5 backdrop-blur-md shadow-sm"
+        >
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>SIH26043 &bull; Demand-Driven Societal &amp; SME Innovation &bull; Govt of Jharkhand &amp; MIC</span>
+        </motion.div>
+
         {/* Main Headline */}
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}
@@ -55,8 +68,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
           className="text-sm sm:text-base md:text-lg text-[#b2abc0] max-w-2xl mx-auto leading-relaxed mb-9 font-normal"
         >
-          Turn real business problems into production-ready software.<br className="hidden sm:inline" />
-          Powered by student <span className="text-white font-semibold">Skill Pods</span> and industry mentorship.
+          Turn real business bottlenecks and crowdsourced societal challenges into production software.<br className="hidden sm:inline" />
+          Powered by multidisciplinary student <span className="text-white font-semibold">Skill Pods</span> and verified mentors.
         </motion.p>
 
         {/* Dual Action Glowing Pill Buttons */}
@@ -67,7 +80,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
           className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 w-full sm:w-auto justify-center mb-16 md:mb-20"
         >
           
-          {/* Button 1: POST A BUSINESS PROBLEM */}
+          {/* Button 1: POST A PROBLEM / SOCIETAL CHALLENGE */}
           <button
             onClick={() => onOpenModal('submit-problem')}
             className="w-full sm:w-auto glow-pill-primary text-[#240356] font-bold text-xs sm:text-xs font-mono uppercase tracking-widest px-6 py-3.5 rounded-full flex items-center justify-between sm:justify-center gap-3 cursor-pointer group hover:scale-105 active:scale-95 transition-all shadow-[0_0_30px_rgba(168,127,251,0.4)]"
@@ -76,7 +89,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
             <div className="w-4 h-4 text-[#240356] group-hover:rotate-12 transition-transform duration-300">
               <FileEdit className="w-4 h-4" />
             </div>
-            <span>POST A BUSINESS PROBLEM</span>
+            <span>POST PROBLEM OR CHALLENGE</span>
             <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
 
@@ -92,6 +105,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ metrics, onOpenModal, 
             <span>JOIN A SKILL POD</span>
             <ChevronRight className="w-4 h-4 text-[#a19ba9] group-hover:text-white group-hover:translate-x-1 transition-transform" />
           </button>
+
+          {/* Button 3: EXPLORE PUBLIC DASHBOARD (SIH26043) */}
+          {onOpenPublicDashboard && (
+            <button
+              onClick={onOpenPublicDashboard}
+              className="w-full sm:w-auto bg-[#6d4ec7]/20 hover:bg-[#6d4ec7]/35 text-[#d0bcff] hover:text-white border border-[#d0bcff]/40 font-bold text-xs font-mono uppercase tracking-widest px-6 py-3.5 rounded-full flex items-center justify-between sm:justify-center gap-3 cursor-pointer group hover:scale-105 active:scale-95 transition-all shadow-[0_0_25px_rgba(109,78,199,0.3)]"
+              id="hero-btn-public-portal"
+            >
+              <div className="w-4 h-4 text-[#d0bcff]">
+                <Landmark className="w-4 h-4" />
+              </div>
+              <span>PUBLIC DASHBOARD</span>
+              <ChevronRight className="w-4 h-4 text-[#d0bcff] group-hover:translate-x-1 transition-transform" />
+            </button>
+          )}
 
         </motion.div>
 

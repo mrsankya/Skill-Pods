@@ -36,6 +36,48 @@ export interface PodData {
   milestoneGateStatus?: 'LOCKED' | 'PENDING_REVIEW' | 'APPROVED' | 'CHANGES_REQUESTED';
 }
 
+export type ThematicDomain =
+  | 'Agriculture & Irrigation'
+  | 'Water Resources & Sanitation'
+  | 'Healthcare & Telemedicine'
+  | 'Environment & Forestry'
+  | 'Renewable Energy & Rural Electrification'
+  | 'Urban Infrastructure & Waste Management'
+  | 'Accessibility & Inclusive Tech'
+  | 'Public Administration & Citizen Services'
+  | 'Rural Livelihoods & Tribal Development'
+  | 'Smart Education & Foundational Literacy';
+
+export type JharkhandDistrict =
+  | 'Ranchi' | 'Dhanbad' | 'East Singhbhum' | 'West Singhbhum' | 'Bokaro'
+  | 'Hazaribagh' | 'Deoghar' | 'Dumka' | 'Giridih' | 'Palamu' | 'Ramgarh'
+  | 'Saraikela Kharsawan' | 'Chatra' | 'Garhwa' | 'Godda' | 'Gumla'
+  | 'Jamtara' | 'Khunti' | 'Koderma' | 'Latehar' | 'Lohardaga' | 'Pakur'
+  | 'Sahibganj' | 'Simdega';
+
+export const THEMATIC_DOMAINS: ThematicDomain[] = [
+  'Agriculture & Irrigation',
+  'Water Resources & Sanitation',
+  'Healthcare & Telemedicine',
+  'Environment & Forestry',
+  'Renewable Energy & Rural Electrification',
+  'Urban Infrastructure & Waste Management',
+  'Accessibility & Inclusive Tech',
+  'Public Administration & Citizen Services',
+  'Rural Livelihoods & Tribal Development',
+  'Smart Education & Foundational Literacy'
+];
+
+export const JHARKHAND_DISTRICTS: JharkhandDistrict[] = [
+  'Ranchi', 'Dhanbad', 'East Singhbhum', 'West Singhbhum', 'Bokaro',
+  'Hazaribagh', 'Deoghar', 'Dumka', 'Giridih', 'Palamu', 'Ramgarh',
+  'Saraikela Kharsawan', 'Chatra', 'Garhwa', 'Godda', 'Gumla',
+  'Jamtara', 'Khunti', 'Koderma', 'Latehar', 'Lohardaga', 'Pakur',
+  'Sahibganj', 'Simdega'
+];
+
+export type SubmitterType = 'SME' | 'Citizen' | 'Gram Panchayat (PRI)' | 'Urban Local Body (ULB)' | 'Govt Agency' | 'NGO / Community Group';
+
 export interface SmeProblem {
   id: string;
   smeName: string;
@@ -48,6 +90,16 @@ export interface SmeProblem {
   submittedAt: string;
   recommendedPodId?: string;
   recommendedPodScore?: number;
+  // SIH26043 Societal Challenge Extension
+  problemType?: 'SME' | 'SOCIETAL';
+  thematicDomain?: ThematicDomain;
+  district?: JharkhandDistrict;
+  blockVillage?: string;
+  submitterType?: SubmitterType;
+  csrPartner?: string;
+  communityUpvotes?: number;
+  evidencePhotos?: string[];
+  impactMetric?: string;
 }
 
 export interface MarketplaceProject {
@@ -123,6 +175,16 @@ export interface VerifiedSkillPassport {
     peerReviewScore: number;
     mentorEndorsement: string;
   }[];
+  societalImpactBadges?: {
+    id: string;
+    title: string;
+    thematicDomain: ThematicDomain;
+    district: string;
+    impactDescription: string;
+    communityHours: number;
+    verifiedBy: string;
+    verifiedDate: string;
+  }[];
 }
 
 export interface MilestoneGateItem {
@@ -177,7 +239,7 @@ export interface LiveEvent {
   type: 'deploy' | 'mentor' | 'perf' | 'sme' | 'pod' | 'marketplace' | 'milestone';
 }
 
-export type PageType = 'landing' | 'login' | 'dashboard' | 'not-found';
+export type PageType = 'landing' | 'login' | 'dashboard' | 'not-found' | 'public-dashboard';
 
 export type UserRole = 'student' | 'sme' | 'mentor' | 'college' | 'admin';
 

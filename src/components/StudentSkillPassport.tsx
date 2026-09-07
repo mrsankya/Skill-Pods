@@ -159,6 +159,18 @@ export const StudentSkillPassport: React.FC<StudentSkillPassportProps> = ({
         peerReviewScore: 4.8,
         mentorEndorsement: "Architected a commercially viable product licensed by enterprise logistics companies."
       }
+    ],
+    societalImpactBadges: [
+      {
+        id: "soc-01",
+        title: "NEP 2020 Societal Innovation Fellow",
+        thematicDomain: "Water Resources & Sanitation",
+        district: "Khunti District, Jharkhand",
+        impactDescription: "Co-architected Jal-Rakshak solar IoT fluoride telemetry sensor mesh for 14 tribal villages, preventing water toxicity.",
+        communityHours: 120,
+        verifiedBy: "Dr. Rajeshwar Soren (IIT ISM Dhanbad) & Gram Panchayat Torpa",
+        verifiedDate: "Sep 02, 2026"
+      }
     ]
   };
 
@@ -431,6 +443,66 @@ export const StudentSkillPassport: React.FC<StudentSkillPassportProps> = ({
           ))}
         </div>
       </div>
+
+      {/* SIH26043 & NEP 2020 Societal Innovation & Community Impact Audit */}
+      {passportData.societalImpactBadges && passportData.societalImpactBadges.length > 0 && (
+        <div className="bg-gradient-to-br from-indigo-50/90 via-purple-50/70 to-white rounded-3xl p-6 sm:p-8 border border-indigo-200/90 shadow-sm space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="p-2 rounded-xl bg-indigo-600 text-white shadow-xs">
+                <Sparkles className="w-5 h-5" />
+              </span>
+              <div>
+                <h3 className="text-lg font-black text-[#1e1b4b]">
+                  NEP 2020 Societal Innovation &amp; Community Impact Audit
+                </h3>
+                <p className="text-xs text-indigo-900 font-medium">
+                  Verified grassroot solutions crowdsourced via Government of Jharkhand &amp; MIC (SIH26043)
+                </p>
+              </div>
+            </div>
+            <span className="px-3 py-1 rounded-full bg-indigo-200 text-indigo-950 text-2xs font-extrabold tracking-wider uppercase">
+              Field Pilot Verified ✓
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 pt-2">
+            {passportData.societalImpactBadges.map((badge) => (
+              <div key={badge.id} className="p-5 rounded-2xl bg-white border border-indigo-200/80 shadow-2xs space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <span className="text-xs font-black text-white bg-indigo-800 px-2.5 py-0.5 rounded-lg">
+                        {badge.title}
+                      </span>
+                      <span className="text-2xs font-bold text-indigo-900 bg-indigo-100 px-2.5 py-0.5 rounded-full">
+                        {badge.thematicDomain}
+                      </span>
+                    </div>
+                    <p className="text-xs font-semibold text-slate-700 mt-1">
+                      Target District: <strong className="text-indigo-950">{badge.district}</strong>
+                    </p>
+                  </div>
+                  <div className="text-right font-mono">
+                    <span className="text-xs font-black text-indigo-900 bg-indigo-50 px-2.5 py-1 rounded-lg border border-indigo-200">
+                      {badge.communityHours} Community Impact Hours
+                    </span>
+                  </div>
+                </div>
+
+                <p className="text-xs text-slate-800 bg-indigo-50/50 p-3 rounded-xl border border-indigo-100 leading-relaxed">
+                  <strong>Impact Delivered:</strong> {badge.impactDescription}
+                </p>
+
+                <div className="pt-2 border-t border-indigo-100 flex items-center justify-between text-2xs text-[#5c4780]">
+                  <span>Sign-Off Authority: <strong className="text-indigo-950">{badge.verifiedBy}</strong></span>
+                  <span className="font-mono">{badge.verifiedDate}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* ================= MODAL: REQUEST SKILL VERIFICATION ================= */}
       {showVerifyModal && (

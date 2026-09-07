@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, ArrowRight, ShieldCheck, Zap, Bell, Users, MessageSquare } from 'lucide-react';
+import { Menu, X, ArrowRight, ShieldCheck, Zap, Bell, Users, MessageSquare, Landmark } from 'lucide-react';
 import { ModalView } from '../types';
 import { SkillPodsLogo } from './SkillPodsLogo';
 
@@ -9,9 +9,10 @@ interface NavbarProps {
   onNavigate: (sectionId: string) => void;
   onOpenCommunity?: () => void;
   onOpenChat?: () => void;
+  onOpenPublicDashboard?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNavigate, onOpenCommunity, onOpenChat }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNavigate, onOpenCommunity, onOpenChat, onOpenPublicDashboard }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [unreadCount, setUnreadCount] = useState(3);
@@ -78,6 +79,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
         {/* Action Controls */}
         <div className="hidden md:flex items-center gap-3">
           
+          {/* Public Societal Innovation Portal (SIH26043) */}
+          {onOpenPublicDashboard && (
+            <button
+              onClick={onOpenPublicDashboard}
+              className="text-[#d0bcff] hover:text-white bg-[#6d4ec7]/20 hover:bg-[#6d4ec7]/30 border border-[#d0bcff]/40 text-xs font-mono tracking-wider uppercase px-3.5 py-2 rounded-full transition-all cursor-pointer flex items-center gap-1.5 shadow-[0_0_15px_rgba(208,188,255,0.2)] hover:scale-105"
+              title="Public Societal Innovation Portal (SIH26043)"
+            >
+              <Landmark className="w-3.5 h-3.5 text-[#d0bcff]" />
+              <span>PUBLIC PORTAL</span>
+            </button>
+          )}
+
           {/* Community Directory Button */}
           {onOpenCommunity && (
             <button
@@ -270,6 +283,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenModal, activeSection, onNa
               <span>PRICING &amp; BOUNTIES</span>
               <ArrowRight className="w-3.5 h-3.5 text-white/30" />
             </button>
+
+            {onOpenPublicDashboard && (
+              <button
+                onClick={() => { onOpenPublicDashboard(); setMobileMenuOpen(false); }}
+                className="text-left text-[#d0bcff] hover:text-white py-2 flex items-center justify-between border-t border-white/5 pt-3"
+              >
+                <span className="flex items-center gap-2">
+                  <Landmark className="w-4 h-4 text-[#d0bcff]" />
+                  PUBLIC PORTAL (SIH26043)
+                </span>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-bold">CITIZEN</span>
+              </button>
+            )}
 
             {onOpenCommunity && (
               <button
