@@ -195,5 +195,8 @@ docker run -p 3000:3000 -e PORT=3000 skillpods:latest
     - **Clean URL Path Routing**: Integrated HTML5 History API (`window.history.pushState`, `popstate`, and `hashchange` listeners in `src/App.tsx`) providing clean URLs (`/`, `/public`, `/login`, `/dashboard`, `/404`) with backward compatibility for hash routes (`#public`, `#login`, `#dashboard`).
     - **Cloudflare Pages Compatibility**: Backed by `public/_redirects` (`/* /index.html 200`), allowing direct deep links and browser refreshes on any URL path.
 17. **Cloudflare Pages & GitHub Sync**:
-    - Deployed to Cloudflare Pages: `https://skill-pods.pages.dev` (Preview: `https://3b3ccd36.skill-pods.pages.dev`).
-    - Synced with GitHub remote `https://github.com/Sakshi-patil48/Skill-Pods.git` on branch `main`.
+    - Deployed to Cloudflare Pages: `https://skill-pods.pages.dev` (Preview: `https://bf921347.skill-pods.pages.dev`).
+    - Synced with Primary GitHub remote `https://github.com/mrsankya/Skill-Pods.git` on branch `main`.
+18. **Platform Interface Screenshot Integration**:
+    - Embedded high-res platform interface preview (`screenshot-1788853881530.png`) into `docs/screenshots/skillpods-platform-preview.png` and `public/skillpods-platform-preview.png`.
+    - Integrated as the hero visual banner in `README.md` on GitHub.
