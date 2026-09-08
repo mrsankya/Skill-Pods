@@ -1,113 +1,158 @@
 <div align="center">
 
 # ⚡ SKILL PODS
-### **Transforming Real Business Problems into Production-Grade Software**
-*Powered by 3-Student Skill Pods, Industry Mentorship, and Cryptographic Proof-of-Work*
+### **Demand-Driven SME Innovation Engine & National Open Innovation Portal**
+*Bridging Real-World Enterprise Demand, Grassroots Societal Challenges, Multidisciplinary Student Pods, and Industry Mentorship*
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Deployment-Cloudflare_Pages-purple?style=for-the-badge&logo=cloudflare)](https://skill-pods.pages.dev)
-[![Database](https://img.shields.io/badge/🗄️_Database-MongoDB_Atlas_Cloud-emerald?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/atlas)
-[![React 19](https://img.shields.io/badge/⚛️_Frontend-React_19_+_TypeScript-blue?style=for-the-badge&logo=react)](https://react.dev)
-[![Tailwind v4](https://img.shields.io/badge/🎨_Styling-Tailwind_CSS_v4-38bdf8?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com)
-[![Status](https://img.shields.io/badge/🚀_Status-Active_Production_%26_Testing-success?style=for-the-badge)]()
+[![Live Production](https://img.shields.io/badge/🌐_Production_Live-Cloudflare_Pages-purple?style=for-the-badge&logo=cloudflare)](https://skill-pods.pages.dev)
+[![GitHub Repository](https://img.shields.io/badge/🐙_GitHub_Repo-mrsankya%2FSkill--Pods-181717?style=for-the-badge&logo=github)](https://github.com/mrsankya/Skill-Pods)
+[![SIH 2026 Ready](https://img.shields.io/badge/🏆_Smart_India_Hackathon-231_PS_Bank-amber?style=for-the-badge)](https://skill-pods.pages.dev/public)
+[![Govt of Jharkhand](https://img.shields.io/badge/🏛️_Govt_of_Jharkhand-MIC_SIH26043-emerald?style=for-the-badge)](https://skill-pods.pages.dev/public)
+[![Tech Stack](https://img.shields.io/badge/⚛️_Full--Stack-React_19_+_TypeScript_+_Express-blue?style=for-the-badge&logo=react)](https://react.dev)
+[![Cloud Database](https://img.shields.io/badge/🗄️_Database-MongoDB_Atlas_Cloud-green?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/atlas)
 
 <br/>
 
-[🌐 Live Production Website](https://skill-pods.pages.dev) &bull; [📂 GitHub Repository](https://github.com/Sakshi-patil48/Skill-Pods.git) &bull; [📑 Verified Skill Passports](#-cryptographic-verified-skill-passport) &bull; [🧪 Experimental Labs](#-experimental-labs--next-gen-beta-suite)
+**[🌐 Live Portal](https://skill-pods.pages.dev)** &bull; **[🏛️ Public Societal Innovation Hub](https://skill-pods.pages.dev/public)** &bull; **[📂 GitHub Repo](https://github.com/mrsankya/Skill-Pods)** &bull; **[📑 231 SIH PS Bank](https://skill-pods.pages.dev/public)** &bull; **[💬 WhatsApp Civic Helpline](https://wa.me/919822725265)**
 
 </div>
 
 ---
 
-## 📖 Executive Summary & Problem Solved
-
-Traditional engineering colleges build throwaway capstone projects that sit on GitHub, while Indian SMEs and Startups struggle to afford expensive dev agencies. 
-
-**Skill Pods** solves this by establishing a direct, high-trust pipeline:
-1. **SMEs & Companies** post real business problems with escrow milestone bounties (₹10,000 &ndash; ₹50,000+).
-2. **AI-Assembled 3-Student Skill Pods** (Full-Stack, Backend/DevOps, AI/Data) are matched based on verified skill telemetry.
-3. **Staff Engineers & Industry Mentors** (from *Cloudflare, Razorpay, Datadog, Stripe*) guide pods through weekly milestone gating.
-4. **Students earn real stipends & cryptographic Skill Passports** that guarantee placement readiness for top recruiters.
+## 📑 Table of Contents
+- [Executive Overview](#-executive-overview)
+- [Cross-Domain Problem Solving Architecture (7 Strategic Pillars)](#-cross-domain-problem-solving-architecture-7-strategic-pillars)
+- [Complete Ecosystem & Stakeholder Workspaces](#-complete-ecosystem--stakeholder-workspaces)
+- [SIH26043 Civic & Societal Innovations](#-sih26043-civic--societal-innovations)
+- [Official 231 National SIH Problem Statement Bank](#-official-231-national-sih-problem-statement-bank)
+- [High-Level System Architecture](#-high-level-system-architecture)
+- [Interactive Visual Innovations & UI/UX Engine](#-interactive-visual-innovations--uiux-engine)
+- [Complete Technology Stack](#-complete-technology-stack)
+- [Pre-Seeded 1-Click Evaluation Accounts](#-pre-seeded-1-click-evaluation-accounts)
+- [Local Quickstart & Deployment](#-local-quickstart--deployment)
+- [Security, Cryptography & Compliance](#-security-cryptography--compliance)
+- [Contact & Helpline](#-contact--helpline)
 
 ---
 
-## 🏗️ High-Level System Architecture
+## 🚀 Executive Overview
 
-```mermaid
-graph TD
-    A[🏢 SME / Business Problem] -->|Voice or Form Input| B(🤖 GURU AI Task Decomposer)
-    B --> C{⚡ Skill Pod Assembly}
-    C -->|Student 1: Frontend| D[🚀 3-Student Skill Pod]
-    C -->|Student 2: Backend| D
-    C -->|Student 3: AI / Data| D
-    D <-->|Weekly Code Review & Sprint Gates| E[👨‍🏫 Industry Staff Mentors]
-    E -->|Milestone Approval| F[🔒 Smart Escrow Vault]
-    F -->|Instant UPI Payouts| D
-    D --> G[🪪 Cryptographic Skill Passport]
-    G --> H[💼 Top Corporate Recruiters]
-    G --> I[🏫 NAAC / NIRF College Rankings]
+Traditional engineering capstones often languish as unused GitHub repositories, while Indian SMEs and Startups struggle to afford bespoke development agencies. Concurrently, grassroots rural citizens and Gram Panchayats lack an accessible technological bridge to turn regional infrastructural pain points into actionable engineering projects.
+
+**Skill Pods** unifies both worlds through a dual-engine open innovation ecosystem:
+1. **Demand-First SME Engine**: Enterprises and SMEs post production bottlenecks with escrowed milestone bounties (₹10,000 &ndash; ₹1,00,000+).
+2. **Societal Open Innovation Hub (SIH26043 Mandate)**: Non-technical rural citizens, Gram Panchayats (PRIs), and urban local bodies crowdsource real societal challenges via conversational voice, photo, video, and WhatsApp channels.
+3. **Multidisciplinary 3-Student Skill Pods**: Full-stack, backend/cloud, and AI/data students collaborate under guidance from staff engineers (*Cloudflare, Datadog, Razorpay*).
+4. **Verifiable Proof-of-Work**: Stamped cryptographic Skill Passports with SHA-256 validation, NAAC Criterion 3.5.1/5.2.1 accreditation exports, and Section 80G CSR corporate matching.
+
+---
+
+## 🌐 Cross-Domain Problem Solving Architecture (7 Strategic Pillars)
+
+Rather than treating problems with a generic, one-size-fits-all approach, **Skill-Pods** enforces a rigorous **Cross-Domain Problem Solving Taxonomy** spanning 7 core verticals:
+
+```
+                                  SKILL PODS
+                        CROSS-DOMAIN PROBLEM SOLVING
+                                     │
+    ┌──────────────┬──────────────┬──┴───────────┬──────────────┬──────────────┐
+    ▼              ▼              ▼              ▼              ▼              ▼
+💻 TECHNOLOGY   🌾 AGRI-TECH   🏥 HEALTHCARE  🌲 ENVIRONMENT 🎓 EDUCATION   ⚙️ MANUFACTURING
+ • AI / ML       • Precision    • Rural PHC    • Water Fluoride• Multilingual • Predictive Maint.
+ • Cybersecurity   Irrigation     Telemetry      Filtration     Literacy Bots • Automated QA
+ • IoT Sensors   • Post-Harvest • Tele-ICU     • Waste Plastic • Cryptographic• Supply Chain
+ • Web3 Ledger     Storage      • Diagnostics    Pyrolysis       Skill Passports Telemetry
 ```
 
----
-
-## 🌟 4 Integrated Stakeholder Dashboards
-
-### 🎓 1. Student Builder Workspace
-* **🤖 AI Skill Match Engine**: Benchmarks student GitHub competencies against open SME problems with 96% fit scoring.
-* **💼 Project Marketplace & Monetization**: List capstone & hackathon projects for *Commercial Licensing*, *Full IP Buyout*, or *SME Pilot Upgrades*.
-* **🪪 Verified Skill Passport & Academic Vault**: Cryptographically signed proof-of-work with SHA-256 hash, verified LOC (18.4k LOC), mentor endorsements, official CGPA metrics, and full-screen document lightbox for verified marksheets and certificates.
-* **💵 Earnings Wallet**: Financial ledger tracking sprint stipends, licensing royalties, and instant UPI payouts.
-* **🌐 Community Network & Vault Viewer**: LinkedIn-style cross-role directory to explore verified student marksheets, SME problems, and mentor profiles.
-* **💬 Private 1-on-1 Direct Messaging**: Private student-mentor-SME real-time chat threads with quick icebreakers and SuperAdmin global audit supervision.
-
-### 🏢 2. SME Company Portal
-* **🎙️ Voice Problem-to-PRD AI**: Speak into your mic for 30s &mdash; GURU AI transcribes and outputs a complete technical specification, stack, and budget.
-* **🤖 Pod Match Comparison**: Side-by-side comparison of student pods evaluating velocity, test coverage, and latency SLA.
-* **📦 Milestone Acceptance Gate**: Inspect GitHub pull requests and test pass rates before releasing escrow funds.
-
-### 👨‍🏫 3. Industry Mentor Workspace
-* **🚦 Sprint Milestone Gates**: Strict blocking gates requiring explicit mentor inspection and sign-off.
-* **🧠 Skill Verification Stamps**: Mentors audit PRs and issue verified competency stamps (*FastAPI, React 19, Vector Search*).
-* **⚠️ Pod Health Radar**: Real-time anomaly detection for slowing velocity or blocked PR dependencies.
-
-### 🏫 4. College Institutional Dashboard
-* **🪪 Centralized Skill Passport Roster**: Complete roster of verified student builders for dean inspection.
-* **💡 Innovation & IP Registry**: Tracks college software IP monetization and institutional fund royalties.
-* **📊 NAAC & NIRF Exporter**: 1-click official compliance report for **NAAC Criterion 3.5.1** and **5.2.1**.
+### The 7 Strategic Pillars in Action:
+1. **💻 Technology**:
+   - *Sub-Domains*: Cloud-native software, Autonomous AI/ML agents, OWASP PR security scanners, Web3 ledgers, and IoT sensor mesh telemetry.
+   - *In Skill-Pods*: AST pull-request security auditor (`GuruCopilotModal.tsx`), real-time semantic deduplication engine (`AiDuplicateCheckBanner.tsx`), and live WebSocket telemetry.
+2. **🌾 Agriculture**:
+   - *Sub-Domains*: AI crop health monitoring, solar precision drip irrigation, rural supply chain cold-chains, and tribal forest produce preservation.
+   - *In Skill-Pods*: Torpa (Khunti) solar drip irrigation pod and Dumka tribal SHG Mahuwa/Lac post-harvest solar drying unit.
+3. **🏥 Healthcare**:
+   - *Sub-Domains*: Remote patient monitoring, rural primary health centre (PHC) diagnostic telemetry, and portable tele-medicine kits.
+   - *In Skill-Pods*: Chatra Block PHC portable ECG & telemetry station connected with AIIMS Deoghar and Vinoba Bhave University student pods.
+4. **🌲 Environment & Sustainability**:
+   - *Sub-Domains*: Ground water contamination sensors, industrial waste plastic pyrolysis, afforestation tracking, and decentralized renewable mini-grids.
+   - *In Skill-Pods*: Khunti handpump fluoride & arsenic real-time IoT filtration pod (IIT ISM Dhanbad) and Jamshedpur urban plastic pyrolysis unit.
+5. **🎓 Education & Foundational Literacy**:
+   - *Sub-Domains*: Regional dialect foundational literacy tools, special-needs accessibility, institutional IP management, and NAAC/NIRF accreditation.
+   - *In Skill-Pods*: Multilingual literacy tools in tribal vernaculars (Santhali, Ho, Mundari), cryptographic student skill passports, and 1-click NAAC Criterion 3.5.1 audit reports.
+6. **⚙️ Manufacturing & Industrial Automation**:
+   - *Sub-Domains*: Industrial quality control, assembly-line defect computer vision, ERP ledger reconciliation, and conveyor predictive maintenance.
+   - *In Skill-Pods*: Kestrel Freight & Logistics automated invoice OCR reconciliation and steel plant conveyor vibration anomaly detection.
+7. **🏛️ Social, Civic & Public Administration**:
+   - *Sub-Domains*: Direct citizen grievance dispatch, rural disability accessibility, Gram Panchayat service transparency, and municipal waste tracking.
+   - *In Skill-Pods*: 24-District Societal GIS Heatmap, 24x7 WhatsApp civic helpline simulator, and official Gram Panchayat PRI digital sign-off seals.
 
 ---
 
-## 🎨 Interactive Visual Innovations & Micro-Interactions
-* **🎡 Parabolic Arc Continuous Orbital Animation (`InnovationCarousel.tsx`)**: 11 builder profiles, mentor badges, and SME problems glide smoothly along a parametric quadratic Bézier curve with pause-on-hover, soft boundary wrap-around fading, and apex bloom elevation.
-* **🔦 4-Stage Interactive Torch Lamp (`LoginPage.tsx`)**: Overhead wall sconce lamp behaves as a multi-tap flashlight (Level 1: Soft Glow, Level 2: Bright, Level 3: Turbo Max High-Beam, Level 4: Stealth Darkness Mode OFF) with dynamic downlight cone washing over the brick wall.
-* **👨‍💻 Interactive Embedded Developer Portfolio (`DeveloperPortfolioModal.tsx`)**: Full in-browser live showcase embedding [`sanket-portfolio-211.pages.dev`](https://sanket-portfolio-211.pages.dev/) with responsive Desktop, Tablet, and Mobile device preview mockups.
-* **🚀 Official Brand Favicon & Assets**: High-resolution diamond-rocket brand logo integrated across browser tabs and Apple mobile shortcuts.
+## 🌟 Complete Ecosystem & Stakeholder Workspaces
+
+```mermaid
+flowchart LR
+    Citizen[🏛️ Citizen / PRI / SME] -->|Voice / WhatsApp / Form| Intake[📥 Multi-Modal Problem Intake]
+    Intake --> Dedupe[🤖 AI Semantic Deduplication]
+    Dedupe --> Triage[📊 Public Societal Radar]
+    Triage --> Pods[🚀 3-Student Skill Pods]
+    Pods <--> Mentors[👨‍🏫 Staff Industry Mentors]
+    Mentors --> Escrow[🔒 Smart Milestone Escrow Vault]
+    Escrow --> CSR[💼 Corporate CSR Matching]
+    Pods --> Passport[🪪 Cryptographic Skill Passport]
+    Passport --> Placement[💼 Top Corporate Recruiters]
+    Passport --> NAAC[🏫 NAAC / NIRF Institutional IP]
+```
+
+### 1. 🎓 Student Builder Workspace
+- **🤖 AI Skill Match Engine**: Benchmarks student repository competencies against open corporate & societal challenges with 96% fit scoring.
+- **💼 Project Marketplace & Monetization**: List capstone software under *Commercial Licensing*, *Full IP Buyout*, or *SME Pilot Upgrades*.
+- **🪪 Cryptographic Skill Passport**: Digitally signed proof-of-work with SHA-256 verification, verified LOC benchmarks (18.4k LOC), mentor stamps, and an encrypted academic marksheet/certificate lightbox vault.
+- **💵 Real-Time Earnings Wallet**: Track sprint stipends, commercial software royalties, and milestone escrow disbursements.
+- **💬 Direct 1-on-1 Messaging**: Private end-to-end messaging with SME founders and mentors, audited globally by SuperAdmin security.
+
+### 2. 🏢 SME & Industry Enterprise Portal
+- **🎙️ Voice Problem-to-PRD AI**: Record spoken operational pain points &mdash; AI automatically generates a complete technical specification, architecture stack, and sprint budget.
+- **🎯 Pod Match Evaluator**: Side-by-side comparison comparing student pods on velocity, Cypress test coverage, SLA latency, and stack synergy.
+- **📦 Milestone Acceptance Gate**: Audit code pull requests, preview staging builds, release escrow bounties, or request structured revisions.
+
+### 3. 👨‍🏫 Industry Mentor Station
+- **🚦 Sprint Milestone Gates**: Strict blocking review gates requiring staff mentor inspection before pods advance.
+- **🧠 Skill Verification Seals**: Issue cryptographically verifiable competency stamps (*FastAPI, React 19, Vector Search, IoT*).
+- **⚠️ Pod Velocity & Workload Radar**: Automated telemetry detecting burnouts, blocked PR dependencies, or velocity dips.
+
+### 4. 🏫 College Dean & Institutional Portal
+- **🪪 Centralized Skill Passport Registry**: Department-wide roster of verified student builders for deans and campus placement cells.
+- **💡 Institutional IP & Commercialization Vault**: Track college software IP lifecycle from campus hackathon to commercial venture royalties.
+- **📊 NAAC & NIRF 1-Click Exporter**: Generates official documentation for **NAAC Criterion 3.5.1** (Industry Linkages) and **5.2.1** (Placement & Entrepreneurship).
 
 ---
 
-## 🧪 Experimental Labs & Next-Gen Beta Suite `[🧪 IN TESTING]`
+## 🏛️ SIH26043 Civic & Societal Innovations
 
-| Feature | Description | Status |
+Skill-Pods features a full-fledged, unauthenticated **Public Societal Innovation Portal** tailored for the Government of Jharkhand & Ministry of Education Innovation Cell (MIC):
+
+| Innovation | Description | File Reference |
 | :--- | :--- | :--- |
-| **🌐 Community Network & Vault** | LinkedIn-style verified student, SME, and mentor directory with cryptographic transcript inspection. | `✅ Live` |
-| **💬 Direct Messaging & SuperAdmin Audit** | Private 1-on-1 chat streams protected by SuperAdmin global supervisory oversight. | `✅ Live` |
-| **🎙️ Live WebRTC Sprint Room** | 4-participant video/audio room with screen-sharing, WebRTC mesh latency radar (24ms), and in-room sprint chat. | `🧪 Testing` |
-| **🤖 GURU AI PR Scanner** | Automated AST pull request security auditor checking OWASP Top 10 vulnerabilities with instant scoring (96/100 A+). | `🧪 Testing` |
-| **💼 Recruiter 1-Click Hiring** | Direct talent pipeline allowing HR to filter students by verified lines of code and send 1-click offers. | `⚡ Beta` |
-| **🎙️ SME Voice PRD Generator** | Speech-to-spec engine transcribing spoken business pain points into technical PRDs with budget estimates. | `🧪 Testing` |
-| **📊 AI Pitch Deck Generator** | 5-slide venture memo and investor deck generator for capstone projects with TAM market sizing. | `⚡ Beta` |
-| **🏆 National Pod Leaderboard** | Live national rankings of top college pods based on XP, commit velocity, and zero-bug streaks. | `⚡ Beta` |
-| **💻 In-Browser API Testbench** | Interactive REST endpoint execution sandbox with real-time JSON response and latency inspection. | `🧪 Testing` |
-| **🔒 Smart Escrow Vault** | Milestone fund locking and automated release upon mentor sign-off. | `🧪 Testing` |
+| **🗺️ 24-District GIS Heatmap** | Interactive geospatial heatmap spanning all 24 districts across 5 administrative divisions (South Chotanagpur, North Chotanagpur, Santhal Pargana, Kolhan, Palamu) showing live challenge severity, active pods, and anchor universities (IIT ISM Dhanbad, BIT Mesra, NIT Jamshedpur, CUJ). | [`JharkhandDistrictHeatmap.tsx`](src/components/JharkhandDistrictHeatmap.tsx) |
+| **🎙️ Multi-Modal Non-Tech Intake** | Zero-friction intake for rural villagers and Gram Pradhans supporting **AI Chatbot Guide (Hindi/English)**, **One-Touch Voice Recording** with automatic transcription, **Camera Photo Uploads**, and **15-60s Video Walkthroughs**. | [`CitizenEasySubmitModal.tsx`](src/components/CitizenEasySubmitModal.tsx) |
+| **💬 24x7 WhatsApp Civic Helpline** | Offline citizen helpline simulator replicating WhatsApp/SMS civic intake with bilingual audio waveform notes, automatic ticket generation (`JH-WA-KHU-9042`), and direct external WhatsApp routing (`+91 9822725265`). | [`CitizenWhatsAppSimulatorModal.tsx`](src/components/CitizenWhatsAppSimulatorModal.tsx) |
+| **🤖 AI Semantic Deduplication** | Real-time cosine similarity clustering scanning new problem text and voice transcripts to detect duplicates (e.g. 92% match with existing Khunti fluoride issue), offering 1-tap corroboration to avoid administrative clutter. | [`AiDuplicateCheckBanner.tsx`](src/components/AiDuplicateCheckBanner.tsx) |
+| **💼 CSR Grant Escrow Pledging** | Corporate CSR gateway allowing industry partners (Tata Steel, Coal India, NTPC, SAIL) to pledge matching grants (₹25k, ₹50k, ₹1L) with milestone locking and Section 80G tax exemption receipts. | [`CsrGrantPledgeModal.tsx`](src/components/CsrGrantPledgeModal.tsx) |
+| **📜 Gram Panchayat PRI Sign-Off** | Digital field closure tool enabling Gram Pradhans, Sarpanches, or BDOs to execute on-site verification and issue an official, printable Government of Jharkhand sealed digital closure certificate. | [`PriFieldSignOffModal.tsx`](src/components/PriFieldSignOffModal.tsx) |
+| **🌐 Multilingual Dialect Engine** | 1-click language switcher supporting **English (`en`)**, **हिन्दी (`hi`)**, and **मराठी (`mr`)** for all portal controls, tickets, search filters, and tracking statuses. | [`translations.ts`](src/data/translations.ts) |
 
-## 🏛️ System Architecture & Deployment Overview (For Jury & Evaluators)
+---
 
-| Component | Technology | Deployment / Hosting | Purpose |
-| :--- | :--- | :--- | :--- |
-| **Frontend & UI** | React 19, TypeScript, Tailwind CSS v4, Motion | **Cloudflare Pages Global Edge Network** | Sub-20ms global edge delivery with SSL/HSTS security |
-| **Cloud Database** | MongoDB Atlas Cloud Cluster | **MongoDB Atlas Cloud (AWS Mumbai / us-east)** | Multi-collection persistence for users, pods, passports & audit logs |
-| **Backend REST API** | Node.js, Express.js, TypeScript, TSX | **Unified Edge Runtime + Docker Container Engine** | JWT signing, SHA-512 auth, rate limiting, and webhook dispatching |
-| **Realtime Mesh** | WebRTC, WebSocket Protocols | **Browser-to-Browser P2P Mesh** | Low-latency audio, video sprint rooms & telemetry streaming |
-| **AI Co-Pilot** | GURU Autonomous LLM Engine | **In-Browser / REST Inference Pipeline** | PR security scanning, task decomposition, and pitch deck generation |
+## 🏆 Official 231 National SIH Problem Statement Bank
+
+Ingested directly from the national Smart India Hackathon bank across all official ministries:
+
+- **231 Official Problem Statements Loaded**: Complete repository (`SIH26001` through `SIH26231`), including Problem Statement #43 (`SIH26043` - Government of Jharkhand).
+- **17 Official Themes**: *Smart Automation, Clean & Green Tech, Agriculture & FoodTech, MedTech, Blockchain & Cyber, Robotics & Drones, Smart Education, Space Tech, Transportation & Logistics, Heritage & Culture, and Disaster Management*.
+- **1-Click Hackathon Adoption**: College hackathon organizers and student pods can adopt any challenge with 1 click, instantly copying the formatted specification to their clipboard.
+- **Batch Text Exporter**: Dedicated `"Export for Hackathon (.txt)"` button downloads the entire 231-problem bank for offline institutional hackathons.
 
 ---
 
@@ -115,106 +160,105 @@ graph TD
 
 ```
 Frontend:
-  ├── React 19 (React 19.x with optimistic state updates)
-  ├── TypeScript (Strict Type Safety)
-  ├── Tailwind CSS v4 (Modern high-contrast dark purple palette)
-  ├── Motion (Framer Motion v12 Animations & Transitions)
-  ├── Lucide React (Clean feather-style iconography)
-  └── Canvas WebGL Shaders (3D Character Holograms & Glowing Particles)
+  ├── React 19 (Optimistic state rendering, concurrent mode)
+  ├── TypeScript 5.7 (Strict static typing across all data models)
+  ├── Tailwind CSS v4 (Modern high-contrast dark purple cyberpunk design)
+  ├── Motion / Framer Motion v12 (Smooth layout springs & micro-interactions)
+  ├── Lucide React (Pixel-perfect feather iconography)
+  └── Canvas WebGL Shaders (Dynamic 3D particle nebulas & hologram avatars)
 
-Backend & Networking:
-  ├── Node.js & Express.js (Modular REST API architecture)
-  ├── WebSockets / WebRTC (Live mesh audio, video & telemetry)
-  ├── HMAC-SHA256 & SHA-512 (Password hashing & cryptographic session signing)
-  └── Enterprise Rate Limiting & DDoS Defense (Sliding window brute-force protection)
+Routing & Navigation:
+  ├── HTML5 History API (Zero-flicker clean URLs: /, /public, /login, /dashboard, /404)
+  └── Cloudflare Pages _redirects (Global edge rewrite handling deep links & refreshes)
+
+Backend & APIs:
+  ├── Node.js & Express.js (Modular REST API architecture in server/app.ts)
+  ├── WebSockets & WebRTC (Peer-to-peer live mesh sprint rooms & telemetry)
+  ├── HMAC-SHA256 & PBKDF2/SHA-512 (Salt-randomized credential hashing & JWTs)
+  └── Enterprise Sliding-Window Rate Limiter (Brute-force & DDoS protection)
 
 Database & Cloud:
-  ├── MongoDB Atlas Cloud Cluster (Native driver with multi-collection sync)
-  ├── JSON Fallback Engine (Zero-setup offline local persistence)
-  └── Cloudflare Pages (Global edge CDN distribution with HSTS security)
+  ├── MongoDB Atlas Cloud Cluster (Multi-collection enterprise persistence)
+  ├── JSON Fallback Database Engine (Zero-config local development persistence)
+  └── Cloudflare Pages (Sub-20ms global edge CDN distribution with HSTS security)
 ```
 
 ---
 
 ## 🔑 Pre-Seeded 1-Click Evaluation Accounts
 
-You can test any role immediately from the **Login** modal:
+Evaluate any platform perspective directly via the **Login Console**:
 
-| Role | Email | Password | Notable Features |
+| Role | Email | Password | Primary Capabilities |
 | :--- | :--- | :--- | :--- |
-| 🎓 **Student Lead** | `dev.patel@skillpods.io` | `password123` | AI Match (96%), Skill Passport (94 XP), Pod Apex-2 |
-| 🏢 **SME Company** | `kestrel@freight.com` | `password123` | Post Problems, Voice PRD AI, Escrow Vault |
-| 👨‍🏫 **Staff Mentor** | `sarah.chen@cloudflare.com` | `password123` | Milestone Gating, Skill Stamps, Health Radar |
-| 🏫 **College Dean** | `dean@nit.edu` | `password123` | NAAC/NIRF Exporter, IP Registry, Roster |
-| 👑 **SuperAdmin** | `sanketbhende0@gmail.com` | `password123` | Platform Governance, MongoDB Logs, System Radar |
+| 🎓 **Student Lead** | `dev.patel@skillpods.io` | `password123` | AI Skill Match (96%), Cryptographic Skill Passport, Earnings Wallet |
+| 🏢 **SME Company** | `kestrel@freight.com` | `password123` | Dual Problem Intake, Voice-to-PRD AI, Escrow Bounty Vault |
+| 👨‍🏫 **Staff Mentor** | `sarah.chen@cloudflare.com` | `password123` | Sprint Milestone Gating, Skill Stamp Audits, Pod Health Radar |
+| 🏫 **College Dean** | `dean@nit.edu` | `password123` | NAAC/NIRF Compliance Exporter, IP Registry, Department Radar |
+| 👑 **SuperAdmin** | `sanketbhende0@gmail.com` | `password123` | Global Platform Audit, Security Telemetry, Supervised Chat View |
 
 ---
 
-## 🚀 Quickstart & Local Installation
+## 💻 Local Quickstart & Deployment
 
-### Prerequisites
-* [Node.js](https://nodejs.org/) (v18 or higher)
-* [npm](https://www.npmjs.com/) or [pnpm](https://pnpm.io/)
+### 1. Prerequisites
+- **Node.js**: v18.0.0 or higher
+- **npm**: v9.0.0 or higher
 
-### 1. Clone the Repository
+### 2. Installation
 ```bash
-git clone https://github.com/Sakshi-patil48/Skill-Pods.git
-cd Skill-Pods
-```
+# Clone the primary repository
+git clone https://github.com/mrsankya/Skill-Pods.git
+cd Skill-Pods/Skill-Pods-main
 
-### 2. Install Dependencies
-```bash
+# Install dependencies
 npm install
 ```
 
-### 3. Configure Environment Variables
-Create a `.env` file in the root directory:
+### 3. Environment Setup
+Create a `.env` file in the project root:
 ```env
 PORT=3001
 MONGODB_URI=mongodb+srv://sanketbhende0_db_user:2PjFJzuGU81srV3Z@cluster0.b7x8wdz.mongodb.net/?appName=Cluster0
 JWT_SECRET=skillpods_super_secret_production_key_2026
 ```
 
-### 4. Run Development Server
+### 4. Run Locally
 ```bash
 npm run dev
 ```
 Open **[http://localhost:3000](http://localhost:3000)** in your browser!
+- Visit **[http://localhost:3000/public](http://localhost:3000/public)** for the Public Societal Innovation Hub.
+- Visit **[http://localhost:3000/login](http://localhost:3000/login)** to log in as Student, SME, Mentor, Dean, or SuperAdmin.
 
----
-
-## 🚢 Deployment Options
-
-### 1. Cloudflare Pages (Live Frontend)
+### 5. Production Edge Deployment (Cloudflare Pages)
 ```bash
 npm run build
 npx wrangler pages deploy dist --project-name=skill-pods
 ```
 
-### 2. Render / Railway (24/7 Standalone Node.js Backend)
-* **Build Command:** `npm install && npm run build`
-* **Start Command:** `node dist/server.cjs`
-* **Environment Variables:** Set `MONGODB_URI` and `PORT`.
+---
 
-### 3. Docker Containerization
-```bash
-docker build -t skill-pods .
-docker run -p 3001:3001 -e MONGODB_URI="your_mongo_uri" skill-pods
-```
+## 🛡️ Security, Cryptography & Compliance
+
+- **OWASP Top 10 Mitigation**: Enterprise IP sliding-window rate limiters on all authentication routes, XSS sanitize parsers, and SQL/NoSQL injection guards.
+- **Strict Transport Security**: Automatic HTTPS, `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, and modern Content Security Policies.
+- **Cryptographic Stamping**: Student Skill Passports are sealed with SHA-256 checksums and verified mentor digital signatures.
+- **SuperAdmin Privacy Oversight**: Ordinary peer-to-peer conversations remain encrypted; only the authenticated SuperAdmin (`sanketbhende0@gmail.com`) has a monitored audit log to prevent harassment, fraud, or off-platform leaks.
 
 ---
 
-## 🛡️ Security & Privacy Architecture
+## 📞 Contact & Helpline
 
-* **OWASP Top 10 Defenses**: Enterprise rate limiter on authentication routes, sanitization against XSS, SQL/NoSQL injection prevention.
-* **Security Headers**: HSTS, `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, Content Security Policy.
-* **Cryptographic Hashing**: Node `crypto` PBKDF2 with SHA-512 and salt randomization for all credentials.
-* **Login Security Alerts**: Real-time email dispatch log whenever an account or SuperAdmin signs in.
+- **Founder & SuperAdmin:** Sanket Bhende
+- **Email:** [sanketbhende0@gmail.com](mailto:sanketbhende0@gmail.com)
+- **Direct Phone / Calling Hotline:** [+91 9822725265](tel:+919822725265)
+- **WhatsApp Helpline:** [+91 9822725265](https://wa.me/919822725265) (Click to chat)
+- **Primary GitHub:** [https://github.com/mrsankya/Skill-Pods](https://github.com/mrsankya/Skill-Pods)
+- **Live Production Deployment:** [https://skill-pods.pages.dev](https://skill-pods.pages.dev)
 
 ---
 
-## 📄 License & Attribution
-
-Distributed under the **MIT License**. Built with passion for hackathons, engineering colleges, and SME empowerment across India. 
-
-*Designed and developed for the Skill Pods Ecosystem.*
+<div align="center">
+  <sub>Built with precision for Smart India Hackathon (SIH26043) &bull; Designed for National Impact &bull; © 2026 Skill Pods</sub>
+</div>
