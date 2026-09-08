@@ -15,12 +15,19 @@
 
 **[🌐 Live Portal](https://skill-pods.pages.dev)** &bull; **[🏛️ Public Societal Innovation Hub](https://skill-pods.pages.dev/public)** &bull; **[📂 GitHub Repo](https://github.com/mrsankya/Skill-Pods)** &bull; **[📑 231 SIH PS Bank](https://skill-pods.pages.dev/public)** &bull; **[💬 WhatsApp Civic Helpline](https://wa.me/919822725265)**
 
+<br/><br/>
+
+<img src="./docs/screenshots/skillpods-platform-preview.png" alt="Skill Pods Platform Live Interface" width="100%" style="border-radius: 14px; border: 1px solid rgba(208, 188, 255, 0.25); box-shadow: 0 20px 60px rgba(0,0,0,0.6);" />
+
+<p align="center"><i><b>Figure 1:</b> Skill Pods Unified Production Interface &mdash; Demand-Driven SME Engine &amp; National Open Innovation Portal</i></p>
+
 </div>
 
 ---
 
 ## 📑 Table of Contents
 - [Executive Overview](#-executive-overview)
+- [Live Platform Interface](#-live-platform-interface)
 - [Cross-Domain Problem Solving Architecture (7 Strategic Pillars)](#-cross-domain-problem-solving-architecture-7-strategic-pillars)
 - [Complete Ecosystem & Stakeholder Workspaces](#-complete-ecosystem--stakeholder-workspaces)
 - [SIH26043 Civic & Societal Innovations](#-sih26043-civic--societal-innovations)
