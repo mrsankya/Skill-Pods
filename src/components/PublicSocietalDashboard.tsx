@@ -919,18 +919,23 @@ export const PublicSocietalDashboard: React.FC<PublicSocietalDashboardProps> = (
           </div>
         </div>
 
-        {/* Thematic Domains Bar - Horizontal Scroll on Mobile with smooth touch scroll */}
+        {/* Cross-Domain Problem Solving Taxonomy Bar */}
         <div className="space-y-2.5">
-          <div className="flex items-center justify-between">
-            <h3 className="text-xs sm:text-sm font-mono uppercase tracking-wider text-[#cbc3d7] flex items-center gap-2">
-              <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#d0bcff]" />
-              <span>
-                {activeTabMode === 'SIH_HACKATHON'
-                  ? '17 National SIH Hackathon Themes'
-                  : '10 Thematic Domains (SIH26043 Mandate)'}
-              </span>
-            </h3>
-            <span className="text-[10px] sm:text-2xs font-mono text-slate-400">Scroll &rarr;</span>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+            <div>
+              <h3 className="text-xs sm:text-sm font-mono uppercase tracking-wider text-[#d0bcff] font-bold flex items-center gap-2">
+                <Layers className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#d0bcff]" />
+                <span>
+                  {activeTabMode === 'SIH_HACKATHON'
+                    ? 'Cross-Domain Problem Solving: 17 National SIH Themes'
+                    : 'Cross-Domain Problem Solving: 10 Civic & Societal Domains'}
+                </span>
+              </h3>
+              <p className="text-[11px] font-mono text-slate-400 mt-0.5">
+                Pillars: <span className="text-slate-300">Technology &bull; Agriculture &bull; Healthcare &bull; Environment &bull; Education &bull; Manufacturing &bull; Public Civic Challenges</span>
+              </p>
+            </div>
+            <span className="text-[10px] sm:text-2xs font-mono text-slate-400 self-end sm:self-auto">Scroll &rarr;</span>
           </div>
 
           <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-[#312a45] scrollbar-track-transparent">
