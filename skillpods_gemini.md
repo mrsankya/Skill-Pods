@@ -49,7 +49,8 @@
 
 ## Production Deployments & URLs
 - 🌐 **Cloudflare Pages Production URL**: `https://skill-pods.pages.dev`
-- 🐙 **GitHub Repository**: `https://github.com/Sakshi-patil48/Skill-Pods.git` (`main` branch)
+- 🐙 **GitHub Repository (Primary)**: `https://github.com/mrsankya/Skill-Pods.git` (`main` branch)
+- 🐙 **Upstream Repository**: `https://github.com/Sakshi-patil48/Skill-Pods.git`
 - 🗄️ **MongoDB Atlas Cloud Cluster**: `cluster0.b7x8wdz.mongodb.net/skillpods`
 - 👑 **SuperAdmin Account**: `sanketbhende0@gmail.com`
 
